@@ -4,7 +4,7 @@ Every level of the game carries its own build of the level code: an overlay
 loaded over the resident image when the level starts. This page describes what
 the overlays are, how they are split here, and how they are counted. It is
 the same arrangement as in
-[rac1-decomp](https://github.com/Lynder063/rac1-decomp)'s `docs/OVERLAYS.md`.
+[rac1-decomp](https://github.com/OpenRAC/rac1-decomp)'s `docs/OVERLAYS.md`.
 
 ## What an overlay is
 
@@ -154,8 +154,10 @@ runs on past a function's declared size; they are not yet in separate files.
 ## Decompiling overlay functions
 
 An overlay function is named `func_<level>_<address>` (for example
-`func_L01_00631CB8`) and its source goes to `src/overlays/<level>/<ADDRESS>.c`,
-where level and address are those in its name and in
+`func_L01_00631CB8`). As in rac1-decomp, its source goes to
+`src/overlays/shared/L01_00631CB8.c` if it is `common` (in two or more levels),
+or to `src/overlays/lNN_<level>/LNN_<ADDRESS>.c` if it is in one level only
+(`l00_multiplayer_menu/`, named from `config/overlays.tsv`). Its assembly is in
 `asm/overlays/<level>/nonmatchings/`. `tools/build.sh` compiles it like any other
 file (same compiler, flags and assembler passes). `tools/audit_matches.py` and
 `tools/diff_func.py` compare it with the bytes in that level's `overlay.elf`, found in

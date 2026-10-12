@@ -5,7 +5,7 @@ Try several C variants of the same function against retail in one go.
   venv/bin/python tools/try_variants.py FILE.c  name=func_00497438 ...
 FILE.c holds functions with distinct names (v1, v2, ...). Each argument maps a
 function name in FILE.c to the retail function it should match. The file is
-compiled with the matching compiler (SN GCC 2.95.3 v1.36 -O2 -G0) in the
+compiled with the matching compiler (SN GCC 2.95.3 v1.36 -O2 -G8 -fopt-stack) in the
 container, then every function is compared with retail like tools/audit_matches.py.
 """
 import os

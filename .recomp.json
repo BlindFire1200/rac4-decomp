@@ -4,7 +4,7 @@
   "system": "PlayStation 2",
   "type": "decomp",
   "project": "rac-deadlocked-decomp",
-  "status": "exploring",
+  "status": "in-progress",
   "toolchain": "SN ProDG ee-gcc 2.95.3",
   "approach": "Matching decompilation: C/C++ that builds to a byte-identical copy of the retail executable.",
   "original": {
@@ -16,14 +16,14 @@
     { "name": "Lynder063", "link": "https://github.com/Lynder063" }
   ],
   "links": [
-    { "label": "Progress on decomp.dev", "url": "https://decomp.dev/Lynder063/rac-deadlocked-decomp" },
-    { "label": "Research notes", "url": "https://github.com/Lynder063/rac-deadlocked-decomp/blob/main/docs/RESEARCH.md" }
+    { "label": "Progress on decomp.dev", "url": "https://decomp.dev/OpenRAC/rac-deadlocked-decomp" },
+    { "label": "Research notes", "url": "https://github.com/OpenRAC/rac-deadlocked-decomp/blob/main/docs/RESEARCH.md" }
   ],
   "help": [
-    "finding the retail compiler",
+    "matching functions",
     "level overlays",
     "naming functions"
   ],
   "tags": ["Insomniac Games", "Ratchet & Clank", "MIPS R5900"],
-  "notes": "Early stage. The retail executable is a loader plus a packed game image; unpacking, splitting into sections and disassembly with splat are done and about 8,000 functions are identified. No function is matched yet."
+  "notes": "Early stage. The retail executable is a loader plus a packed game image; unpacking, splitting, disassembly and the compiler are done, the 47 level overlays are split into common and level-specific code, and functions are matching (progress on decomp.dev). There is no linked image yet."
 }

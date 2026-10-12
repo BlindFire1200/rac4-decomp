@@ -1,0 +1,180 @@
+# Workflow
+
+From a fresh clone to a matched function. The short version is in
+[`CONTRIBUTING.md`](../CONTRIBUTING.md); the compiler and the build are in
+[`TOOLCHAIN.md`](TOOLCHAIN.md); what tends to make a function match is in
+[`LEVERS.md`](LEVERS.md).
+
+On Linux and macOS, run the build commands through the container:
+`bash tools/docker/run.sh <command>`.
+
+## Setup (once, and after changing config/splat.yaml)
+
+**The executable.** Copy `SCUS_974.65` from your disc to `baserom/` (ignored by
+git). Its SHA-1 must be `aa91b1c3b9b1a244320c47580b77342ef9856e95`.
+
+**The disassembly.**
+
+```
+bash tools/setup_asm.sh
+```
+
+The retail executable is only a loader with a compressed game image
+([`RESEARCH.md`](RESEARCH.md)). The script checks the hash, unpacks the image
+(`tools/unpack_wad.py`), rebuilds an ELF from its 17 sections
+(`tools/split_image.py`), and runs [splat](https://github.com/ethteck/splat)
+with `config/splat.yaml` into `asm/` (not tracked). A `venv/` with the pinned
+tool versions is created on first use. If the splat configuration changed,
+regenerate `config/functions.tsv` (every function with address and size) with
+`venv/bin/python tools/gen_function_list.py`.
+
+**The toolchain** ([`TOOLCHAIN.md`](TOOLCHAIN.md)):
+
+```
+git clone https://github.com/AngheloAlf/SN-Systems-ProDG_for_PS2_3.01 toolchain/sn-prodg-3.01
+git clone https://github.com/AngheloAlf/sce_ps2_sdk_24 toolchain/sn-prodg-24
+```
+
+**The level overlays** (needed to check overlay functions, and to regenerate
+`config/overlays.tsv` and `config/overlay_functions.tsv`, which are committed).
+Unpack your disc with the [wrench](https://github.com/chaoticgd/wrench) build
+tool, link the result to `private/overlays` (or set `$OVERLAYS`) and split it:
+
+```
+wrenchbuild unpack GAME.iso -o DIR -g dl -r us
+venv/bin/python tools/split_overlays.py DIR
+```
+
+See [`OVERLAYS.md`](OVERLAYS.md).
+
+**Helper tools** (cloned locally, not vendored):
+
+```
+git clone https://github.com/matt-kempster/m2c tools/ext/m2c
+git clone https://github.com/simonlindholm/asm-differ tools/ext/asm-differ
+```
+
+## 0. Before decompiling anything: is it even game code?
+
+libgcc (`0x12EE30` to `0x131958`) and libm are not game code: they are rebuilt
+from GCC's and newlib's own sources, never decompiled
+([`TOOLCHAIN.md`](TOOLCHAIN.md), `config/libgcc.tsv`, `config/libm.tsv`). Check
+those tables before starting on a function in that range.
+
+## 1. Get a sketch
+
+Pick a function from `asm/nonmatchings/<segment>/func_XXXXXXXX.s` (or
+`asm/overlays/<level>/nonmatchings/` for a level overlay). Small functions
+without data tables are a good start; `config/functions.tsv` and
+`config/overlay_functions.tsv` list all of them with sizes.
+
+```
+venv/bin/python tools/ext/m2c/m2c.py -t mipsee-gcc-c asm/nonmatchings/.../func_XXXXXXXX.s
+```
+
+The output is a draft: it usually needs types, struct members and cleaner
+control flow.
+
+Put it in the file its address belongs to, defining `func_XXXXXXXX` (the name in
+`asm/`), starting the file with `#include "common.h"`. A file may hold several
+functions.
+
+| Function | File |
+|---|---|
+| core text, below `0x163B80` | `src/core/<ADDR>.c` |
+| network text, from `0x1E00000` | `src/net/<ADDR>.c` |
+| resident level text | `src/game/<ADDR>.c` |
+| overlay code in two or more levels (`func_L01_00631CB8`) | `src/overlays/shared/L01_00631CB8.c` |
+| overlay code in one level only | `src/overlays/lNN_<level>/LNN_<ADDR>.c` (e.g. `l00_multiplayer_menu/`) |
+
+`config/overlay_functions.tsv` says which overlay functions are shared (`common`)
+and which belong to one level (`level`); the level directory names come from
+`config/overlays.tsv`.
+
+### Automatic drafts (`tools/auto_structs.py`)
+
+For small functions, `venv/bin/python tools/auto_structs.py prepare overlay N`
+runs m2c, builds structures from the `->unkXX` accesses (members named by
+offset, types from how they are used) and writes four compile variants;
+`bash tools/docker/run.sh bash build/auto3/compile.sh` compiles them, `check`
+keeps the ones that equal retail and `adopt` copies them into `src/`, in the
+layout above. The first run matched 71 of 1,800 functions tried.
+
+## 2. Iterate with the differ
+
+The quickest loop leaves `src/` alone: write candidates in
+`build/try/func_XXXXXXXX/` and run
+
+```
+venv/bin/python tools/try_func.py func_XXXXXXXX build/try/func_XXXXXXXX/p1.c --diff
+```
+
+It compiles the candidate through the real pipeline (in the container) and
+says `EXACT`, `BYTES n/size` with the instructions that differ, `SIZE` or
+`COMPILE`, in seconds. Several candidates go in one run. To see a function
+already in `src/` against retail:
+
+```
+bash tools/docker/run.sh bash tools/build.sh
+venv/bin/python tools/diff_func.py func_XXXXXXXX
+```
+
+`tools/diff_func.py` shows your function next to retail, word by word (for an
+overlay function, against that level's `overlay.elf`). `tools/try_variants.py`
+compiles several source forms of one function in a single run (see its
+docstring; `EXTRA="..."` passes flags). [`LEVERS.md`](LEVERS.md) lists what has
+made functions match so far.
+
+## 3. Verify
+
+```
+bash tools/docker/run.sh bash tools/build.sh
+venv/bin/python tools/audit_matches.py
+```
+
+`tools/audit_matches.py` compares each compiled function with the retail bytes
+at its address, with relocatable fields masked (jump targets, the immediate of
+`lui`, and of loads, stores and adds that are not stack-relative). This is
+**not** a link-time comparison yet: a function that calls or reads the wrong
+symbol can still pass, so check calls and globals by eye. An overlay function
+counts in every level that contains it.
+
+If it does not match yet, keep it out of `src/`: see
+[`NONMATCHING.md`](NONMATCHING.md).
+
+## 4. Publish
+
+```
+python3 tools/gen_progress_report.py
+python3 tools/gen_progress_report.py --check
+```
+
+Commit the regenerated `progress/report.json` together with your source. CI
+(`.github/workflows/progress.yml`) runs `--check` and fails if the report
+disagrees with `src/`; it cannot build the game, so the report always comes from
+your machine.
+
+## Names
+
+Name functions by address (`func_XXXXXXXX`, `func_LNN_XXXXXXXX` for overlay
+functions), types `Type1`, `Type2` ... and members by offset (`f20` for the
+member at `0x20`) until you understand what something does. Then give it a
+descriptive name of your own. Do not copy identifiers, file names or directory
+names from any other source ([`LEGAL.md`](../LEGAL.md)).
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `src/core/`, `src/net/`, `src/game/` | Resident code, one file per start address until the real source file is known |
+| `src/overlays/shared/`, `src/overlays/lNN_<level>/` | Level overlay code in two or more levels, and in one ([`OVERLAYS.md`](OVERLAYS.md)) |
+| `src/libgcc/`, `src/libm/` | GCC's runtime library and newlib's math library, sources that match retail |
+| `nonmatching/` | Near misses, never built ([`NONMATCHING.md`](NONMATCHING.md)) |
+| `include/` | Shared headers (`common.h`) and assembly macros |
+| `config/` | splat configuration, section table, function lists, library tables, the level overlays |
+| `tools/` | Unpacker, splitters, compile pipeline (`cc.sh`), audit, diff and report tools, the agent queue (`wave.py`, `try_func.py`, `claims.py`); `tools/docker/` the build container |
+| `.claude/agents/` | The worker agent used by waves ([`AGENT_WORKFLOW.md`](AGENT_WORKFLOW.md)) |
+| `docs/` | This guide, the toolchain, research notes, the overlays, levers, near misses, the agent workflow |
+| `notes/` | Notes on single functions |
+| `progress/report.json` | objdiff-format progress report read by decomp.dev |
+| `baserom/`, `asm/`, `assets/`, `build/`, `toolchain/`, `venv/`, `private/` | Local only, never committed |
