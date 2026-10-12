@@ -4,7 +4,7 @@
 # paths in logs and tool output line up. Builds the image on first use.
 #
 #   bash tools/docker/run.sh bash tools/setup_asm.sh
-#   bash tools/docker/run.sh bash tools/build_sn.sh
+#   bash tools/docker/run.sh bash tools/build.sh
 set -euo pipefail
 repo=$(cd "$(dirname "$0")/../.." && pwd)
 CONTAINER_CLI="${CONTAINER_CLI:-}"

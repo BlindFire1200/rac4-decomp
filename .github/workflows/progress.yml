@@ -5,8 +5,8 @@
 # game: the compiler and the retail executable cannot be redistributed, so
 # neither is available here. The report is generated locally from a real
 # build (tools/gen_progress_report.py) and committed as progress/report.json;
-# this job only validates and uploads it. It holds names, addresses, sizes
-# and percentages -- no retail bytes.
+# this job only proves it is current, validates it, and uploads it. It holds
+# names, addresses, sizes and percentages -- no retail bytes.
 #
 # The repository must be registered once by hand at
 # https://decomp.dev/manage/new; this workflow alone does not add it.
@@ -32,7 +32,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Check the committed report is well-formed
+      # Fails if C was added or removed without regenerating the report,
+      # so the published numbers cannot silently fall behind src/.
+      - name: Check the committed report is current
         run: python tools/gen_progress_report.py --check
 
       - name: Validate the report with objdiff

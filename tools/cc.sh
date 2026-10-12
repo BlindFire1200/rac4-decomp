@@ -12,7 +12,8 @@ src=$1; out=$2; shift 2
 CC=toolchain/sn-prodg-3.01/usr/local/sce/ee/gcc/bin/ee-gcc2953.exe
 export WINEDEBUG=-all
 mkdir -p build/tmp
-tmp=build/tmp/$(basename "${out%.o}")
+# named after the whole output path: two workers' build/try/<func>/p1.o must not share one
+tmp=build/tmp/$(echo "${out%.o}" | tr '/' '_')
 wine "$CC" -O2 -G8 -fopt-stack -mno-check-zero-division "$@" -Iinclude -S "$src" -o "$tmp.s"
 python tools/ps2eeas_dli.py "$tmp.s" "$tmp.s"
 wine "$CC" -c "$tmp.s" -o "${tmp}_first.o"
