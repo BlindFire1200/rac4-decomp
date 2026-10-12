@@ -10,7 +10,7 @@ linking exception, as stated in each file's header. They are built unchanged
 that Sony's toolchain linked into the game.
 
 The selection and build recipe come from
-[rac1-decomp](https://github.com/Lynder063/rac1-decomp) (MIT).
+[rac1-decomp](https://github.com/OpenRAC/rac1-decomp) (GPL-3.0).
 
 ## Math library (`src/libm/`)
 
