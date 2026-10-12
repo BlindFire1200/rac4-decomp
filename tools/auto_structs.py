@@ -29,6 +29,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import layout  # noqa: E402
 import retail as mp  # noqa: E402
 from elftools.elf.elffile import ELFFile  # noqa: E402
 
@@ -333,13 +334,7 @@ def adopt():
         name = Path(f).name[:-2]
         if name in done:
             continue
-        m = re.fullmatch(r"func_(L\d\d)_([0-9A-F]{8})", name)
-        if m:
-            dst = ROOT / "src" / "overlays" / m.group(1) / (m.group(2) + ".c")
-        else:
-            addr = int(name[5:], 16)
-            sub = "core" if addr < 0x163B80 else "net" if addr >= 0x1E00000 else "game"
-            dst = ROOT / "src" / sub / ("%08X.c" % addr)
+        dst = layout.src_path(name)
         dst.parent.mkdir(parents=True, exist_ok=True)
         dst.write_text(re.sub(r"\n{3,}", "\n\n", renumber(Path(f).read_text())).rstrip("\n") + "\n")
         n += 1
