@@ -4,7 +4,7 @@ Retail links GCC's runtime library (`libgcc.a`) into `core_text` at
 0x12EE30-0x131958. Those functions were not written for the game: they are
 GCC's own sources built by Sony's EE toolchain, so they are rebuilt here from
 GCC's sources rather than decompiled. Built the same way as in
-[rac1-decomp](https://github.com/Lynder063/rac1-decomp), whose notes and
+[rac1-decomp](https://github.com/OpenRAC/rac1-decomp), whose notes and
 modified-in-place files these are taken from.
 
 - Compiler: **Sony's `2.9-ee-991111`** (`ee-gcc.exe`) through its **driver**
