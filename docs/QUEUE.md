@@ -108,6 +108,9 @@ stop and say in NOTES.md which instructions are left.
   occurs in: an L01 function may call `func_L00_...`, and that is right.
 - `-G8`: a global of up to 8 bytes that retail reaches through `$gp`
   (`%gp_rel`) is a plain `extern s32 D_x;` (or `f32`, `s16`...).
+  When the assembly gives only an offset (`lw $v0, -0x37F7($gp)`), the
+  global's address is `0x22597F` plus that offset (`$gp` is `0x22597F`,
+  from `.reginfo`): `-0x37F7($gp)` is `D_00222188`.
 - A global retail reaches with `lui` + `%lo` must not go through `$gp`:
   declare it without a size,
   ```c
