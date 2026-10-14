@@ -122,7 +122,7 @@ def build_structs(text):
                 body.append("    %s f%X;" % (t, o))
                 size = SCALARS[t]
             cur = o + size
-        out.append("typedef struct %s {\n%s\n} %s;" % (k, "\n".join(body), k))
+        out.append("struct %s {\n%s\n};" % (k, "\n".join(body)))
     fwd = "".join("typedef struct %s %s;\n" % (k, k) for k in defs)
     # rewrite
     new = ACCESS.sub(lambda m: m.group(1) + re.sub(r"->unk", "->f", m.group(2)), text)
