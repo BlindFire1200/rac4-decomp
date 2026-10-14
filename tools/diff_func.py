@@ -39,15 +39,16 @@ def main() -> int:
     with open(elf_path, "rb") as f:
         secs = mp.sections(ELFFile(f))
     retail = mp.read(secs, addr, size)
-    code = b""
+    code, masks, start = b"", {}, 0
     for path in glob.glob(str(ROOT / "build" / "obj" / "*.o")):
         elf = ELFFile(open(path, "rb"))
         for s in elf.get_section_by_name(".symtab").iter_symbols():
             if s.name == name and s["st_info"]["type"] == "STT_FUNC":
                 code = elf.get_section_by_name(".text").data()[s["st_value"]: s["st_value"] + s["st_size"]]
+                masks, start = mp.reloc_masks(elf), s["st_value"]
     dis = lambda w: rabbitizer.Instruction(w, 0, category=rabbitizer.InstrCategory.R5900).disassemble()
     n = max(len(code), len(retail)) // 4
-    rn, cn = mp.normalise(retail), mp.normalise(code)
+    rn, cn = mp.fields(retail, masks, start), mp.fields(code, masks, start)
     for i in range(n):
         a = struct.unpack_from("<I", code, i * 4)[0] if i * 4 < len(code) else None
         b = struct.unpack_from("<I", retail, i * 4)[0] if i * 4 < len(retail) else None

@@ -23,7 +23,7 @@ Decompilation progress is tracked live on **[openrac.dev](https://openrac.dev)**
 |---|---|---|---|---|
 | v1.00 | NTSC-U | `SCUS_974.65` | [![](https://decomp.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&label=Code&measure=matched_code_percent)](https://decomp.dev/OpenRAC/rac-deadlocked-decomp) | [![](https://decomp.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&label=Functions&measure=matched_functions)](https://decomp.dev/OpenRAC/rac-deadlocked-decomp) |
 
-Only NTSC-U is targeted; PAL (*Ratchet: Gladiator*) may follow as a second version if someone with a PAL disc joins. There is no linked image yet: a function counts as matched when its compiled code equals retail with relocatable fields masked (`tools/audit_matches.py`), so a function that calls or reads the wrong symbol can still count.
+Only NTSC-U is targeted; PAL (*Ratchet: Gladiator*) may follow as a second version if someone with a PAL disc joins. There is no linked image yet: a function counts as matched when its compiled code equals retail with only the fields it relocates masked (`tools/audit_matches.py`), so a function that calls or reads the wrong symbol can still count.
 
 | Category | Progress | Contents |
 |---|---|---|

@@ -36,6 +36,7 @@ def main() -> int:
         secs = mp.sections(ELFFile(f))
     elf = ELFFile(open(out, "rb"))
     data = elf.get_section_by_name(".text").data()
+    masks = mp.reloc_masks(elf)
     syms = {s.name: s for s in elf.get_section_by_name(".symtab").iter_symbols()
             if s["st_info"]["type"] == "STT_FUNC"}
     for name, target in pairs:
@@ -49,8 +50,9 @@ def main() -> int:
         pad = size - len(code)
         if 0 < pad <= 12 and not any(retail[len(code):]):
             retail = retail[:len(code)]
-        ok = len(code) == len(retail) and mp.normalise(code) == mp.normalise(retail)
-        eq = sum(1 for a, b in zip(mp.normalise(code), mp.normalise(retail)) if a == b)
+        ours, theirs = mp.fields(code, masks, s["st_value"]), mp.fields(retail, masks, s["st_value"])
+        ok = len(code) == len(retail) and ours == theirs
+        eq = sum(1 for a, b in zip(ours, theirs) if a == b)
         print("%-10s -> %s  %s  (%d/%d words)" % (name, target, "EXACT" if ok else "no", eq, len(retail) // 4))
     return 0
 

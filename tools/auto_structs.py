@@ -294,6 +294,7 @@ def check(cls):
         if text is None:
             continue
         data = text.data()
+        masks = mp.reloc_masks(elf)
         for s in elf.get_section_by_name(".symtab").iter_symbols():
             if s.name != name or s["st_info"]["type"] != "STT_FUNC":
                 continue
@@ -303,7 +304,8 @@ def check(cls):
             pad = size - len(code)
             if 0 < pad <= 12 and not any(r[len(code):]):
                 r = r[:len(code)]
-            if len(code) == len(r) and mp.normalise(code) == mp.normalise(r):
+            start = s["st_value"]
+            if len(code) == len(r) and mp.fields(code, masks, start) == mp.fields(r, masks, start):
                 exact.setdefault(name, []).append(variant)
     out = AUTO / "exact"
     out.mkdir(exist_ok=True)

@@ -162,7 +162,7 @@ or to `src/overlays/lNN_<level>/LNN_<ADDRESS>.c` if it is in one level only
 file (same compiler, flags and assembler passes). `tools/audit_matches.py` and
 `tools/diff_func.py` compare it with the bytes in that level's `overlay.elf`, found in
 `$OVERLAYS` or `private/overlays` (a symlink to the folder from
-`wrenchbuild unpack`). Jump targets and relocatable immediates are masked, so
+`wrenchbuild unpack`). The fields the compiled object relocates are masked, so
 the different load addresses of the levels do not matter, and a match counts in
 **every** level that contains the function.
 
