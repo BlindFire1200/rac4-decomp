@@ -1,13 +1,13 @@
 #include "common.h"
 
 typedef struct {
-    u32 f0;
-    u8 f4;
-    u8 f5[3];
-} Type1;
-extern Type1 D_00270DC0[];
+    u32 id;
+    u8 active;
+    u8 pad[3];
+} SlotFlags;
+extern SlotFlags D_00270DC0[];
 
-// Clear a byte in the indexed record.
-void func_L00_005E1870(u8 *arg0) {
-    D_00270DC0[*(s16 *)(arg0 + 0xE)].f4 = 0;
+// Clear the active byte of the slot indexed by the owner.
+void func_L00_005E1870(u8 *owner) {
+    D_00270DC0[*(s16 *)(owner + 0xE)].active = 0;
 }
