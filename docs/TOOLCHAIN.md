@@ -71,11 +71,13 @@ because that assembler is not usable here:
 
 1. compile to assembly (`-S`);
 2. `tools/ps2eeas_dli.py`: expand 64-bit constants the way SN's assembler does;
-3. assemble once with the compiler driver's GNU `as`;
-4. `tools/ps2eeas_nops.py`: add the nops SN's assembler adds (it pads short
+3. `tools/ps2eeas_sdata.py`: reach each small global through `$gp` or with
+   `lui` where SN's assembler does (below);
+4. assemble once with the compiler driver's GNU `as`;
+5. `tools/ps2eeas_nops.py`: add the nops SN's assembler adds (it pads short
    loops, and puts a nop after an `mtc1` whose result is read next, and between
    a float compare and its `bc1`);
-5. assemble again.
+6. assemble again.
 
 A source file can add compiler flags on its first line:
 
@@ -102,6 +104,20 @@ starts at 5), a float compare followed directly by `bc1` gets a nop between them
 and an `mtc1` whose destination is read by the next instruction gets one too.
 Retail's level code has 722 `mtc1; nop; cvt.s.w` sequences and 93 without; the
 nop pass accounts for the first group.
+
+Small data: GCC writes accesses to globals as macros (`lw $2,D_x`) and leaves
+`$gp` or `lui` to the assembler. GNU `as` uses `$gp` for every object of 8
+bytes or less. `ps2eeas` (1.9.6 in the SDK mirror, run on test files) reads the
+file once and uses `$gp` only for a plain `D_x` whose definition in
+`.sdata`/`.sbss` it has already seen, and inside `.set nomacro` (GCC's filled
+delay slots), where one instruction is required; everything else becomes `lui`
+plus the access. Retail agrees: in the resident and L00 code, when one function
+reaches a global both ways, 1231 of 1252 `$gp` accesses sit in delay slots.
+`tools/ps2eeas_sdata.py` reproduces that by renaming accesses (`D_x__gp`,
+`D_x__lui`) so GNU `as` picks the same form; on all the matched sources,
+`ps2eeas_dli` + `ps2eeas_sdata` + GNU `as` give the same text as `ps2eeas`
+wherever the old pipeline did, and two files more (the rest differ only in
+the nops step 5 adds).
 
 Not explained yet: retail has two nops before most `div.s` (281 of 435 in level code,
 including library code), while the compilers in the mirrors emit none and `ps2eeas` on

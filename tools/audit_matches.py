@@ -4,10 +4,12 @@ Check every compiled function against the retail image.
 
 Reads build/obj/*.o (tools/build.sh) and compares each `func_XXXXXXXX` with
 the retail bytes at that address (and each `func_L<level>_<address>` with the bytes
-in that level's overlay, found in $OVERLAYS or private/overlays). Fields a linker would fill in (jump
-targets, the immediates of lui and of address arithmetic and loads/stores)
-are masked: this is NOT a link-time comparison, so a function that calls or
-reads the wrong symbol can still count. Writes build/matches.json.
+in that level's overlay, found in $OVERLAYS or private/overlays). Only the
+fields the compiled object has relocations on are masked (retail.fields: jump
+targets, and the immediates of the lui/%lo/$gp accesses to symbols); every
+other bit, constants and offsets included, must equal retail. This is NOT a
+link-time comparison, so a function that calls or reads the wrong symbol can
+still count. Writes build/matches.json.
 
 Usage: venv/bin/python tools/audit_matches.py
 """
@@ -69,6 +71,7 @@ def main() -> int:
         elf = ELFFile(open(path, "rb"))
         text = elf.get_section_by_name(".text")
         data = text.data() if text else b""
+        masks = mp.reloc_masks(elf)
         for s in elf.get_section_by_name(".symtab").iter_symbols():
             if s["st_info"]["type"] != "STT_FUNC":
                 continue
@@ -98,7 +101,8 @@ def main() -> int:
             if 0 < pad <= 12 and not any(retail[len(code):]):
                 retail = retail[:len(code)]
                 size = len(code)
-            if len(code) == size and mp.normalise(code) == mp.normalise(retail):
+            start = s["st_value"]
+            if len(code) == size and mp.fields(code, masks, start) == mp.fields(retail, masks, start):
                 exact.append(name)
             else:
                 bad.append((s.name, "size %d vs retail %d" % (len(code), size)

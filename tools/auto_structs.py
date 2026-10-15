@@ -122,7 +122,7 @@ def build_structs(text):
                 body.append("    %s f%X;" % (t, o))
                 size = SCALARS[t]
             cur = o + size
-        out.append("typedef struct %s {\n%s\n} %s;" % (k, "\n".join(body), k))
+        out.append("struct %s {\n%s\n};" % (k, "\n".join(body)))
     fwd = "".join("typedef struct %s %s;\n" % (k, k) for k in defs)
     # rewrite
     new = ACCESS.sub(lambda m: m.group(1) + re.sub(r"->unk", "->f", m.group(2)), text)
@@ -294,6 +294,7 @@ def check(cls):
         if text is None:
             continue
         data = text.data()
+        masks = mp.reloc_masks(elf)
         for s in elf.get_section_by_name(".symtab").iter_symbols():
             if s.name != name or s["st_info"]["type"] != "STT_FUNC":
                 continue
@@ -303,7 +304,8 @@ def check(cls):
             pad = size - len(code)
             if 0 < pad <= 12 and not any(r[len(code):]):
                 r = r[:len(code)]
-            if len(code) == len(r) and mp.normalise(code) == mp.normalise(r):
+            start = s["st_value"]
+            if len(code) == len(r) and mp.fields(code, masks, start) == mp.fields(r, masks, start):
                 exact.setdefault(name, []).append(variant)
     out = AUTO / "exact"
     out.mkdir(exist_ok=True)

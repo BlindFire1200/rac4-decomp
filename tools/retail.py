@@ -30,6 +30,33 @@ def normalise(code: bytes):
     return tuple(out)
 
 
+# Relocation types whose field the linker fills in: R_MIPS_26 (j/jal target),
+# R_MIPS_HI16, R_MIPS_LO16, R_MIPS_GPREL16 (immediate). Any other type: the word.
+RELOC_FIELDS = {4: 0x03FFFFFF, 5: 0xFFFF, 6: 0xFFFF, 7: 0xFFFF}
+
+
+def reloc_masks(elf, section: str = ".text") -> dict:
+    """offset -> the bits a relocation fills in, for one section of a
+    relocatable object (a compiled source file)."""
+    idx = next((i for i, s in enumerate(elf.iter_sections()) if s.name == section), None)
+    masks = {}
+    for s in elf.iter_sections():
+        if s["sh_type"] in ("SHT_REL", "SHT_RELA") and s["sh_info"] == idx:
+            for r in s.iter_relocations():
+                masks[r["r_offset"]] = masks.get(r["r_offset"], 0) | RELOC_FIELDS.get(r["r_info_type"], 0xFFFFFFFF)
+    return masks
+
+
+def fields(code: bytes, masks: dict, start: int = 0):
+    """code as words with only the fields our object relocates masked
+    (masks from reloc_masks(), start = the function's offset in the section).
+    Unlike normalise(), constants and offsets the linker does not touch must
+    equal retail: a match compared this way differs from retail only in what
+    the link fills in."""
+    return tuple(w & ~masks.get(start + i * 4, 0) & 0xFFFFFFFF
+                 for i, (w,) in enumerate(struct.iter_unpack("<I", code[: len(code) // 4 * 4])))
+
+
 def sections(elf):
     return [(s["sh_addr"], s["sh_size"], s.name, s.data() if s["sh_type"] != "SHT_NOBITS" else b"")
             for s in elf.iter_sections() if s["sh_addr"]]

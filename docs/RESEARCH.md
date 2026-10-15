@@ -77,7 +77,8 @@ Moved to [`TOOLCHAIN.md`](TOOLCHAIN.md).
 ## Checking matches
 
 `tools/audit_matches.py` compares every compiled function with the retail bytes
-at its address, with relocatable fields masked (`tools/retail.py`). This is not
+at its address, masking only the fields the compiled object relocates
+(`tools/retail.py`, `fields()`). This is not
 a link-time comparison, so a function that calls or reads the wrong symbol can
 still count. `tools/diff_func.py` shows a function next to retail word by word;
 `tools/try_variants.py` tries several source forms of one function at once.

@@ -36,6 +36,7 @@ def main() -> int:
         elf = ELFFile(open(path, "rb"))
         text = elf.get_section_by_name(".text")
         data = text.data()
+        masks = mp.reloc_masks(elf)
         syms = {s.name: s for s in elf.get_section_by_name(".symtab").iter_symbols()
                 if s["st_info"]["type"] == "STT_FUNC"}
         same = size_same = 0
@@ -52,10 +53,11 @@ def main() -> int:
                 continue
             if len(code) == len(rc):
                 size_same += 1
-            if mp.normalise(code) == mp.normalise(rc):
+            ours, theirs = mp.fields(code, masks, s["st_value"]), mp.fields(rc, masks, s["st_value"])
+            if ours == theirs:
                 same += 1
             else:
-                eq = sum(1 for x, y in zip(mp.normalise(code), mp.normalise(rc)) if x == y)
+                eq = sum(1 for x, y in zip(ours, theirs) if x == y)
                 detail.append("%s:%d/%d w" % (name, eq, len(rc) // 4))
         results.append((same, size_same, Path(path).stem, detail))
     for same, size_same, tag, detail in sorted(results, reverse=True):

@@ -44,8 +44,9 @@ did to its output ([`docs/TOOLCHAIN.md`](docs/TOOLCHAIN.md)). So:
 - if one function's nops differ from retail, refine the rule in
   `tools/ps2eeas_nops.py` with evidence from retail, not the C.
 
-The check is not link-time yet: `tools/audit_matches.py` masks relocatable
-fields, so a function that calls or reads the wrong symbol can still pass.
+The check is not link-time yet: `tools/audit_matches.py` masks the fields the
+compiled object relocates (constants and offsets must equal retail), so a
+function that calls or reads the wrong symbol can still pass.
 Check calls and globals by eye.
 
 ## Sources

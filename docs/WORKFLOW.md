@@ -133,8 +133,9 @@ venv/bin/python tools/audit_matches.py
 ```
 
 `tools/audit_matches.py` compares each compiled function with the retail bytes
-at its address, with relocatable fields masked (jump targets, the immediate of
-`lui`, and of loads, stores and adds that are not stack-relative). This is
+at its address, masking only the fields the compiled object has relocations on
+(jump targets, and the immediates of `lui`/`%lo`/`$gp` accesses to symbols):
+every constant and offset must equal retail. This is
 **not** a link-time comparison yet: a function that calls or reads the wrong
 symbol can still pass, so check calls and globals by eye. An overlay function
 counts in every level that contains it.

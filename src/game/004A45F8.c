@@ -10,10 +10,10 @@ s32 func_00505B20(void);
 extern s32 D_307B58_[];
 #define D_307B58 (D_307B58_[0])
 
-void func_004A45F8(s32 a0) {
+void func_004A45F8(void) {
     s32 *temp_s0;
 
-    temp_s0 = (func_00505B20() * 0xEC) + &D_307B58;
+    temp_s0 = (s32 *)((u32)&D_307B58 + ((u32)func_00505B20() * 0xECU));
     if (*temp_s0 & 1) {
         func_004A46A8();
     }

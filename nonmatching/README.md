@@ -9,5 +9,12 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_004C8388`](game/func_004C8388.c) | game | 56 | not recorded |
 | [`func_004F23B0`](game/func_004F23B0.c) | game | 96 | not recorded |
 | [`func_004F5E18`](game/func_004F5E18.c) | game | 48 | not recorded |
+| [`func_00510A78`](game/func_00510A78.c) | game | 32 | COMPILE failed |
 | [`func_0053CB20`](game/func_0053CB20.c) | game | 80 | not recorded |
 | [`func_0054A810`](game/func_0054A810.c) | game | 64 | register choice differs for the multiply |
+| [`func_01EA6D00`](net/func_01EA6D00.c) | net | 80 | COMPILE failed |
+| [`func_01EA6D50`](net/func_01EA6D50.c) | net | 32 | COMPILE failed |
+| [`func_01EEF7E4`](net/func_01EEF7E4.c) | net | 48 | COMPILE failed |
+| [`func_L00_006BB188`](shared/func_L00_006BB188.c) | shared | 800 | COMPILE failed |
+| [`func_L00_006D1BA0`](shared/func_L00_006D1BA0.c) | shared | 24 | COMPILE failed |
+| [`func_L00_00770CA8`](l00_multiplayer_menu/func_L00_00770CA8.c) | l00_multiplayer_menu | 40 | COMPILE failed |
