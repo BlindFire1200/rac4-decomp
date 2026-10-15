@@ -2,6 +2,7 @@
 
 extern u8 D_0022CA80[];
 
+// Reload the +0x98 field of the indexed entry's linked object from its source.
 void func_L00_0059BB68(s32 index) {
     u8 *record = D_0022CA80 + index * 0x470;
     u8 *ptr = *(u8 **)(record + 0x124);

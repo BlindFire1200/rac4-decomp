@@ -1,13 +1,13 @@
-#include "common.h"
+#include "actor_table.h"
 
-extern u8 D_0022CA80[];
 extern void func_L00_0058E5D0(void *, f32);
 
+// Store the value and run the follow-up for the indexed actor.
 void func_L00_0058E660(s32 index, f32 value, f32 rate) {
-    u8 *record = D_0022CA80 + index * 0x470;
-    u8 *object = *(u8 **)(record + 0x50);
-    if (*(s16 *)(object + 0x86) == 0) {
-        u8 *field = *(u8 **)(object + 0x70);
+    u8 *entry = ACTOR_ENTRY(index);
+    u8 *object = ENTRY_OBJECT(entry);
+    if (OBJECT_BUSY(object) == 0) {
+        u8 *field = OBJECT_PARAMS(object);
         *(f32 *)(field + 0x1F4) = value;
         func_L00_0058E5D0(object, rate);
     }

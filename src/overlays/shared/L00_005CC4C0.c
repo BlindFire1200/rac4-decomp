@@ -3,6 +3,7 @@
 extern void func_L00_006701A8(void *, void *, s32);
 extern u8 D_00245580[];
 
+// Flush the eight 0x30-byte rows that have pending halfword ranges and reset their counters.
 void func_L00_005CC4C0(void) {
     s32 i;
     for (i = 0; i < 8; i++) {

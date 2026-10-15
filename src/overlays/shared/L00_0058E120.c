@@ -1,14 +1,12 @@
-#include "common.h"
-
-extern u8 D_0022CA80[];
+#include "actor_table.h"
 
 // Store the x/y values that are nonzero into the indexed record's object
 // (inactive objects only).
 void func_L00_0058E120(s32 index, f32 x, f32 y) {
-    u8 *record = D_0022CA80 + index * 0x470;
-    u8 *object = *(u8 **)(record + 0x50);
-    if (*(s16 *)(object + 0x86) == 0) {
-        u8 *field = *(u8 **)(object + 0x70) + 0x60;
+    u8 *entry = ACTOR_ENTRY(index);
+    u8 *object = ENTRY_OBJECT(entry);
+    if (OBJECT_BUSY(object) == 0) {
+        u8 *field = OBJECT_PARAMS(object) + 0x60;
         if (x != 0.0f) {
             *(f32 *)(field + 0xFC) = x;
         }

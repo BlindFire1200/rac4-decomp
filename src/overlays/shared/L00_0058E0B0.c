@@ -1,12 +1,11 @@
-#include "common.h"
+#include "actor_table.h"
 
-extern u8 D_0022CA80[];
-
+// Store a float parameter for the indexed actor (inactive objects only).
 void func_L00_0058E0B0(s32 index, f32 value) {
-    u8 *record = D_0022CA80 + index * 0x470;
-    u8 *object = *(u8 **)(record + 0x50);
-    if (*(s16 *)(object + 0x86) == 0) {
-        u8 *target = *(u8 **)(object + 0x70);
+    u8 *entry = ACTOR_ENTRY(index);
+    u8 *object = ENTRY_OBJECT(entry);
+    if (OBJECT_BUSY(object) == 0) {
+        u8 *target = OBJECT_PARAMS(object);
         *(f32 *)(target + 0x204) = value;
     }
 }
