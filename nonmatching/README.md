@@ -16,5 +16,4 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_01EA6D50`](net/func_01EA6D50.c) | net | 32 | COMPILE failed |
 | [`func_01EEF7E4`](net/func_01EEF7E4.c) | net | 48 | COMPILE failed |
 | [`func_L00_006BB188`](shared/func_L00_006BB188.c) | shared | 800 | COMPILE failed |
-| [`func_L00_006D1BA0`](shared/func_L00_006D1BA0.c) | shared | 24 | COMPILE failed |
 | [`func_L00_00770CA8`](l00_multiplayer_menu/func_L00_00770CA8.c) | l00_multiplayer_menu | 40 | COMPILE failed |
