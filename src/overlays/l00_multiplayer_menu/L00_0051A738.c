@@ -1,5 +1,6 @@
 #include "common.h"
 
-s64 func_L00_0051A738(u8 *arg0) {
-    return *(s64 *)(arg0 + 0x88);
+// Return the 64-bit value at +0x88.
+s64 func_L00_0051A738(u8 *object) {
+    return *(s64 *)(object + 0x88);
 }

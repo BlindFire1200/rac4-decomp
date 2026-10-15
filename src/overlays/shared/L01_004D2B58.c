@@ -1,5 +1,6 @@
 #include "common.h"
 
-s32 func_L01_004D2B58(u8 *arg0) {
-    return *(s16 *)(arg0 + 0xBC) == 0xCBE;
+// Return whether the type halfword at +0xBC is 0xCBE.
+s32 func_L01_004D2B58(u8 *object) {
+    return *(s16 *)(object + 0xBC) == 0xCBE;
 }
