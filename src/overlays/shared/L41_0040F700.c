@@ -2,13 +2,17 @@
 
 extern void func_L00_006EC318(void *, s32 *, s32);
 extern void *func_L01_006B4FC0(s32, s32, s32, s32);
-void func_L41_0040F700(s32 unused, s32 arg1, s32 arg2) {
-    s32 first, second;
-    void *stream=func_L01_006B4FC0(unused,0,0,0xFA);
-    if(stream) {
-        first=arg1;
-        func_L00_006EC318(stream,&first,4);
-        second=arg2;
-        func_L00_006EC318(stream,&second,4);
+
+// Message writer: opens a stream with func_L01_006B4FC0 (kind 0) and writes two
+// words.
+void func_L41_0040F700(s32 target, s32 value_a, s32 value_b) {
+    s32 first;
+    s32 second;
+    void *stream = func_L01_006B4FC0(target, 0, 0, 0xFA);
+    if (stream) {
+        first = value_a;
+        func_L00_006EC318(stream, &first, 4);
+        second = value_b;
+        func_L00_006EC318(stream, &second, 4);
     }
 }

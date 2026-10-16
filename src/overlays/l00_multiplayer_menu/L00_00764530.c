@@ -3,6 +3,8 @@
 extern s32 func_L00_005C9F50(s32);
 extern s32 D_004EE5E8[];
 
+// Fill the 22-entry table D_004EE5E8 with func_L00_005C9F50 lookups for the ids
+// 0x2CF4-0x2CF9, 0x30DE-0x30EB and 0x3523-0x3524.
 void func_L00_00764530(void) {
     D_004EE5E8[0] = func_L00_005C9F50(0x2CF4);
     D_004EE5E8[1] = func_L00_005C9F50(0x2CF5);

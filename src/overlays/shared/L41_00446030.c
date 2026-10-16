@@ -2,19 +2,23 @@
 
 extern void func_L00_006EC318(void *, void *, int);
 extern int func_L01_006B3E48(int, int, void **, void *);
-int func_L41_00446030(void *unused, void *data, int arg2, int arg3, int arg4, int arg5) {
+
+// Message writer: opens a stream with func_L01_006B3E48 (id 0x261F, 0x90
+// bytes), writes the 12-byte header and four words, and returns the open call's
+// result.
+int func_L41_00446030(void *target, void *header, int value_a, int value_b, int value_c, int value_d) {
     void *stream = 0;
     int first, second, third, fourth;
-    int result = func_L01_006B3E48(0x261F, 0x90, &stream, unused);
+    int result = func_L01_006B3E48(0x261F, 0x90, &stream, target);
     if (stream != 0) {
-        func_L00_006EC318(stream, data, 12);
-        first = arg2;
+        func_L00_006EC318(stream, header, 12);
+        first = value_a;
         func_L00_006EC318(stream, &first, 4);
-        second = arg3;
+        second = value_b;
         func_L00_006EC318(stream, &second, 4);
-        third = arg4;
+        third = value_c;
         func_L00_006EC318(stream, &third, 4);
-        fourth = arg5;
+        fourth = value_d;
         func_L00_006EC318(stream, &fourth, 4);
     }
     return result;

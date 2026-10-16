@@ -7,19 +7,21 @@ extern void func_L01_005A8928(void *);
 extern void func_L00_005DD4A0(void *);
 extern void func_L01_00588B08(void *);
 extern void func_L01_00591BD8(void *, int, int);
-void func_L01_0043A3E0(void *arg0) {
-    unsigned char *state = *(unsigned char **)((char *)arg0 + 0xAC);
+
+// Same sequence as func_L01_003D6868, but moves to state 0xD.
+void func_L01_0043A3E0(void *object) {
+    unsigned char *linked = *(unsigned char **)((char *)object + 0xAC);
     void *callback = func_L00_005DEBD0(0x20ED, 0x12, 8);
     if (callback != 0) ((void (*)(void))(*(void **)((char *)callback + 4)))();
-    if (*(int *)(state + 0x324) != 0 && *(int *)(state + 0x320) != 0)
-        func_L01_0056E9D0(*(int *)(state + 0x324), arg0);
-    func_L01_0056E7F8(arg0);
-    func_L01_005A8928(arg0);
-    if (state[0x460] != 0) {
-        func_L00_005DD4A0(arg0);
+    if (*(int *)(linked + 0x324) != 0 && *(int *)(linked + 0x320) != 0)
+        func_L01_0056E9D0(*(int *)(linked + 0x324), object);
+    func_L01_0056E7F8(object);
+    func_L01_005A8928(object);
+    if (linked[0x460] != 0) {
+        func_L00_005DD4A0(object);
         return;
     }
-    state[0x48B] = 0;
-    func_L01_00588B08(arg0);
-    func_L01_00591BD8(arg0, 0xD, -1);
+    linked[0x48B] = 0;
+    func_L01_00588B08(object);
+    func_L01_00591BD8(object, 0xD, -1);
 }
