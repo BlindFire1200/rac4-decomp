@@ -1,16 +1,16 @@
 {
  "measures": {
-  "fuzzy_match_percent": 1.6473961634179897,
+  "fuzzy_match_percent": 1.6500239593155364,
   "total_code": "5175440",
-  "matched_code": "85260",
-  "matched_code_percent": 1.6473961634179897,
+  "matched_code": "85396",
+  "matched_code_percent": 1.6500239593155364,
   "total_functions": 15056,
-  "matched_functions": 1057,
+  "matched_functions": 1058,
   "complete_code": "0",
-  "matched_functions_percent": 7.020456960680128,
+  "matched_functions_percent": 7.027098831030818,
   "complete_code_percent": 0.0,
-  "total_units": 1251,
-  "complete_units": 1039
+  "total_units": 1252,
+  "complete_units": 1040
  },
  "units": [
   {
@@ -37687,6 +37687,50 @@
     "progress_categories": [
      "level_01",
      "level_21",
+     "common",
+     "overlays",
+     "game"
+    ]
+   }
+  },
+  {
+   "name": "overlays/shared/L01_00468CC0",
+   "measures": {
+    "fuzzy_match_percent": 100.0,
+    "total_code": "136",
+    "matched_code": "136",
+    "matched_code_percent": 100.0,
+    "total_functions": 1,
+    "matched_functions": 1,
+    "complete_code": "136",
+    "matched_functions_percent": 100.0,
+    "complete_code_percent": 100.0,
+    "total_units": 1,
+    "complete_units": 1
+   },
+   "functions": [
+    {
+     "name": "func_L01_00468CC0",
+     "size": "136",
+     "fuzzy_match_percent": 100.0,
+     "address": "0",
+     "metadata": {
+      "virtual_address": "4623552"
+     }
+    }
+   ],
+   "metadata": {
+    "complete": true,
+    "source_path": "src/overlays/shared/L01_00468CC0.c",
+    "progress_categories": [
+     "level_01",
+     "level_05",
+     "level_13",
+     "level_15",
+     "level_21",
+     "level_25",
+     "level_33",
+     "level_35",
      "common",
      "overlays",
      "game"
@@ -110059,10 +110103,10 @@
    "name": "overlays/common_086",
    "measures": {
     "fuzzy_match_percent": 0.0,
-    "total_code": "264",
+    "total_code": "128",
     "matched_code": "0",
     "matched_code_percent": 0.0,
-    "total_functions": 4,
+    "total_functions": 3,
     "matched_functions": 0,
     "complete_code": "0",
     "matched_functions_percent": 0.0,
@@ -110072,19 +110116,10 @@
    },
    "functions": [
     {
-     "name": "func_L01_00468CC0",
-     "size": "136",
-     "fuzzy_match_percent": 0.0,
-     "address": "0",
-     "metadata": {
-      "virtual_address": "4623552"
-     }
-    },
-    {
      "name": "func_L01_00468D48",
      "size": "96",
      "fuzzy_match_percent": 0.0,
-     "address": "136",
+     "address": "0",
      "metadata": {
       "virtual_address": "4623688"
      }
@@ -110093,7 +110128,7 @@
      "name": "func_L01_00469318",
      "size": "24",
      "fuzzy_match_percent": 0.0,
-     "address": "232",
+     "address": "96",
      "metadata": {
       "virtual_address": "4625176"
      }
@@ -110102,7 +110137,7 @@
      "name": "func_L01_00469330",
      "size": "8",
      "fuzzy_match_percent": 0.0,
-     "address": "256",
+     "address": "120",
      "metadata": {
       "virtual_address": "4625200"
      }
@@ -181740,14 +181775,14 @@
    "id": "game",
    "name": "Game",
    "measures": {
-    "fuzzy_match_percent": 1.6473961634179897,
+    "fuzzy_match_percent": 1.6500239593155364,
     "total_code": "5175440",
-    "matched_code": "85260",
-    "matched_code_percent": 1.6473961634179897,
+    "matched_code": "85396",
+    "matched_code_percent": 1.6500239593155364,
     "total_functions": 15056,
-    "matched_functions": 1057,
+    "matched_functions": 1058,
     "complete_code": "0",
-    "matched_functions_percent": 7.020456960680128,
+    "matched_functions_percent": 7.027098831030818,
     "complete_code_percent": 0.0
    }
   },
@@ -181830,14 +181865,14 @@
    "id": "overlays",
    "name": "Level overlays",
    "measures": {
-    "fuzzy_match_percent": 1.0950528200578844,
+    "fuzzy_match_percent": 1.099011122830792,
     "total_code": "3435816",
-    "matched_code": "37624",
-    "matched_code_percent": 1.0950528200578844,
+    "matched_code": "37760",
+    "matched_code_percent": 1.099011122830792,
     "total_functions": 7029,
-    "matched_functions": 337,
+    "matched_functions": 338,
     "complete_code": "0",
-    "matched_functions_percent": 4.794423104282259,
+    "matched_functions_percent": 4.808649879072414,
     "complete_code_percent": 0.0
    }
   },
@@ -181845,14 +181880,14 @@
    "id": "common",
    "name": "Common (shared by 2+ levels)",
    "measures": {
-    "fuzzy_match_percent": 1.2671315478577212,
+    "fuzzy_match_percent": 1.2723549320268728,
     "total_code": "2603676",
-    "matched_code": "32992",
-    "matched_code_percent": 1.2671315478577212,
+    "matched_code": "33128",
+    "matched_code_percent": 1.2723549320268728,
     "total_functions": 4714,
-    "matched_functions": 264,
+    "matched_functions": 265,
     "complete_code": "0",
-    "matched_functions_percent": 5.60033941450997,
+    "matched_functions_percent": 5.621552821383114,
     "complete_code_percent": 0.0
    }
   },
@@ -181890,14 +181925,14 @@
    "id": "level_01",
    "name": "Level 01: Dreadzone Station",
    "measures": {
-    "fuzzy_match_percent": 1.5422442663953537,
+    "fuzzy_match_percent": 1.5494510153037433,
     "total_code": "1887120",
-    "matched_code": "29104",
-    "matched_code_percent": 1.5422442663953537,
+    "matched_code": "29240",
+    "matched_code_percent": 1.5494510153037433,
     "total_functions": 3449,
-    "matched_functions": 228,
+    "matched_functions": 229,
     "complete_code": "0",
-    "matched_functions_percent": 6.610611771527979,
+    "matched_functions_percent": 6.639605682806611,
     "complete_code_percent": 0.0
    }
   },
@@ -181935,14 +181970,14 @@
    "id": "level_05",
    "name": "Level 05: Dark Cathedral",
    "measures": {
-    "fuzzy_match_percent": 1.6399909700163497,
+    "fuzzy_match_percent": 1.6477439862817218,
     "total_code": "1754156",
-    "matched_code": "28768",
-    "matched_code_percent": 1.6399909700163497,
+    "matched_code": "28904",
+    "matched_code_percent": 1.6477439862817218,
     "total_functions": 3192,
-    "matched_functions": 225,
+    "matched_functions": 226,
     "complete_code": "0",
-    "matched_functions_percent": 7.048872180451128,
+    "matched_functions_percent": 7.080200501253133,
     "complete_code_percent": 0.0
    }
   },
@@ -182025,14 +182060,14 @@
    "id": "level_13",
    "name": "Level 13: Maraxus Prison",
    "measures": {
-    "fuzzy_match_percent": 1.691380191921234,
+    "fuzzy_match_percent": 1.6994660927262566,
     "total_code": "1681940",
-    "matched_code": "28448",
-    "matched_code_percent": 1.691380191921234,
+    "matched_code": "28584",
+    "matched_code_percent": 1.6994660927262566,
     "total_functions": 3084,
-    "matched_functions": 220,
+    "matched_functions": 221,
     "complete_code": "0",
-    "matched_functions_percent": 7.133592736705578,
+    "matched_functions_percent": 7.166018158236057,
     "complete_code_percent": 0.0
    }
   },
@@ -182055,14 +182090,14 @@
    "id": "level_15",
    "name": "Level 15: Control Level",
    "measures": {
-    "fuzzy_match_percent": 1.6575595399885654,
+    "fuzzy_match_percent": 1.6655263231889628,
     "total_code": "1707088",
-    "matched_code": "28296",
-    "matched_code_percent": 1.6575595399885654,
+    "matched_code": "28432",
+    "matched_code_percent": 1.6655263231889628,
     "total_functions": 3074,
-    "matched_functions": 218,
+    "matched_functions": 219,
     "complete_code": "0",
-    "matched_functions_percent": 7.091737150292778,
+    "matched_functions_percent": 7.124268054651919,
     "complete_code_percent": 0.0
    }
   },
@@ -182070,14 +182105,14 @@
    "id": "level_21",
    "name": "Level 21: Dreadzone Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5422442663953537,
+    "fuzzy_match_percent": 1.5494510153037433,
     "total_code": "1887120",
-    "matched_code": "29104",
-    "matched_code_percent": 1.5422442663953537,
+    "matched_code": "29240",
+    "matched_code_percent": 1.5494510153037433,
     "total_functions": 3449,
-    "matched_functions": 228,
+    "matched_functions": 229,
     "complete_code": "0",
-    "matched_functions_percent": 6.610611771527979,
+    "matched_functions_percent": 6.639605682806611,
     "complete_code_percent": 0.0
    }
   },
@@ -182115,14 +182150,14 @@
    "id": "level_25",
    "name": "Level 25: Dark Cathedral Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6399909700163497,
+    "fuzzy_match_percent": 1.6477439862817218,
     "total_code": "1754156",
-    "matched_code": "28768",
-    "matched_code_percent": 1.6399909700163497,
+    "matched_code": "28904",
+    "matched_code_percent": 1.6477439862817218,
     "total_functions": 3192,
-    "matched_functions": 225,
+    "matched_functions": 226,
     "complete_code": "0",
-    "matched_functions_percent": 7.048872180451128,
+    "matched_functions_percent": 7.080200501253133,
     "complete_code_percent": 0.0
    }
   },
@@ -182205,14 +182240,14 @@
    "id": "level_33",
    "name": "Level 33: Maraxus Prison Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.691380191921234,
+    "fuzzy_match_percent": 1.6994660927262566,
     "total_code": "1681940",
-    "matched_code": "28448",
-    "matched_code_percent": 1.691380191921234,
+    "matched_code": "28584",
+    "matched_code_percent": 1.6994660927262566,
     "total_functions": 3084,
-    "matched_functions": 220,
+    "matched_functions": 221,
     "complete_code": "0",
-    "matched_functions_percent": 7.133592736705578,
+    "matched_functions_percent": 7.166018158236057,
     "complete_code_percent": 0.0
    }
   },
@@ -182235,14 +182270,14 @@
    "id": "level_35",
    "name": "Level 35: Control Level Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6575595399885654,
+    "fuzzy_match_percent": 1.6655263231889628,
     "total_code": "1707088",
-    "matched_code": "28296",
-    "matched_code_percent": 1.6575595399885654,
+    "matched_code": "28432",
+    "matched_code_percent": 1.6655263231889628,
     "total_functions": 3074,
-    "matched_functions": 218,
+    "matched_functions": 219,
     "complete_code": "0",
-    "matched_functions_percent": 7.091737150292778,
+    "matched_functions_percent": 7.124268054651919,
     "complete_code_percent": 0.0
    }
   },
