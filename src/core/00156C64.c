@@ -1,4 +1,6 @@
 #include "common.h"
-s32 func_00156C64(void *arg0) {
-    return *(s32 *)((char *)arg0 + 0x2B8);
+
+// Return the word at +0x2B8.
+s32 func_00156C64(void *object) {
+    return *(s32 *)((u8 *)object + 0x2B8);
 }
