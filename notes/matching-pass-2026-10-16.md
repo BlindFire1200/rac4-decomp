@@ -38,3 +38,4 @@ Follow-up attempts:
 - `func_L00_00541648`: a 296/316-byte-size candidate was logged; the final semantics correction was not run because the wave budget was exhausted, so it is not staged as a near miss.
 - `func_L00_004F72C0` improved from BYTES 39/104 to BYTES 17/104 with an explicit nonzero branch and return. The helper-call order is correct; saved-register and frame layout remain different. Its best source is now staged in `nonmatching/`.
 - `func_L00_00744A90`: SIZE 348/312 on the first candidate, using the nearby menu wrapper as a model; indirect-call scheduling and stack frame differ.
+- `func_L00_00745360`: SIZE 312/320 after three candidates; the repeated helper checks and ranking comparisons are represented, but branch layout, globals, register allocation, and frame differ.
