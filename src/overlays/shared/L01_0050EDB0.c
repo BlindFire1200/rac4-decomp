@@ -1,9 +1,13 @@
 #include "common.h"
+
 typedef struct Action { u32 pad0, pad4; s32 (*call)(void); } Action;
 typedef struct RepeatAction { void (*call)(void *, s32, s32); } RepeatAction;
 extern Action *func_L00_005DEBD0(s32, s32, s32);
 extern s32 func_L00_006930D0(s32);
 
+// Call the registered check (id 0x2102) and stop if it returns nonzero.
+// Otherwise call the repeat callback (id 0xAE0) once per the count
+// func_L00_006930D0 gives for the +0x284 stat.
 void func_L01_0050EDB0(void *object) {
     u8 *stats = *(u8 **)((u8 *)object + 0xAC) + 0x280;
     s32 count;

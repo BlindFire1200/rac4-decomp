@@ -1,10 +1,14 @@
 #include "common.h"
+
 extern s32 func_L00_005C8CF0(s16);
 extern u8 *D_00222D14;
 extern void *func_L00_005DEBD0(s32, s32, s32);
 extern void func_L01_004E4F60(void *);
 extern void func_L01_00591BD8(void *, s32, s32);
 
+// Invalidate (set to -1) each of the linked object's sixteen slot pairs whose
+// type has no complete callback set (id table 0xB). Then run func_L01_004E4F60,
+// set +0x30 to 0xFF and move to state 1 (-1).
 void func_L01_004E5108(void *object) {
     u8 *linked = *(u8 **)((u8 *)object + 0xAC);
     u8 *entry = linked;

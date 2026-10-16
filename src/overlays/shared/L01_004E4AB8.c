@@ -2,6 +2,9 @@
 
 extern void func_L01_00591BD8(void *, s32, s32);
 
+// In state 0 only: reset the linked object's +0x54 length (0x14 when below 2),
+// store it as a float at +0x50, clear +0x64 and move to state 1, or 2 when the
+// +0xF4 byte is set. Returns 1 when it ran.
 s32 func_L01_004E4AB8(void *object) {
     u8 *linked;
     s32 value;

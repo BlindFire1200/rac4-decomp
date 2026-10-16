@@ -1,7 +1,10 @@
 #include "common.h"
+
 extern void func_L00_005E75B0(void *, s32, s32, f32);
 extern void func_L01_00591BD8(void *, s32, s32);
 
+// Switch the object's +0x54 mode for the action (1-5; actions 2 and 4 also
+// raise bit 4 of +0x55), then move it to the state given by the action (-1).
 void func_L01_00493B48(void *object, s32 action) {
     if ((u32)(action - 1) < 5) {
         switch (action) {
