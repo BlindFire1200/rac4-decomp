@@ -1,16 +1,16 @@
 {
  "measures": {
-  "fuzzy_match_percent": 1.5354829734283462,
+  "fuzzy_match_percent": 1.5393473791600327,
   "total_code": "5175440",
-  "matched_code": "79468",
-  "matched_code_percent": 1.5354829734283462,
+  "matched_code": "79668",
+  "matched_code_percent": 1.5393473791600327,
   "total_functions": 15056,
-  "matched_functions": 1020,
+  "matched_functions": 1021,
   "complete_code": "0",
-  "matched_functions_percent": 6.77470775770457,
+  "matched_functions_percent": 6.781349628055261,
   "complete_code_percent": 0.0,
-  "total_units": 1214,
-  "complete_units": 1002
+  "total_units": 1215,
+  "complete_units": 1003
  },
  "units": [
   {
@@ -39323,6 +39323,86 @@
      "level_25",
      "level_26",
      "level_27",
+     "level_28",
+     "level_30",
+     "level_31",
+     "level_33",
+     "level_34",
+     "level_35",
+     "level_41",
+     "level_42",
+     "level_44",
+     "level_45",
+     "level_46",
+     "level_47",
+     "level_48",
+     "level_50",
+     "level_51",
+     "level_53",
+     "level_54",
+     "level_61",
+     "level_62",
+     "level_64",
+     "level_65",
+     "level_66",
+     "level_67",
+     "level_68",
+     "level_70",
+     "level_71",
+     "level_73",
+     "level_74",
+     "common",
+     "overlays",
+     "game"
+    ]
+   }
+  },
+  {
+   "name": "overlays/shared/L01_004EB408",
+   "measures": {
+    "fuzzy_match_percent": 100.0,
+    "total_code": "200",
+    "matched_code": "200",
+    "matched_code_percent": 100.0,
+    "total_functions": 1,
+    "matched_functions": 1,
+    "complete_code": "200",
+    "matched_functions_percent": 100.0,
+    "complete_code_percent": 100.0,
+    "total_units": 1,
+    "complete_units": 1
+   },
+   "functions": [
+    {
+     "name": "func_L01_004EB408",
+     "size": "200",
+     "fuzzy_match_percent": 100.0,
+     "address": "0",
+     "metadata": {
+      "virtual_address": "5157896"
+     }
+    }
+   ],
+   "metadata": {
+    "complete": true,
+    "source_path": "src/overlays/shared/L01_004EB408.c",
+    "progress_categories": [
+     "level_01",
+     "level_02",
+     "level_04",
+     "level_05",
+     "level_06",
+     "level_08",
+     "level_10",
+     "level_11",
+     "level_13",
+     "level_14",
+     "level_15",
+     "level_21",
+     "level_22",
+     "level_24",
+     "level_25",
+     "level_26",
      "level_28",
      "level_30",
      "level_31",
@@ -101314,10 +101394,10 @@
    "name": "overlays/common_032",
    "measures": {
     "fuzzy_match_percent": 0.0,
-    "total_code": "86632",
+    "total_code": "86432",
     "matched_code": "0",
     "matched_code_percent": 0.0,
-    "total_functions": 163,
+    "total_functions": 162,
     "matched_functions": 0,
     "complete_code": "0",
     "matched_functions_percent": 0.0,
@@ -101732,19 +101812,10 @@
      }
     },
     {
-     "name": "func_L01_004EB408",
-     "size": "200",
-     "fuzzy_match_percent": 0.0,
-     "address": "20016",
-     "metadata": {
-      "virtual_address": "5157896"
-     }
-    },
-    {
      "name": "func_L01_004EB4D0",
      "size": "712",
      "fuzzy_match_percent": 0.0,
-     "address": "20216",
+     "address": "20016",
      "metadata": {
       "virtual_address": "5158096"
      }
@@ -101753,7 +101824,7 @@
      "name": "func_L01_004EB798",
      "size": "576",
      "fuzzy_match_percent": 0.0,
-     "address": "20928",
+     "address": "20728",
      "metadata": {
       "virtual_address": "5158808"
      }
@@ -101762,7 +101833,7 @@
      "name": "func_L01_004EB9D8",
      "size": "688",
      "fuzzy_match_percent": 0.0,
-     "address": "21504",
+     "address": "21304",
      "metadata": {
       "virtual_address": "5159384"
      }
@@ -101771,7 +101842,7 @@
      "name": "func_L01_004EBC88",
      "size": "184",
      "fuzzy_match_percent": 0.0,
-     "address": "22192",
+     "address": "21992",
      "metadata": {
       "virtual_address": "5160072"
      }
@@ -101780,7 +101851,7 @@
      "name": "func_L01_004EBD70",
      "size": "1272",
      "fuzzy_match_percent": 0.0,
-     "address": "22376",
+     "address": "22176",
      "metadata": {
       "virtual_address": "5160304"
      }
@@ -101789,7 +101860,7 @@
      "name": "func_L01_004EC268",
      "size": "1048",
      "fuzzy_match_percent": 0.0,
-     "address": "23648",
+     "address": "23448",
      "metadata": {
       "virtual_address": "5161576"
      }
@@ -101798,7 +101869,7 @@
      "name": "func_L01_004EC680",
      "size": "592",
      "fuzzy_match_percent": 0.0,
-     "address": "24696",
+     "address": "24496",
      "metadata": {
       "virtual_address": "5162624"
      }
@@ -101807,7 +101878,7 @@
      "name": "func_L01_004EC8D0",
      "size": "968",
      "fuzzy_match_percent": 0.0,
-     "address": "25288",
+     "address": "25088",
      "metadata": {
       "virtual_address": "5163216"
      }
@@ -101816,7 +101887,7 @@
      "name": "func_L01_004ECC98",
      "size": "224",
      "fuzzy_match_percent": 0.0,
-     "address": "26256",
+     "address": "26056",
      "metadata": {
       "virtual_address": "5164184"
      }
@@ -101825,7 +101896,7 @@
      "name": "func_L01_004ECD78",
      "size": "864",
      "fuzzy_match_percent": 0.0,
-     "address": "26480",
+     "address": "26280",
      "metadata": {
       "virtual_address": "5164408"
      }
@@ -101834,7 +101905,7 @@
      "name": "func_L01_004ED0D8",
      "size": "36",
      "fuzzy_match_percent": 0.0,
-     "address": "27344",
+     "address": "27144",
      "metadata": {
       "virtual_address": "5165272"
      }
@@ -101843,7 +101914,7 @@
      "name": "func_L01_004ED0FC",
      "size": "20",
      "fuzzy_match_percent": 0.0,
-     "address": "27380",
+     "address": "27180",
      "metadata": {
       "virtual_address": "5165308"
      }
@@ -101852,7 +101923,7 @@
      "name": "func_L01_004ED110",
      "size": "40",
      "fuzzy_match_percent": 0.0,
-     "address": "27400",
+     "address": "27200",
      "metadata": {
       "virtual_address": "5165328"
      }
@@ -101861,7 +101932,7 @@
      "name": "func_L01_004ED138",
      "size": "48",
      "fuzzy_match_percent": 0.0,
-     "address": "27440",
+     "address": "27240",
      "metadata": {
       "virtual_address": "5165368"
      }
@@ -101870,7 +101941,7 @@
      "name": "func_L01_004ED168",
      "size": "56",
      "fuzzy_match_percent": 0.0,
-     "address": "27488",
+     "address": "27288",
      "metadata": {
       "virtual_address": "5165416"
      }
@@ -101879,7 +101950,7 @@
      "name": "func_L01_004ED1B0",
      "size": "128",
      "fuzzy_match_percent": 0.0,
-     "address": "27544",
+     "address": "27344",
      "metadata": {
       "virtual_address": "5165488"
      }
@@ -101888,7 +101959,7 @@
      "name": "func_L01_004ED260",
      "size": "1120",
      "fuzzy_match_percent": 0.0,
-     "address": "27672",
+     "address": "27472",
      "metadata": {
       "virtual_address": "5165664"
      }
@@ -101897,7 +101968,7 @@
      "name": "func_L01_004ED6C0",
      "size": "80",
      "fuzzy_match_percent": 0.0,
-     "address": "28792",
+     "address": "28592",
      "metadata": {
       "virtual_address": "5166784"
      }
@@ -101906,7 +101977,7 @@
      "name": "func_L01_004ED710",
      "size": "220",
      "fuzzy_match_percent": 0.0,
-     "address": "28872",
+     "address": "28672",
      "metadata": {
       "virtual_address": "5166864"
      }
@@ -101915,7 +101986,7 @@
      "name": "func_L01_004ED7EC",
      "size": "68",
      "fuzzy_match_percent": 0.0,
-     "address": "29092",
+     "address": "28892",
      "metadata": {
       "virtual_address": "5167084"
      }
@@ -101924,7 +101995,7 @@
      "name": "func_L01_004ED858",
      "size": "1936",
      "fuzzy_match_percent": 0.0,
-     "address": "29160",
+     "address": "28960",
      "metadata": {
       "virtual_address": "5167192"
      }
@@ -101933,7 +102004,7 @@
      "name": "func_L01_004EDFE8",
      "size": "64",
      "fuzzy_match_percent": 0.0,
-     "address": "31096",
+     "address": "30896",
      "metadata": {
       "virtual_address": "5169128"
      }
@@ -101942,7 +102013,7 @@
      "name": "func_L01_004EE028",
      "size": "136",
      "fuzzy_match_percent": 0.0,
-     "address": "31160",
+     "address": "30960",
      "metadata": {
       "virtual_address": "5169192"
      }
@@ -101951,7 +102022,7 @@
      "name": "func_L01_004EE0B0",
      "size": "752",
      "fuzzy_match_percent": 0.0,
-     "address": "31296",
+     "address": "31096",
      "metadata": {
       "virtual_address": "5169328"
      }
@@ -101960,7 +102031,7 @@
      "name": "func_L01_004EE3A0",
      "size": "384",
      "fuzzy_match_percent": 0.0,
-     "address": "32048",
+     "address": "31848",
      "metadata": {
       "virtual_address": "5170080"
      }
@@ -101969,7 +102040,7 @@
      "name": "func_L01_004EE520",
      "size": "184",
      "fuzzy_match_percent": 0.0,
-     "address": "32432",
+     "address": "32232",
      "metadata": {
       "virtual_address": "5170464"
      }
@@ -101978,7 +102049,7 @@
      "name": "func_L01_004EE5D8",
      "size": "24",
      "fuzzy_match_percent": 0.0,
-     "address": "32616",
+     "address": "32416",
      "metadata": {
       "virtual_address": "5170648"
      }
@@ -101987,7 +102058,7 @@
      "name": "func_L01_004EE5F0",
      "size": "496",
      "fuzzy_match_percent": 0.0,
-     "address": "32640",
+     "address": "32440",
      "metadata": {
       "virtual_address": "5170672"
      }
@@ -101996,7 +102067,7 @@
      "name": "func_L01_004EE7E0",
      "size": "1688",
      "fuzzy_match_percent": 0.0,
-     "address": "33136",
+     "address": "32936",
      "metadata": {
       "virtual_address": "5171168"
      }
@@ -102005,7 +102076,7 @@
      "name": "func_L01_004EEE78",
      "size": "1056",
      "fuzzy_match_percent": 0.0,
-     "address": "34824",
+     "address": "34624",
      "metadata": {
       "virtual_address": "5172856"
      }
@@ -102014,7 +102085,7 @@
      "name": "func_L01_004EF298",
      "size": "496",
      "fuzzy_match_percent": 0.0,
-     "address": "35880",
+     "address": "35680",
      "metadata": {
       "virtual_address": "5173912"
      }
@@ -102023,7 +102094,7 @@
      "name": "func_L01_004EF488",
      "size": "408",
      "fuzzy_match_percent": 0.0,
-     "address": "36376",
+     "address": "36176",
      "metadata": {
       "virtual_address": "5174408"
      }
@@ -102032,7 +102103,7 @@
      "name": "func_L01_004EF620",
      "size": "728",
      "fuzzy_match_percent": 0.0,
-     "address": "36784",
+     "address": "36584",
      "metadata": {
       "virtual_address": "5174816"
      }
@@ -102041,7 +102112,7 @@
      "name": "func_L01_004EF8F8",
      "size": "880",
      "fuzzy_match_percent": 0.0,
-     "address": "37512",
+     "address": "37312",
      "metadata": {
       "virtual_address": "5175544"
      }
@@ -102050,7 +102121,7 @@
      "name": "func_L01_004EFC68",
      "size": "232",
      "fuzzy_match_percent": 0.0,
-     "address": "38392",
+     "address": "38192",
      "metadata": {
       "virtual_address": "5176424"
      }
@@ -102059,7 +102130,7 @@
      "name": "func_L01_004EFD50",
      "size": "96",
      "fuzzy_match_percent": 0.0,
-     "address": "38624",
+     "address": "38424",
      "metadata": {
       "virtual_address": "5176656"
      }
@@ -102068,7 +102139,7 @@
      "name": "func_L01_004EFDB0",
      "size": "88",
      "fuzzy_match_percent": 0.0,
-     "address": "38720",
+     "address": "38520",
      "metadata": {
       "virtual_address": "5176752"
      }
@@ -102077,7 +102148,7 @@
      "name": "func_L01_004EFF68",
      "size": "120",
      "fuzzy_match_percent": 0.0,
-     "address": "38808",
+     "address": "38608",
      "metadata": {
       "virtual_address": "5177192"
      }
@@ -102086,7 +102157,7 @@
      "name": "func_L01_004EFFE0",
      "size": "352",
      "fuzzy_match_percent": 0.0,
-     "address": "38928",
+     "address": "38728",
      "metadata": {
       "virtual_address": "5177312"
      }
@@ -102095,7 +102166,7 @@
      "name": "func_L01_004F0140",
      "size": "816",
      "fuzzy_match_percent": 0.0,
-     "address": "39280",
+     "address": "39080",
      "metadata": {
       "virtual_address": "5177664"
      }
@@ -102104,7 +102175,7 @@
      "name": "func_L01_004F0470",
      "size": "1536",
      "fuzzy_match_percent": 0.0,
-     "address": "40096",
+     "address": "39896",
      "metadata": {
       "virtual_address": "5178480"
      }
@@ -102113,7 +102184,7 @@
      "name": "func_L01_004F0A70",
      "size": "888",
      "fuzzy_match_percent": 0.0,
-     "address": "41632",
+     "address": "41432",
      "metadata": {
       "virtual_address": "5180016"
      }
@@ -102122,7 +102193,7 @@
      "name": "func_L01_004F0DE8",
      "size": "1136",
      "fuzzy_match_percent": 0.0,
-     "address": "42520",
+     "address": "42320",
      "metadata": {
       "virtual_address": "5180904"
      }
@@ -102131,7 +102202,7 @@
      "name": "func_L01_004F1258",
      "size": "3608",
      "fuzzy_match_percent": 0.0,
-     "address": "43656",
+     "address": "43456",
      "metadata": {
       "virtual_address": "5182040"
      }
@@ -102140,7 +102211,7 @@
      "name": "func_L01_004F2070",
      "size": "120",
      "fuzzy_match_percent": 0.0,
-     "address": "47264",
+     "address": "47064",
      "metadata": {
       "virtual_address": "5185648"
      }
@@ -102149,7 +102220,7 @@
      "name": "func_L01_004F20E8",
      "size": "864",
      "fuzzy_match_percent": 0.0,
-     "address": "47384",
+     "address": "47184",
      "metadata": {
       "virtual_address": "5185768"
      }
@@ -102158,7 +102229,7 @@
      "name": "func_L01_004F2448",
      "size": "1432",
      "fuzzy_match_percent": 0.0,
-     "address": "48248",
+     "address": "48048",
      "metadata": {
       "virtual_address": "5186632"
      }
@@ -102167,7 +102238,7 @@
      "name": "func_L01_004F29E0",
      "size": "664",
      "fuzzy_match_percent": 0.0,
-     "address": "49680",
+     "address": "49480",
      "metadata": {
       "virtual_address": "5188064"
      }
@@ -102176,7 +102247,7 @@
      "name": "func_L01_004F2C78",
      "size": "680",
      "fuzzy_match_percent": 0.0,
-     "address": "50344",
+     "address": "50144",
      "metadata": {
       "virtual_address": "5188728"
      }
@@ -102185,7 +102256,7 @@
      "name": "func_L01_004F2F20",
      "size": "264",
      "fuzzy_match_percent": 0.0,
-     "address": "51024",
+     "address": "50824",
      "metadata": {
       "virtual_address": "5189408"
      }
@@ -102194,7 +102265,7 @@
      "name": "func_L01_004F3028",
      "size": "216",
      "fuzzy_match_percent": 0.0,
-     "address": "51288",
+     "address": "51088",
      "metadata": {
       "virtual_address": "5189672"
      }
@@ -102203,7 +102274,7 @@
      "name": "func_L01_004F3100",
      "size": "28",
      "fuzzy_match_percent": 0.0,
-     "address": "51504",
+     "address": "51304",
      "metadata": {
       "virtual_address": "5189888"
      }
@@ -102212,7 +102283,7 @@
      "name": "func_L01_004F3128",
      "size": "184",
      "fuzzy_match_percent": 0.0,
-     "address": "51532",
+     "address": "51332",
      "metadata": {
       "virtual_address": "5189928"
      }
@@ -102221,7 +102292,7 @@
      "name": "func_L01_004F31E0",
      "size": "40",
      "fuzzy_match_percent": 0.0,
-     "address": "51716",
+     "address": "51516",
      "metadata": {
       "virtual_address": "5190112"
      }
@@ -102230,7 +102301,7 @@
      "name": "func_L01_004F3210",
      "size": "16",
      "fuzzy_match_percent": 0.0,
-     "address": "51756",
+     "address": "51556",
      "metadata": {
       "virtual_address": "5190160"
      }
@@ -102239,7 +102310,7 @@
      "name": "func_L01_004F3220",
      "size": "44",
      "fuzzy_match_percent": 0.0,
-     "address": "51772",
+     "address": "51572",
      "metadata": {
       "virtual_address": "5190176"
      }
@@ -102248,7 +102319,7 @@
      "name": "func_L01_004F3258",
      "size": "44",
      "fuzzy_match_percent": 0.0,
-     "address": "51816",
+     "address": "51616",
      "metadata": {
       "virtual_address": "5190232"
      }
@@ -102257,7 +102328,7 @@
      "name": "func_L01_004F3284",
      "size": "20",
      "fuzzy_match_percent": 0.0,
-     "address": "51860",
+     "address": "51660",
      "metadata": {
       "virtual_address": "5190276"
      }
@@ -102266,7 +102337,7 @@
      "name": "func_L01_004F32D0",
      "size": "1352",
      "fuzzy_match_percent": 0.0,
-     "address": "51880",
+     "address": "51680",
      "metadata": {
       "virtual_address": "5190352"
      }
@@ -102275,7 +102346,7 @@
      "name": "func_L01_004F3818",
      "size": "5024",
      "fuzzy_match_percent": 0.0,
-     "address": "53232",
+     "address": "53032",
      "metadata": {
       "virtual_address": "5191704"
      }
@@ -102284,7 +102355,7 @@
      "name": "func_L01_004F4BB8",
      "size": "248",
      "fuzzy_match_percent": 0.0,
-     "address": "58256",
+     "address": "58056",
      "metadata": {
       "virtual_address": "5196728"
      }
@@ -102293,7 +102364,7 @@
      "name": "func_L01_004F4CB0",
      "size": "1600",
      "fuzzy_match_percent": 0.0,
-     "address": "58504",
+     "address": "58304",
      "metadata": {
       "virtual_address": "5196976"
      }
@@ -102302,7 +102373,7 @@
      "name": "func_L01_004F52F0",
      "size": "1664",
      "fuzzy_match_percent": 0.0,
-     "address": "60104",
+     "address": "59904",
      "metadata": {
       "virtual_address": "5198576"
      }
@@ -102311,7 +102382,7 @@
      "name": "func_L01_004F5970",
      "size": "64",
      "fuzzy_match_percent": 0.0,
-     "address": "61768",
+     "address": "61568",
      "metadata": {
       "virtual_address": "5200240"
      }
@@ -102320,7 +102391,7 @@
      "name": "func_L01_004F59B0",
      "size": "128",
      "fuzzy_match_percent": 0.0,
-     "address": "61832",
+     "address": "61632",
      "metadata": {
       "virtual_address": "5200304"
      }
@@ -102329,7 +102400,7 @@
      "name": "func_L01_004F5A30",
      "size": "232",
      "fuzzy_match_percent": 0.0,
-     "address": "61960",
+     "address": "61760",
      "metadata": {
       "virtual_address": "5200432"
      }
@@ -102338,7 +102409,7 @@
      "name": "func_L01_004F5B18",
      "size": "2352",
      "fuzzy_match_percent": 0.0,
-     "address": "62192",
+     "address": "61992",
      "metadata": {
       "virtual_address": "5200664"
      }
@@ -102347,7 +102418,7 @@
      "name": "func_L01_004F6448",
      "size": "1048",
      "fuzzy_match_percent": 0.0,
-     "address": "64544",
+     "address": "64344",
      "metadata": {
       "virtual_address": "5203016"
      }
@@ -102356,7 +102427,7 @@
      "name": "func_L01_004F7648",
      "size": "744",
      "fuzzy_match_percent": 0.0,
-     "address": "65592",
+     "address": "65392",
      "metadata": {
       "virtual_address": "5207624"
      }
@@ -102365,7 +102436,7 @@
      "name": "func_L01_004F7930",
      "size": "336",
      "fuzzy_match_percent": 0.0,
-     "address": "66336",
+     "address": "66136",
      "metadata": {
       "virtual_address": "5208368"
      }
@@ -102374,7 +102445,7 @@
      "name": "func_L01_004F7A80",
      "size": "240",
      "fuzzy_match_percent": 0.0,
-     "address": "66672",
+     "address": "66472",
      "metadata": {
       "virtual_address": "5208704"
      }
@@ -102383,7 +102454,7 @@
      "name": "func_L01_004F7B70",
      "size": "480",
      "fuzzy_match_percent": 0.0,
-     "address": "66912",
+     "address": "66712",
      "metadata": {
       "virtual_address": "5208944"
      }
@@ -102392,7 +102463,7 @@
      "name": "func_L01_004F7D50",
      "size": "64",
      "fuzzy_match_percent": 0.0,
-     "address": "67392",
+     "address": "67192",
      "metadata": {
       "virtual_address": "5209424"
      }
@@ -102401,7 +102472,7 @@
      "name": "func_L01_004F7D90",
      "size": "952",
      "fuzzy_match_percent": 0.0,
-     "address": "67456",
+     "address": "67256",
      "metadata": {
       "virtual_address": "5209488"
      }
@@ -102410,7 +102481,7 @@
      "name": "func_L01_004F8148",
      "size": "512",
      "fuzzy_match_percent": 0.0,
-     "address": "68408",
+     "address": "68208",
      "metadata": {
       "virtual_address": "5210440"
      }
@@ -102419,7 +102490,7 @@
      "name": "func_L01_004F8348",
      "size": "128",
      "fuzzy_match_percent": 0.0,
-     "address": "68920",
+     "address": "68720",
      "metadata": {
       "virtual_address": "5210952"
      }
@@ -102428,7 +102499,7 @@
      "name": "func_L01_004F83C8",
      "size": "504",
      "fuzzy_match_percent": 0.0,
-     "address": "69048",
+     "address": "68848",
      "metadata": {
       "virtual_address": "5211080"
      }
@@ -102437,7 +102508,7 @@
      "name": "func_L01_004F85C0",
      "size": "800",
      "fuzzy_match_percent": 0.0,
-     "address": "69552",
+     "address": "69352",
      "metadata": {
       "virtual_address": "5211584"
      }
@@ -102446,7 +102517,7 @@
      "name": "func_L01_004F88E0",
      "size": "44",
      "fuzzy_match_percent": 0.0,
-     "address": "70352",
+     "address": "70152",
      "metadata": {
       "virtual_address": "5212384"
      }
@@ -102455,7 +102526,7 @@
      "name": "func_L01_004F890C",
      "size": "12",
      "fuzzy_match_percent": 0.0,
-     "address": "70396",
+     "address": "70196",
      "metadata": {
       "virtual_address": "5212428"
      }
@@ -102464,7 +102535,7 @@
      "name": "func_L01_004F8918",
      "size": "1096",
      "fuzzy_match_percent": 0.0,
-     "address": "70408",
+     "address": "70208",
      "metadata": {
       "virtual_address": "5212440"
      }
@@ -102473,7 +102544,7 @@
      "name": "func_L01_004F8D60",
      "size": "1992",
      "fuzzy_match_percent": 0.0,
-     "address": "71504",
+     "address": "71304",
      "metadata": {
       "virtual_address": "5213536"
      }
@@ -102482,7 +102553,7 @@
      "name": "func_L01_004F9528",
      "size": "2744",
      "fuzzy_match_percent": 0.0,
-     "address": "73496",
+     "address": "73296",
      "metadata": {
       "virtual_address": "5215528"
      }
@@ -102491,7 +102562,7 @@
      "name": "func_L01_004FFC88",
      "size": "40",
      "fuzzy_match_percent": 0.0,
-     "address": "76240",
+     "address": "76040",
      "metadata": {
       "virtual_address": "5241992"
      }
@@ -102500,7 +102571,7 @@
      "name": "func_L01_004FFCC8",
      "size": "2032",
      "fuzzy_match_percent": 0.0,
-     "address": "76280",
+     "address": "76080",
      "metadata": {
       "virtual_address": "5242056"
      }
@@ -102509,7 +102580,7 @@
      "name": "func_L01_00500548",
      "size": "472",
      "fuzzy_match_percent": 0.0,
-     "address": "78312",
+     "address": "78112",
      "metadata": {
       "virtual_address": "5244232"
      }
@@ -102518,7 +102589,7 @@
      "name": "func_L01_00500720",
      "size": "360",
      "fuzzy_match_percent": 0.0,
-     "address": "78784",
+     "address": "78584",
      "metadata": {
       "virtual_address": "5244704"
      }
@@ -102527,7 +102598,7 @@
      "name": "func_L01_005008D8",
      "size": "464",
      "fuzzy_match_percent": 0.0,
-     "address": "79144",
+     "address": "78944",
      "metadata": {
       "virtual_address": "5245144"
      }
@@ -102536,7 +102607,7 @@
      "name": "func_L01_00500AA8",
      "size": "80",
      "fuzzy_match_percent": 0.0,
-     "address": "79608",
+     "address": "79408",
      "metadata": {
       "virtual_address": "5245608"
      }
@@ -102545,7 +102616,7 @@
      "name": "func_L01_00500AF8",
      "size": "376",
      "fuzzy_match_percent": 0.0,
-     "address": "79688",
+     "address": "79488",
      "metadata": {
       "virtual_address": "5245688"
      }
@@ -102554,7 +102625,7 @@
      "name": "func_L01_00500C70",
      "size": "624",
      "fuzzy_match_percent": 0.0,
-     "address": "80064",
+     "address": "79864",
      "metadata": {
       "virtual_address": "5246064"
      }
@@ -102563,7 +102634,7 @@
      "name": "func_L01_00500EE0",
      "size": "408",
      "fuzzy_match_percent": 0.0,
-     "address": "80688",
+     "address": "80488",
      "metadata": {
       "virtual_address": "5246688"
      }
@@ -102572,7 +102643,7 @@
      "name": "func_L01_00501078",
      "size": "248",
      "fuzzy_match_percent": 0.0,
-     "address": "81096",
+     "address": "80896",
      "metadata": {
       "virtual_address": "5247096"
      }
@@ -102581,7 +102652,7 @@
      "name": "func_L01_00501170",
      "size": "56",
      "fuzzy_match_percent": 0.0,
-     "address": "81344",
+     "address": "81144",
      "metadata": {
       "virtual_address": "5247344"
      }
@@ -102590,7 +102661,7 @@
      "name": "func_L01_005011A8",
      "size": "624",
      "fuzzy_match_percent": 0.0,
-     "address": "81400",
+     "address": "81200",
      "metadata": {
       "virtual_address": "5247400"
      }
@@ -102599,7 +102670,7 @@
      "name": "func_L01_00501418",
      "size": "224",
      "fuzzy_match_percent": 0.0,
-     "address": "82024",
+     "address": "81824",
      "metadata": {
       "virtual_address": "5248024"
      }
@@ -102608,7 +102679,7 @@
      "name": "func_L01_005014F8",
      "size": "400",
      "fuzzy_match_percent": 0.0,
-     "address": "82248",
+     "address": "82048",
      "metadata": {
       "virtual_address": "5248248"
      }
@@ -102617,7 +102688,7 @@
      "name": "func_L01_00501688",
      "size": "272",
      "fuzzy_match_percent": 0.0,
-     "address": "82648",
+     "address": "82448",
      "metadata": {
       "virtual_address": "5248648"
      }
@@ -102626,7 +102697,7 @@
      "name": "func_L01_005017D8",
      "size": "192",
      "fuzzy_match_percent": 0.0,
-     "address": "82920",
+     "address": "82720",
      "metadata": {
       "virtual_address": "5248984"
      }
@@ -102635,7 +102706,7 @@
      "name": "func_L01_005018A0",
      "size": "664",
      "fuzzy_match_percent": 0.0,
-     "address": "83112",
+     "address": "82912",
      "metadata": {
       "virtual_address": "5249184"
      }
@@ -102644,7 +102715,7 @@
      "name": "func_L01_00501B38",
      "size": "224",
      "fuzzy_match_percent": 0.0,
-     "address": "83776",
+     "address": "83576",
      "metadata": {
       "virtual_address": "5249848"
      }
@@ -102653,7 +102724,7 @@
      "name": "func_L01_00501C18",
      "size": "128",
      "fuzzy_match_percent": 0.0,
-     "address": "84000",
+     "address": "83800",
      "metadata": {
       "virtual_address": "5250072"
      }
@@ -102662,7 +102733,7 @@
      "name": "func_L01_00501C98",
      "size": "304",
      "fuzzy_match_percent": 0.0,
-     "address": "84128",
+     "address": "83928",
      "metadata": {
       "virtual_address": "5250200"
      }
@@ -102671,7 +102742,7 @@
      "name": "func_L01_00501DC8",
      "size": "192",
      "fuzzy_match_percent": 0.0,
-     "address": "84432",
+     "address": "84232",
      "metadata": {
       "virtual_address": "5250504"
      }
@@ -102680,7 +102751,7 @@
      "name": "func_L01_00588720",
      "size": "292",
      "fuzzy_match_percent": 0.0,
-     "address": "84624",
+     "address": "84424",
      "metadata": {
       "virtual_address": "5801760"
      }
@@ -102689,7 +102760,7 @@
      "name": "func_L01_00588850",
      "size": "8",
      "fuzzy_match_percent": 0.0,
-     "address": "84916",
+     "address": "84716",
      "metadata": {
       "virtual_address": "5802064"
      }
@@ -102698,7 +102769,7 @@
      "name": "func_L01_00588858",
      "size": "104",
      "fuzzy_match_percent": 0.0,
-     "address": "84924",
+     "address": "84724",
      "metadata": {
       "virtual_address": "5802072"
      }
@@ -102707,7 +102778,7 @@
      "name": "func_L01_005888C0",
      "size": "56",
      "fuzzy_match_percent": 0.0,
-     "address": "85028",
+     "address": "84828",
      "metadata": {
       "virtual_address": "5802176"
      }
@@ -102716,7 +102787,7 @@
      "name": "func_L01_005888F8",
      "size": "80",
      "fuzzy_match_percent": 0.0,
-     "address": "85084",
+     "address": "84884",
      "metadata": {
       "virtual_address": "5802232"
      }
@@ -102725,7 +102796,7 @@
      "name": "func_L01_00591730",
      "size": "112",
      "fuzzy_match_percent": 0.0,
-     "address": "85164",
+     "address": "84964",
      "metadata": {
       "virtual_address": "5838640"
      }
@@ -102734,7 +102805,7 @@
      "name": "func_L01_005917A0",
      "size": "68",
      "fuzzy_match_percent": 0.0,
-     "address": "85276",
+     "address": "85076",
      "metadata": {
       "virtual_address": "5838752"
      }
@@ -102743,7 +102814,7 @@
      "name": "func_L01_005A0CF8",
      "size": "200",
      "fuzzy_match_percent": 0.0,
-     "address": "85344",
+     "address": "85144",
      "metadata": {
       "virtual_address": "5901560"
      }
@@ -102752,7 +102823,7 @@
      "name": "func_L01_005A8680",
      "size": "32",
      "fuzzy_match_percent": 0.0,
-     "address": "85544",
+     "address": "85344",
      "metadata": {
       "virtual_address": "5932672"
      }
@@ -102761,7 +102832,7 @@
      "name": "func_L01_005A86A0",
      "size": "32",
      "fuzzy_match_percent": 0.0,
-     "address": "85576",
+     "address": "85376",
      "metadata": {
       "virtual_address": "5932704"
      }
@@ -102770,7 +102841,7 @@
      "name": "func_L01_00651F40",
      "size": "64",
      "fuzzy_match_percent": 0.0,
-     "address": "85608",
+     "address": "85408",
      "metadata": {
       "virtual_address": "6627136"
      }
@@ -102779,7 +102850,7 @@
      "name": "func_L01_00652810",
      "size": "352",
      "fuzzy_match_percent": 0.0,
-     "address": "85672",
+     "address": "85472",
      "metadata": {
       "virtual_address": "6629392"
      }
@@ -102788,7 +102859,7 @@
      "name": "func_L01_0069E6B0",
      "size": "608",
      "fuzzy_match_percent": 0.0,
-     "address": "86024",
+     "address": "85824",
      "metadata": {
       "virtual_address": "6940336"
      }
@@ -180015,14 +180086,14 @@
    "id": "game",
    "name": "Game",
    "measures": {
-    "fuzzy_match_percent": 1.5354829734283462,
+    "fuzzy_match_percent": 1.5393473791600327,
     "total_code": "5175440",
-    "matched_code": "79468",
-    "matched_code_percent": 1.5354829734283462,
+    "matched_code": "79668",
+    "matched_code_percent": 1.5393473791600327,
     "total_functions": 15056,
-    "matched_functions": 1020,
+    "matched_functions": 1021,
     "complete_code": "0",
-    "matched_functions_percent": 6.77470775770457,
+    "matched_functions_percent": 6.781349628055261,
     "complete_code_percent": 0.0
    }
   },
@@ -180105,14 +180176,14 @@
    "id": "overlays",
    "name": "Level overlays",
    "measures": {
-    "fuzzy_match_percent": 0.9264756901999408,
+    "fuzzy_match_percent": 0.9322967236895108,
     "total_code": "3435816",
-    "matched_code": "31832",
-    "matched_code_percent": 0.9264756901999408,
+    "matched_code": "32032",
+    "matched_code_percent": 0.9322967236895108,
     "total_functions": 7029,
-    "matched_functions": 300,
+    "matched_functions": 301,
     "complete_code": "0",
-    "matched_functions_percent": 4.2680324370465215,
+    "matched_functions_percent": 4.282259211836677,
     "complete_code_percent": 0.0
    }
   },
@@ -180120,14 +180191,14 @@
    "id": "common",
    "name": "Common (shared by 2+ levels)",
    "measures": {
-    "fuzzy_match_percent": 1.0717155283529902,
+    "fuzzy_match_percent": 1.0793969756605661,
     "total_code": "2603676",
-    "matched_code": "27904",
-    "matched_code_percent": 1.0717155283529902,
+    "matched_code": "28104",
+    "matched_code_percent": 1.0793969756605661,
     "total_functions": 4714,
-    "matched_functions": 229,
+    "matched_functions": 230,
     "complete_code": "0",
-    "matched_functions_percent": 4.857870173949936,
+    "matched_functions_percent": 4.87908358082308,
     "complete_code_percent": 0.0
    }
   },
@@ -180165,14 +180236,14 @@
    "id": "level_01",
    "name": "Level 01: Dreadzone Station",
    "measures": {
-    "fuzzy_match_percent": 1.3993810674466913,
+    "fuzzy_match_percent": 1.4099792276060876,
     "total_code": "1887120",
-    "matched_code": "26408",
-    "matched_code_percent": 1.3993810674466913,
+    "matched_code": "26608",
+    "matched_code_percent": 1.4099792276060876,
     "total_functions": 3449,
-    "matched_functions": 210,
+    "matched_functions": 211,
     "complete_code": "0",
-    "matched_functions_percent": 6.088721368512612,
+    "matched_functions_percent": 6.117715279791244,
     "complete_code_percent": 0.0
    }
   },
@@ -180180,14 +180251,14 @@
    "id": "level_02",
    "name": "Level 02: Catacrom Graveyard",
    "measures": {
-    "fuzzy_match_percent": 1.6102747070927226,
+    "fuzzy_match_percent": 1.6227150246691497,
     "total_code": "1607676",
-    "matched_code": "25888",
-    "matched_code_percent": 1.6102747070927226,
+    "matched_code": "26088",
+    "matched_code_percent": 1.6227150246691497,
     "total_functions": 2933,
-    "matched_functions": 202,
+    "matched_functions": 203,
     "complete_code": "0",
-    "matched_functions_percent": 6.887146266621207,
+    "matched_functions_percent": 6.921241050119332,
     "complete_code_percent": 0.0
    }
   },
@@ -180195,14 +180266,14 @@
    "id": "level_04",
    "name": "Level 04: Sarathos Swamp",
    "measures": {
-    "fuzzy_match_percent": 1.5936611234615432,
+    "fuzzy_match_percent": 1.6060805524161998,
     "total_code": "1610380",
-    "matched_code": "25664",
-    "matched_code_percent": 1.5936611234615432,
+    "matched_code": "25864",
+    "matched_code_percent": 1.6060805524161998,
     "total_functions": 2908,
-    "matched_functions": 198,
+    "matched_functions": 199,
     "complete_code": "0",
-    "matched_functions_percent": 6.8088033012379645,
+    "matched_functions_percent": 6.843191196698762,
     "complete_code_percent": 0.0
    }
   },
@@ -180210,14 +180281,14 @@
    "id": "level_05",
    "name": "Level 05: Dark Cathedral",
    "measures": {
-    "fuzzy_match_percent": 1.4817382262466965,
+    "fuzzy_match_percent": 1.4931397207545964,
     "total_code": "1754156",
-    "matched_code": "25992",
-    "matched_code_percent": 1.4817382262466965,
+    "matched_code": "26192",
+    "matched_code_percent": 1.4931397207545964,
     "total_functions": 3192,
-    "matched_functions": 206,
+    "matched_functions": 207,
     "complete_code": "0",
-    "matched_functions_percent": 6.453634085213032,
+    "matched_functions_percent": 6.484962406015038,
     "complete_code_percent": 0.0
    }
   },
@@ -180225,14 +180296,14 @@
    "id": "level_06",
    "name": "Level 06: Temple Of Shaar",
    "measures": {
-    "fuzzy_match_percent": 1.6339678929867525,
+    "fuzzy_match_percent": 1.6466303844079146,
     "total_code": "1579468",
-    "matched_code": "25808",
-    "matched_code_percent": 1.6339678929867525,
+    "matched_code": "26008",
+    "matched_code_percent": 1.6466303844079146,
     "total_functions": 2943,
-    "matched_functions": 201,
+    "matched_functions": 202,
     "complete_code": "0",
-    "matched_functions_percent": 6.829765545361876,
+    "matched_functions_percent": 6.863744478423378,
     "complete_code_percent": 0.0
    }
   },
@@ -180255,14 +180326,14 @@
    "id": "level_08",
    "name": "Level 08: Mining Facility",
    "measures": {
-    "fuzzy_match_percent": 1.5884821498936086,
+    "fuzzy_match_percent": 1.600795965009063,
     "total_code": "1624192",
-    "matched_code": "25800",
-    "matched_code_percent": 1.5884821498936086,
+    "matched_code": "26000",
+    "matched_code_percent": 1.600795965009063,
     "total_functions": 3005,
-    "matched_functions": 201,
+    "matched_functions": 202,
     "complete_code": "0",
-    "matched_functions_percent": 6.688851913477538,
+    "matched_functions_percent": 6.722129783693844,
     "complete_code_percent": 0.0
    }
   },
@@ -180270,14 +180341,14 @@
    "id": "level_10",
    "name": "Level 10: Torval Ruins",
    "measures": {
-    "fuzzy_match_percent": 1.5593515185194133,
+    "fuzzy_match_percent": 1.5714320230012806,
     "total_code": "1655560",
-    "matched_code": "25816",
-    "matched_code_percent": 1.5593515185194133,
+    "matched_code": "26016",
+    "matched_code_percent": 1.5714320230012806,
     "total_functions": 3035,
-    "matched_functions": 201,
+    "matched_functions": 202,
     "complete_code": "0",
-    "matched_functions_percent": 6.622734761120263,
+    "matched_functions_percent": 6.655683690280066,
     "complete_code_percent": 0.0
    }
   },
@@ -180285,14 +180356,14 @@
    "id": "level_11",
    "name": "Level 11: Tempus Station",
    "measures": {
-    "fuzzy_match_percent": 1.6128222380670234,
+    "fuzzy_match_percent": 1.6253753376783795,
     "total_code": "1593232",
-    "matched_code": "25696",
-    "matched_code_percent": 1.6128222380670234,
+    "matched_code": "25896",
+    "matched_code_percent": 1.6253753376783795,
     "total_functions": 2891,
-    "matched_functions": 199,
+    "matched_functions": 200,
     "complete_code": "0",
-    "matched_functions_percent": 6.88343133863715,
+    "matched_functions_percent": 6.918021445866482,
     "complete_code_percent": 0.0
    }
   },
@@ -180300,14 +180371,14 @@
    "id": "level_13",
    "name": "Level 13: Maraxus Prison",
    "measures": {
-    "fuzzy_match_percent": 1.5406019239687503,
+    "fuzzy_match_percent": 1.5524929545643722,
     "total_code": "1681940",
-    "matched_code": "25912",
-    "matched_code_percent": 1.5406019239687503,
+    "matched_code": "26112",
+    "matched_code_percent": 1.5524929545643722,
     "total_functions": 3084,
-    "matched_functions": 203,
+    "matched_functions": 204,
     "complete_code": "0",
-    "matched_functions_percent": 6.582360570687419,
+    "matched_functions_percent": 6.614785992217898,
     "complete_code_percent": 0.0
    }
   },
@@ -180315,14 +180386,14 @@
    "id": "level_14",
    "name": "Level 14: Ghost Station",
    "measures": {
-    "fuzzy_match_percent": 1.5604882071263582,
+    "fuzzy_match_percent": 1.5725438947586692,
     "total_code": "1658968",
-    "matched_code": "25888",
-    "matched_code_percent": 1.5604882071263582,
+    "matched_code": "26088",
+    "matched_code_percent": 1.5725438947586692,
     "total_functions": 3016,
-    "matched_functions": 202,
+    "matched_functions": 203,
     "complete_code": "0",
-    "matched_functions_percent": 6.69761273209549,
+    "matched_functions_percent": 6.730769230769231,
     "complete_code_percent": 0.0
    }
   },
@@ -180330,14 +180401,14 @@
    "id": "level_15",
    "name": "Level 15: Control Level",
    "measures": {
-    "fuzzy_match_percent": 1.5165006139109407,
+    "fuzzy_match_percent": 1.528216471558584,
     "total_code": "1707088",
-    "matched_code": "25888",
-    "matched_code_percent": 1.5165006139109407,
+    "matched_code": "26088",
+    "matched_code_percent": 1.528216471558584,
     "total_functions": 3074,
-    "matched_functions": 202,
+    "matched_functions": 203,
     "complete_code": "0",
-    "matched_functions_percent": 6.571242680546519,
+    "matched_functions_percent": 6.60377358490566,
     "complete_code_percent": 0.0
    }
   },
@@ -180345,14 +180416,14 @@
    "id": "level_21",
    "name": "Level 21: Dreadzone Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.3993810674466913,
+    "fuzzy_match_percent": 1.4099792276060876,
     "total_code": "1887120",
-    "matched_code": "26408",
-    "matched_code_percent": 1.3993810674466913,
+    "matched_code": "26608",
+    "matched_code_percent": 1.4099792276060876,
     "total_functions": 3449,
-    "matched_functions": 210,
+    "matched_functions": 211,
     "complete_code": "0",
-    "matched_functions_percent": 6.088721368512612,
+    "matched_functions_percent": 6.117715279791244,
     "complete_code_percent": 0.0
    }
   },
@@ -180360,14 +180431,14 @@
    "id": "level_22",
    "name": "Level 22: Catacrom Graveyard Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6102747070927226,
+    "fuzzy_match_percent": 1.6227150246691497,
     "total_code": "1607676",
-    "matched_code": "25888",
-    "matched_code_percent": 1.6102747070927226,
+    "matched_code": "26088",
+    "matched_code_percent": 1.6227150246691497,
     "total_functions": 2933,
-    "matched_functions": 202,
+    "matched_functions": 203,
     "complete_code": "0",
-    "matched_functions_percent": 6.887146266621207,
+    "matched_functions_percent": 6.921241050119332,
     "complete_code_percent": 0.0
    }
   },
@@ -180375,14 +180446,14 @@
    "id": "level_24",
    "name": "Level 24: Sarathos Swamp Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5936611234615432,
+    "fuzzy_match_percent": 1.6060805524161998,
     "total_code": "1610380",
-    "matched_code": "25664",
-    "matched_code_percent": 1.5936611234615432,
+    "matched_code": "25864",
+    "matched_code_percent": 1.6060805524161998,
     "total_functions": 2908,
-    "matched_functions": 198,
+    "matched_functions": 199,
     "complete_code": "0",
-    "matched_functions_percent": 6.8088033012379645,
+    "matched_functions_percent": 6.843191196698762,
     "complete_code_percent": 0.0
    }
   },
@@ -180390,14 +180461,14 @@
    "id": "level_25",
    "name": "Level 25: Dark Cathedral Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.4817382262466965,
+    "fuzzy_match_percent": 1.4931397207545964,
     "total_code": "1754156",
-    "matched_code": "25992",
-    "matched_code_percent": 1.4817382262466965,
+    "matched_code": "26192",
+    "matched_code_percent": 1.4931397207545964,
     "total_functions": 3192,
-    "matched_functions": 206,
+    "matched_functions": 207,
     "complete_code": "0",
-    "matched_functions_percent": 6.453634085213032,
+    "matched_functions_percent": 6.484962406015038,
     "complete_code_percent": 0.0
    }
   },
@@ -180405,14 +180476,14 @@
    "id": "level_26",
    "name": "Level 26: Temple Of Shaar Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6339678929867525,
+    "fuzzy_match_percent": 1.6466303844079146,
     "total_code": "1579468",
-    "matched_code": "25808",
-    "matched_code_percent": 1.6339678929867525,
+    "matched_code": "26008",
+    "matched_code_percent": 1.6466303844079146,
     "total_functions": 2943,
-    "matched_functions": 201,
+    "matched_functions": 202,
     "complete_code": "0",
-    "matched_functions_percent": 6.829765545361876,
+    "matched_functions_percent": 6.863744478423378,
     "complete_code_percent": 0.0
    }
   },
@@ -180435,14 +180506,14 @@
    "id": "level_28",
    "name": "Level 28: Mining Facility Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5884821498936086,
+    "fuzzy_match_percent": 1.600795965009063,
     "total_code": "1624192",
-    "matched_code": "25800",
-    "matched_code_percent": 1.5884821498936086,
+    "matched_code": "26000",
+    "matched_code_percent": 1.600795965009063,
     "total_functions": 3005,
-    "matched_functions": 201,
+    "matched_functions": 202,
     "complete_code": "0",
-    "matched_functions_percent": 6.688851913477538,
+    "matched_functions_percent": 6.722129783693844,
     "complete_code_percent": 0.0
    }
   },
@@ -180450,14 +180521,14 @@
    "id": "level_30",
    "name": "Level 30: Torval Ruins Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5593515185194133,
+    "fuzzy_match_percent": 1.5714320230012806,
     "total_code": "1655560",
-    "matched_code": "25816",
-    "matched_code_percent": 1.5593515185194133,
+    "matched_code": "26016",
+    "matched_code_percent": 1.5714320230012806,
     "total_functions": 3035,
-    "matched_functions": 201,
+    "matched_functions": 202,
     "complete_code": "0",
-    "matched_functions_percent": 6.622734761120263,
+    "matched_functions_percent": 6.655683690280066,
     "complete_code_percent": 0.0
    }
   },
@@ -180465,14 +180536,14 @@
    "id": "level_31",
    "name": "Level 31: Tempus Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6128222380670234,
+    "fuzzy_match_percent": 1.6253753376783795,
     "total_code": "1593232",
-    "matched_code": "25696",
-    "matched_code_percent": 1.6128222380670234,
+    "matched_code": "25896",
+    "matched_code_percent": 1.6253753376783795,
     "total_functions": 2891,
-    "matched_functions": 199,
+    "matched_functions": 200,
     "complete_code": "0",
-    "matched_functions_percent": 6.88343133863715,
+    "matched_functions_percent": 6.918021445866482,
     "complete_code_percent": 0.0
    }
   },
@@ -180480,14 +180551,14 @@
    "id": "level_33",
    "name": "Level 33: Maraxus Prison Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5406019239687503,
+    "fuzzy_match_percent": 1.5524929545643722,
     "total_code": "1681940",
-    "matched_code": "25912",
-    "matched_code_percent": 1.5406019239687503,
+    "matched_code": "26112",
+    "matched_code_percent": 1.5524929545643722,
     "total_functions": 3084,
-    "matched_functions": 203,
+    "matched_functions": 204,
     "complete_code": "0",
-    "matched_functions_percent": 6.582360570687419,
+    "matched_functions_percent": 6.614785992217898,
     "complete_code_percent": 0.0
    }
   },
@@ -180495,14 +180566,14 @@
    "id": "level_34",
    "name": "Level 34: Ghost Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5604882071263582,
+    "fuzzy_match_percent": 1.5725438947586692,
     "total_code": "1658968",
-    "matched_code": "25888",
-    "matched_code_percent": 1.5604882071263582,
+    "matched_code": "26088",
+    "matched_code_percent": 1.5725438947586692,
     "total_functions": 3016,
-    "matched_functions": 202,
+    "matched_functions": 203,
     "complete_code": "0",
-    "matched_functions_percent": 6.69761273209549,
+    "matched_functions_percent": 6.730769230769231,
     "complete_code_percent": 0.0
    }
   },
@@ -180510,14 +180581,14 @@
    "id": "level_35",
    "name": "Level 35: Control Level Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.5165006139109407,
+    "fuzzy_match_percent": 1.528216471558584,
     "total_code": "1707088",
-    "matched_code": "25888",
-    "matched_code_percent": 1.5165006139109407,
+    "matched_code": "26088",
+    "matched_code_percent": 1.528216471558584,
     "total_functions": 3074,
-    "matched_functions": 202,
+    "matched_functions": 203,
     "complete_code": "0",
-    "matched_functions_percent": 6.571242680546519,
+    "matched_functions_percent": 6.60377358490566,
     "complete_code_percent": 0.0
    }
   },
@@ -180525,14 +180596,14 @@
    "id": "level_41",
    "name": "Level 41: Battledome Tower",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180540,14 +180611,14 @@
    "id": "level_42",
    "name": "Level 42: Catacrom Graveyard",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180555,14 +180626,14 @@
    "id": "level_44",
    "name": "Level 44: Sarathos Swamp",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180570,14 +180641,14 @@
    "id": "level_45",
    "name": "Level 45: Dark Cathedral",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180585,14 +180656,14 @@
    "id": "level_46",
    "name": "Level 46: Temple Of Shaar",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180600,14 +180671,14 @@
    "id": "level_47",
    "name": "Level 47: Valix Lighthouse",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180615,14 +180686,14 @@
    "id": "level_48",
    "name": "Level 48: Mining Facility",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180630,14 +180701,14 @@
    "id": "level_50",
    "name": "Level 50: Torval Ruins",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180645,14 +180716,14 @@
    "id": "level_51",
    "name": "Level 51: Tempus Station",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180660,14 +180731,14 @@
    "id": "level_53",
    "name": "Level 53: Maraxus Prison",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180675,14 +180746,14 @@
    "id": "level_54",
    "name": "Level 54: Ghost Station",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180690,14 +180761,14 @@
    "id": "level_61",
    "name": "Level 61: Battledome Tower Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180705,14 +180776,14 @@
    "id": "level_62",
    "name": "Level 62: Catacrom Graveyard Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180720,14 +180791,14 @@
    "id": "level_64",
    "name": "Level 64: Sarathos Swamp Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180735,14 +180806,14 @@
    "id": "level_65",
    "name": "Level 65: Dark Cathedral Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180750,14 +180821,14 @@
    "id": "level_66",
    "name": "Level 66: Temple Of Shaar Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180765,14 +180836,14 @@
    "id": "level_67",
    "name": "Level 67: Valix Lighthouse Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180780,14 +180851,14 @@
    "id": "level_68",
    "name": "Level 68: Mining Facility Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180795,14 +180866,14 @@
    "id": "level_70",
    "name": "Level 70: Torval Ruins Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180810,14 +180881,14 @@
    "id": "level_71",
    "name": "Level 71: Tempus Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180825,14 +180896,14 @@
    "id": "level_73",
    "name": "Level 73: Maraxus Prison Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   },
@@ -180840,14 +180911,14 @@
    "id": "level_74",
    "name": "Level 74: Ghost Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.2878118009684922,
+    "fuzzy_match_percent": 1.3016711617193368,
     "total_code": "1443068",
-    "matched_code": "18584",
-    "matched_code_percent": 1.2878118009684922,
+    "matched_code": "18784",
+    "matched_code_percent": 1.3016711617193368,
     "total_functions": 2490,
-    "matched_functions": 177,
+    "matched_functions": 178,
     "complete_code": "0",
-    "matched_functions_percent": 7.108433734939759,
+    "matched_functions_percent": 7.14859437751004,
     "complete_code_percent": 0.0
    }
   }
