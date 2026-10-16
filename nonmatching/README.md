@@ -35,6 +35,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L01_0056E9D0`](shared/func_L01_0056E9D0.c) | shared | 104 | BYTES 7/100 |
 | [`func_L01_00478730`](shared/func_L01_00478730.c) | shared | 152 | BYTES 11/152 |
 | [`func_L00_006ED020`](shared/func_L00_006ED020.c) | shared | 200 | BYTES 15/200 |
+| [`func_L01_004E5DD0`](shared/func_L01_004E5DD0.c) | shared | 128 | BYTES 10/124 |
 | [`func_004CD8B8`](game/func_004CD8B8.c) | game | 136 | BYTES 11/132 |
 | [`func_L01_003CF4F0`](shared/func_L01_003CF4F0.c) | shared | 144 | BYTES 12/144 |
 | [`func_L05_00490F70`](shared/func_L05_00490F70.c) | shared | 144 | BYTES 12/140 |
