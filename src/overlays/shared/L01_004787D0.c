@@ -1,9 +1,9 @@
 #include "common.h"
 
-// Store arg1 through the linked pointer at +0xAC when it is non-null.
-void func_L01_004787D0(void *arg0, s32 arg1) {
-    u8 *linked = *(u8 **)((u8 *)arg0 + 0xAC);
+// Store value through the linked pointer at +0xAC when it is non-null.
+void func_L01_004787D0(void *object, s32 value) {
+    u8 *linked = *(u8 **)((u8 *)object + 0xAC);
     if (linked != NULL) {
-        *(s32 *)linked = arg1;
+        *(s32 *)linked = value;
     }
 }
