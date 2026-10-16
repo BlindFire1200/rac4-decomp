@@ -1,9 +1,10 @@
-/* Not matching yet: BYTES 7/104 (tools/try_func.py func_L00_0051E250 --diff). Not part of the build. */
+/* Not matching yet: BYTES 5/104 (tools/try_func.py func_L00_0051E250 --diff). Not part of the build. */
 #include "common.h"
 extern void func_004FAD28(void *);
 extern void func_00538B40(s32);
 extern void func_L00_00538038(void *);
 s32 func_L00_0051E250(void *object) {
+    volatile s64 stackSlot;
     u8 *state = *(u8 **)((u8 *)object + 8);
     if (state == 0) return 0;
     func_L00_00538038(state + 0xC);

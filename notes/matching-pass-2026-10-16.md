@@ -23,3 +23,16 @@ Closest nonexact results and what remains:
 - `func_L00_0052F6C0`: SIZE 92/104 after two variants; callback and cleanup calls are represented, with a frame-size and tail-return difference.
 
 Walls skipped: `func_L00_00553D58` branches to an external function label, and `func_L00_005C0FEC` reads unset `$t0`, `$v1`, and `$t1` registers.
+
+## Follow-up checkpoint
+
+After this note was first written, `func_L00_00535830` also matched exactly (104 bytes); both new matches this pass (`00529620`, `00535830`) are committed with the latest audit and progress report.
+
+Follow-up attempts:
+
+- `func_L00_0051E250` improved from BYTES 7/104 to BYTES 5/104 after adding a volatile stack slot. The best candidate still places the saved registers at different stack offsets; the nonmatching source has been updated to the 5-byte result.
+- `func_L00_005415E0`: SIZE 92/104 after three variants; the state-bit conditional and helper call are represented, but the frame/register layout remains different.
+- `func_L00_00537BB0`: SIZE 300/312 after three variants; max-value selection and branches remain differently scheduled.
+- `func_L00_0072EC88`: SIZE 344/312 after two variants; the indirect calls and branches are represented, but it uses a larger frame and extra saved registers.
+- `func_L00_00739F70`: SIZE 352/312 after three variants; the selection filtering and copy loop are represented, but register and frame layout remain different.
+- `func_L00_00541648`: a 296/316-byte-size candidate was logged; the final semantics correction was not run because the wave budget was exhausted, so it is not staged as a near miss.
