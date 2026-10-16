@@ -7,6 +7,7 @@ Best attempts at functions that do not match yet. They are not built; see
 |---|---|---|---|
 | [`func_01EBF9D0`](net/func_01EBF9D0.c) | net | 128 | BYTES 8/128 |
 | [`func_01EC0410`](net/func_01EC0410.c) | net | 128 | BYTES 26/128 |
+| [`func_01EED7A8`](net/func_01EED7A8.c) | net | 252 | BYTES 58/252 |
 | [`func_01E9E710`](net/func_01E9E710.c) | net | 128 | BYTES 31/128 |
 | [`func_01EC9640`](net/func_01EC9640.c) | net | 128 | BYTES 44/128 |
 | [`func_004B79F8`](game/func_004B79F8.c) | game | 112 | not recorded |
