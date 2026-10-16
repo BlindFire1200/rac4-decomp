@@ -1,6 +1,7 @@
 #include "common.h"
 
 extern s32 func_L01_004CC160(s32);
+
 // Return 1 when the linked +0xAC object is ready: its +0x2E0 word is set, both
 // required slots at +0x28 pass func_L01_004CC160, and each optional slot at
 // +0x2C0 that is set passes too. Otherwise 0.

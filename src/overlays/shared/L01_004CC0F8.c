@@ -2,6 +2,7 @@
 
 extern void func_L01_004CFEC8(void);
 extern void func_L01_004D2FD8(void);
+
 // Dispatch on the object's type halfword (+0xBC): three types run
 // func_L01_004D2FD8, three others run func_L01_004CFEC8.
 void func_L01_004CC0F8(u8 *object) {

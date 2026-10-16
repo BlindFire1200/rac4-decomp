@@ -1,6 +1,7 @@
 #include "common.h"
 
 extern void func_L00_005BBF48(s32, void *, s32, u32, u32, u32, u32);
+
 // Fill the first count slots at +0x10 with consecutive 0x80-byte addresses
 // starting at start, record the count at +0xA4 and run func_L00_005BBF48 with
 // four packed constant words.

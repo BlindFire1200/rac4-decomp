@@ -15,6 +15,7 @@ extern void func_L00_007034B8(void);
 extern void func_L00_00703540(void);
 extern void func_00703768(void);
 extern u32 D_212148[];
+
 // Install the message handlers into the D_212148 table (the variant whose slots
 // are filled by local functions).
 void func_L00_00702CA8(void) {

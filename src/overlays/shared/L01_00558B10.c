@@ -1,6 +1,7 @@
 #include "common.h"
 
 // Reset the list's cursor and per-item flag: with reverse set the +0xA8 position
+
 // is counted back from D_0021DDB8 by the list's first word and the items' +0xB
 // byte is cleared, otherwise it is set to one.
 void func_L01_00558B10(s32 arg0, u8 *list, s32 reverse) {
