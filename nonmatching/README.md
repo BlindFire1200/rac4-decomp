@@ -5,6 +5,7 @@ Best attempts at functions that do not match yet. They are not built; see
 
 | Function | Directory | Size | What differs |
 |---|---|---|---|
+| [`func_01EBF9D0`](net/func_01EBF9D0.c) | net | 128 | BYTES 8/128 |
 | [`func_004B79F8`](game/func_004B79F8.c) | game | 112 | not recorded |
 | [`func_004C8388`](game/func_004C8388.c) | game | 56 | not recorded |
 | [`func_004F23B0`](game/func_004F23B0.c) | game | 96 | not recorded |
