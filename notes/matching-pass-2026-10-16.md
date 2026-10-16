@@ -42,3 +42,5 @@ Follow-up attempts:
 - `func_L00_0052D158`: SIZE 300/316 after three candidates; normalization, nanosecond carry, and overflow logic are represented, but helper-call timing and arithmetic/register scheduling differ.
 - `func_L00_00744A90`: a second candidate using explicit menu structure fields was SIZE 344/312, still differing in indirect-call scheduling and frame layout.
 - `func_L00_004F7340`: the saved-frame variant was BYTES 47/104, worse than the best 45/104 candidate; the frame and conditional branch arrangement remain the main differences.
+- `func_L00_0070C8C0` matched exactly (104 bytes). Its 0x46-iteration loop calls `func_L00_0070C548` and forwards each result to `func_L00_0070C528`; the full build, audit, and progress check passed.
+- `func_L00_005423D8`: SIZE 100/104 after two candidates. Allocation success and error paths are represented; the stack-frame layout still differs.
