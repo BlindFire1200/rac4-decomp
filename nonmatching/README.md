@@ -5,19 +5,54 @@ Best attempts at functions that do not match yet. They are not built; see
 
 | Function | Directory | Size | What differs |
 |---|---|---|---|
+| [`func_L00_005D3228`](shared/func_L00_005D3228.c) | shared | 240 | BYTES 1/240 |
+| [`func_L00_007023C8`](shared/func_L00_007023C8.c) | shared | 184 | BYTES 6/184 |
 | [`func_01EBF9D0`](net/func_01EBF9D0.c) | net | 128 | BYTES 8/128 |
+| [`func_L00_006ED020`](shared/func_L00_006ED020.c) | shared | 200 | BYTES 15/200 |
+| [`func_L41_0044C720`](shared/func_L41_0044C720.c) | shared | 272 | BYTES 42/272 |
+| [`func_L00_006A97A8`](shared/func_L00_006A97A8.c) | shared | 280 | BYTES 44/276 |
 | [`func_01EC0410`](net/func_01EC0410.c) | net | 128 | BYTES 26/128 |
 | [`func_01EED7A8`](net/func_01EED7A8.c) | net | 252 | BYTES 58/252 |
+| [`func_L00_006702E0`](shared/func_L00_006702E0.c) | shared | 192 | BYTES 45/192 |
 | [`func_01E9E710`](net/func_01E9E710.c) | net | 128 | BYTES 31/128 |
+| [`func_L00_006F6FE0`](shared/func_L00_006F6FE0.c) | shared | 304 | BYTES 78/300 |
+| [`func_L01_00498698`](shared/func_L01_00498698.c) | shared | 240 | BYTES 76/240 |
+| [`func_L00_00666DF0`](shared/func_L00_00666DF0.c) | shared | 264 | BYTES 89/260 |
 | [`func_01EC9640`](net/func_01EC9640.c) | net | 128 | BYTES 44/128 |
+| [`func_L00_005908F0`](shared/func_L00_005908F0.c) | shared | 200 | BYTES 113/200 |
+| [`func_004E7A70`](game/func_004E7A70.c) | game | 280 | BYTES 162/276 |
+| [`func_L00_006AA1F0`](shared/func_L00_006AA1F0.c) | shared | 272 | BYTES 177/272 |
 | [`func_004B79F8`](game/func_004B79F8.c) | game | 112 | not recorded |
+| [`func_004C6070`](game/func_004C6070.c) | game | 328 | SIZE ours 300 / retail 328 |
 | [`func_004C8388`](game/func_004C8388.c) | game | 56 | not recorded |
+| [`func_004D3748`](game/func_004D3748.c) | game | 392 | SIZE ours 384 / retail 392 |
+| [`func_004E04E0`](game/func_004E04E0.c) | game | 344 | SIZE ours 332 / retail 344 |
 | [`func_004F23B0`](game/func_004F23B0.c) | game | 96 | not recorded |
+| [`func_004F5428`](game/func_004F5428.c) | game | 264 | SIZE ours 268 / retail 264 |
 | [`func_004F5E18`](game/func_004F5E18.c) | game | 48 | not recorded |
+| [`func_004F8B60`](game/func_004F8B60.c) | game | 664 | SIZE ours 580 / retail 664 |
 | [`func_0053CB20`](game/func_0053CB20.c) | game | 80 | not recorded |
 | [`func_0054A810`](game/func_0054A810.c) | game | 64 | register choice differs for the multiply |
 | [`func_01EA6D00`](net/func_01EA6D00.c) | net | 80 | COMPILE failed |
 | [`func_01EEF7E4`](net/func_01EEF7E4.c) | net | 48 | COMPILE failed |
+| [`func_L00_005D5CE0`](shared/func_L00_005D5CE0.c) | shared | 400 | SIZE ours 340 / retail 400 |
+| [`func_L00_006017A8`](shared/func_L00_006017A8.c) | shared | 224 | SIZE ours 240 / retail 224 |
+| [`func_L00_00665160`](shared/func_L00_00665160.c) | shared | 184 | SIZE ours 176 / retail 184 |
+| [`func_L00_0067FE68`](shared/func_L00_0067FE68.c) | shared | 184 | SIZE ours 176 / retail 184 |
+| [`func_L00_006AA5F8`](shared/func_L00_006AA5F8.c) | shared | 280 | SIZE ours 212 / retail 280 |
 | [`func_L00_006BB188`](shared/func_L00_006BB188.c) | shared | 800 | COMPILE failed |
+| [`func_L00_006C2808`](shared/func_L00_006C2808.c) | shared | 208 | SIZE ours 188 / retail 208 |
+| [`func_L00_006C69F0`](shared/func_L00_006C69F0.c) | shared | 184 | SIZE ours 192 / retail 184 |
+| [`func_L00_006D1C68`](shared/func_L00_006D1C68.c) | shared | 304 | SIZE ours 288 / retail 304 |
+| [`func_L00_006EA5B8`](shared/func_L00_006EA5B8.c) | shared | 184 | SIZE ours 188 / retail 184 |
 | [`func_L00_006EE598`](shared/func_L00_006EE598.c) | shared | 368 | SIZE 208/368 |
+| [`func_L00_006F4038`](shared/func_L00_006F4038.c) | shared | 296 | SIZE ours 284 / retail 296 |
+| [`func_L00_006FEDE8`](shared/func_L00_006FEDE8.c) | shared | 256 | SIZE ours 244 / retail 256 |
 | [`func_L00_00770CA8`](l00_multiplayer_menu/func_L00_00770CA8.c) | l00_multiplayer_menu | 40 | COMPILE failed |
+| [`func_L01_0044BC50`](shared/func_L01_0044BC50.c) | shared | 264 | SIZE ours 260 / retail 264 |
+| [`func_L01_004BDAE8`](shared/func_L01_004BDAE8.c) | shared | 240 | SIZE ours 204 / retail 240 |
+| [`func_L01_004CFBF0`](shared/func_L01_004CFBF0.c) | shared | 240 | SIZE ours 208 / retail 240 |
+| [`func_L01_005589E0`](shared/func_L01_005589E0.c) | shared | 304 | SIZE ours 320 / retail 304 |
+| [`func_L01_005724C8`](shared/func_L01_005724C8.c) | shared | 264 | SIZE ours 244 / retail 264 |
+| [`func_L01_00666D98`](shared/func_L01_00666D98.c) | shared | 240 | SIZE ours 244 / retail 240 |
+| [`func_L05_004DF3B8`](shared/func_L05_004DF3B8.c) | shared | 280 | SIZE ours 296 / retail 280 |
