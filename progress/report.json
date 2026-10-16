@@ -1,16 +1,16 @@
 {
  "measures": {
-  "fuzzy_match_percent": 1.6759927658324703,
+  "fuzzy_match_percent": 1.6781568330422147,
   "total_code": "5175440",
-  "matched_code": "86740",
-  "matched_code_percent": 1.6759927658324703,
+  "matched_code": "86852",
+  "matched_code_percent": 1.6781568330422147,
   "total_functions": 15056,
-  "matched_functions": 1066,
+  "matched_functions": 1067,
   "complete_code": "0",
-  "matched_functions_percent": 7.080233793836344,
+  "matched_functions_percent": 7.086875664187035,
   "complete_code_percent": 0.0,
-  "total_units": 1260,
-  "complete_units": 1048
+  "total_units": 1261,
+  "complete_units": 1049
  },
  "units": [
   {
@@ -37848,6 +37848,48 @@
    "metadata": {
     "complete": true,
     "source_path": "src/overlays/shared/L01_00469288.c",
+    "progress_categories": [
+     "level_01",
+     "level_05",
+     "level_15",
+     "level_21",
+     "level_25",
+     "level_35",
+     "common",
+     "overlays",
+     "game"
+    ]
+   }
+  },
+  {
+   "name": "overlays/shared/L01_004693B0",
+   "measures": {
+    "fuzzy_match_percent": 100.0,
+    "total_code": "112",
+    "matched_code": "112",
+    "matched_code_percent": 100.0,
+    "total_functions": 1,
+    "matched_functions": 1,
+    "complete_code": "112",
+    "matched_functions_percent": 100.0,
+    "complete_code_percent": 100.0,
+    "total_units": 1,
+    "complete_units": 1
+   },
+   "functions": [
+    {
+     "name": "func_L01_004693B0",
+     "size": "112",
+     "fuzzy_match_percent": 100.0,
+     "address": "0",
+     "metadata": {
+      "virtual_address": "4625328"
+     }
+    }
+   ],
+   "metadata": {
+    "complete": true,
+    "source_path": "src/overlays/shared/L01_004693B0.c",
     "progress_categories": [
      "level_01",
      "level_05",
@@ -110633,10 +110675,10 @@
    "name": "overlays/common_090",
    "measures": {
     "fuzzy_match_percent": 0.0,
-    "total_code": "21136",
+    "total_code": "21024",
     "matched_code": "0",
     "matched_code_percent": 0.0,
-    "total_functions": 43,
+    "total_functions": 42,
     "matched_functions": 0,
     "complete_code": "0",
     "matched_functions_percent": 0.0,
@@ -110898,19 +110940,10 @@
      }
     },
     {
-     "name": "func_L01_004693B0",
-     "size": "112",
-     "fuzzy_match_percent": 0.0,
-     "address": "16936",
-     "metadata": {
-      "virtual_address": "4625328"
-     }
-    },
-    {
      "name": "func_L01_00469420",
      "size": "456",
      "fuzzy_match_percent": 0.0,
-     "address": "17048",
+     "address": "16936",
      "metadata": {
       "virtual_address": "4625440"
      }
@@ -110919,7 +110952,7 @@
      "name": "func_L01_004696B0",
      "size": "64",
      "fuzzy_match_percent": 0.0,
-     "address": "17504",
+     "address": "17392",
      "metadata": {
       "virtual_address": "4626096"
      }
@@ -110928,7 +110961,7 @@
      "name": "func_L01_004697C8",
      "size": "272",
      "fuzzy_match_percent": 0.0,
-     "address": "17568",
+     "address": "17456",
      "metadata": {
       "virtual_address": "4626376"
      }
@@ -110937,7 +110970,7 @@
      "name": "func_L01_004698D8",
      "size": "264",
      "fuzzy_match_percent": 0.0,
-     "address": "17840",
+     "address": "17728",
      "metadata": {
       "virtual_address": "4626648"
      }
@@ -110946,7 +110979,7 @@
      "name": "func_L01_00469A80",
      "size": "120",
      "fuzzy_match_percent": 0.0,
-     "address": "18104",
+     "address": "17992",
      "metadata": {
       "virtual_address": "4627072"
      }
@@ -110955,7 +110988,7 @@
      "name": "func_L01_00469AF8",
      "size": "248",
      "fuzzy_match_percent": 0.0,
-     "address": "18224",
+     "address": "18112",
      "metadata": {
       "virtual_address": "4627192"
      }
@@ -110964,7 +110997,7 @@
      "name": "func_L01_00469D18",
      "size": "480",
      "fuzzy_match_percent": 0.0,
-     "address": "18472",
+     "address": "18360",
      "metadata": {
       "virtual_address": "4627736"
      }
@@ -110973,7 +111006,7 @@
      "name": "func_L01_004734A0",
      "size": "304",
      "fuzzy_match_percent": 0.0,
-     "address": "18952",
+     "address": "18840",
      "metadata": {
       "virtual_address": "4666528"
      }
@@ -110982,7 +111015,7 @@
      "name": "func_L01_004735D0",
      "size": "464",
      "fuzzy_match_percent": 0.0,
-     "address": "19256",
+     "address": "19144",
      "metadata": {
       "virtual_address": "4666832"
      }
@@ -110991,7 +111024,7 @@
      "name": "func_L01_004737A0",
      "size": "440",
      "fuzzy_match_percent": 0.0,
-     "address": "19720",
+     "address": "19608",
      "metadata": {
       "virtual_address": "4667296"
      }
@@ -111000,7 +111033,7 @@
      "name": "func_L01_00473958",
      "size": "464",
      "fuzzy_match_percent": 0.0,
-     "address": "20160",
+     "address": "20048",
      "metadata": {
       "virtual_address": "4667736"
      }
@@ -111009,7 +111042,7 @@
      "name": "func_L01_00473B28",
      "size": "368",
      "fuzzy_match_percent": 0.0,
-     "address": "20624",
+     "address": "20512",
      "metadata": {
       "virtual_address": "4668200"
      }
@@ -111018,7 +111051,7 @@
      "name": "func_L01_005F6C60",
      "size": "56",
      "fuzzy_match_percent": 0.0,
-     "address": "20992",
+     "address": "20880",
      "metadata": {
       "virtual_address": "6253664"
      }
@@ -111027,7 +111060,7 @@
      "name": "func_L01_005F6C98",
      "size": "88",
      "fuzzy_match_percent": 0.0,
-     "address": "21048",
+     "address": "20936",
      "metadata": {
       "virtual_address": "6253720"
      }
@@ -182041,14 +182074,14 @@
    "id": "game",
    "name": "Game",
    "measures": {
-    "fuzzy_match_percent": 1.6759927658324703,
+    "fuzzy_match_percent": 1.6781568330422147,
     "total_code": "5175440",
-    "matched_code": "86740",
-    "matched_code_percent": 1.6759927658324703,
+    "matched_code": "86852",
+    "matched_code_percent": 1.6781568330422147,
     "total_functions": 15056,
-    "matched_functions": 1066,
+    "matched_functions": 1067,
     "complete_code": "0",
-    "matched_functions_percent": 7.080233793836344,
+    "matched_functions_percent": 7.086875664187035,
     "complete_code_percent": 0.0
    }
   },
@@ -182131,14 +182164,14 @@
    "id": "overlays",
    "name": "Level overlays",
    "measures": {
-    "fuzzy_match_percent": 1.1381284678807013,
+    "fuzzy_match_percent": 1.1413882466348606,
     "total_code": "3435816",
-    "matched_code": "39104",
-    "matched_code_percent": 1.1381284678807013,
+    "matched_code": "39216",
+    "matched_code_percent": 1.1413882466348606,
     "total_functions": 7029,
-    "matched_functions": 346,
+    "matched_functions": 347,
     "complete_code": "0",
-    "matched_functions_percent": 4.922464077393655,
+    "matched_functions_percent": 4.93669085218381,
     "complete_code_percent": 0.0
    }
   },
@@ -182146,14 +182179,14 @@
    "id": "common",
    "name": "Common (shared by 2+ levels)",
    "measures": {
-    "fuzzy_match_percent": 1.3239742579337828,
+    "fuzzy_match_percent": 1.3282758684260254,
     "total_code": "2603676",
-    "matched_code": "34472",
-    "matched_code_percent": 1.3239742579337828,
+    "matched_code": "34584",
+    "matched_code_percent": 1.3282758684260254,
     "total_functions": 4714,
-    "matched_functions": 273,
+    "matched_functions": 274,
     "complete_code": "0",
-    "matched_functions_percent": 5.791260076368265,
+    "matched_functions_percent": 5.8124734832414084,
     "complete_code_percent": 0.0
    }
   },
@@ -182191,14 +182224,14 @@
    "id": "level_01",
    "name": "Level 01: Dreadzone Station",
    "measures": {
-    "fuzzy_match_percent": 1.6206706515748865,
+    "fuzzy_match_percent": 1.6266056212641486,
     "total_code": "1887120",
-    "matched_code": "30584",
-    "matched_code_percent": 1.6206706515748865,
+    "matched_code": "30696",
+    "matched_code_percent": 1.6266056212641486,
     "total_functions": 3449,
-    "matched_functions": 237,
+    "matched_functions": 238,
     "complete_code": "0",
-    "matched_functions_percent": 6.871556973035663,
+    "matched_functions_percent": 6.900550884314294,
     "complete_code_percent": 0.0
    }
   },
@@ -182236,14 +182269,14 @@
    "id": "level_05",
    "name": "Level 05: Dark Cathedral",
    "measures": {
-    "fuzzy_match_percent": 1.6869651273888981,
+    "fuzzy_match_percent": 1.6933499643133223,
     "total_code": "1754156",
-    "matched_code": "29592",
-    "matched_code_percent": 1.6869651273888981,
+    "matched_code": "29704",
+    "matched_code_percent": 1.6933499643133223,
     "total_functions": 3192,
-    "matched_functions": 230,
+    "matched_functions": 231,
     "complete_code": "0",
-    "matched_functions_percent": 7.205513784461153,
+    "matched_functions_percent": 7.2368421052631575,
     "complete_code_percent": 0.0
    }
   },
@@ -182356,14 +182389,14 @@
    "id": "level_15",
    "name": "Level 15: Control Level",
    "measures": {
-    "fuzzy_match_percent": 1.7137956566972528,
+    "fuzzy_match_percent": 1.7203565369799332,
     "total_code": "1707088",
-    "matched_code": "29256",
-    "matched_code_percent": 1.7137956566972528,
+    "matched_code": "29368",
+    "matched_code_percent": 1.7203565369799332,
     "total_functions": 3074,
-    "matched_functions": 224,
+    "matched_functions": 225,
     "complete_code": "0",
-    "matched_functions_percent": 7.286922576447625,
+    "matched_functions_percent": 7.319453480806766,
     "complete_code_percent": 0.0
    }
   },
@@ -182371,14 +182404,14 @@
    "id": "level_21",
    "name": "Level 21: Dreadzone Station Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6206706515748865,
+    "fuzzy_match_percent": 1.6266056212641486,
     "total_code": "1887120",
-    "matched_code": "30584",
-    "matched_code_percent": 1.6206706515748865,
+    "matched_code": "30696",
+    "matched_code_percent": 1.6266056212641486,
     "total_functions": 3449,
-    "matched_functions": 237,
+    "matched_functions": 238,
     "complete_code": "0",
-    "matched_functions_percent": 6.871556973035663,
+    "matched_functions_percent": 6.900550884314294,
     "complete_code_percent": 0.0
    }
   },
@@ -182416,14 +182449,14 @@
    "id": "level_25",
    "name": "Level 25: Dark Cathedral Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.6869651273888981,
+    "fuzzy_match_percent": 1.6933499643133223,
     "total_code": "1754156",
-    "matched_code": "29592",
-    "matched_code_percent": 1.6869651273888981,
+    "matched_code": "29704",
+    "matched_code_percent": 1.6933499643133223,
     "total_functions": 3192,
-    "matched_functions": 230,
+    "matched_functions": 231,
     "complete_code": "0",
-    "matched_functions_percent": 7.205513784461153,
+    "matched_functions_percent": 7.2368421052631575,
     "complete_code_percent": 0.0
    }
   },
@@ -182536,14 +182569,14 @@
    "id": "level_35",
    "name": "Level 35: Control Level Splitscreen",
    "measures": {
-    "fuzzy_match_percent": 1.7137956566972528,
+    "fuzzy_match_percent": 1.7203565369799332,
     "total_code": "1707088",
-    "matched_code": "29256",
-    "matched_code_percent": 1.7137956566972528,
+    "matched_code": "29368",
+    "matched_code_percent": 1.7203565369799332,
     "total_functions": 3074,
-    "matched_functions": 224,
+    "matched_functions": 225,
     "complete_code": "0",
-    "matched_functions_percent": 7.286922576447625,
+    "matched_functions_percent": 7.319453480806766,
     "complete_code_percent": 0.0
    }
   },
