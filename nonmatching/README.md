@@ -14,7 +14,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_0053CB20`](game/func_0053CB20.c) | game | 80 | not recorded |
 | [`func_0054A810`](game/func_0054A810.c) | game | 64 | register choice differs for the multiply |
 | [`func_01EA6D00`](net/func_01EA6D00.c) | net | 80 | COMPILE failed |
-| [`func_01EA6D50`](net/func_01EA6D50.c) | net | 32 | COMPILE failed |
 | [`func_01EEF7E4`](net/func_01EEF7E4.c) | net | 48 | COMPILE failed |
 | [`func_L00_006BB188`](shared/func_L00_006BB188.c) | shared | 800 | COMPILE failed |
 | [`func_L00_00770CA8`](l00_multiplayer_menu/func_L00_00770CA8.c) | l00_multiplayer_menu | 40 | COMPILE failed |
