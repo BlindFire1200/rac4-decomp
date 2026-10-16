@@ -1,4 +1,5 @@
 #include "common.h"
+
 extern void func_00703770(void);
 extern void func_00703778(void);
 extern void func_00703780(void);
@@ -13,6 +14,8 @@ extern s32 func_L00_00702DF8(s32, s32, s32, u8 *);
 extern s32 func_L00_00702D90(s32, s32, s32, s32);
 extern void func_L00_00702D78(void);
 extern u32 D_212148[];
+// Install the handlers into the D_212148 table (the variant whose slots mostly
+// point at the resident stubs 0x703770-0x7037B8).
 void func_L00_00702E10(void) {
     D_212148[0] = (u32)&func_00703770;
     D_212148[1] = (u32)&func_00703770;
