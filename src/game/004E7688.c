@@ -10,6 +10,8 @@ extern s32 D_221E20;
 extern s32 D_221E28;
 extern s32 D_221E2C;
 
+// Like func_004E75D0 but first switch to the other buffer (index 1 - D_221E2C)
+// and record the chosen buffer in D_221E20.
 void func_004E7688(void) {
     s32 index;
     s32 selected;
