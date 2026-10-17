@@ -1,5 +1,10 @@
 #include "common.h"
+
 extern s32 D_00220B5C;
+
+// If the object supports D_00220B5C (checked with the method at +0x14 of its +8
+// table), copy the two floats at +0x14 and +0x18 to the out pointers and return
+// 1; otherwise return 0.
 s32 func_00509FE8(void *arg0, f32 *out_a, f32 *out_b) {
     u8 *object = arg0;
     u8 *table = *(u8 **)(object + 8);
