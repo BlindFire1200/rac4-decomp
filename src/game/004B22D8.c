@@ -5,6 +5,8 @@ extern void func_00497E10(s32);
 extern void func_004B3E20(void);
 extern void func_004B4C68(void);
 extern s32 *D_0021DDA4;
+
+// Run the three setup calls, then func_00497E10 for every active slot.
 void func_004B22D8(void) {
     s32 i = 0;
     func_004B4C68();

@@ -1,13 +1,15 @@
 #include "common.h"
 
-void func_L00_00599C48(s32);                           /* extern */
+void func_L00_00599C48(s32);
 
-void func_L01_00413950(void *arg0) {
-    s32 temp_a0;
+// Release the handle at +0x28 (func_L00_00599C48) when it is set and reset it
+// to -1.
+void func_L01_00413950(void *object) {
+    s32 handle;
 
-    temp_a0 = *(s32 *)((u8 *)arg0 + 0x28);
-    if (temp_a0 >= 0) {
-        func_L00_00599C48(temp_a0);
-        *(s32 *)((u8 *)arg0 + 0x28) = -1;
+    handle = *(s32 *)((u8 *)object + 0x28);
+    if (handle >= 0) {
+        func_L00_00599C48(handle);
+        *(s32 *)((u8 *)object + 0x28) = -1;
     }
 }

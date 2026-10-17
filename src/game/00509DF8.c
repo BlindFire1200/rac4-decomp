@@ -2,6 +2,10 @@
 
 extern void func_0050EEB8(void *, s32, f32, f32);
 extern s32 D_00220B68;
+
+// If the object supports D_00220B68 (checked with the method at +0x14 of its +8
+// table), run func_0050EEB8 with 1 and the two values and return 1; otherwise
+// return 0.
 s32 func_00509DF8(void *handle, f32 value, f32 value2) {
     u8 *object = handle;
     u8 *table = *(u8 **)(object + 8);
