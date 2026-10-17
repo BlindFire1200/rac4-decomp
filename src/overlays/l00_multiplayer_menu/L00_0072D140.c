@@ -1,15 +1,19 @@
 #include "common.h"
 
-void func_L00_0072D140(void *arg0) {
-    void *temp_a0;
-    temp_a0 = *(void **)((u8 *)arg0 + 0xBC);
-    if ((*(s32 (**)(void *))((u8 *)*(void **)((u8 *)temp_a0 + 0x58) + 0xA8))(temp_a0) == 3) {
-        void *temp_a0_2 = *(void **)((u8 *)arg0 + 0xD0);
-        if ((*(s32 (**)(void *))((u8 *)*(void **)((u8 *)temp_a0_2 + 0x58) + 0xA8))(temp_a0_2) == 0) {
-            (*(void (**)(void *, s32))((u8 *)*(void **)((u8 *)*(void **)((u8 *)arg0 + 0x114) + 0x58) + 0xA4))(*(void **)((u8 *)arg0 + 0x114), 0);
-            (*(void (**)(void *, s32, s32))((u8 *)*(void **)((u8 *)*(void **)((u8 *)arg0 + 0x114) + 0x58) + 0x20))(*(void **)((u8 *)arg0 + 0x114), 3, 0);
+// Update the handle at +0x114 from the states of the handles at +0xBC and
+// +0xD0: when the first reports 3 (method at +0xA8), the second reporting 0
+// clears the third (+0xA4) and runs its +0x20 method with 3, otherwise runs
+// +0x20 with 0.
+void func_L00_0072D140(void *object) {
+    void *first;
+    first = *(void **)((u8 *)object + 0xBC);
+    if ((*(s32 (**)(void *))((u8 *)*(void **)((u8 *)first + 0x58) + 0xA8))(first) == 3) {
+        void *second = *(void **)((u8 *)object + 0xD0);
+        if ((*(s32 (**)(void *))((u8 *)*(void **)((u8 *)second + 0x58) + 0xA8))(second) == 0) {
+            (*(void (**)(void *, s32))((u8 *)*(void **)((u8 *)*(void **)((u8 *)object + 0x114) + 0x58) + 0xA4))(*(void **)((u8 *)object + 0x114), 0);
+            (*(void (**)(void *, s32, s32))((u8 *)*(void **)((u8 *)*(void **)((u8 *)object + 0x114) + 0x58) + 0x20))(*(void **)((u8 *)object + 0x114), 3, 0);
             return;
         }
-        (*(void (**)(void *, s32, s32))((u8 *)*(void **)((u8 *)*(void **)((u8 *)arg0 + 0x114) + 0x58) + 0x20))(*(void **)((u8 *)arg0 + 0x114), 0, 0);
+        (*(void (**)(void *, s32, s32))((u8 *)*(void **)((u8 *)*(void **)((u8 *)object + 0x114) + 0x58) + 0x20))(*(void **)((u8 *)object + 0x114), 0, 0);
     }
 }

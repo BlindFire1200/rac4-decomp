@@ -1,6 +1,11 @@
 #include "common.h"
-void func_L00_007744B0(void *arg0) {
-    u8 *p = (u8 *)arg0;
+
+// Clear every pending item: for each set flag byte in +0x6C..+0x7C, clear the
+// byte or word it refers to (through the pointers at +0x38, +0x3C, +0x4C,
+// +0x50, +0x60 and +0x68, or in the object itself) and the flag. Then copy the
+// words at +0x84 and +0x80 into +0x30 and +0x2C.
+void func_L00_007744B0(void *object) {
+    u8 *p = (u8 *)object;
     if (p[0x6C]) { *(u8 *)(*(u8 **)(p + 0x68) + 0x2F88) = 0; p[0x6C] = 0; }
     if (p[0x6D]) { **(u8 **)(p + 0x38) = 0; p[0x6D] = 0; }
     if (p[0x72]) { *(u8 *)(*(u8 **)(p + 0x3C) + 0x3D0) = 0; p[0x72] = 0; }
