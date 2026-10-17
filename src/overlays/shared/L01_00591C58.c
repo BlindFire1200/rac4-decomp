@@ -1,5 +1,7 @@
 #include "common.h"
-void func_L01_00591C58(u8 *arg0, s8 arg1) {
-    arg0[0x69] = arg1;
-    arg0[0xBE] &= 0xFD;
+
+// Store the byte at +0x69 and clear bit 1 of the +0xBE flags.
+void func_L01_00591C58(u8 *object, s8 value) {
+    object[0x69] = value;
+    object[0xBE] &= 0xFD;
 }
