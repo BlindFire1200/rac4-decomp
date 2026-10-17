@@ -16,6 +16,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_0068AC58`](shared/func_L00_0068AC58.c) | shared | 688 | BYTES 9/684 |
 | [`func_L05_003E4478`](shared/func_L05_003E4478.c) | shared | 136 | BYTES 3/132 |
 | [`func_L00_00696438`](shared/func_L00_00696438.c) | shared | 88 | BYTES 2/84 |
+| [`func_00163218`](core/func_00163218.c) | core | 116 | BYTES 3/116 |
 | [`func_L00_007023C8`](shared/func_L00_007023C8.c) | shared | 184 | BYTES 6/184 |
 | [`func_L01_0044A0F0`](shared/func_L01_0044A0F0.c) | shared | 144 | BYTES 5/140 |
 | [`func_L01_005AC6C8`](shared/func_L01_005AC6C8.c) | shared | 128 | BYTES 5/128 |
