@@ -102,6 +102,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_0013EEB0`](core/func_0013EEB0.c) | core | 140 | BYTES 25/140 |
 | [`func_00148D10`](core/func_00148D10.c) | core | 132 | BYTES 24/132 |
 | [`func_L01_005BAEC0`](shared/func_L01_005BAEC0.c) | shared | 168 | BYTES 30/164 |
+| [`func_L00_0071BEB8`](l00_multiplayer_menu/func_L00_0071BEB8.c) | l00_multiplayer_menu | 328 | BYTES 61/328 |
 | [`func_004C67D8`](game/func_004C67D8.c) | game | 144 | BYTES 27/144 |
 | [`func_01EEE33C`](net/func_01EEE33C.c) | net | 96 | BYTES 18/96 |
 | [`func_01EEF7E4`](net/func_01EEF7E4.c) | net | 48 | BYTES 9/48 |
