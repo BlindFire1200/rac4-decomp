@@ -1,8 +1,14 @@
 #include "common.h"
+
 extern void func_0011A9EC(s32, void *);
 extern void func_L00_0071B478(void *);
 extern void func_L00_0071BB58(void *);
 extern void func_L00_00741990(void *);
+
+// Push this object's settings to its linked object at +0x268: call the method
+// at +0x140 of the linked object's vtable, copy the bytes at +0x26C/+0x26D and
+// words at +0x270/+0x274, run func_L00_00741990, copy the +0x28C text when
+// +0x27C is 1, then run the two update calls.
 void func_L00_0071A8A8(void *object) {
     ((void (**)(void *))(*(u8 **)(*(void **)((u8 *)object + 0x268) + 0x58) + 0x140))[0](*(void **)((u8 *)object + 0x268));
     {
