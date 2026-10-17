@@ -5,6 +5,9 @@ void func_L00_0071BC68(void *);
 void func_L00_0071BB58(void *);
 void func_L00_007647B0(s32);
 
+// Run the three update calls; when the +0x264 flag is set, call
+// func_L00_007647B0 with 0xC when the +0x274 halfword is nonzero, otherwise
+// with 0xB.
 void func_L00_00740AE0(void *object) {
     func_L00_0071B478();
     func_L00_0071BC68(object);

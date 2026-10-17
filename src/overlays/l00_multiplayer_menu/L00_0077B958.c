@@ -3,6 +3,9 @@
 s32 func_0011A518(void *, s32, s32);
 void func_0077CFA0(s32, void *);
 
+// Reset the object's flags and bytes (+0, +0x60, +0x2F4C..+0x2F89), set the
+// three words at +0x2F8C..+0x2F94 to -1, run func_0077CFA0 for +0x2F9C and
+// clear the 0x2EE0 bytes at +0x2FBC.
 void func_L00_0077B958(u8 *object) {
     s32 minusOne = -1;
     object[0] = 0;
