@@ -42,6 +42,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_00767968`](l00_multiplayer_menu/func_L00_00767968.c) | l00_multiplayer_menu | 232 | BYTES 16/232 |
 | [`func_L00_00536290`](l00_multiplayer_menu/func_L00_00536290.c) | l00_multiplayer_menu | 100 | BYTES 7/100 |
 | [`func_L01_0056E9D0`](shared/func_L01_0056E9D0.c) | shared | 104 | BYTES 7/100 |
+| [`func_L00_0071C498`](l00_multiplayer_menu/func_L00_0071C498.c) | l00_multiplayer_menu | 472 | BYTES 34/472 |
 | [`func_L00_0071B9B0`](l00_multiplayer_menu/func_L00_0071B9B0.c) | l00_multiplayer_menu | 152 | BYTES 11/152 |
 | [`func_L01_00478730`](shared/func_L01_00478730.c) | shared | 152 | BYTES 11/152 |
 | [`func_L00_0051F4B0`](l00_multiplayer_menu/func_L00_0051F4B0.c) | l00_multiplayer_menu | 148 | BYTES 11/148 |
