@@ -1,11 +1,13 @@
 #include "common.h"
-s32 func_004BFA60(u32 arg0) {
-    s32 var_v1;
-    var_v1 = -1;
-    if (arg0 < 2 || arg0 == 8 || arg0 == 0x25 || arg0 == 0xA || arg0 == 0xB) var_v1 = 0;
-    else if (arg0 == 2 || arg0 == 13 || arg0 == 9 || arg0 == 15 || arg0 == 12 || arg0 == 14) var_v1 = 1;
-    else if (arg0 == 3 || arg0 == 17 || arg0 == 18 || arg0 == 23 || arg0 == 16 || arg0 == 19 || arg0 == 20) var_v1 = 2;
-    else if (arg0 == 4 || arg0 == 21 || arg0 == 25 || arg0 == 38 || arg0 == 22 || arg0 == 24) var_v1 = 3;
-    else if (arg0 == 5 || arg0 == 28 || arg0 == 34 || arg0 == 39 || arg0 == 26 || arg0 == 36) var_v1 = 4;
-    return var_v1;
+
+// Map a kind id to its group 0-4 (-1 when the id is in none of the lists).
+s32 func_004BFA60(u32 kind) {
+    s32 group;
+    group = -1;
+    if (kind < 2 || kind == 8 || kind == 0x25 || kind == 0xA || kind == 0xB) group = 0;
+    else if (kind == 2 || kind == 13 || kind == 9 || kind == 15 || kind == 12 || kind == 14) group = 1;
+    else if (kind == 3 || kind == 17 || kind == 18 || kind == 23 || kind == 16 || kind == 19 || kind == 20) group = 2;
+    else if (kind == 4 || kind == 21 || kind == 25 || kind == 38 || kind == 22 || kind == 24) group = 3;
+    else if (kind == 5 || kind == 28 || kind == 34 || kind == 39 || kind == 26 || kind == 36) group = 4;
+    return group;
 }

@@ -1,4 +1,7 @@
 #include "common.h"
+
+// Map a value 0-6 to its code (0 gives 2, 1 gives 5, 2 gives 3, 3 gives 4, 4
+// gives 7, 5 gives 6, 6 gives 1); 7, 8 and anything else give -1.
 s32 func_005469B8(s32 value) {
     s32 result = -1;
     switch (value) {
