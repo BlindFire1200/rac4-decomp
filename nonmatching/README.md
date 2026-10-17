@@ -15,6 +15,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_0077C4F8`](l00_multiplayer_menu/func_L00_0077C4F8.c) | l00_multiplayer_menu | 168 | BYTES 2/164 |
 | [`func_L00_0068AC58`](shared/func_L00_0068AC58.c) | shared | 688 | BYTES 9/684 |
 | [`func_L05_003E4478`](shared/func_L05_003E4478.c) | shared | 136 | BYTES 3/132 |
+| [`func_004D8380`](game/func_004D8380.c) | game | 336 | BYTES 8/336 |
 | [`func_L00_00696438`](shared/func_L00_00696438.c) | shared | 88 | BYTES 2/84 |
 | [`func_00163218`](core/func_00163218.c) | core | 116 | BYTES 3/116 |
 | [`func_00503AE8`](game/func_00503AE8.c) | game | 112 | BYTES 3/112 |
@@ -26,6 +27,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_005190D8`](l00_multiplayer_menu/func_L00_005190D8.c) | l00_multiplayer_menu | 100 | BYTES 4/100 |
 | [`func_L01_00432D58`](shared/func_L01_00432D58.c) | shared | 528 | BYTES 21/524 |
 | [`func_L01_00468FB0`](shared/func_L01_00468FB0.c) | shared | 296 | BYTES 12/296 |
+| [`func_004D5C30`](game/func_004D5C30.c) | game | 336 | BYTES 15/336 |
 | [`func_0046F738`](game/func_0046F738.c) | game | 112 | BYTES 5/108 |
 | [`func_L00_0051E250`](l00_multiplayer_menu/func_L00_0051E250.c) | l00_multiplayer_menu | 104 | BYTES 5/104 |
 | [`func_L01_004DA958`](shared/func_L01_004DA958.c) | shared | 112 | BYTES 6/112 |
