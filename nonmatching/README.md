@@ -59,8 +59,10 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_00596268`](shared/func_L00_00596268.c) | shared | 144 | BYTES 13/140 |
 | [`func_00499D30`](game/func_00499D30.c) | game | 96 | BYTES 9/96 |
 | [`func_L01_004DE290`](shared/func_L01_004DE290.c) | shared | 136 | BYTES 13/136 |
+| [`func_004C9670`](game/func_004C9670.c) | game | 104 | BYTES 10/104 |
 | [`func_L05_004F24B0`](shared/func_L05_004F24B0.c) | shared | 104 | BYTES 10/104 |
 | [`func_L01_0048AD90`](shared/func_L01_0048AD90.c) | shared | 144 | BYTES 14/144 |
+| [`func_004AE8A8`](game/func_004AE8A8.c) | game | 104 | BYTES 10/100 |
 | [`func_L00_005FED90`](shared/func_L00_005FED90.c) | shared | 88 | BYTES 9/88 |
 | [`func_001412F8`](core/func_001412F8.c) | core | 140 | BYTES 15/140 |
 | [`func_L00_005C1588`](l00_multiplayer_menu/func_L00_005C1588.c) | l00_multiplayer_menu | 144 | BYTES 15/140 |
