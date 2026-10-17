@@ -4,13 +4,15 @@ void func_00504550(s32, void *, f32 *);
 void func_00504648(s32, f32 *, f32 *);
 void func_0049CFE8(s32, s32, f32, f32, f32, f32);
 
-void func_0049D170(s32 arg0, s32 arg1, s32 arg2) {
-    f32 sp0;
-    f32 sp4;
-    f32 sp8;
-    f32 spC;
+// Read two float pairs for the source (func_00504550 and func_00504648) and
+// pass them with the two other arguments to func_0049CFE8.
+void func_0049D170(s32 param_a, s32 param_b, s32 source) {
+    f32 x0;
+    f32 y0;
+    f32 x1;
+    f32 y1;
 
-    func_00504550(arg2, &sp0, &sp4);
-    func_00504648(arg2, &sp8, &spC);
-    func_0049CFE8(arg0, arg1, sp0, sp4, sp8, spC);
+    func_00504550(source, &x0, &y0);
+    func_00504648(source, &x1, &y1);
+    func_0049CFE8(param_a, param_b, x0, y0, x1, y1);
 }
