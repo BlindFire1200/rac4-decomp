@@ -1,5 +1,7 @@
 #include "common.h"
-void func_004EE978(s32 unused, f32 *out, f32 *a, f32 *b, f32 t) {
+
+// Linear interpolation of four floats: out[i] = (1 - t) * a[i] + t * b[i].
+void func_004EE978(s32 unused0, f32 *out, f32 *a, f32 *b, f32 t) {
     f32 s = 1.0f - t;
     out[0] = s * a[0] + t * b[0];
     out[1] = s * a[1] + t * b[1];

@@ -1,13 +1,18 @@
 #include "common.h"
+
 extern void func_00497580(s32 *, s32, s32);
 extern void func_00497628(s32 *, s32, s32);
-s32 func_004976C8(s32 *arg0, s32 arg1, s32 arg2, void (*arg3)(void), void (*arg4)(void), s32 arg5) {
-    s32 old = *arg0;
-    if (arg2 != 0) func_00497580(&old, arg1, arg5);
-    else func_00497628(&old, arg1, arg5);
-    if (*arg0 == old) return 0;
-    if (arg3 != 0) arg3();
-    *arg0 = old;
-    if (arg4 != 0) arg4();
+
+// Compute an updated value of the word at value_ptr (func_00497580 when mode is
+// nonzero, func_00497628 otherwise). When it differs, run before(), store it
+// and run after(); returns 1 when it changed, else 0.
+s32 func_004976C8(s32 *value_ptr, s32 param_a, s32 mode, void (*before)(void), void (*after)(void), s32 param_b) {
+    s32 updated = *value_ptr;
+    if (mode != 0) func_00497580(&updated, param_a, param_b);
+    else func_00497628(&updated, param_a, param_b);
+    if (*value_ptr == updated) return 0;
+    if (before != 0) before();
+    *value_ptr = updated;
+    if (after != 0) after();
     return 1;
 }
