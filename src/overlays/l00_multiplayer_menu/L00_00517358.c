@@ -1,4 +1,8 @@
 #include "common.h"
+
+// Fill the two optional out records from the object's linked +4 and +8 blocks:
+// the first gets kind 6 with the +0xC and +0x10 words, the second gets three
+// words of the +8 block. Returns 1 when either record was filled.
 s32 func_L00_00517358(void *object, void *out1, void *out2) {
     s32 result = 0;
     if (out1 != 0) {
