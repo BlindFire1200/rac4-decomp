@@ -24,18 +24,22 @@ s32 func_L01_004DE290();
 void func_L01_00591BD8(void *, s32, s32);
 
 
-s32 func_L01_004DDFC8(S_arg0 *arg0) {
+// In state 0 only: set the +0x30 byte to 0xFF, convert the linked +0x70 and
+// +0x74 words into the +0x7C and +0x80 entries scaled by 60, run
+// func_L01_004DE290 and func_00585D88 and move to state 1 (-1). Returns 1 when
+// it ran.
+s32 func_L01_004DDFC8(S_arg0 *object) {
     S_temp_v0 *temp_v0;
 
-    if (arg0->f20 != 0) {
+    if (object->f20 != 0) {
         return 0;
     }
-    temp_v0 = arg0->fAC;
-    arg0->f30 = 0xFF;
+    temp_v0 = object->fAC;
+    object->f30 = 0xFF;
     temp_v0->f7C = (f32)temp_v0->f70 * 60.0f;
     temp_v0->f80 = (f32) ((f32) temp_v0->f74 * 60.0f);
     func_L01_004DE290();
-    func_00585D88(arg0);
-    func_L01_00591BD8(arg0, 1, -1);
+    func_00585D88(object);
+    func_L01_00591BD8(object, 1, -1);
     return 1;
 }

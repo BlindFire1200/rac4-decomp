@@ -6,6 +6,11 @@
 #define B(p, o) (*(u8 *)((u8 *)(p) + (o)))
 #define P(p, o) (*(void **)((u8 *)(p) + (o)))
 
+// Update the flag bits (+0x34) of the linked objects of a player: clear bit 0
+// of the main one at +0x634 and of the pairs in the +0x22F0 table, copy or
+// clear the +0x98 word of the main one depending on the +0x25CC state, then set
+// bit 0 or bits 0 and 6 of the first pair's objects under the +0x2EE8, +0x2318,
+// +0x2668 and +0x2663 conditions.
 void func_005239C8(void *arg0) {
     s32 temp_v1_2;
     void *temp_a0;
