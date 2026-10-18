@@ -1,4 +1,3 @@
-/* Not matching yet: BYTES 5/308 (tools/try_func.py func_004BB018 --diff). Not part of the build. */
 #include "common.h"
 void func_0049C290(s32, s32);
 void func_0049C400(s32, s32, s32, s32, s32);
@@ -13,6 +12,7 @@ void func_004BBC50();
 s32 func_00505B20();
 void func_00505DD0(s32, s32);
 extern s32 D_221820;
+typedef struct { s32 f0; s32 f4; s32 f8; u8 fC; } Type1;
 extern u8 D_30A6F0[];
 extern void func_004BCC40(void);
 extern void func_004BCE28(void);
@@ -36,8 +36,8 @@ void func_004BB018(void) {
     temp_s1_2 = D_221820;
     func_0049C400(temp_s2, 0, temp_s1_2, func_004A1A60(&D_221820, 0xF), 0);
     func_0049C290(temp_s2, 1);
-    *(s32 *)(temp_s0 + 0x8) = 0;
-    *(s32 *)(temp_s0 + 0x4) = 7;
-    *(s32 *)(temp_s0 + 0x0) = 0;
-    temp_s0[0xC] = 0;
+    ((Type1 *)temp_s0)->f0 = 0;
+    ((Type1 *)temp_s0)->f4 = 7;
+    ((Type1 *)temp_s0)->fC = 0;
+    ((Type1 *)temp_s0)->f8 = 0;
 }
