@@ -1,11 +1,12 @@
-/* Not matching yet: BYTES 2/356 (tools/try_func.py func_L01_00500720 --diff). Not part of the build. */
+#include "common.h"
+
 typedef int u128 __attribute__((mode(TI)));
 
 extern void *func_005A16E8(void *);
 extern void *func_L00_005DEBD0(s32, s32, s32);
 extern void *func_L00_005EAC30(void *);
 extern void func_L01_00591BD8(u8 *object, s32 new_state, s32 param);
-extern void func_L01_005A1B38();
+extern s32 func_L01_005A1B38();
 
 // Sync the linked object's position, pick its +0x30 value, and on a hit fire callbacks and move to state 11.
 s32 func_L01_00500720(u8 *self) {
