@@ -22,6 +22,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_00163218`](core/func_00163218.c) | core | 116 | BYTES 3/116 |
 | [`func_00503AE8`](game/func_00503AE8.c) | game | 112 | BYTES 3/112 |
 | [`func_00526FD8`](game/func_00526FD8.c) | game | 112 | BYTES 3/112 |
+| [`func_004D7840`](game/func_004D7840.c) | game | 176 | BYTES 6/172 |
 | [`func_L01_0044A0F0`](shared/func_L01_0044A0F0.c) | shared | 144 | BYTES 5/140 |
 | [`func_0049E618`](game/func_0049E618.c) | game | 160 | BYTES 6/160 |
 | [`func_L01_005AC6C8`](shared/func_L01_005AC6C8.c) | shared | 128 | BYTES 5/128 |
