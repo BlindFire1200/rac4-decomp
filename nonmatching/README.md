@@ -194,3 +194,4 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L01_005724C8`](shared/func_L01_005724C8.c) | shared | 264 | SIZE ours 244 / retail 264 |
 | [`func_L01_00666D98`](shared/func_L01_00666D98.c) | shared | 240 | SIZE ours 244 / retail 240 |
 | [`func_L05_004DF3B8`](shared/func_L05_004DF3B8.c) | shared | 280 | SIZE ours 296 / retail 280 |
+| [`func_L06_004013F0`](shared/func_L06_004013F0.c) | shared | 112 | SIZE ours 120 / retail 112 |
