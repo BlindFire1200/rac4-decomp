@@ -1,39 +1,43 @@
 #include "common.h"
-s32 func_0011F780(u32 *arg0) {
-    s32 count;
-    u32 value;
-    value = *arg0;
-    if (value & 7) {
-        if (value & 1) return 0;
-        if (value & 2) {
-            *arg0 = value >> 1;
+
+// Count the trailing zero bits of *value_ptr, shift them out and return the
+// count (0x20 for zero; a value with bit 0 set returns 0). The first three low
+// bits are special-cased: bit 1 set gives 1, otherwise 2.
+s32 func_0011F780(u32 *value_ptr) {
+    s32 shift;
+    u32 bits;
+    bits = *value_ptr;
+    if (bits & 7) {
+        if (bits & 1) return 0;
+        if (bits & 2) {
+            *value_ptr = bits >> 1;
             return 1;
         }
-        *arg0 = value >> 2;
+        *value_ptr = bits >> 2;
         return 2;
     }
-    count = 0;
-    if (!(value & 0xFFFF)) {
-        count = 0x10;
-        value >>= 0x10;
+    shift = 0;
+    if (!(bits & 0xFFFF)) {
+        shift = 0x10;
+        bits >>= 0x10;
     }
-    if (!(value & 0xFF)) {
-        count += 8;
-        value >>= 8;
+    if (!(bits & 0xFF)) {
+        shift += 8;
+        bits >>= 8;
     }
-    if (!(value & 0xF)) {
-        count += 4;
-        value >>= 4;
+    if (!(bits & 0xF)) {
+        shift += 4;
+        bits >>= 4;
     }
-    if (!(value & 3)) {
-        count += 2;
-        value >>= 2;
+    if (!(bits & 3)) {
+        shift += 2;
+        bits >>= 2;
     }
-    if (!(value & 1)) {
-        value >>= 1;
-        count++;
-        if (value == 0) return 0x20;
+    if (!(bits & 1)) {
+        bits >>= 1;
+        shift++;
+        if (bits == 0) return 0x20;
     }
-    *arg0 = value;
-    return count;
+    *value_ptr = bits;
+    return shift;
 }

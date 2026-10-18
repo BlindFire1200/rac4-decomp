@@ -1,32 +1,34 @@
 #include "common.h"
 
-void func_0049C200(s32, s32);                          /* extern */
-void func_0049C248(s32, s32);                          /* extern */
-void func_0049C328(s32, s32, s32);                       /* extern */
+void func_0049C200(s32, s32);
+void func_0049C248(s32, s32);
+void func_0049C328(s32, s32, s32);
 
-void func_0049C290(s32 arg0, s32 arg1) {
-    s32 var_a1;
-    s32 var_a1_2;
-    s32 var_s0;
-    s32 var_s0_2;
+// For slots 0 to count - 1 run func_0049C328 (1) and func_0049C200; for the
+// remaining slots up to 4 run func_0049C248.
+void func_0049C290(s32 param, s32 count) {
+    s32 tmp_a;
+    s32 tmp_b;
+    s32 slot_a;
+    s32 slot_b;
 
-    var_s0 = 0;
-    if (arg1 > 0) {
-        var_a1 = 0;
+    slot_a = 0;
+    if (count > 0) {
+        tmp_a = 0;
         do {
-            func_0049C328(arg0, var_s0, 1);
-            func_0049C200(arg0, var_s0);
-            var_s0 += 1;
-            var_a1 = var_s0;
-        } while (var_s0 < arg1);
+            func_0049C328(param, slot_a, 1);
+            func_0049C200(param, slot_a);
+            slot_a += 1;
+            tmp_a = slot_a;
+        } while (slot_a < count);
     }
-    var_s0_2 = arg1;
-    if (var_s0_2 < 4) {
-        var_a1_2 = var_s0_2;
+    slot_b = count;
+    if (slot_b < 4) {
+        tmp_b = slot_b;
         do {
-            func_0049C248(arg0, var_a1_2);
-            var_s0_2 += 1;
-            var_a1_2 = var_s0_2;
-        } while (var_s0_2 < 4);
+            func_0049C248(param, tmp_b);
+            slot_b += 1;
+            tmp_b = slot_b;
+        } while (slot_b < 4);
     }
 }

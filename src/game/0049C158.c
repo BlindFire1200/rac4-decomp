@@ -5,12 +5,16 @@ extern void func_00504550(s32, void *, f32 *);
 extern void func_00504648(s32, f32 *, f32 *);
 extern void func_00505AD8(s32);
 extern s32 func_00505B20(void);
-void func_0049C158(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    f32 values[4];
-    s32 old_owner = func_00505B20();
-    func_00505AD8(arg3 == 0 ? arg0 : 4);
-    func_00504550(arg2, values, &values[1]);
-    func_00504648(arg2, &values[2], &values[3]);
-    func_0049BFC0(arg0, arg1, arg3, values[0], values[1], values[2], values[3]);
-    func_00505AD8(old_owner);
+
+// Read two float pairs for the source, run func_0049BFC0 with them under a
+// temporarily switched owner (param_a, or 4 when mode is nonzero), then restore
+// the owner.
+void func_0049C158(s32 param_a, s32 param_b, s32 source, s32 mode) {
+    f32 coords[4];
+    s32 saved_owner = func_00505B20();
+    func_00505AD8(mode == 0 ? param_a : 4);
+    func_00504550(source, coords, &coords[1]);
+    func_00504648(source, &coords[2], &coords[3]);
+    func_0049BFC0(param_a, param_b, mode, coords[0], coords[1], coords[2], coords[3]);
+    func_00505AD8(saved_owner);
 }
