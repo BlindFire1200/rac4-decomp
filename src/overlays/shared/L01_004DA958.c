@@ -1,4 +1,5 @@
-/* Not matching yet: BYTES 6/112 (tools/try_func.py func_L01_004DA958 --diff). Not part of the build. */
+/* cflags: -mno-split-addresses */
+#include "common.h"
 typedef int u128 __attribute__((mode(TI)));
 extern u8 D_00222B28[];
 extern s32 func_L00_005BC248(u8 *, s32, f32, f32);
