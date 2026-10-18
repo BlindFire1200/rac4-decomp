@@ -1,4 +1,3 @@
-/* Not matching yet: BYTES 11/152 (tools/try_func.py func_L01_00478730 --diff). Not part of the build. */
 #include "common.h"
 
 typedef int u128 __attribute__((mode(TI)));
@@ -8,6 +7,7 @@ extern void func_L01_004787E8(void *);
 void *func_L01_00478730(u8 *arg0, s32 arg1, s32 arg2) {
     u8 *object;
     u8 *data;
+    u128 v;
 
     object = func_L00_005DD000(0x26A9, 0x310);
     if (object != 0) {
@@ -15,8 +15,9 @@ void *func_L01_00478730(u8 *arg0, s32 arg1, s32 arg2) {
         *(s32 *)(data + 0x00) = arg1;
         *(s32 *)(data + 0x08) = (arg2 <= 0xFE) ? arg2 : -1;
         *(s32 *)(data + 0x04) = (s32)arg0;
+        v = *(u128 *)(arg0 + 0x10);
         *(u8 *)(object + 0x30) = 0xFF;
-        *(u128 *)(object + 0x10) = *(u128 *)(arg0 + 0x10);
+        *(u128 *)(object + 0x10) = v;
         *(u16 *)(object + 0x32) = *(u16 *)(arg0 + 0x32);
         func_L01_004787E8(object);
     }
