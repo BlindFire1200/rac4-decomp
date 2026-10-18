@@ -148,6 +148,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_0014A150`](core/func_0014A150.c) | core | 132 | BYTES 26/132 |
 | [`func_L00_005E0ED0`](shared/func_L00_005E0ED0.c) | shared | 136 | BYTES 26/132 |
 | [`func_01EC0410`](net/func_01EC0410.c) | net | 128 | BYTES 26/128 |
+| [`func_L01_004CFEC8`](shared/func_L01_004CFEC8.c) | shared | 144 | BYTES 31/140 |
 | [`func_01EED7A8`](net/func_01EED7A8.c) | net | 252 | BYTES 58/252 |
 | [`func_L00_006702E0`](shared/func_L00_006702E0.c) | shared | 192 | BYTES 45/192 |
 | [`func_01E9E710`](net/func_01E9E710.c) | net | 128 | BYTES 31/128 |
