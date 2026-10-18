@@ -47,7 +47,8 @@ did to its output ([`docs/TOOLCHAIN.md`](docs/TOOLCHAIN.md)). So:
 The check is not link-time yet: `tools/audit_matches.py` masks the fields the
 compiled object relocates (constants and offsets must equal retail), so a
 function that calls or reads the wrong symbol can still pass.
-Check calls and globals by eye.
+`tools/audit_relocs.py` checks where the relocations of every exact function
+point; it must report 0 mismatches.
 
 ## Sources
 
