@@ -73,6 +73,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_0051F4B0`](l00_multiplayer_menu/func_L00_0051F4B0.c) | l00_multiplayer_menu | 148 | BYTES 11/148 |
 | [`func_L00_006ED020`](shared/func_L00_006ED020.c) | shared | 200 | BYTES 15/200 |
 | [`func_004C57C0`](game/func_004C57C0.c) | game | 336 | BYTES 25/332 |
+| [`func_004D7998`](game/func_004D7998.c) | game | 464 | BYTES 37/464 |
 | [`func_L01_004E5DD0`](shared/func_L01_004E5DD0.c) | shared | 128 | BYTES 10/124 |
 | [`func_0015DA28`](core/func_0015DA28.c) | core | 156 | BYTES 13/156 |
 | [`func_004CD8B8`](game/func_004CD8B8.c) | game | 136 | BYTES 11/132 |
