@@ -22,14 +22,12 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_00715B30`](l00_multiplayer_menu/func_L00_00715B30.c) | l00_multiplayer_menu | 1160 | BYTES 45/1160 |
 | [`func_L00_005190D8`](l00_multiplayer_menu/func_L00_005190D8.c) | l00_multiplayer_menu | 100 | BYTES 4/100 |
 | [`func_L01_00432D58`](shared/func_L01_00432D58.c) | shared | 528 | BYTES 21/524 |
-| [`func_L01_00468FB0`](shared/func_L01_00468FB0.c) | shared | 296 | BYTES 12/296 |
 | [`func_L01_004414B0`](shared/func_L01_004414B0.c) | shared | 216 | BYTES 9/216 |
 | [`func_L41_003E3060`](shared/func_L41_003E3060.c) | shared | 432 | BYTES 19/428 |
 | [`func_L41_0061C668`](shared/func_L41_0061C668.c) | shared | 152 | BYTES 7/148 |
 | [`func_L00_0051E250`](l00_multiplayer_menu/func_L00_0051E250.c) | l00_multiplayer_menu | 104 | BYTES 5/104 |
 | [`func_0012DD90`](core/func_0012DD90.c) | core | 144 | BYTES 7/144 |
 | [`func_004B1F38`](game/func_004B1F38.c) | game | 512 | BYTES 25/508 |
-| [`func_L01_00427C40`](shared/func_L01_00427C40.c) | shared | 224 | BYTES 11/220 |
 | [`func_L01_0047F050`](shared/func_L01_0047F050.c) | shared | 128 | BYTES 7/128 |
 | [`func_L41_00446500`](shared/func_L41_00446500.c) | shared | 840 | BYTES 46/836 |
 | [`func_L00_0068A9B8`](shared/func_L00_0068A9B8.c) | shared | 664 | BYTES 37/664 |
@@ -39,11 +37,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_006EE740`](shared/func_L00_006EE740.c) | shared | 48 | BYTES 3/48 |
 | [`func_L01_0049A8F0`](shared/func_L01_0049A8F0.c) | shared | 208 | BYTES 13/208 |
 | [`func_L41_0040DF30`](shared/func_L41_0040DF30.c) | shared | 224 | BYTES 14/220 |
-| [`func_004D8598`](game/func_004D8598.c) | game | 192 | BYTES 12/188 |
-| [`func_004D8D98`](game/func_004D8D98.c) | game | 192 | BYTES 12/188 |
-| [`func_004D97E0`](game/func_004D97E0.c) | game | 192 | BYTES 12/188 |
 | [`func_L01_004DDF28`](shared/func_L01_004DDF28.c) | shared | 160 | BYTES 10/156 |
-| [`func_L00_00707F28`](l00_multiplayer_menu/func_L00_00707F28.c) | l00_multiplayer_menu | 168 | BYTES 11/168 |
 | [`func_L01_004D0978`](shared/func_L01_004D0978.c) | shared | 136 | BYTES 9/136 |
 | [`func_L00_00767968`](l00_multiplayer_menu/func_L00_00767968.c) | l00_multiplayer_menu | 232 | BYTES 16/232 |
 | [`func_L00_00536290`](l00_multiplayer_menu/func_L00_00536290.c) | l00_multiplayer_menu | 100 | BYTES 7/100 |
