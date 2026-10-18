@@ -1,0 +1,26 @@
+/* Not matching yet: BYTES 11/220 (tools/try_func.py func_L01_00427C40 --diff). Not part of the build. */
+#include "common.h"
+typedef struct __attribute__((packed,aligned(4))) Type1 { u64 f0; s32 f8; } Type1;
+extern s32 func_L01_006B3E48(s32, s32, s32 *, s32);
+extern void func_L00_006EC318(s32, void *, s32);
+s32 func_L01_00427C40(s32 arg0, Type1 *arg1, Type1 *arg2, s32 arg3, s32 arg4) {
+    Type1 first;
+    Type1 second;
+    s32 handle;
+    s32 local24;
+    s32 local28;
+    s32 result;
+    first = *arg1;
+    second = *arg2;
+    handle = 0;
+    result = func_L01_006B3E48(0x1AFC, 0x40, &handle, arg0);
+    if (handle != 0) {
+        func_L00_006EC318(handle, &first, 12);
+        func_L00_006EC318(handle, &second, 12);
+        local24 = arg3;
+        func_L00_006EC318(handle, &local24, 4);
+        local28 = arg4;
+        func_L00_006EC318(handle, &local28, 4);
+    }
+    return result;
+}
