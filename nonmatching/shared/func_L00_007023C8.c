@@ -1,4 +1,4 @@
-/* Not matching yet: BYTES 6/184 (tools/try_func.py func_L00_007023C8 --diff). Not part of the build. */
+/* Not matching yet: BYTES 2/184 (tools/try_func.py func_L00_007023C8 --diff). Not part of the build. */
 #include "common.h"
 extern s32 D_0021E6B4;
 extern s32 D_0022318C;
@@ -30,8 +30,8 @@ void func_L00_007023C8(s32 arg0) {
         do {
             i--;
             if (*flags != 0 && *values >= 0x1F5) *flags = 0;
-            flags++;
             values++;
+            flags++;
         } while (i >= 0);
     }
 }
