@@ -1,6 +1,7 @@
-/* Not matching yet: BYTES 2/172 (tools/try_func.py func_L01_0044AA78 --diff). Not part of the build. */
+#include "common.h"
+
 extern s32 func_L00_005E60D0(s32, s32);
-extern void func_L01_004491B0(void);
+extern s32 func_L01_004491B0(void);
 extern void func_L01_00591BD8(void *, s32, s32);
 
 // Initialize the timer and state for the selected object action.

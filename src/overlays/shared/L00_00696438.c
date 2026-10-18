@@ -1,6 +1,7 @@
-/* Not matching yet: BYTES 2/84 (tools/try_func.py func_L00_00696438 --diff). Not part of the build. */
-extern void func_L00_00696490(s32, s32);
-extern void func_L00_00696588(s32);
+#include "common.h"
+
+extern s32 func_L00_00696490(s32, s32);
+extern s32 func_L00_00696588(s32);
 extern u8 D_1711A8[];
 
 void func_L00_00696438(void) {

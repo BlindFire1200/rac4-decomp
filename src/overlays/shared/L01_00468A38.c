@@ -1,4 +1,3 @@
-/* Not matching yet: BYTES 2/292 (tools/try_func.py func_L01_00468A38 --diff). Not part of the build. */
 #include "common.h"
 typedef int u128 __attribute__((mode(TI)));
 
@@ -12,7 +11,7 @@ extern void func_L01_00468D48(void *);
 extern void func_L01_00468DA8(void *);
 extern void func_L01_004696B0(void *);
 extern void func_L01_00591BD8(void *, s32, s32);
-extern void func_L01_00593D50(void *, f32, f32, f32);
+extern s32 func_L01_00593D50(void *, f32, f32, f32);
 extern void func_L01_005A1B38(void *);
 extern void func_L01_005AE158(void *);
 

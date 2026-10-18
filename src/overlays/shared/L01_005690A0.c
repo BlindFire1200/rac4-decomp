@@ -1,8 +1,7 @@
-/* Not matching yet: BYTES 8/148 (tools/try_func.py func_L01_005690A0 --diff). Not part of the build. */
 #include "common.h"
 
 extern u8 *func_005A16E8(void);
-extern void func_L01_0056D620(void *, s32);
+extern s32 func_L01_0056D620(void *, s32);
 
 void func_L01_005690A0(void *unused, void *arg1) {
     u8 *object;
@@ -13,8 +12,8 @@ void func_L01_005690A0(void *unused, void *arg1) {
 
     object = func_005A16E8();
     if (object != 0) {
-        ids = (s32 *)(object + 0x50);
         times = (f32 *)(object + 0x70);
+        ids = (s32 *)(object + 0x50);
         i = 7;
         do {
             id = *ids;

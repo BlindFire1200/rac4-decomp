@@ -1,6 +1,7 @@
-/* Not matching yet: BYTES 3/112 (tools/try_func.py func_00503AE8 --diff). Not part of the build. */
+#include "common.h"
+
 extern s32 func_0015DB80(s32, s32);
-extern void *func_005010E0(void *);
+extern void *func_005010E0(void);
 extern void *func_005011A8(void *, s32);
 extern s32 func_00503B88(s32);
 extern u8 D_222038[];
@@ -10,7 +11,7 @@ s32 func_00503AE8(void) {
     u8 *table;
     s32 (*method)(void *, s32);
     s32 value;
-    if (*(s32 *)(object + 4) == 0) object = func_005010E0(object);
+    if (*(s32 *)(object + 4) == 0) object = func_005010E0();
     entry = func_005011A8(object, 2);
     table = *(u8 **)entry;
     method = *(s32 (**)(void *, s32))(table + 8);

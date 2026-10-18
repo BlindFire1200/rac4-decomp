@@ -1,4 +1,5 @@
-/* Not matching yet: BYTES 8/1044 (tools/try_func.py func_L01_0068E830 --diff). Not part of the build. */
+#include "common.h"
+
 typedef int u128 __attribute__((mode(TI)));
 typedef struct Type1 { s32 v[3]; } Type1;
 typedef struct Type2 { u8 pad[0x20]; u8 f20; } Type2;
@@ -71,10 +72,9 @@ Type2 *func_L01_0068E830(u8 *p, u128 *a, u128 *b, s32 c, s32 d, f32 f0, f32 f1, 
             }
         }
         for (i2 = 0; i2 < count && !found; i2++) {
-            h = P_HIST(p);
             m = 0;
             for (i = 0; i < 4; i++) {
-                if (list[i2] == h[i]) {
+                if (list[i2] == (h = P_HIST(p))[i]) {
                     m = 1;
                 }
             }

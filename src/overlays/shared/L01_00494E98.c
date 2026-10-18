@@ -1,7 +1,6 @@
-/* Not matching yet: BYTES 2/96 (tools/try_func.py func_L01_00494E98 --diff). Not part of the build. */
 #include "common.h"
 extern s32 func_00495A60(void);
-extern void func_L00_005FC990(void *);
+extern s32 func_L00_005FC990(void *);
 extern void func_004959C8(void);
 extern void func_L01_00573C00(void *, void *, s32);
 void func_L01_00494E98(u8 *object) {

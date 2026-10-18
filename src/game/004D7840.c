@@ -1,10 +1,11 @@
-/* Not matching yet: BYTES 6/172 (tools/try_func.py func_004D7840 --diff). Not part of the build. */
+#include "common.h"
+
 struct Type1 { s32 unk0; s32 unk4; s32 unk8; };
 struct Type0 { s32 pad0[2]; struct Type1 *unk8; };
 extern s32 func_004A1A60(s32, s32);
 extern s32 func_004D8178(s32);
 extern s32 func_004D81D8(s32);
-extern void func_00505238(s32, s32);
+extern s32 func_00505238(s32, s32);
 extern void func_00505328(s32, s32);
 
 void func_004D7840(s32 arg0, struct Type0 *arg1) {

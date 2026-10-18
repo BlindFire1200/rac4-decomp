@@ -1,6 +1,7 @@
-/* Not matching yet: BYTES 8/140 (tools/try_func.py func_L00_0077C720 --diff). Not part of the build. */
-extern s32 func_0012E370(void);
-extern s64 func_0012FEB0(s32, s32);
+#include "common.h"
+
+extern u64 func_0012E370(void);
+extern s64 func_0012FEB0(u64, s64);
 extern void func_L00_0077BDF0(void *, u8);
 s32 func_L00_0077C720(void *arg0) {
     s32 var_s1 = 1;
