@@ -1,4 +1,5 @@
 #include "common.h"
+
 extern s32 func_004978C0(s32);
 extern void func_00497980(s32);
 extern void func_004C2610(void);
@@ -7,6 +8,10 @@ extern s32 func_00505B20(void);
 extern void *func_00510BE8(s32);
 extern s32 func_0054A290(s32, s32, s32);
 extern u8 D_30B7F8[];
+
+// Check with func_0054A290 for the current owner's entry. When it passes, run
+// func_004C2610, func_00497980 (0x14) and func_004C34D8 and set bits 1, 4 and 5
+// of its +8 flags; otherwise run func_00497980 (4).
 void func_004C4018(void) {
     s32 result = 0;
     s32 index = func_00505B20();

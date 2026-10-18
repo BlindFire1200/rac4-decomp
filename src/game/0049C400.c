@@ -6,19 +6,23 @@ extern s32 func_00505B20(void);
 extern void func_00505F98(s32, s32, s32);
 extern void func_00506060(s32, s32);
 
-void func_0049C400(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 temp_s1;
-    s32 temp_a0;
-    s32 temp_s3;
-    temp_s3 = func_00505B20();
-    func_00505AD8((arg4 == 0) ? arg0 : 4);
-    temp_s1 = (arg1 << 3) + 0x100001;
-    temp_s0 = arg0 << 6;
-    temp_a0 = temp_s0 + 0x100001;
-    temp_s0_2 = temp_s0 + temp_s1 + 1;
-    func_00506060(temp_a0, temp_s0_2);
-    func_00505F98(arg2, temp_s0_2, arg3);
-    func_00505AD8(temp_s3);
+// Under a temporarily switched owner (slot, or 4 when mode is nonzero) compute
+// two packed ids from slot and offset, pass them to func_00506060, run
+// func_00505F98 with param_a, the second id and param_b, then restore the
+// owner.
+void func_0049C400(s32 slot, s32 offset, s32 param_a, s32 param_b, s32 mode) {
+    s32 slot_bits;
+    s32 second_id;
+    s32 offset_bits;
+    s32 first_id;
+    s32 saved_owner;
+    saved_owner = func_00505B20();
+    func_00505AD8((mode == 0) ? slot : 4);
+    offset_bits = (offset << 3) + 0x100001;
+    slot_bits = slot << 6;
+    first_id = slot_bits + 0x100001;
+    second_id = slot_bits + offset_bits + 1;
+    func_00506060(first_id, second_id);
+    func_00505F98(param_a, second_id, param_b);
+    func_00505AD8(saved_owner);
 }

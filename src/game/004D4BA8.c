@@ -7,6 +7,9 @@ extern void func_0049B0D8(s32);
 extern void func_0049C4B0(s32, s32, s32, s32);
 extern void func_004D5B90(void);
 
+// Tear down the single entry: run func_0049C4B0 with the key D_2219F8 and
+// func_004D5B90, release (func_00499CE0) and clear the handles at +0x138C,
+// +0x1390, +0x1394 and +0x139C of D_31B9B8, then run func_0049B0D8.
 void func_004D4BA8(void) {
     func_0049C4B0(0, 0, D_2219F8, 0);
     func_004D5B90();
