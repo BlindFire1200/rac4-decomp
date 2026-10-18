@@ -114,6 +114,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_0067FB70`](shared/func_L00_0067FB70.c) | shared | 512 | BYTES 67/508 |
 | [`func_0015CB28`](core/func_0015CB28.c) | core | 96 | BYTES 13/96 |
 | [`func_L00_0065B218`](shared/func_L00_0065B218.c) | shared | 96 | BYTES 13/96 |
+| [`func_L01_004C45A0`](shared/func_L01_004C45A0.c) | shared | 120 | BYTES 16/116 |
 | [`func_L00_00541F08`](l00_multiplayer_menu/func_L00_00541F08.c) | l00_multiplayer_menu | 144 | BYTES 20/144 |
 | [`func_L00_00670708`](shared/func_L00_00670708.c) | shared | 112 | BYTES 15/108 |
 | [`func_L00_00705188`](shared/func_L00_00705188.c) | shared | 104 | BYTES 14/100 |
