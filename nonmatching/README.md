@@ -93,6 +93,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_0054A810`](game/func_0054A810.c) | game | 64 | BYTES 7/64 |
 | [`func_L00_00528810`](l00_multiplayer_menu/func_L00_00528810.c) | l00_multiplayer_menu | 168 | BYTES 18/164 |
 | [`func_00498890`](game/func_00498890.c) | game | 136 | BYTES 15/136 |
+| [`func_00148800`](core/func_00148800.c) | core | 180 | BYTES 20/180 |
 | [`func_0011C040`](core/func_0011C040.c) | core | 96 | BYTES 11/96 |
 | [`func_004B7558`](game/func_004B7558.c) | game | 96 | BYTES 11/96 |
 | [`func_00549C18`](game/func_00549C18.c) | game | 136 | BYTES 16/136 |
