@@ -28,6 +28,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_005190D8`](l00_multiplayer_menu/func_L00_005190D8.c) | l00_multiplayer_menu | 100 | BYTES 4/100 |
 | [`func_L01_00432D58`](shared/func_L01_00432D58.c) | shared | 528 | BYTES 21/524 |
 | [`func_L01_00468FB0`](shared/func_L01_00468FB0.c) | shared | 296 | BYTES 12/296 |
+| [`func_004E21D8`](game/func_004E21D8.c) | game | 160 | BYTES 7/160 |
 | [`func_0049B3D8`](game/func_0049B3D8.c) | game | 336 | BYTES 15/336 |
 | [`func_004A3A28`](game/func_004A3A28.c) | game | 336 | BYTES 15/336 |
 | [`func_004A52E0`](game/func_004A52E0.c) | game | 336 | BYTES 15/336 |
