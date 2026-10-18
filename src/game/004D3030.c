@@ -1,8 +1,8 @@
 #include "common.h"
 
-extern u8 D_002282EE;
+extern u8 D_0021FB2D;
 
-// Clear the byte D_002282EE.
+// Clear the byte D_0021FB2D.
 void func_004D3030(void) {
-    D_002282EE = 0;
+    D_0021FB2D = 0;
 }
