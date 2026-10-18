@@ -1,4 +1,4 @@
-/* Not matching yet: BYTES 11/956 (tools/try_func.py func_L00_00769F08 --diff). Not part of the build. */
+/* Not matching yet: BYTES 5/956 (tools/try_func.py func_L00_00769F08 --diff). Not part of the build. */
 #include "common.h"
 
 typedef struct Item {
@@ -105,8 +105,8 @@ void func_L00_00769F08(Item *arg0) {
             Item *item = pool_alloc(mgr->f400);
             if (item != 0) {
                 Entry *e = (Entry *)func_15DB80(0xD4, item);
-                e->fC8 = 1;
                 func_005C17B0(e, arg0->f20, 0xC8);
+                e->fC8 = 1;
                 {
                     s32 a = arg0->f1C;
                     s32 b = arg0->fE8;

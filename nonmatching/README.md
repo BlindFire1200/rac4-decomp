@@ -6,6 +6,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | Function | Directory | Size | What differs |
 |---|---|---|---|
 | [`func_L01_006B36F8`](shared/func_L01_006B36F8.c) | shared | 584 | BYTES 1/584 |
+| [`func_L00_00769F08`](l00_multiplayer_menu/func_L00_00769F08.c) | l00_multiplayer_menu | 960 | BYTES 5/956 |
 | [`func_L01_00468A38`](shared/func_L01_00468A38.c) | shared | 296 | BYTES 2/292 |
 | [`func_L01_00590358`](shared/func_L01_00590358.c) | shared | 1144 | BYTES 8/1144 |
 | [`func_L01_0068E830`](shared/func_L01_0068E830.c) | shared | 1048 | BYTES 8/1044 |
@@ -14,7 +15,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L08_004D1258`](shared/func_L08_004D1258.c) | shared | 120 | BYTES 1/116 |
 | [`func_L00_007023C8`](shared/func_L00_007023C8.c) | shared | 184 | BYTES 2/184 |
 | [`func_L00_0076A2C8`](l00_multiplayer_menu/func_L00_0076A2C8.c) | l00_multiplayer_menu | 912 | BYTES 10/908 |
-| [`func_L00_00769F08`](l00_multiplayer_menu/func_L00_00769F08.c) | l00_multiplayer_menu | 960 | BYTES 11/956 |
 | [`func_L01_0044AA78`](shared/func_L01_0044AA78.c) | shared | 176 | BYTES 2/172 |
 | [`func_L00_0068AC58`](shared/func_L00_0068AC58.c) | shared | 688 | BYTES 9/684 |
 | [`func_L01_0048EC90`](shared/func_L01_0048EC90.c) | shared | 80 | BYTES 1/76 |
