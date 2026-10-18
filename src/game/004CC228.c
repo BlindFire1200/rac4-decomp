@@ -11,8 +11,8 @@ void func_004CC228(void) {
     switch (state) {
     case 0: func_004CC208(); break;
     case 1: func_0049B208(owner); break;
-    case 2: func_004CC2E8(2); break;
-    case 3: func_004CC2E8(3); break;
+    case 6: func_004CC2E8(2); break;
+    case 7: func_004CC2E8(3); break;
     case 4: func_004CC2E8(0); break;
     case 5: func_004CC2E8(1); break;
     case 12: func_004CC420(); break;
