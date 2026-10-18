@@ -6,7 +6,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | Function | Directory | Size | What differs |
 |---|---|---|---|
 | [`func_L01_006B36F8`](shared/func_L01_006B36F8.c) | shared | 584 | BYTES 1/584 |
-| [`func_L00_005D3228`](shared/func_L00_005D3228.c) | shared | 240 | BYTES 1/240 |
 | [`func_L01_00468A38`](shared/func_L01_00468A38.c) | shared | 296 | BYTES 2/292 |
 | [`func_L01_00590358`](shared/func_L01_00590358.c) | shared | 1144 | BYTES 8/1144 |
 | [`func_L01_0068E830`](shared/func_L01_0068E830.c) | shared | 1048 | BYTES 8/1044 |
