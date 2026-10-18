@@ -9,15 +9,14 @@ extern TypeObj *D_3367B8[];
 extern TypeChild *D_3284A0[];
 extern s32 D_0021EDD4;
 extern s32 D_0021EDD8;
-extern s32 D_003D0FFF;
 extern void *func_0046D428(s32, s32, s32);
 
 // For each of the 10 slots of D_3367B8 whose object is missing or does not
 // match the id, copy the +0x10 word of the state at +0x24 into the +0x98 word
 // of each of its four D_3284A0 children. Then call the registered callbacks
-// (ids 0x263B and 0x265B) as the global state requires.
+// (ids 0x263B and 0x265B) as the global state D_0021EDD4 requires.
 void func_004EE000(s32 owner_id) {
-    s32 i, j, state;
+    s32 i, j;
     TypeObj *obj;
     TypeResult *r;
     for (i = 0; i < 10; i++) {
@@ -29,13 +28,11 @@ void func_004EE000(s32 owner_id) {
             }
         }
     }
-    state = D_003D0FFF;
     if (D_0021EDD4 == 0 && owner_id == -1) {
         r = func_0046D428(0x263B, 0, 0xC);
-        state = D_003D0FFF;
-        if (r != 0 && r->f8 != 0) { r->f8(); state = D_0021EDD4; }
+        if (r != 0 && r->f8 != 0) r->f8();
     }
-    if (state == 1) {
+    if (D_0021EDD4 == 1) {
         r = func_0046D428(0x265B, 0, 0x14);
         if (r != 0 && r->fC != 0) r->fC(owner_id);
     }
