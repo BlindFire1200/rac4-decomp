@@ -1,4 +1,4 @@
-/* Not matching yet: COMPILE failed (tools/try_func.py func_01EEF7E4 --diff). Not part of the build. */
+/* Not matching yet: BYTES 9/48 (tools/try_func.py func_01EEF7E4 --diff). Not part of the build. */
 /* cflags: -mno-split-addresses */
 #include "common.h"
 
@@ -17,6 +17,7 @@ struct Type1 {
 };
 
 void func_01EEF7E4(Type1 *arg0) {
+    arg0->f0 = 0;
     arg0->f24 = 0;
     arg0->f20 = 0x80000;
     arg0->f4 = 0;
@@ -26,5 +27,4 @@ void func_01EEF7E4(Type1 *arg0) {
     arg0->f14 = 0;
     arg0->f18 = 0;
     arg0->f1C = 0;
-    arg0->f0 = 0;
 }

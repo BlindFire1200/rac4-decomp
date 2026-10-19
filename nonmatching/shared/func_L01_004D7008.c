@@ -1,0 +1,37 @@
+/* Not matching yet: BYTES 39/324 (tools/try_func.py func_L01_004D7008 --diff). Not part of the build. */
+#include "common.h"
+
+typedef int u128 __attribute__((mode(TI)));
+extern f32 fabsf(f32);
+extern void *func_L00_005BD3C0(s16);
+extern void func_L00_0066AA58(void *, void *, s32);
+extern s32 func_L00_0066CC08(void *, s16);
+extern void func_L00_0066CD78(s32);
+extern void func_L01_004D6DD8(void);
+extern void func_L01_00599C28(void *, u128, void *, void *);
+extern u128 D_00222B50;
+
+void func_L01_004D7008(void *arg0) {
+    u128 local = *(u128 *)((u8 *)arg0 + 0xF0);
+    u8 *state = *(u8 **)((u8 *)arg0 + 0xAC);
+    f32 value = *(f32 *)((u8 *)arg0 + 0xF8) - *(f32 *)(state + 0x2B0);
+    *(f32 *)(state + 0x240) = value;
+    *(f32 *)((u8 *)arg0 + 0xF8) = *(f32 *)(state + 0x2B0);
+    *(f32 *)(state + 0x1A8) = *(f32 *)(state + 0x2D0);
+    *(f32 *)(state + 0x228) = *(f32 *)(state + 0x2D0);
+    *(f32 *)(state + 0x250) = *(f32 *)(state + 0x2D0);
+    if (*(u8 *)((u8 *)arg0 + 0x20) != 2) func_L01_004D6DD8();
+    if (fabsf(*(f32 *)(state + 0x240)) > 0.0f || fabsf(*(f32 *)(state + 0x244)) > 0.0f) {
+        if (*(s32 *)(state + 0x264) == -1 || func_L00_0066CC08(arg0, *(s16 *)(state + 0x264)) == 0) {
+            *(s32 *)(state + 0x264) = -1;
+            func_L00_0066AA58(state + 0x264, arg0, 4);
+        }
+    } else {
+        void *entry = func_L00_005BD3C0(*(s16 *)(state + 0x264));
+        if (entry != 0 && *(void **)((u8 *)entry + 0x1C) == arg0 && *(u8 *)((u8 *)entry + 0x10) != 0) {
+            func_L00_0066CD78(*(s32 *)(state + 0x264));
+            *(s32 *)(state + 0x264) = -1;
+        }
+    }
+    func_L01_00599C28(state + 0x50, D_00222B50, &local, (u8 *)arg0 + 0xF0);
+}
