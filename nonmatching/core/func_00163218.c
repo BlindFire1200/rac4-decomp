@@ -1,6 +1,8 @@
-/* Not matching yet: BYTES 3/116 (tools/try_func.py func_00163218 --diff). Not part of the build. */
+/* Not matching yet: BYTES 1/116 (tools/try_func.py func_00163218 --diff). Not part of the build. */
+#include "common.h"
 extern u8 D_21DC18[];
-extern u8 D_21DC20[];
+extern u8 D_21DC20;
+extern u8 D_21DC20_[];
 
 s32 func_00163218(void) {
     s32 var_a0;
@@ -12,8 +14,7 @@ s32 func_00163218(void) {
     if (D_21DC18[0] != 0) {
         goto block_3;
     }
-    var_a0 = 1;
-    if (D_21DC20[0] != 0) {
+    if (D_21DC20 != 0 ? (++var_a0, 1) : (++var_a0, 0)) {
         goto block_4;
     }
     var_a1 = 0;
@@ -27,7 +28,7 @@ block_4:
     if (D_21DC18[var_a0] != 0) {
         goto block_3;
     }
-    if (D_21DC20[var_a0] != 0) {
+    if (D_21DC20_[var_a0] != 0) {
         goto block_3;
     }
     var_a1 = var_a0;

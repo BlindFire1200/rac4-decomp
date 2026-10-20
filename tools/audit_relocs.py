@@ -192,7 +192,7 @@ class Checker:
         gp0 = struct.unpack("<i", reginfo.data()[20:24])[0] if reginfo else 0
 
         def resolve(sym, off):
-            """address of sym + off, or ('infer', section index), or None"""
+            """address of sym + off, or ('infer', section index, offset), or None"""
             shn = sym["st_shndx"]
             if sym["st_info"]["type"] == "STT_SECTION" or (isinstance(shn, int) and NAME.fullmatch(sym.name) is None):
                 base = 0 if sym["st_info"]["type"] == "STT_SECTION" else sym["st_value"]
@@ -206,7 +206,7 @@ class Checker:
                 if cands:
                     d = max(cands, key=lambda d: d[0])
                     return d[2] + o - d[0]
-                return ("infer", shn)
+                return ("infer", shn, o)
             a = name_addr(sym.name)
             if a is None:
                 a = self.lib_syms.get(sym.name)
@@ -217,7 +217,9 @@ class Checker:
                 return
             self.checked += 1
             if isinstance(ours, tuple):
-                inferred.setdefault(ours[1], {}).setdefault(ret, []).append((f, off, typ, sym))
+                # the section's base this relocation implies: retail's address minus our offset
+                base = (ret - ours[2]) & 0xFFFFFFFF
+                inferred.setdefault(ours[1], {}).setdefault(base, []).append((f, off, typ, sym))
                 return
             if ours is None:
                 self.unresolved.append({"function": f[3], "offset": off - f[0], "type": typ, "symbol": sym.name})
