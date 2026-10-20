@@ -35,6 +35,7 @@ have been logged. --no-budget skips both, for tools that re-check results.
 and BUDGET: two agents trying the same function side by side.
 """
 from __future__ import annotations
+import os
 import shutil
 import struct
 import subprocess
@@ -81,7 +82,9 @@ def source_text(name: str, candidate: str) -> str:
 
 
 def in_container() -> bool:
-    return shutil.which("wine") is not None
+    """True where the compiler runs without starting the container: inside it
+    (wine on PATH), or natively on Windows (Git Bash)."""
+    return shutil.which("wine") is not None or os.name == "nt"
 
 
 def compile_all(jobs: list[tuple[Path, Path, list[str]]], work: Path) -> None:
@@ -91,10 +94,11 @@ def compile_all(jobs: list[tuple[Path, Path, list[str]]], work: Path) -> None:
     for src, obj, flags in jobs:
         obj.unlink(missing_ok=True)
         log = obj.with_suffix(".log")
-        lines.append(f"bash tools/cc.sh {src.relative_to(ROOT)} {obj.relative_to(ROOT)} "
-                     f"{' '.join(flags)} > {log.relative_to(ROOT)} 2>&1")
+        # as_posix: on Windows relative_to() gives backslashes, which bash reads as escapes
+        lines.append(f"bash tools/cc.sh {src.relative_to(ROOT).as_posix()} {obj.relative_to(ROOT).as_posix()} "
+                     f"{' '.join(flags)} > {log.relative_to(ROOT).as_posix()} 2>&1")
     script.write_text("\n".join(lines) + "\n")
-    cmd = ["bash", str(script.relative_to(ROOT))]
+    cmd = ["bash", script.relative_to(ROOT).as_posix()]
     if not in_container():
         cmd = ["bash", "tools/docker/run.sh"] + cmd
     subprocess.run(cmd, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

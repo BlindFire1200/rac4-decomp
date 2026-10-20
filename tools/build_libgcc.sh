@@ -6,9 +6,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export WINEDEBUG=-all
+# Windows (Git Bash) runs the 32-bit .exe directly; elsewhere it goes through Wine.
+WINE=$(command -v wine >/dev/null 2>&1 && echo wine || true)
 BIN24=toolchain/sn-prodg-24/local/sce/ee/gcc/bin
-CC_LIBGCC="wine $BIN24/ee-gcc.exe"
-CC_TEXT="wine $BIN24/ee-gcc2953.exe"
+CC_LIBGCC="$WINE $BIN24/ee-gcc.exe"
+CC_TEXT="$WINE $BIN24/ee-gcc2953.exe"
 FLAGS="-O2 -G2 -S"
 FP_DEFS="-DFLOAT_BIT_ORDER_MISMATCH -DNO_DENORMALS -DUS_SOFTWARE_GOFAST"
 out=build/libgcc; rm -rf "$out"; mkdir -p "$out"

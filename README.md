@@ -119,6 +119,8 @@ level code* instead).
 ### Prerequisites
 - **Linux & macOS**: [Docker](https://www.docker.com/) or [Podman](https://podman.io/) (uses the prebuilt Wine container via GitHub Container Registry), and Python 3.10+.
 - **Windows**: Git Bash, Python 3.10+, and community toolchain mirrors.
+  The compilers run natively (no Wine or container needed). The venv's interpreter is
+  `venv/Scripts/python.exe`: use it wherever these docs say `venv/bin/python`.
 
 ### Setup & Build
 

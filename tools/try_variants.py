@@ -9,6 +9,7 @@ compiled with the matching compiler (SN GCC 2.95.3 v1.36 -O2 -G8 -fopt-stack) in
 container, then every function is compared with retail like tools/audit_matches.py.
 """
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -26,8 +27,11 @@ def main() -> int:
     out = ROOT / "build" / "try.o"
     cc = "toolchain/sn-prodg-3.01/usr/local/sce/ee/gcc/bin/ee-gcc2953.exe"
     script = ROOT / "build" / "try.sh"
-    script.write_text("export WINEDEBUG=-all\nwine %s -O2 -G8 -fopt-stack -mno-check-zero-division %s -Iinclude -c %s -o build/try.o 2>&1 | grep -v warning | grep -v 'In function'\n" % (cc, os.environ.get("EXTRA", ""), src))
-    subprocess.run(["bash", str(ROOT / "tools" / "docker" / "run.sh"), "bash", "build/try.sh"], cwd=ROOT)
+    # Windows (Git Bash) runs the .exe directly; elsewhere it goes through Wine
+    script.write_text("export WINEDEBUG=-all\nWINE=$(command -v wine >/dev/null 2>&1 && echo wine || true)\n$WINE %s -O2 -G8 -fopt-stack -mno-check-zero-division %s -Iinclude -c %s -o build/try.o 2>&1 | grep -v warning | grep -v 'In function'\n" % (cc, os.environ.get("EXTRA", ""), Path(src).as_posix()))
+    native = os.name == "nt" or shutil.which("wine") is not None
+    cmd = ["bash", "build/try.sh"] if native else ["bash", "tools/docker/run.sh", "bash", "build/try.sh"]
+    subprocess.run(cmd, cwd=ROOT)
     sizes = {}
     for l in (ROOT / "config" / "functions.tsv").read_text().splitlines()[1:]:
         n, a, s, _ = l.split("\t")
