@@ -1,6 +1,6 @@
 #include "common.h"
 
-// True for no moby; false if pvar+0x3B is set or the moby at +0xB8 is in state 5 below 100;
+// True for no moby; false if pvar+0x3B is set or the moby at +0xB8 is in state 5 below 120;
 // otherwise the opposite of func_L01_004EFC68.
 
 typedef struct Type3 {
@@ -34,7 +34,7 @@ s32 func_L01_004EFD50(Type1 *arg0) {
         return 0;
     }
     other = arg0->fB8;
-    if (other->f20 == 5 && other->f6A < 100) {
+    if (other->f20 == 5 && other->f6A < 120) {
         return 0;
     }
     return func_L01_004EFC68(arg0) == 0;
