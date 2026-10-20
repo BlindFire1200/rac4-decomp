@@ -1,6 +1,6 @@
 #include "common.h"
 
-// Store arg1 at pvar+0x5C, set pvar+0x50 to 250, put the moby in state 3 and set its +0x30 to 0xFF.
+// Store arg1 at pvar+0x5C, set pvar+0x50 to 300, put the moby in state 3 and set its +0x30 to 0xFF.
 
 typedef struct Type2 {
     char _p0[0x50];
@@ -23,6 +23,6 @@ void func_L41_003BBFE8(Type1 *arg0, s32 arg1) {
 
     p->f5C = arg1;
     arg0->f20 = 3;
-    p->f50 = 250;
+    p->f50 = 300;
     arg0->f30 = 0xFF;
 }
