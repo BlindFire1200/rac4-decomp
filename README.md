@@ -47,16 +47,16 @@ A function counts as matched on a version when its C, built with its file's own 
 <!-- progress:begin SCUS_974.65 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,427 of 8,948 | 90,328 of 2,193,280 bytes (4.12%) | 4.34% |
-| Engine core (core.text) | 342 of 1,637 | 8,100 of 280,336 bytes (2.89%) | 3.49% |
+| **Main program** | 1,453 of 8,948 | 91,416 of 2,193,280 bytes (4.17%) | 4.39% |
+| Engine core (core.text) | 343 of 1,637 | 8,132 of 280,336 bytes (2.90%) | 3.50% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
 | Network (net.text) | 199 of 2,441 | 4,112 of 465,620 bytes (0.88%) | 1.05% |
-| Resident menus (.text) | 830 of 4,785 | 63,420 of 1,416,576 bytes (4.48%) | 4.65% |
+| Resident menus (.text) | 855 of 4,785 | 64,476 of 1,416,576 bytes (4.55%) | 4.72% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
-| **Shared level code** | 981 of 5,076 | 78,880 of 1,980,204 bytes (3.98%) | 4.61% |
-| **Level-specific code** | 497 of 4,061 | 56,856 of 1,608,940 bytes (3.53%) | 4.21% |
-| Level 00: Multiplayer Menu | 376 of 2,798 | 40,912 of 943,140 bytes (4.34%) | 5.20% |
+| **Shared level code** | 1,009 of 5,076 | 79,804 of 1,980,204 bytes (4.03%) | 4.65% |
+| **Level-specific code** | 511 of 4,061 | 57,876 of 1,608,940 bytes (3.60%) | 4.27% |
+| Level 00: Multiplayer Menu | 389 of 2,798 | 41,916 of 943,140 bytes (4.44%) | 5.30% |
 | Level 01: Dreadzone Station (and 21) | 26 of 356 | 2,856 of 188,848 bytes (1.51%) | 1.51% |
 | Level 02: Catacrom Graveyard (and 22) | 2 of 35 | 124 of 26,596 bytes (0.47%) | 0.47% |
 | Level 04: Sarathos Swamp (and 24) | 2 of 19 | 196 of 11,708 bytes (1.67%) | 1.67% |
@@ -69,10 +69,10 @@ A function counts as matched on a version when its C, built with its file's own 
 | Level 13: Maraxus Prison (and 33) | 2 of 34 | 280 of 16,916 bytes (1.66%) | 1.66% |
 | Level 14: Ghost Station (and 34) | 1 of 29 | 128 of 14,548 bytes (0.88%) | 0.88% |
 | Level 15: Control Level (and 35) | 9 of 135 | 704 of 116,368 bytes (0.60%) | 0.60% |
-| Level 41: Battledome Tower (all 22 multiplayer maps) | 65 of 374 | 10,504 of 139,984 bytes (7.50%) | 9.37% |
-| **Total** | 2,905 of 18,085 | 226,064 of 5,782,424 bytes (3.91%) | 4.39% |
+| Level 41: Battledome Tower (all 22 multiplayer maps) | 66 of 374 | 10,520 of 139,984 bytes (7.52%) | 9.38% |
+| **Total** | 2,973 of 18,085 | 229,096 of 5,782,424 bytes (3.96%) | 4.45% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 90,328 bytes (1.56%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 91,416 bytes (1.58%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 **PAL (`SCES_532.85`)**
@@ -80,16 +80,16 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 <!-- progress:begin SCES_532.85 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,415 of 8,945 | 89,844 of 2,202,512 bytes (4.08%) | 4.29% |
-| Engine core (core.text) | 342 of 1,641 | 8,100 of 280,488 bytes (2.89%) | 3.49% |
+| **Main program** | 1,441 of 8,945 | 90,932 of 2,202,512 bytes (4.13%) | 4.34% |
+| Engine core (core.text) | 343 of 1,641 | 8,132 of 280,488 bytes (2.90%) | 3.50% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
 | Network (net.text) | 199 of 2,441 | 4,112 of 465,620 bytes (0.88%) | 1.05% |
-| Resident menus (.text) | 821 of 4,786 | 63,740 of 1,422,048 bytes (4.48%) | 4.63% |
+| Resident menus (.text) | 846 of 4,786 | 64,796 of 1,422,048 bytes (4.56%) | 4.71% |
 | frontbin's own code | 0 of 17 | 0 of 15,776 bytes (0.00%) | 0.00% |
-| **Shared level code** | 950 of 5,088 | 74,668 of 2,008,520 bytes (3.72%) | 4.33% |
-| **Level-specific code** | 489 of 4,080 | 52,368 of 1,601,892 bytes (3.27%) | 3.84% |
-| Level 00: Multiplayer Menu | 372 of 2,826 | 36,996 of 943,820 bytes (3.92%) | 4.60% |
+| **Shared level code** | 978 of 5,088 | 75,592 of 2,008,520 bytes (3.76%) | 4.38% |
+| **Level-specific code** | 503 of 4,080 | 53,388 of 1,601,892 bytes (3.33%) | 3.90% |
+| Level 00: Multiplayer Menu | 385 of 2,826 | 38,000 of 943,820 bytes (4.03%) | 4.70% |
 | Level 01: Dreadzone Station (and 21) | 25 of 357 | 2,716 of 189,772 bytes (1.43%) | 1.43% |
 | Level 02: Catacrom Graveyard (and 22) | 2 of 29 | 124 of 21,232 bytes (0.58%) | 0.58% |
 | Level 04: Sarathos Swamp (and 24) | 2 of 19 | 196 of 11,868 bytes (1.65%) | 1.65% |
@@ -102,10 +102,10 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Level 13: Maraxus Prison (and 33) | 2 of 34 | 280 of 15,996 bytes (1.75%) | 1.75% |
 | Level 14: Ghost Station (and 34) | 1 of 23 | 128 of 8,884 bytes (1.44%) | 1.44% |
 | Level 15: Control Level (and 35) | 9 of 134 | 704 of 116,624 bytes (0.60%) | 0.60% |
-| Level 41: Battledome Tower (all 22 multiplayer maps) | 63 of 374 | 10,096 of 140,340 bytes (7.19%) | 9.05% |
-| **Total** | 2,854 of 18,113 | 216,880 of 5,812,924 bytes (3.73%) | 4.18% |
+| Level 41: Battledome Tower (all 22 multiplayer maps) | 64 of 374 | 10,112 of 140,340 bytes (7.21%) | 9.06% |
+| **Total** | 2,922 of 18,113 | 219,912 of 5,812,924 bytes (3.78%) | 4.23% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 89,844 bytes (1.55%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 90,932 bytes (1.56%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 </details>
