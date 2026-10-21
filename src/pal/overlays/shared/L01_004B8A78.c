@@ -16,7 +16,7 @@ typedef struct Type1 {
     Type2 *fAC;
 } Type1;
 
-extern void func_L01_00591BD8(Type1 *arg0, s32 arg1, s32 arg2);
+extern void func_00474368(Type1 *arg0, s32 arg1, s32 arg2);
 
 void func_L01_004B8A78(Type1 *arg0) {
     Type2 *p = arg0->fAC;
@@ -24,8 +24,8 @@ void func_L01_004B8A78(Type1 *arg0) {
     p->f5E4 = 50;
     p->f5EA = -1;
     if (p->f60D != 0) {
-        func_L01_00591BD8(arg0, 6, -1);
+        func_00474368(arg0, 6, -1);
     } else {
-        func_L01_00591BD8(arg0, 0x17, -1);
+        func_00474368(arg0, 0x17, -1);
     }
 }

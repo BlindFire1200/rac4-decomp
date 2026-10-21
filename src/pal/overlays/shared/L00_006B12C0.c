@@ -1,9 +1,9 @@
 #include "common.h"
 
-extern void func_005EBBE8(s32, void *);
-extern void func_L00_005E3648(s32, s32, s32, s32);
-extern void func_L00_005E3660(s32, s32 *, s32 *, s32 *);
-extern void func_L00_006ADA40(u8 *);
+extern void func_L00_005EE5E8(s32, void *);
+extern void func_00470990(s32, s32, s32, s32);
+extern void func_004709A8(s32, s32 *, s32 *, s32 *);
+extern void func_L00_006B1260(u8 *);
 
 // While in state 0x7F/0x90/0x81 for under 25 frames, save the object's +0x38 and flash its colour; restore it afterwards.
 void func_L00_006B12C0(u8 *player) {
@@ -21,7 +21,7 @@ void func_L00_006B12C0(u8 *player) {
             *(s64 *)(player + 0x2DE0) = *(s64 *)(*(s32 *)(player + 0x2EF0) + 0x38);
             *(s32 *)(player + 0x2DE8) = 1;
         }
-        func_L00_005E3660(*(s32 *)(player + 0x2EF0), &r, &g, &b);
+        func_004709A8(*(s32 *)(player + 0x2EF0), &r, &g, &b);
         if (*(s32 *)(player + 0x370) % 4 < 3) {
             r = 0;
             g = 0;
@@ -31,11 +31,11 @@ void func_L00_006B12C0(u8 *player) {
             g = 0x90;
             b = 0xF0;
         }
-        func_L00_005E3648(*(s32 *)(player + 0x2EF0), r, g, b);
-        func_L00_006ADA40(player);
+        func_00470990(*(s32 *)(player + 0x2EF0), r, g, b);
+        func_L00_006B1260(player);
     } else if (*(s32 *)(player + 0x2DE8) != 0) {
         *(s64 *)(*(s32 *)(player + 0x2EF0) + 0x38) = *(s64 *)(player + 0x2DE0);
         *(s32 *)(player + 0x2DE8) = 0;
     }
-    func_005EBBE8(*(s32 *)(player + 0x2EF0), player + 0x2EBC);
+    func_L00_005EE5E8(*(s32 *)(player + 0x2EF0), player + 0x2EBC);
 }
