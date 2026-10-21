@@ -72,15 +72,15 @@ to check a match against. Every name in `src/` is your own work
 ## Commits and pull requests
 
 - Small, focused commits: one function or one tool change.
-- Run the build, the audit and `tools/gen_progress_report.py --check` before
+- Run the build, the audit, `tools/gen_progress_report.py --check` and `tools/progress.py --check` before
   pushing.
 - Commit messages: a short summary line, then an optional body. Add
   `Co-Authored-By:` for anyone (or any tool) who helped, and nothing else
   tool-specific: no session links.
 - Never commit retail data: `asm/`, `assets/`, `baserom/`, `build/`, `venv/`,
   `toolchain/` and `private/` are ignored by git.
-- CI (`.github/workflows/progress.yml`) checks and uploads
-  `progress/report.json` to [decomp.dev](https://decomp.dev/OpenRAC/rac-deadlocked-decomp).
+- CI (`.github/workflows/progress.yml`) checks and uploads the PAL report
+  `progress/report.json` to [ByteMatch](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp).
   It cannot build the game, so the report is generated on your machine.
 
 For LLM agents, [`docs/AGENT_WORKFLOW.md`](docs/AGENT_WORKFLOW.md) describes

@@ -1,4 +1,12 @@
-# Level overlays
+# Level overlays (NTSC-U)
+
+> [!NOTE]
+> The project's target is now the PAL disc (`SCES_532.85`): its 47 level programs, read straight
+> from the disc, their byte-identical build and how their functions are counted are in
+> [`levels.md`](levels.md), which also explains how the totals below became the PAL ones. This
+> page describes the US overlays (from a wrench unpack of the NTSC-U disc) that the C in
+> `src/overlays/` was matched against; `tools/audit_matches.py` and the US report
+> (`progress/us/report.json`) still use them.
 
 Every level of the game carries its own build of the level code: an overlay
 loaded over the resident image when the level starts. This page describes what

@@ -173,11 +173,27 @@ Each level carries its own program: its code, data and dispatch tables, loaded o
    python3 tools/gen_progress_report.py
    ```
 
+### The PAL target
+
+The PAL disc's programs are read from your own `baserom/SCES_532.85.iso` (expected SHA-1s in
+`config/programs.tsv` and `config/levels/levels.tsv`), built from their assembly, and counted
+([`docs/levels.md`](docs/levels.md)):
+
+```bash
+python3 tools/levels.py dump                        # baserom/SCES_532.85(.elf), baserom/pal/
+python3 tools/build_levels.py --asm -P 16           # 49 targets, one MATCH each (ee-as/ee-ld; Linux, or the container)
+JOBS=16 bash tools/docker/run.sh bash tools/build.sh   # then build_libgcc.sh, build_libm.sh
+python3 tools/pal_map.py --write                    # where src/ matches on PAL
+python3 tools/progress.py --write                   # progress/report.json and the table above
+python3 tools/check_pal.py func_L01_XXXXXXXX try.c  # one function against its PAL bytes
+```
+
 For detailed documentation:
 - [`docs/WORKFLOW.md`](docs/WORKFLOW.md) – Setup in full, and the step-by-step function matching guide
 - [`docs/TOOLCHAIN.md`](docs/TOOLCHAIN.md) – Compiler, flags, assembler passes, libraries and the container
 - [`docs/RESEARCH.md`](docs/RESEARCH.md) – How the retail executable is packed and taken apart
-- [`docs/OVERLAYS.md`](docs/OVERLAYS.md) – The 47 level overlays and how they are split and counted
+- [`docs/levels.md`](docs/levels.md) – The PAL disc's programs, their build, how the functions are counted, and the old against the new totals
+- [`docs/OVERLAYS.md`](docs/OVERLAYS.md) – The 47 US level overlays the existing C was matched against
 
 ---
 
@@ -197,6 +213,7 @@ This project builds upon years of dedicated reverse-engineering research and too
 
 - **GFI (Game Fuckery Inc.)** – Special thanks to the GFI Discord community for years of reverse engineering, game research, and technical insights that made this decompilation possible.
 - **[rac1-decomp](https://github.com/OpenRAC/rac1-decomp)** – Repository layout, README, progress workflow and report generator, toolchain notes, the libgcc build recipe, and `tools/ps2eeas_nops.py` / `tools/ps2eeas_dli.py` (the nops and constant sequences of SN's assembler).
+- **[rac3-uya-decomp-pal](https://github.com/OpenRAC/rac3-uya-decomp-pal)** – The PAL treatment this repository follows: reading the levels from the disc, the function inventory (rac1-decomp's rules), the catalogue and the report (`tools/inventory.py`, `tools/level_catalogue.py`, `tools/progress.py` are adapted from it).
 - **[rac3-uya-decomp](https://github.com/OpenRAC/rac3-uya-decomp)** by vetusmagnus – *Up Your Arsenal*, the closest engine relative. Compiler research (SN ee-gcc 2.95.3 v1.36) and the `-fopt-stack`, `-G8` and global-declaration findings.
 - **[OpenRAC](https://github.com/OpenRAC/OpenRAC)** – Status of Deadlocked, sourcing policy, and the sibling decompilations of the engine family.
 - **[Lombyte](https://github.com/mateuszklysz/Lombyte)** by mateuszklysz – R&C1 NTSC decomp, checked for Deadlocked coverage (none).
@@ -206,7 +223,7 @@ This project builds upon years of dedicated reverse-engineering research and too
   - [splat](https://github.com/ethteck/splat) & [spimdisasm](https://github.com/Decompollaborate/spimdisasm) – Binary splitting and MIPS disassembly.
   - [m2c](https://github.com/matt-kempster/m2c) & [asm-differ](https://github.com/simonlindholm/asm-differ) – Assembly-to-C translation and diffing.
   - [objdiff](https://github.com/encounter/objdiff) – Object diffing tool.
-  - [decomp.dev](https://decomp.dev) & [decomp.wiki](https://decomp.wiki) – Progress tracking and decompilation knowledge base.
+  - [ByteMatch](https://bytematch.dev), [decomp.dev](https://decomp.dev) & [decomp.wiki](https://decomp.wiki) – Progress tracking and decompilation knowledge base.
   - [AngheloAlf](https://github.com/AngheloAlf) – PS2 toolchain mirrors.
 
 ---

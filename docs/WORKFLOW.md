@@ -155,8 +155,11 @@ python3 tools/gen_progress_report.py
 python3 tools/gen_progress_report.py --check
 ```
 
-Commit the regenerated `progress/report.json` together with your source. CI
-(`.github/workflows/progress.yml`) runs `--check` and fails if the report
+Commit the regenerated `progress/us/report.json` together with your source,
+and the PAL count too (`python3 tools/pal_map.py --write` and
+`python3 tools/progress.py --write`, `docs/levels.md`: `config/pal_map.tsv`,
+`progress/report.json`, the README table). CI
+(`.github/workflows/progress.yml`) runs `tools/progress.py --check` and fails if the PAL report
 disagrees with `src/`; it cannot build the game, so the report always comes from
 your machine.
 
@@ -182,5 +185,6 @@ names from any other source ([`LEGAL.md`](../LEGAL.md)).
 | `.claude/agents/` | The worker agent used by waves ([`AGENT_WORKFLOW.md`](AGENT_WORKFLOW.md)) |
 | `docs/` | This guide, the toolchain, research notes, the overlays, levers, near misses, the agent workflow |
 | `notes/` | Notes on single functions |
-| `progress/report.json` | objdiff-format progress report read by decomp.dev |
+| `progress/report.json` | the PAL (`SCES_532.85`) objdiff-format progress report CI publishes (`tools/progress.py`) |
+| `progress/us/report.json` | the NTSC-U count (`tools/gen_progress_report.py`) |
 | `baserom/`, `asm/`, `assets/`, `build/`, `toolchain/`, `venv/`, `private/` | Local only, never committed |
