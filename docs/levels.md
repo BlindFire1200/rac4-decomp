@@ -298,6 +298,26 @@ On PAL the addresses differ: PAL names read the same as US ones but are other fu
 written against PAL goes in **`src/pal/`** under its PAL name (`tools/match_map.py --version pal`
 checks it there, the US audit and the US map leave it out).
 
+New US C goes where its kind of code lives: `src/core/ADDR.c`, `src/net/ADDR.c`,
+`src/game/ADDR.c` (the menu `.text`), `src/frontbin/FB_ADDR.c` (`func_FB_ADDR`),
+`src/overlays/shared/LNN_ADDR.c` and `src/overlays/lNN_<slug>/LNN_ADDR.c`. A function that the
+old lists (`config/functions.tsv`, `config/overlay_functions.tsv`) do not have is checked by
+`tools/match_map.py` at its catalogue place on the US disc (`match` or `nomatch`) and found by its
+code on PAL; `tools/audit_matches.py` lists such names and leaves them to it. The map is the
+proof on each disc; the audit is the old per-function check of the listed names (it reads the
+US overlays from `private/overlays` or, without a wrench unpack, from `baserom/us/levels/`).
+
+Landing new C (after `tools/build.sh`, `build_libgcc.sh`, `build_libm.sh`):
+
+    python3 tools/match_map.py --write && python3 tools/match_map.py --version pal --write
+    python3 tools/inventory.py --write && python3 tools/level_catalogue.py && python3 tools/match_map.py --write
+    python3 tools/inventory.py --version pal --write && python3 tools/level_catalogue.py --version pal && python3 tools/match_map.py --version pal --write
+    python3 tools/progress.py --write && python3 tools/progress.py --version pal --write
+    python3 tools/progress.py --check && python3 tools/progress.py --version pal --check
+
+(The second and third lines matter only when a match moves a cut: run them until the tables stop
+changing; then commit `config/us/`, `config/pal/`, both reports and the README with the C.)
+
 For a worker (US by default; add `--version pal` for PAL):
 
     python3 tools/asm_programs.py main level_01 ...                    # asm/us/... once, from the dumps

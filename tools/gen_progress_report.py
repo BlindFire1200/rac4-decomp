@@ -38,7 +38,7 @@ REPORT = ROOT / "build" / "legacy_report.json"
 FUNCTIONS = ROOT / "config" / "functions.tsv"
 MATCHES = ROOT / "build" / "matches.json"
 
-DEF_RE = re.compile(r"^[A-Za-z_][\w \t\*]*?\b(func_(?:L\d\d_)?[0-9A-F]{8})\s*\(.*\)\s*\{?\s*$", re.M)
+DEF_RE = re.compile(r"^[A-Za-z_][\w \t\*]*?\b(func_(?:L\d\d_|FB_)?[0-9A-F]{8})\s*\(.*\)\s*\{?\s*$", re.M)
 
 # Progress categories shown on decomp.dev.
 CATEGORIES = [
