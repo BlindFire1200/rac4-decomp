@@ -1,41 +1,40 @@
 #!/usr/bin/env python3
-"""pal_map.py: where each function of src/ is on the PAL disc, and whether its C matches there.
+"""match_map.py: where each function of src/ is on one disc, and whether its C matches there.
 
-    python3 tools/pal_map.py --write     # config/pal_map.tsv from a build (needs the dumps)
-    python3 tools/pal_map.py --check     # every src/ function and near miss has a row (CI)
+    python3 tools/match_map.py [--version us|pal] --write   # config/<version>/map.tsv from a build (needs the dumps)
+    python3 tools/match_map.py [--version us|pal] --check   # every src/ function and near miss has a row (CI)
 
-The C in src/ was matched against the NTSC-U executable (SCUS_974.65) and its level overlays:
-it is named by US addresses (func_XXXXXXXX, func_LNN_XXXXXXXX) and checked by
-tools/audit_matches.py, which stays as it is. For the PAL report each source function is
-looked up in the PAL programs (tools/levels.py dump):
+The C in src/ is named by US addresses (func_XXXXXXXX, func_LNN_XXXXXXXX: the US executable's
+and the US overlays' addresses, config/functions.tsv, config/overlay_functions.tsv) and checked
+function by function by tools/audit_matches.py, which stays as it is. For each version's report
+every source function is looked up in that disc's programs (tools/levels.py dump):
 
   - its compiled code (build/obj/, build/libgcc/, build/libm/: tools/build.sh,
-    build_libgcc.sh, build_libm.sh, the file's own flags) is searched for in the PAL section
-    that holds its kind of code (core.text for core, libgcc and libm; net.text; the resident
-    menu .text, then frontbin's; for a level function the level programs, its own level's
-    first), comparing words with only the fields its object relocates masked (retail.fields(),
-    as tools/audit_matches.py compares with the US bytes: constants and offsets must be equal);
-  - where it is found it is `match` (a find where the inventory starts a function of its size
-    first, then where it starts one, then a single find inside one: the inventory then takes
-    the C's start and end as proven), with the PAL place(s): program, section, address and size,
-    and the PAL catalogue name of the function there (config/inventory.tsv for the main image
-    and frontbin, config/levels/functions.tsv for the levels). When identical code is found in
-    several places of one section, the one nearest the address the unique finds around it
-    predict is kept;
-  - where it is not found it is `ntsc`: the C matches the US build only (a PAL constant
-    differs, 50 Hz against 60 Hz, a field moved, the code changed). Its C stays in src/.
-  - C in src/pal/ is written against PAL under its PAL catalogue name (tools/check_pal.py): it
-    is `match` when it builds to the bytes of that function, else `nomatch` (it should not
-    be in src/ then);
-  - a near miss (nonmatching/**/func_*.c) is `near`: the PAL function whose code (the US
-    function's retail bytes, tools/retail.py normalise()) is the same as the US function's,
-    with the near miss's closeness (its verdict, tools/nonmatching.py) carried over; `none` when
-    the PAL code differs.
+    build_libgcc.sh, build_libm.sh, the file's own flags) is searched for in the section that
+    holds its kind of code (core.text for core, libgcc and libm; net.text; the resident menu
+    .text, then frontbin's; for a level function the level programs, its own level's first),
+    comparing words with only the fields its object relocates masked (retail.fields(), as
+    tools/audit_matches.py does: constants and offsets must be equal);
+  - where it is found it is `match`, with the place(s) (program, section, address, size) and the
+    catalogue name of the function there (config/<version>/inventory.tsv for the main image and
+    frontbin, functions.tsv for the levels). Which find: on the US disc the one at the address
+    its name gives first; then one where the inventory starts a function of its size, then
+    where it starts one, then a single find inside one (the inventory then takes the C's start
+    and end as proven). When identical code is in several places of one section, the one
+    nearest the address the unique finds around it predict is kept;
+  - where it is not found it is `differs`: the C builds to the other version's bytes only (on
+    PAL: a 50 Hz constant against 60 Hz, a field moved, the code changed). Its C stays in src/.
+  - C in src/pal/ is written against PAL under its PAL catalogue name (tools/check_func.py
+    --version pal): on PAL it is `match` when it builds to the bytes of that function, else
+    `nomatch`; on the US disc it is `other` (not a US function);
+  - a near miss (nonmatching/**/func_*.c) is `near`: the function whose code is the US function's
+    (its US retail bytes, tools/retail.py normalise(), same size), with the near miss's closeness
+    (its verdict, rac1-decomp's closeness()) as its fuzzy match; `none` when no function has it.
 
-config/pal_map.tsv (committed: names, addresses, sizes; no bytes): US name, source file,
-status, PAL names (comma-separated), PAL places (program:section:address:size, comma-separated),
-closeness (percent; 100 for a match). tools/progress.py counts from it without the disc, and
-tools/inventory.py takes a matched place's start and end as proven.
+config/<version>/map.tsv (committed: names, addresses, sizes; no bytes): source name, source
+file, status, catalogue names, places (program:section:address:size), closeness (percent; 100
+for a match). tools/progress.py counts from it without the disc, and tools/inventory.py takes a
+matched place's start and end as proven.
 """
 import argparse
 import bisect
@@ -48,19 +47,20 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-MAP = os.path.join(ROOT, "config", "pal_map.tsv")
 NAME = re.compile(r"^func_(?:(L\d\d)_)?([0-9A-F]{8})$")
 DEF_RE = re.compile(r"^[A-Za-z_][\w \t\*]*?\b(func_(?:L\d\d_)?[0-9A-F]{8})\s*\(.*\)\s*\{?\s*$", re.M)
-HEAD = """# Each function of src/ (and each near miss in nonmatching/) on the PAL disc (tools/pal_map.py --write):
-# US name (a PAL name for src/pal/), source file, status (match: its C builds to the PAL bytes; ntsc: to the
-# US bytes only; nomatch: src/pal/ C that does not build to its PAL function;
-# near: a near miss of a PAL function; none: a near miss whose function differs on PAL), PAL
-# names, PAL places (program:section:address:size), closeness (percent).
+HEAD = """# Each function of src/ (and each near miss in nonmatching/) on the %s disc (tools/match_map.py --write):
+# source name (US names; PAL names in src/pal/), source file, status (match: its C builds to this disc's bytes;
+# differs: to the other version's only; nomatch: src/pal/ C that does not build to its PAL function; other:
+# src/pal/ C on the US disc; near: a near miss of a function here; none: a near miss of no function here),
+# catalogue names, places (program:section:address:size), closeness (percent).
 """
 
 
-def read_map(path=MAP):
-    """[{name, file, status, pal: [names], places: [(program, section, address, size)], closeness}]"""
+def read_map(path=None):
+    """[{name, file, status, names: [catalogue names], places: [(program, section, address, size)], closeness}]"""
+    import levels
+    path = path or levels.cfg("map.tsv")
     out = []
     if not os.path.exists(path):
         return out
@@ -72,7 +72,7 @@ def read_map(path=MAP):
         for p in places.split(",") if places != "-" else []:
             prog, sec, a, sz = p.split(":")
             pl.append((prog, sec, int(a, 16), int(sz)))
-        out.append({"name": n, "file": f, "status": st, "pal": [] if pal == "-" else pal.split(","),
+        out.append({"name": n, "file": f, "status": st, "names": [] if pal == "-" else pal.split(","),
                     "places": pl, "closeness": float(close)})
     return out
 
@@ -146,8 +146,8 @@ def compiled():
 
 # --- the PAL programs ---------------------------------------------------------------
 
-class Pal:
-    """The PAL code sections and the names of their functions."""
+class Disc:
+    """The selected disc's code sections and the names of their functions."""
 
     def __init__(self):
         import inventory as inv
@@ -211,7 +211,7 @@ class Pal:
         return out
 
 
-def search_order(name, us_seg, pal):
+def search_order(name, us_seg, disc):
     """[(program, section)] to look in for a US function, best first, in groups: the first
     group with a find wins."""
     m = NAME.match(name)
@@ -221,10 +221,10 @@ def search_order(name, us_seg, pal):
         return [[("main", "net.text")]]
     if us_seg == "text":
         return [[("main", ".text")], [("frontbin", ".text")],
-                [("level_%02d" % n, ".text") for n in pal.levels]]
+                [("level_%02d" % n, ".text") for n in disc.levels]]
     lv = int(m.group(1)[1:])
-    own = pal.copy_of.get(lv, lv)
-    return [[("level_%02d" % own, ".text")], [("level_%02d" % n, ".text") for n in pal.levels if n != own],
+    own = disc.copy_of.get(lv, lv)
+    return [[("level_%02d" % own, ".text")], [("level_%02d" % n, ".text") for n in disc.levels if n != own],
             [("main", ".text")]]
 
 
@@ -265,16 +265,16 @@ def resolve(hits_by_name, info):
     return out
 
 
-def near_places(near, info, pal):
+def near_places(near, info, disc):
     """{US name: (key, address, closeness)} for the near misses whose US function's code is a PAL
     function's (retail.normalise() equal, same size)."""
     import layout
     import retail
     idx = collections.defaultdict(list)
-    for (prog, sec, a), (nm, size) in pal.names.items():
-        if (prog, sec) not in pal.sections:
+    for (prog, sec, a), (nm, size) in disc.names.items():
+        if (prog, sec) not in disc.sections:
             continue
-        base, data = pal.sections[(prog, sec)]
+        base, data = disc.sections[(prog, sec)]
         idx[(retail.normalise(data[a - base:a - base + size]), size)].append(((prog, sec), a))
     out = {}
     for name, path in near.items():
@@ -294,7 +294,7 @@ def near_places(near, info, pal):
             out[name] = None
             continue
         seg = info.get(name, ("overlay", 0))[0]
-        order = [k for grp in search_order(name, seg, pal) for k in grp]
+        order = [k for grp in search_order(name, seg, disc) for k in grp]
         cands.sort(key=lambda c: (order.index(c[0]) if c[0] in order else 99, abs(c[1] - info.get(name, ("", 0))[1])))
         out[name] = (cands[0][0], cands[0][1], closeness(os.path.join(ROOT, path)))
     return out
@@ -313,7 +313,8 @@ def closeness(path):
 
 
 def write():
-    pal = Pal()
+    import levels
+    pal = Disc()
     info = us_info()
     src = source_functions()
     built = compiled()
@@ -322,13 +323,14 @@ def write():
         if name not in built or f.startswith("src/pal/"):
             continue
         code, masks = built[name]
-        seg = info.get(name, ("overlay", 0))[0]
+        seg, us_addr = info.get(name, ("overlay", 0))
+        own = [lambda k, a: a == us_addr] if levels.V == "us" else []
         for grp in search_order(name, seg, pal):
             found = [(k, a) for k in grp for a in pal.find(k, code, masks)]
-            # where the inventory starts a function of that size, else where it starts one,
-            # else (the cut is wrong) only a single find inside a function
-            for rule in (lambda k, a: pal.names.get((k[0], k[1], a), (0, -1))[1] == len(code),
-                         lambda k, a: (k[0], k[1], a) in pal.names):
+            # (on the US disc where its name says,) where the inventory starts a function of
+            # that size, else where it starts one, else (the cut is wrong) a single find inside one
+            for rule in own + [lambda k, a: pal.names.get((k[0], k[1], a), (0, -1))[1] == len(code),
+                               lambda k, a: (k[0], k[1], a) in pal.names]:
                 best = [h for h in found if rule(*h)]
                 if best:
                     found = best
@@ -353,10 +355,13 @@ def write():
                 fb_info[name] = ("text", addrs[0])
     fb_hits = resolve(fb_hits, fb_info)
     rows = []
-    import check_pal
+    import check_func
     import retail
-    table = check_pal.places()
+    table = check_func.places()
     for name, f in sorted(src.items()):
+        if f.startswith("src/pal/") and levels.V != "pal":
+            rows.append((name, f, "other", "-", "-", 0.0))
+            continue
         if f.startswith("src/pal/"):
             # C written against PAL, under its PAL catalogue name
             p = table.get(name)
@@ -364,16 +369,16 @@ def write():
                 rows.append((name, f, "nomatch", "-", "-", 0.0))
                 continue
             code, masks = built[name]
-            want = check_pal.pal_bytes(p[:4])
+            want = check_func.disc_bytes(p[:4])
             ok = len(code) == len(want) and retail.fields(code, masks, 0) == retail.fields(want, masks, 0)
             rows.append((name, f, "match" if ok else "nomatch", name, "%s:%s:%08X:%d" % p[:4], 100.0 if ok else 0.0))
             continue
         if name not in built:
-            rows.append((name, f, "ntsc", "-", "-", 0.0))
+            rows.append((name, f, "differs", "-", "-", 0.0))
             continue
         code = built[name][0]
         if name not in hits:
-            rows.append((name, f, "ntsc", "-", "-", 0.0))
+            rows.append((name, f, "differs", "-", "-", 0.0))
             continue
         key, addrs = hits[name]
         a = addrs[0]
@@ -398,28 +403,30 @@ def write():
             (prog, sec), a, c = v
             nm, size = pal.names[(prog, sec, a)]
             rows.append((name, near[name], "near", nm, "%s:%s:%08X:%d" % (prog, sec, a, size), c))
-    with open(MAP, "w", newline="\n") as f:
-        f.write(HEAD)
+    with open(levels.cfg("map.tsv"), "w", newline="\n") as f:
+        f.write(HEAD % levels.version_id())
         for r in rows:
             f.write("%s\t%s\t%s\t%s\t%s\t%.2f\n" % r)
     c = collections.Counter(r[2] for r in rows)
-    print("wrote %s: %s" % (os.path.relpath(MAP, ROOT), ", ".join("%d %s" % (c[k], k) for k in ("match", "ntsc", "near", "none"))))
+    print("wrote %s: %s" % (os.path.relpath(levels.cfg("map.tsv"), ROOT), ", ".join(
+        "%d %s" % (c[k], k) for k in ("match", "differs", "nomatch", "other", "near", "none") if c[k])))
 
 
 def check():
+    import levels
     rows = {r["name"]: r for r in read_map()}
     src, near = source_functions(), near_misses()
     problems = []
     for n, f in src.items():
         r = rows.get(n)
-        if r is None or r["status"] not in ("match", "ntsc", "nomatch") or r["file"] != f:
+        if r is None or r["status"] not in ("match", "differs", "nomatch", "other") or r["file"] != f:
             problems.append("%s (%s) has no up-to-date row" % (n, f))
     for n, f in near.items():
         r = rows.get(n)
         if (r is None or r["status"] not in ("near", "none") or r["file"] != f) and n not in src:
             problems.append("near miss %s (%s) has no up-to-date row" % (n, f))
     for n, r in rows.items():
-        if r["status"] in ("match", "ntsc", "nomatch") and n not in src:
+        if r["status"] in ("match", "differs", "nomatch", "other") and n not in src:
             problems.append("%s: a row but no C in src/" % n)
         if r["status"] in ("near", "none") and n not in near:
             problems.append("%s: a near-miss row but no file in nonmatching/" % n)
@@ -427,13 +434,15 @@ def check():
         print("error:", p)
     if problems:
         print("%d problems: rebuild (tools/build.sh, build_libgcc.sh, build_libm.sh) and run "
-              "python3 tools/pal_map.py --write" % len(problems))
+              "python3 tools/match_map.py --version %s --write" % (len(problems), levels.V))
         return 1
-    print("config/pal_map.tsv OK (%d rows)" % len(rows))
+    print("%s OK (%d rows)" % (os.path.relpath(levels.cfg("map.tsv"), ROOT), len(rows)))
     return 0
 
 
 def main():
+    import levels
+    levels.cli_version()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--check", action="store_true")

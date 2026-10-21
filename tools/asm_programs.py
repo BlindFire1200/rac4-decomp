@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""pal_asm.py: assembly of the PAL programs, one .s per function, from the dumps.
+"""asm_programs.py: assembly of a disc's programs, one .s per function, from the dumps.
 
-    python3 tools/pal_asm.py main frontbin level_01 ...   # asm/pal/<target>/ (all targets without names)
-    python3 tools/pal_asm.py --func NAME                   # print where NAME's .s is
+    python3 tools/asm_programs.py [--version us|pal] main frontbin level_01 ...   # all targets without names
+    python3 tools/asm_programs.py [--version us|pal] --func NAME                  # where NAME's .s is
 
 Writes, for each target (tools/levels.py targets(): main, frontbin, level_NN), from the dumps
 of tools/levels.py dump and the committed function tables:
 
-  asm/pal/<program>/<section>/<function>.s   one per function: config/inventory.tsv's for
+  asm/<version>/<program>/<section>/<function>.s   one per function: config/inventory.tsv's for
                                              the main image and frontbin, the catalogue's
                                              (config/levels/functions.tsv) names for a level
-  asm/pal/<program>/<section>.s              the section: .include of every function in order
-  asm/pal/<program>/<section>.s              a data section: .word lines (.space for a .bss)
-  build/pal/<target>/<target>.ld             the linker script: every section at its address
+  asm/<version>/<program>/<section>.s              the section: .include of every function in order
+  asm/<version>/<program>/<section>.s              a data section: .word lines (.space for a .bss)
+  build/<version>/<target>/<target>.ld             the linker script: every section at its address
 
 A level whose program is a byte-identical copy of a lower one (config/levels/levels.tsv) is
 built from that level's assembly; net.text, the same in every program, from the main image's.
@@ -21,7 +21,7 @@ The instructions come from rabbitizer (pinned in requirements.txt), R5900, with 
 instructions, branch targets as local labels and calls/jumps to a function of the same program
 by its name (everything else by address). A word that is not an instruction, or that the
 assembler would not give back as it is, is written as `.word` with the disassembly in a
-comment (asm/pal/<program>/words.txt lists them; tools/build_levels.py finds them by comparing
+comment (asm/<version>/<program>/words.txt lists them; tools/build_levels.py finds them by comparing
 the build with the dump and reruns this). .vutext is VU microcode: .word lines.
 
 asm/ holds the disc's bytes in another form: it is never committed (.gitignore).
@@ -40,8 +40,17 @@ import levels  # noqa: E402
 rabbitizer.config.pseudos_enablePseudos = False
 rabbitizer.config.misc_expandJalr = True
 R5900 = rabbitizer.InstrCategory.R5900
-ASM = os.path.join(ROOT, "asm", "pal")
-BUILD = os.path.join(ROOT, "build", "pal")
+
+
+def asm_root():
+    """asm/<version>/"""
+    return os.path.join(ROOT, "asm", levels.V)
+
+
+def build_root():
+    """build/<version>/"""
+    return os.path.join(ROOT, "build", levels.V)
+
 DATA_SECTIONS_AS_WORDS = {".vutext"}
 # instructions binutils 2.10-ee's assembler has no R5900 encoding for (doubles, COP0 moves):
 # the bytes of data among code, or hand-written system code; written as .word
@@ -94,7 +103,7 @@ def function_starts(program):
 
 
 def read_words_txt(program):
-    p = os.path.join(ASM, program, "words.txt")
+    p = os.path.join(asm_root(), program, "words.txt")
     if not os.path.exists(p):
         return set()
     return {int(l.split()[0], 16) for l in open(p) if l.strip() and not l.startswith("#")}
@@ -210,7 +219,7 @@ def write_program(program):
     _, secs = levels.read_elf(open(dump_path(program), "rb").read())
     starts = function_starts(program)
     as_words = read_words_txt(program)
-    root = os.path.join(ASM, program)
+    root = os.path.join(asm_root(), program)
     os.makedirs(root, exist_ok=True)
     symbols = {}
     for sec, m in starts.items():
@@ -254,7 +263,7 @@ _NET = {}
 def write_program_net():
     """The main image's net.text parts (the same in every program)."""
     if "parts" not in _NET:
-        pd = os.path.join(ASM, "main", "net_text.parts")
+        pd = os.path.join(asm_root(), "main", "net_text.parts")
         if not os.path.isdir(pd):
             write_program("main")
         _NET["parts"] = sorted(os.path.join(pd, f) for f in os.listdir(pd))
@@ -262,12 +271,12 @@ def write_program_net():
 
 
 def obj_name(target, src):
-    rel = os.path.relpath(src, ASM).replace(os.sep, "_").replace(".parts", "")
-    return os.path.join("build", "pal", target, rel[:-2] + ".o")
+    rel = os.path.relpath(src, asm_root()).replace(os.sep, "_").replace(".parts", "")
+    return os.path.join("build", levels.V, target, rel[:-2] + ".o")
 
 
 def linker_script(target, paths, secs):
-    lines = ["/* %s: tools/pal_asm.py; every section at its address. */" % target]
+    lines = ["/* %s (%s): tools/asm_programs.py; every section at its address. */" % (target, levels.version_id())]
     if program_of(target) != "main":
         # net.text (the main image's assembly) calls the resident engine core by name
         lines.append("/* the main image's resident functions, which net.text calls */")
@@ -291,7 +300,7 @@ def write_target(target, done=None):
             done["main"] = write_program("main")
         done[program] = write_program(program)
     paths, secs = done[program]
-    d = os.path.join(BUILD, target)
+    d = os.path.join(build_root(), target)
     os.makedirs(d, exist_ok=True)
     open(os.path.join(d, target + ".ld"), "w").write(linker_script(target, paths, secs))
     open(os.path.join(d, "objects.txt"), "w").write(
@@ -301,26 +310,27 @@ def write_target(target, done=None):
 
 
 def find_func(name):
-    for root, _, files in os.walk(ASM):
+    for root, _, files in os.walk(asm_root()):
         if name + ".s" in files:
             return os.path.join(root, name + ".s")
     return None
 
 
 def main():
+    levels.cli_version()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("targets", nargs="*")
     ap.add_argument("--func")
     a = ap.parse_args()
     if a.func:
         p = find_func(a.func)
-        print(os.path.relpath(p, ROOT) if p else "%s: no .s (run tools/pal_asm.py first)" % a.func)
+        print(os.path.relpath(p, ROOT) if p else "%s: no .s (run tools/asm_programs.py first)" % a.func)
         return
     names = a.targets or [t[0] for t in levels.targets()]
     done = {}
     for t in names:
         write_target(t, done)
-        print("%s: asm/pal/%s, build/pal/%s/%s.ld" % (t, program_of(t), t, t), flush=True)
+        print("%s: asm/%s/%s, build/%s/%s/%s.ld" % (t, levels.V, program_of(t), levels.V, t, t), flush=True)
 
 
 if __name__ == "__main__":

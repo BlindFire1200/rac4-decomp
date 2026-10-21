@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""levels.py: the PAL disc's programs, from the ISO to the build's targets.
+"""levels.py: the discs' programs, from the ISO to the build's targets.
 
-    python3 tools/levels.py dump      # baserom/SCES_532.85(.elf), baserom/pal/*.elf from the ISO
-    python3 tools/levels.py config    # config/levels/levels.tsv, config/programs.tsv
-    python3 tools/levels.py check     # the dumps agree with the committed tables
+    python3 tools/levels.py [--version us|pal] dump     # baserom/<version>/ from baserom/<ID>.iso
+    python3 tools/levels.py [--version us|pal] config   # config/<version>/levels.tsv, programs.tsv
+    python3 tools/levels.py [--version us|pal] check    # the dumps agree with the committed tables
 
-The target is the PAL disc `baserom/SCES_532.85.iso` ("Ratchet: Gladiator", SCES-53285).
-`baserom/SCUS_974.87.iso` is a beta: reference only, never read here.
+Two versions, the same code and layout: `us` (the default, and the primary target), the NTSC-U
+disc `baserom/SCUS_974.65.iso`; `pal`, the PAL disc `baserom/SCES_532.85.iso` ("Ratchet:
+Gladiator", SCES-53285). `--version` (or the environment's RAC_VERSION) selects one for this
+and every other tool that reads these tables. `baserom/SCUS_974.87.iso` is a beta: reference
+only, never read here.
 
 ## The programs
 
-  - `main`: the game image packed inside the loader `SCES_532.85` (ISO9660 file). The loader is
-    copied to baserom/SCES_532.85; its WAD blob is unpacked (tools/unpack_wad.py) into 17
+  - `main`: the game image packed inside the loader (`SCUS_974.65` or `SCES_532.85`, an ISO9660
+    file). The loader is copied to baserom/<version>/; its WAD blob is unpacked (tools/unpack_wad.py) into 17
     sections (tools/split_image.py's names: .vutext, core.*, the resident menu's .lit/.bss/
     .data/lvl.*/.text, patch.data, net.*).
   - `frontbin`: the front end, the same kind of program as a level (8 sections: .lit, .bss,
@@ -52,7 +55,7 @@ All data is addressed by sector (0x800 bytes) through the table of contents at s
 Each program is written as an ELF (write_elf()): the ELF header, one PT_LOAD per section, the
 sections' bytes back to back (16-aligned, a .bss of zeros has no file bytes), .shstrtab and the
 section header table; sh_type is the disc's type word. `dump` checks that converting each ELF
-back gives the disc's program byte for byte. config/levels/levels.tsv and config/programs.tsv
+back gives the disc's program byte for byte. config/<version>/levels.tsv and programs.tsv
 keep the SHA-1 of the ELF and of the program as the disc stores it (the main image: as the
 loader's WAD unpacks it), the entry point and the sections. The build (tools/build_levels.py)
 compares what it builds with both.
@@ -64,17 +67,61 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-ISO = os.path.join(ROOT, "baserom", "SCES_532.85.iso")
-LOADER = os.path.join(ROOT, "baserom", "SCES_532.85")
-MAIN_ELF = os.path.join(ROOT, "baserom", "SCES_532.85.elf")
-DUMP = os.path.join(ROOT, "baserom", "pal")
-TABLE = os.path.join(ROOT, "config", "levels", "levels.tsv")
-PROGRAMS = os.path.join(ROOT, "config", "programs.tsv")
-CATALOGUE = os.path.join(ROOT, "config", "levels", "functions.tsv")
 TOC_LBA = 1001
 SECTOR = 0x800
-LEVEL_TABLE = 0xC430          # Deadlocked PAL: the TOC offset after the 8 global headers
-VERSION = "SCES_532.85"
+LEVEL_TABLE = 0xC430          # the TOC offset after the 8 global headers (the same on both discs)
+
+# The two versions. `us` is the primary target (the repository was built on it); `pal` the second.
+VERSIONS = {"us": "SCUS_974.65", "pal": "SCES_532.85"}
+V = os.environ.get("RAC_VERSION", "us")
+
+
+def select(version):
+    """Make VERSION ('us' or 'pal') the one every path below refers to."""
+    global V
+    if version not in VERSIONS:
+        sys.exit("unknown version %r (us or pal)" % version)
+    V = version
+
+
+def cli_version(argv=None):
+    """Take `--version us|pal` (or `--version=...`) out of ARGV (sys.argv) and select it."""
+    argv = sys.argv if argv is None else argv
+    for i, x in enumerate(list(argv)):
+        if x == "--version" and i + 1 < len(argv):
+            select(argv[i + 1])
+            del argv[i:i + 2]
+            break
+        if x.startswith("--version="):
+            select(x.split("=", 1)[1])
+            del argv[i]
+            break
+    return V
+
+
+def version_id():
+    return VERSIONS[V]
+
+
+def cfg(name):
+    """config/<version>/NAME: the version's committed tables."""
+    return os.path.join(ROOT, "config", V, name)
+
+
+def dump_dir():
+    return os.path.join(ROOT, "baserom", V)
+
+
+def iso_path():
+    return os.path.join(ROOT, "baserom", version_id() + ".iso")
+
+
+def loader_path():
+    return os.path.join(dump_dir(), version_id())
+
+
+def main_elf():
+    return os.path.join(dump_dir(), "main.elf")
 
 # level number -> (directory slug, title): the US decompilation's names (config/overlays.tsv)
 NAMES = {
@@ -118,16 +165,18 @@ def title(number):
 
 
 def elf_path(number):
-    return os.path.join(DUMP, "levels", dirname(number) + ".elf")
+    return os.path.join(dump_dir(), "levels", dirname(number) + ".elf")
 
 
 def program_path(name):
-    """The dump of a program: 'main', 'frontbin' or a level directory (NN_slug)."""
+    """The dump of a program: 'main', 'frontbin', 'level_NN' or a level directory (NN_slug)."""
     if name == "main":
-        return MAIN_ELF
+        return main_elf()
     if name == "frontbin":
-        return os.path.join(DUMP, "frontbin.elf")
-    return os.path.join(DUMP, "levels", name + ".elf")
+        return os.path.join(dump_dir(), "frontbin.elf")
+    if name.startswith("level_"):
+        return elf_path(int(name[6:]))
+    return os.path.join(dump_dir(), "levels", name + ".elf")
 
 
 # --- the disc -----------------------------------------------------------------------
@@ -168,12 +217,12 @@ def parse_records(raw, stop_at_padding=False):
     return ep, sections, p
 
 
-def read_disc(iso_path=ISO):
+def read_disc(iso=None):
     """{'main': (entry, sections, raw), 'frontbin': ..., level number: ...} and the loader."""
     import unpack_wad
     out = {}
-    with open(iso_path, "rb") as f:
-        lba, size = iso_file(f, "SCES_532.85")
+    with open(iso or iso_path(), "rb") as f:
+        lba, size = iso_file(f, version_id())
         f.seek(lba * SECTOR)
         loader = f.read(size)
         image = unpack_wad.decompress(loader, unpack_wad.find_wad(loader))
@@ -302,7 +351,7 @@ def sections_of(path):
 
 def all_programs(progs):
     """[(table key, dump path, names, (entry, sections, raw))] in table order."""
-    out = [("main", MAIN_ELF, MAIN_SECTIONS, progs["main"]),
+    out = [("main", main_elf(), MAIN_SECTIONS, progs["main"]),
            ("frontbin", program_path("frontbin"), LEVEL_SECTIONS, progs["frontbin"])]
     for n in sorted(k for k in progs if isinstance(k, int)):
         out.append((n, elf_path(n), LEVEL_SECTIONS, progs[n]))
@@ -313,8 +362,8 @@ def dump(write=True):
     progs, loader = read_disc()
     rows = []
     if write:
-        os.makedirs(os.path.join(DUMP, "levels"), exist_ok=True)
-        open(LOADER, "wb").write(loader)
+        os.makedirs(os.path.join(dump_dir(), "levels"), exist_ok=True)
+        open(loader_path(), "wb").write(loader)
     for key, path, names, (entry, secs, raw) in all_programs(progs):
         elf = write_elf(entry, secs, names)
         if program_of_elf(elf) != raw:
@@ -324,19 +373,19 @@ def dump(write=True):
         rows.append((key, entry, [(nm, a, n, k) for nm, (a, n, k, _) in zip(names, secs)],
                      hashlib.sha1(elf).hexdigest(), hashlib.sha1(raw).hexdigest()))
     if write:
-        print("wrote %s, %s and %d level programs" % (os.path.relpath(LOADER, ROOT), os.path.relpath(MAIN_ELF, ROOT),
+        print("wrote %s, %s and %d level programs" % (os.path.relpath(loader_path(), ROOT), os.path.relpath(main_elf(), ROOT),
                                                       len(rows) - 2))
     return rows, hashlib.sha1(loader).hexdigest()
 
 
-TABLE_HEAD = """# The PAL level programs (tools/levels.py config): number, directory, title, SHA-1 of the ELF that
-# tools/levels.py dump writes to baserom/pal/levels/<directory>.elf, SHA-1 of the program as the
+TABLE_HEAD = """# The %s level programs (tools/levels.py config): number, directory, title, SHA-1 of the ELF that
+# tools/levels.py dump writes to baserom/%s/levels/<directory>.elf, SHA-1 of the program as the
 # disc stores it, entry point, sections (name:address:size:type), and the lowest-numbered level
 # whose program is byte-identical to this one (itself when none is).
 """
-PROGRAMS_HEAD = """# The PAL disc's other programs (tools/levels.py config): name, dump, SHA-1 of the dump, SHA-1 of the
+PROGRAMS_HEAD = """# The %s disc's other programs (tools/levels.py config): name, dump, SHA-1 of the dump, SHA-1 of the
 # program as the disc stores it (main: as the loader's WAD unpacks it), entry, sections
-# (name:address:size:type). The loader SCES_532.85 itself: see the `loader` row.
+# (name:address:size:type). The loader %s itself: see the `loader` row.
 """
 
 
@@ -347,8 +396,9 @@ def secs_text(secs):
 def write_config():
     rows, loader_sha1 = dump(write=False)
     first = {}
-    lines, plines = [TABLE_HEAD.rstrip("\n")], [PROGRAMS_HEAD.rstrip("\n")]
-    plines.append("\t".join(["loader", "baserom/SCES_532.85", loader_sha1, loader_sha1, "-", "-"]))
+    lines = [(TABLE_HEAD % (version_id(), V)).rstrip("\n")]
+    plines = [(PROGRAMS_HEAD % (version_id(), version_id())).rstrip("\n")]
+    plines.append("\t".join(["loader", os.path.relpath(loader_path(), ROOT), loader_sha1, loader_sha1, "-", "-"]))
     for key, entry, secs, elf_sha1, raw_sha1 in rows:
         if isinstance(key, int):
             same = first.setdefault(raw_sha1, key)
@@ -357,12 +407,12 @@ def write_config():
         else:
             plines.append("\t".join([key, os.path.relpath(program_path(key), ROOT), elf_sha1, raw_sha1,
                                      "%08X" % entry, secs_text(secs)]))
-    os.makedirs(os.path.dirname(TABLE), exist_ok=True)
-    open(TABLE, "w", newline="\n").write("\n".join(lines) + "\n")
-    open(PROGRAMS, "w", newline="\n").write("\n".join(plines) + "\n")
+    os.makedirs(os.path.dirname(cfg("levels.tsv")), exist_ok=True)
+    open(cfg("levels.tsv"), "w", newline="\n").write("\n".join(lines) + "\n")
+    open(cfg("programs.tsv"), "w", newline="\n").write("\n".join(plines) + "\n")
     copies = sum(1 for l in lines[1:] if l.split("\t")[0] != l.split("\t")[-1])
     print("wrote %s (%d levels, %d byte-identical copies of another) and %s" % (
-        os.path.relpath(TABLE, ROOT), len(lines) - 1, copies, os.path.relpath(PROGRAMS, ROOT)))
+        os.path.relpath(cfg("levels.tsv"), ROOT), len(lines) - 1, copies, os.path.relpath(cfg("programs.tsv"), ROOT)))
 
 
 def _secs(field):
@@ -373,10 +423,10 @@ def _secs(field):
     return out
 
 
-def read_table(path=TABLE):
+def read_table(path=None):
     """[{number, dir, title, elf_sha1, program_sha1, entry, sections, copy_of}]"""
     out = []
-    for line in open(path, encoding="utf-8"):
+    for line in open(path or cfg("levels.tsv"), encoding="utf-8"):
         if line.startswith("#") or not line.strip():
             continue
         f = line.rstrip("\n").split("\t")
@@ -385,10 +435,10 @@ def read_table(path=TABLE):
     return out
 
 
-def read_programs(path=PROGRAMS):
+def read_programs(path=None):
     """{name: {dump, elf_sha1, program_sha1, entry, sections}} (main, frontbin, loader)"""
     out = {}
-    for line in open(path, encoding="utf-8"):
+    for line in open(path or cfg("programs.tsv"), encoding="utf-8"):
         if line.startswith("#") or not line.strip():
             continue
         f = line.rstrip("\n").split("\t")
@@ -421,6 +471,7 @@ def check():
 
 
 def main():
+    cli_version()
     args = sys.argv[1:]
     if not args or args[0] not in ("dump", "config", "check"):
         sys.exit(__doc__)

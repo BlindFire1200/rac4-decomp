@@ -37,7 +37,7 @@ jobs:
       # Fails if src/ or nonmatching/ changed without regenerating config/pal_map.tsv
       # (tools/pal_map.py --write, from a build) and the report (tools/progress.py --write).
       - name: Check the committed report is current
-        run: python tools/progress.py --check
+        run: python tools/progress.py --version pal --check
 
       - name: Validate the report with objdiff
         run: |
@@ -45,14 +45,14 @@ jobs:
             https://github.com/encounter/objdiff/releases/download/v3.8.1/objdiff-cli-linux-x86_64
           echo "c8290281e82114bcc1a06ff73061110d3902a177822e750337de2537188e358f  $RUNNER_TEMP/objdiff-cli" | sha256sum --check
           chmod +x "$RUNNER_TEMP/objdiff-cli"
-          "$RUNNER_TEMP/objdiff-cli" report changes progress/report.json progress/report.json \
+          "$RUNNER_TEMP/objdiff-cli" report changes progress/pal/report.json progress/pal/report.json \
             -o "$RUNNER_TEMP/validation.json"
 
       - name: Summarise
         run: |
           python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json
-          r = json.load(open("progress/report.json"))
+          r = json.load(open("progress/pal/report.json"))
           m = r["measures"]
           print("| Measure | Value |")
           print("| --- | --- |")
@@ -70,5 +70,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SCES_532.85_report
-          path: progress/report.json
+          path: progress/pal/report.json
           if-no-files-found: error

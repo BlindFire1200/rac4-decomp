@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""inventory.py: every function of the PAL programs, found from the binaries alone.
+"""inventory.py: every function of the programs of one disc, found from the binaries alone.
 
-    python3 tools/inventory.py              # the counts
-    python3 tools/inventory.py --write      # config/inventory.tsv
+    python3 tools/inventory.py [--version us|pal]           # the counts
+    python3 tools/inventory.py [--version us|pal] --write   # config/<version>/inventory.tsv
 
 Adapted from rac3-uya-decomp-pal's tools/inventory.py (b20190e), which ports rac1-decomp's
 methods (tools/overlays.py split(), code_size(); tools/overlay_remnants.py); the rules are
@@ -25,7 +25,7 @@ Joined (rac1-decomp's joined.tsv rule, from the bytes): a conditional branch nev
 function, so a start that one crosses is not a start, unless a call or a dispatch table
 reaches it.
 
-Proven: where C in src/ builds to a function's PAL bytes (config/pal_map.tsv, tools/pal_map.py),
+Proven: where C in src/ builds to a function's bytes (config/<version>/map.tsv, tools/match_map.py),
 the function starts and ends where that C does.
 
 A function's size is its bytes without the zero words after it, but with the nop in the delay
@@ -53,7 +53,6 @@ import levels  # noqa: E402
 
 JR_RA = 0x03E00008
 FILL = 0xCDCDCDCD
-INVENTORY = os.path.join(ROOT, "config", "inventory.tsv")
 
 
 def words(b):
@@ -321,15 +320,16 @@ def distinct_levels():
 # --- identity: what two copies of a function share (rac2-decomp's tools/levels.py identity()) ---
 
 MEM = {0x1A, 0x1B, 0x1E, 0x1F, *range(0x20, 0x30), 0x31, 0x36, 0x37, 0x39, 0x3E, 0x3F}
-# Every level program and frontbin replace the memory from the lowest .lit (0x21E200); below it,
+# Every level program and frontbin replace the memory from the lowest .lit (0x21E180 on the US
+# disc, 0x21E200 on PAL); below it,
 # the engine core's code and data are resident and the same for all, and so is net.text
 # (0x1E9A000.., the same bytes in every program) with the memory after it.
-RESIDENT_END = 0x21E200
+RESIDENT_ENDS = {"us": 0x21E180, "pal": 0x21E200}   # the lowest .lit of each disc's programs
 NET_TEXT = 0x1E9A000
 
 
 def is_resident(a):
-    return a < RESIDENT_END or a >= NET_TEXT
+    return a < RESIDENT_ENDS[levels.V] or a >= NET_TEXT
 
 
 def identity(b, address=0):
@@ -341,7 +341,7 @@ def identity(b, address=0):
     w = list(words(b))
     while w and w[-1] == 0:
         w.pop()
-    hi = RESIDENT_END >> 16
+    hi = RESIDENT_ENDS[levels.V] >> 16
     net_hi = NET_TEXT >> 16
     tainted, grew = set(), True
     while grew:
@@ -387,10 +387,10 @@ def fingerprint(b, address=0):
 
 
 def proven_extents(program):
-    """{section: {start: end}} of the functions C in src/ builds to (config/pal_map.tsv)."""
-    import pal_map
+    """{section: {start: end}} of the functions C in src/ builds to (config/<version>/map.tsv)."""
+    import match_map
     out = {}
-    for row in pal_map.read_map():
+    for row in match_map.read_map():
         if row["status"] == "match":
             for prog, sec, a, n in row["places"]:
                 if prog == program:
@@ -409,10 +409,10 @@ def core_inventory():
     return rows
 
 
-def read_inventory(path=INVENTORY):
+def read_inventory(path=None):
     """{program: [(section, address, size, kind)]} from config/inventory.tsv."""
     out = {}
-    for line in open(path):
+    for line in open(path or levels.cfg("inventory.tsv")):
         if line.startswith("#") or not line.strip():
             continue
         prog, sec, a, n, kind = line.rstrip("\n").split("\t")
@@ -427,6 +427,7 @@ HEAD = """# Every function of the PAL main image (core.text, net.text, the resid
 
 
 def main():
+    levels.cli_version()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--write", action="store_true", help="rewrite config/inventory.tsv")
     a = ap.parse_args()
@@ -439,11 +440,11 @@ def main():
               % (p, s, len(rs), sum(1 for r in rs if r[4] == "remnant"), sum(r[3] for r in rs)))
     print("main and frontbin: %d functions, %d bytes" % (len(rows), sum(r[3] for r in rows)))
     if a.write:
-        with open(INVENTORY, "w", newline="\n") as f:
+        with open(levels.cfg("inventory.tsv"), "w", newline="\n") as f:
             f.write(HEAD)
             for r in rows:
                 f.write("%s\t%s\t%08X\t%d\t%s\n" % r)
-        print("wrote", os.path.relpath(INVENTORY, ROOT))
+        print("wrote", os.path.relpath(levels.cfg("inventory.tsv"), ROOT))
 
 
 if __name__ == "__main__":

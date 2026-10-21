@@ -1,40 +1,44 @@
 #!/usr/bin/env python3
-"""progress.py: how much of the PAL game (SCES_532.85) is matched C; progress/report.json and the
-README table.
+"""progress.py: how much of each version is matched C; its objdiff report and README table.
 
-    python3 tools/progress.py            # print the counts
-    python3 tools/progress.py --write    # rewrite progress/report.json and the README table
-    python3 tools/progress.py --check    # the committed report and table are current (CI)
+    python3 tools/progress.py [--version us|pal]            # print the counts
+    python3 tools/progress.py [--version us|pal] --write    # rewrite the report and the README table
+    python3 tools/progress.py [--version us|pal] --check    # both are current (CI)
+
+The US report (SCUS_974.65, the primary target and ByteMatch's default version) is
+progress/report.json; the PAL one (SCES_532.85) progress/pal/report.json. Each has its own
+table in README.md.
 
 Adapted from rac3-uya-decomp-pal's tools/progress.py (b20190e; rac1-decomp's units and
 categories). It needs no game data or toolchain: everything comes from src/, nonmatching/ and
-committed tables made from the binaries:
+the version's committed tables made from the binaries (config/<version>/):
 
-  config/inventory.tsv          every function of the main image and frontbin (tools/inventory.py)
-  config/frontend_pairs.tsv     frontbin's functions that are the main image's (tools/level_catalogue.py)
-  config/levels/functions.tsv   every distinct level function and its places (tools/level_catalogue.py)
-  config/pal_map.tsv            each src/ function's PAL place and whether its C matches there,
-                                and each near miss's PAL function and closeness (tools/pal_map.py)
+  inventory.tsv        every function of the main image and frontbin (tools/inventory.py)
+  frontend_pairs.tsv   frontbin's functions that are the main image's (tools/level_catalogue.py)
+  functions.tsv        every distinct level function and its places (tools/level_catalogue.py)
+  map.tsv              each src/ function's place and whether its C matches there, and each
+                       near miss's function and closeness (tools/match_map.py)
 
 Counted once, as rac1-decomp, rac2-decomp and rac3-uya-decomp-pal count them:
   - the main image's functions (core.text, net.text, the resident menu .text) and frontbin's own
     are the inventory's; frontbin's .text is the menu .text linked a second time, so a pair of
-    config/frontend_pairs.tsv is one function, counted with the main image;
+    frontend_pairs.tsv is one function, counted with the main image;
   - a level function counts once however many levels have it (the 33 levels that are byte-
     identical copies of another are that level): one with the menu .text's code is the main
     image's function; the others are in "Shared level code" (two or more distinct level
     programs) or in their level's unit;
-  - a function is matched (exact) when C in src/ builds to its PAL bytes (config/pal_map.tsv,
-    `match`); its fuzzy match is 100 then, otherwise the closeness of its near miss in
-    nonmatching/ (`near`), otherwise 0. Exact and fuzzy are computed apart.
+  - a function is matched (exact) when C in src/ builds to its bytes (map.tsv, `match`); its
+    fuzzy match is 100 then, otherwise the closeness of its near miss in nonmatching/ (`near`),
+    otherwise 0. Exact and fuzzy are computed apart.
 
 Units: one per source file of src/ that matches core code (the main image and frontbin); the
 core functions no C matches yet in units of 64 KB of their section ("main/core.text/0011xxxx");
 one "Shared level code" unit (category common) and one unit per level program with its own
 functions ("Level 01: Dreadzone Station", categories levels and level_01). Categories: core
 (everything in the main image and frontbin), core_text, libgcc, libm, net_text, menu_text,
-frontbin; level_code, common, levels and level_NN.
-.github/workflows/progress.yml checks the report and uploads it as SCES_532.85_report.
+frontbin; level_code, common, levels and level_NN. The same for both versions.
+.github/workflows/progress.yml checks both and uploads them as SCUS_974.65_report and
+SCES_532.85_report.
 """
 import argparse
 import collections
@@ -46,9 +50,21 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 import levels  # noqa: E402
 
-REPORT = os.path.join(ROOT, "progress", "report.json")
+
+
+def report_path():
+    """progress/report.json for the US disc (ByteMatch's default), progress/<version>/ else."""
+    if levels.V == "us":
+        return os.path.join(ROOT, "progress", "report.json")
+    return os.path.join(ROOT, "progress", levels.V, "report.json")
+
+
 README = os.path.join(ROOT, "README.md")
-BEGIN, END = "<!-- progress:begin (tools/progress.py --write) -->", "<!-- progress:end -->"
+END = "<!-- progress:end -->"
+
+
+def begin():
+    return "<!-- progress:begin %s (tools/progress.py --write) -->" % levels.version_id()
 US_LIBGCC = (0x12EE30, 0x131A00)
 BLOCK = 0x10000
 SECTION_CATS = {("main", "core.text"): "core_text", ("main", "net.text"): "net_text",
@@ -99,11 +115,11 @@ def state():
     """The PAL functions (core and level) with their state, from the committed tables."""
     import inventory
     import level_catalogue as lc
-    import pal_map
+    import match_map
     inv = inventory.read_inventory()
     cat = lc.read_catalogue()
     pairs = lc.read_pairs()                        # frontbin name -> main name
-    rows = pal_map.read_map()
+    rows = match_map.read_map()
     # the PAL function at each place: (program, section, address) -> name
     at = {}
     for prog, rs in inv.items():
@@ -200,11 +216,11 @@ def report():
         units.append(make_unit(name, fns, src, ["core", fns[0]["cat"]]))
     for (prog, sec, blk), fns in sorted(rest.items()):
         cats = ["core"] + sorted({f["cat"] for f in fns})
-        units.append(make_unit("%s/%s/%04Xxxxx" % (prog, sec, blk >> 16), fns, "asm/pal/%s/%s" % (prog, sec.lstrip(".").replace(".", "_")), cats))
+        units.append(make_unit("%s/%s/%04Xxxxx" % (prog, sec, blk >> 16), fns, "asm/%s/%s/%s" % (levels.V, prog, sec.lstrip(".").replace(".", "_")), cats))
     core_units = list(units)
-    level_units = [make_unit("Shared level code", shared, "asm/pal (shared level code)", ["level_code", "common"])]
+    level_units = [make_unit("Shared level code", shared, "asm/%s (shared level code)" % levels.V, ["level_code", "common"])]
     for n in sorted(own):
-        level_units.append(make_unit(level_title(n), own[n], "asm/pal/level_%02d/text" % n,
+        level_units.append(make_unit(level_title(n), own[n], "asm/%s/level_%02d/text" % (levels.V, n),
                                      ["level_code", "levels", "level_%02d" % n]))
     units += level_units
     cats = [{"id": "core", "name": "Main program", "measures": summed(core_units)}]
@@ -255,14 +271,16 @@ def text_of(rep):
 
 def readme_with(table_text):
     readme = open(README, encoding="utf-8").read()
-    if BEGIN not in readme or END not in readme:
-        sys.exit("README.md has no %s ... %s block" % (BEGIN, END))
-    head, rest = readme.split(BEGIN, 1)
+    b = begin()
+    if b not in readme:
+        sys.exit("README.md has no %s ... %s block" % (b, END))
+    head, rest = readme.split(b, 1)
     _, tail = rest.split(END, 1)
-    return readme, head + BEGIN + "\n" + table_text + "\n" + END + tail
+    return readme, head + b + "\n" + table_text + "\n" + END + tail
 
 
 def main():
+    levels.cli_version()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--write", action="store_true", help="rewrite progress/report.json and the README table")
     ap.add_argument("--check", action="store_true", help="fail if either is out of date")
@@ -273,19 +291,20 @@ def main():
     print(text)
     old_readme, new_readme = readme_with(text)
     if a.write:
-        os.makedirs(os.path.dirname(REPORT), exist_ok=True)
-        open(REPORT, "w", encoding="utf-8", newline="\n").write(body)
+        os.makedirs(os.path.dirname(report_path()), exist_ok=True)
+        open(report_path(), "w", encoding="utf-8", newline="\n").write(body)
         open(README, "w", encoding="utf-8", newline="\n").write(new_readme)
-        print("wrote progress/report.json and the README table")
+        print("wrote %s and the README table" % os.path.relpath(report_path(), ROOT))
     if a.check:
-        import pal_map
+        import match_map
         problems = []
-        if pal_map.check():
-            problems.append("config/pal_map.tsv does not cover src/ and nonmatching/ (tools/pal_map.py --write)")
-        if not os.path.exists(REPORT) or open(REPORT, encoding="utf-8").read() != body:
-            problems.append("progress/report.json is out of date (python3 tools/progress.py --write)")
+        if match_map.check():
+            problems.append("config/%s/map.tsv does not cover src/ and nonmatching/ (tools/match_map.py --write)" % levels.V)
+        if not os.path.exists(report_path()) or open(report_path(), encoding="utf-8").read() != body:
+            problems.append("%s is out of date (python3 tools/progress.py --version %s --write)" % (
+                os.path.relpath(report_path(), ROOT), levels.V))
         if old_readme != new_readme:
-            problems.append("the README table is out of date (python3 tools/progress.py --write)")
+            problems.append("the README table is out of date (python3 tools/progress.py --version %s --write)" % levels.V)
         for p in problems:
             print("error:", p)
         sys.exit(1 if problems else 0)

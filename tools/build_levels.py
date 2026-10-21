@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""build_levels.py: build the PAL programs from their assembly and check each against the disc.
+"""build_levels.py: build a disc's programs from their assembly and check each against the disc.
 
-    python3 tools/build_levels.py [--asm] [-P 8] [TARGET ...]    # all 49 targets without names
+    python3 tools/build_levels.py [--version us|pal] [--asm] [-P 8] [TARGET ...]   # all 49 targets without names
 
 Targets (tools/levels.py targets()): `main` (the main image the loader unpacks), `frontbin` and
 `level_NN` for each of the 47 levels. For each one: with --asm its assembly first
-(tools/pal_asm.py), then every section's .s is assembled (ee-as), linked at its address with
-build/pal/<target>/<target>.ld (ee-ld), and the linked sections are put back into the disc's
+(tools/asm_programs.py), then every section's .s is assembled (ee-as), linked at its address with
+build/<version>/<target>/<target>.ld (ee-ld), and the linked sections are put back into the disc's
 program format (the records of tools/levels.py) and into the dump's ELF layout. It prints
-`MATCH` when both SHA-1s are config/levels/levels.tsv's (config/programs.tsv's): the program
+`MATCH` when both SHA-1s are config/<version>/levels.tsv's (programs.tsv's): the program
 as the disc stores it, byte for byte.
 
 When words differ, the first differing word of each section is written to
-asm/pal/<program>/words.txt (the assembler did not give it back: it becomes a .word) and the
+asm/<version>/<program>/words.txt (the assembler did not give it back: it becomes a .word) and the
 target is rebuilt, up to --rounds times; the log says which.
 
 The toolchain is the repository's (toolchain/, docs/TOOLCHAIN.md): SN ProDG's ee-as and ee-ld
@@ -32,7 +32,7 @@ from concurrent.futures import ProcessPoolExecutor
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 import levels  # noqa: E402
-import pal_asm  # noqa: E402
+import asm_programs as progasm  # noqa: E402
 
 BIN = os.path.join(ROOT, "toolchain", "sn-prodg-24", "local", "sce", "ee", "gcc", "bin")
 ASFLAGS = ["-EL", "-mips3", "-mcpu=r5900"]
@@ -76,7 +76,7 @@ def as_errors(flat, log_text):
 def build(target, info, a, log):
     """Assemble and link one target. Returns (ok, message, {section: addresses to make .word})."""
     _, path, elf_sha1, prog_sha1, secs = info
-    d = os.path.join(ROOT, "build", "pal", target)
+    d = os.path.join(progasm.build_root(), target)
     objs = [l.rstrip("\n").split("\t") for l in open(os.path.join(d, "objects.txt"))]
     refused = {}
     for src, obj, sec in objs:
@@ -122,26 +122,27 @@ def one_named(target, table, a):
 
 
 def one(target, info, a):
-    d = os.path.join(ROOT, "build", "pal", target)
+    d = os.path.join(progasm.build_root(), target)
     os.makedirs(d, exist_ok=True)
-    program = pal_asm.program_of(target)
+    program = progasm.program_of(target)
     with open(os.path.join(d, "build.log"), "w") as log:
         for rnd in range(a.rounds + 1):
             if rnd or not os.path.exists(os.path.join(d, "objects.txt")):
-                pal_asm.write_target(target, {})
+                progasm.write_target(target, {})
             ok, msg, fix = build(target, info, a, log)
             log.write("round %d: %s\n" % (rnd, msg))
             if ok or not fix or rnd == a.rounds:
                 return target, ok, msg + ("" if ok or not rnd else " (after %d rounds)" % rnd)
-            # what the assembler refused or did not give back becomes .word (pal_asm.py)
+            # what the assembler refused or did not give back becomes .word (tools/asm_programs.py)
             for sec, addrs in fix.items():
                 prog = "main" if sec == "net.text" else program
-                with open(os.path.join(pal_asm.ASM, prog, "words.txt"), "a") as f:
+                with open(os.path.join(progasm.asm_root(), prog, "words.txt"), "a") as f:
                     f.write("".join("%08X %s\n" % (x, sec) for x in sorted(addrs)))
             log.flush()
 
 
 def main():
+    os.environ["RAC_VERSION"] = levels.cli_version()      # the worker processes' version too
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("targets", nargs="*")
     ap.add_argument("--asm", action="store_true", help="write each target's assembly first")
@@ -155,7 +156,7 @@ def main():
         # each program's assembly once, before the parallel builds (copies share it)
         done = {}
         for t in names:
-            pal_asm.write_target(t, done)
+            progasm.write_target(t, done)
         a.asm = False
     bad = 0
     with ProcessPoolExecutor(a.parallel) as ex:

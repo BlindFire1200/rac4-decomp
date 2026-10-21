@@ -2,12 +2,13 @@
 """
 The NTSC-U progress report, in objdiff's report format (version 2).
 
-The project's target is the PAL disc (SCES_532.85): tools/progress.py writes
-progress/report.json, which CI publishes. This is the US build's own count,
-kept for reference: the C in src/ was matched against SCUS_974.65 and its
-level overlays, and tools/audit_matches.py still checks every function
-against them. It is generated from a real local build and committed as
-progress/us/report.json. The report holds names, addresses, sizes and
+The old count, kept for comparison: tools/progress.py now writes both
+versions' reports (progress/report.json for SCUS_974.65, progress/pal/ for
+SCES_532.85), counting functions found from the binaries (docs/levels.md).
+This one counts config/functions.tsv and config/overlay_functions.tsv (the
+15,056 entries of the earlier split) from tools/audit_matches.py's result,
+and writes build/legacy_report.json (not committed). tools/match_map.py uses
+its source_functions() and load_functions(). The report holds names, addresses, sizes and
 percentages. It holds no retail bytes.
 
 Inputs:
@@ -19,7 +20,7 @@ A function counts as matched when its compiled code equals retail with
 relocatable fields masked (see tools/audit_matches.py: not a link-time check).
 
 Usage:
-  python tools/gen_progress_report.py          write progress/us/report.json from
+  python tools/gen_progress_report.py          write build/legacy_report.json from
                                                the last build (tools/build.sh,
                                                tools/audit_matches.py)
   python tools/gen_progress_report.py --check  the report must list as
@@ -33,7 +34,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REPORT = ROOT / "progress" / "us" / "report.json"
+REPORT = ROOT / "build" / "legacy_report.json"
 FUNCTIONS = ROOT / "config" / "functions.tsv"
 MATCHES = ROOT / "build" / "matches.json"
 
@@ -276,10 +277,10 @@ def check() -> int:
     try:
         r = json.loads(REPORT.read_text())
     except (OSError, ValueError) as e:
-        print("progress/us/report.json unreadable: %s" % e)
+        print("build/legacy_report.json unreadable: %s" % e)
         return 1
     if r.get("version") != 2 or "measures" not in r or "units" not in r:
-        print("progress/us/report.json is not an objdiff v2 report")
+        print("build/legacy_report.json is not an objdiff v2 report")
         return 1
     reported = {f["name"] for u in r["units"] for f in u["functions"]
                 if f["fuzzy_match_percent"] == 100.0}
@@ -292,7 +293,7 @@ def check() -> int:
         print("rebuild (tools/build.sh), audit (tools/audit_matches.py) and rerun "
               "tools/gen_progress_report.py")
         return 1
-    print("progress/us/report.json OK (%d matched functions)" % len(reported))
+    print("build/legacy_report.json OK (%d matched functions)" % len(reported))
     return 0
 
 
@@ -306,7 +307,7 @@ def main() -> int:
     REPORT.parent.mkdir(exist_ok=True)
     REPORT.write_text(json.dumps(build_report(matched), indent=1) + "\n")
     m = json.loads(REPORT.read_text())["measures"]
-    print("wrote progress/us/report.json: %s/%s functions, %.3f%% code"
+    print("wrote build/legacy_report.json: %s/%s functions, %.3f%% code"
           % (m["matched_functions"], m["total_functions"], m["matched_code_percent"]))
     return 0
 

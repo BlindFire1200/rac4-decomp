@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """level_catalogue.py: every distinct function of the levels once, and frontbin's pairs.
 
-    python3 tools/level_catalogue.py
+    python3 tools/level_catalogue.py [--version us|pal]
 
 Adapted from rac3-uya-decomp-pal's tools/level_catalogue.py (b20190e; rac1-decomp's and
 rac2-decomp's catalogue, tools/overlays.py catalogue there). Writes, from baserom/ (the dumps of
 tools/levels.py dump) and config/inventory.tsv:
 
-  config/levels/functions.tsv   name, kind, size, fingerprint, remnant, levels, places
-  config/frontend_pairs.tsv     frontbin .text function -> the main image's .text function with its code
+  config/<version>/functions.tsv   name, kind, size, fingerprint, remnant, levels, places
+  config/<version>/frontend_pairs.tsv  frontbin .text function -> the main image's .text function with its code
 
 1. Each distinct level program's .text is cut into functions by tools/inventory.py (call targets,
    returns, tail calls, padding, joined pieces, linker remnants), plus the starts and ends of the
    main image's resident .text functions wherever their code (address fields masked) is found in
    the level, as rac1-decomp adds the executable's functions it finds in each level. The 33
    levels whose program is a byte-identical copy of a lower-numbered one
-   (config/levels/levels.tsv) are not cut again: they are that level.
+   (config/<version>/levels.tsv) are not cut again: they are that level.
 2. Two places are one function when their instructions are equal apart from what linking
    changes (inventory.identity(): jump targets and address halves are masked, except those
    into the resident engine core and net.text; constants, stack slots and field offsets are
@@ -46,7 +46,6 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 import inventory as inv  # noqa: E402
 import levels  # noqa: E402
 
-PAIRS = os.path.join(ROOT, "config", "frontend_pairs.tsv")
 
 
 def mask(w):
@@ -126,7 +125,7 @@ def frontend_pairs(fb, be):
     lines = ["# frontbin .text function\tthe main image's .text function with its code (tools/level_catalogue.py)"]
     for a, b in sorted(pairs.items(), key=lambda p: p[1]):
         lines.append("func_FB_%08X\tfunc_%08X" % (b, a))
-    open(PAIRS, "w", newline="\n").write("\n".join(lines) + "\n")
+    open(levels.cfg("frontend_pairs.tsv"), "w", newline="\n").write("\n".join(lines) + "\n")
     return pairs
 
 
@@ -149,6 +148,7 @@ def level_places(number, fb_masked):
 
 
 def main(argv=()):
+    levels.cli_version()
     mt = core_functions("main", ".text")
     fb = core_functions("frontbin", ".text")
     pairs = frontend_pairs(mt, fb)
@@ -192,7 +192,7 @@ def main(argv=()):
     for name, kind, size, fp, remnant, places in rows:
         lines.append("%s\t%s\t%d\t%s\t%d\t%d\t%s" % (name, kind, size, fp, int(remnant), len({p[0] for p in places}),
                                                      ",".join("%02d:%08X" % p for p in places)))
-    open(levels.CATALOGUE, "w", newline="\n").write("\n".join(lines) + "\n")
+    open(levels.cfg("functions.tsv"), "w", newline="\n").write("\n".join(lines) + "\n")
     count = collections.Counter(r[1] for r in rows)
     size = collections.Counter()
     for r in rows:
@@ -205,7 +205,7 @@ def main(argv=()):
 def read_catalogue(path=None):
     """[(name, kind, size, fingerprint, remnant, [(level, address)])]"""
     out = []
-    for line in open(path or levels.CATALOGUE):
+    for line in open(path or levels.cfg("functions.tsv")):
         if line.startswith("#"):
             continue
         name, kind, size, fp, rem, _, places = line.rstrip("\n").split("\t")
@@ -214,9 +214,10 @@ def read_catalogue(path=None):
     return out
 
 
-def read_pairs(path=PAIRS):
+def read_pairs(path=None):
     """{frontbin function name: main .text function name}"""
     out = {}
+    path = path or levels.cfg("frontend_pairs.tsv")
     if os.path.exists(path):
         for line in open(path):
             if not line.startswith("#") and line.strip():
