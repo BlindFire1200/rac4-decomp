@@ -70,6 +70,7 @@ MAIN_ELF = os.path.join(ROOT, "baserom", "SCES_532.85.elf")
 DUMP = os.path.join(ROOT, "baserom", "pal")
 TABLE = os.path.join(ROOT, "config", "levels", "levels.tsv")
 PROGRAMS = os.path.join(ROOT, "config", "programs.tsv")
+CATALOGUE = os.path.join(ROOT, "config", "levels", "functions.tsv")
 TOC_LBA = 1001
 SECTOR = 0x800
 LEVEL_TABLE = 0xC430          # Deadlocked PAL: the TOC offset after the 8 global headers
