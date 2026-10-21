@@ -410,7 +410,7 @@ def core_inventory():
 
 
 def read_inventory(path=None):
-    """{program: [(section, address, size, kind)]} from config/inventory.tsv."""
+    """{program: [(section, address, size, kind)]} from config/<version>/inventory.tsv."""
     out = {}
     for line in open(path or levels.cfg("inventory.tsv")):
         if line.startswith("#") or not line.strip():
@@ -420,7 +420,7 @@ def read_inventory(path=None):
     return out
 
 
-HEAD = """# Every function of the PAL main image (core.text, net.text, the resident menu .text) and of
+HEAD = """# Every function of the %s main image (core.text, net.text, the resident menu .text) and of
 # frontbin's .text, found from the binaries (tools/inventory.py --write): program, section,
 # address, size in bytes (without the padding after it), kind (function or remnant).
 """
@@ -429,7 +429,7 @@ HEAD = """# Every function of the PAL main image (core.text, net.text, the resid
 def main():
     levels.cli_version()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--write", action="store_true", help="rewrite config/inventory.tsv")
+    ap.add_argument("--write", action="store_true", help="rewrite config/<version>/inventory.tsv")
     a = ap.parse_args()
     rows = core_inventory()
     by = {}
@@ -441,7 +441,7 @@ def main():
     print("main and frontbin: %d functions, %d bytes" % (len(rows), sum(r[3] for r in rows)))
     if a.write:
         with open(levels.cfg("inventory.tsv"), "w", newline="\n") as f:
-            f.write(HEAD)
+            f.write(HEAD % levels.version_id())
             for r in rows:
                 f.write("%s\t%s\t%08X\t%d\t%s\n" % r)
         print("wrote", os.path.relpath(levels.cfg("inventory.tsv"), ROOT))
