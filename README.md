@@ -47,11 +47,11 @@ A function counts as matched on a version when its C, built with its file's own 
 <!-- progress:begin SCUS_974.65 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,535 of 8,948 | 92,832 of 2,193,280 bytes (4.23%) | 4.46% |
+| **Main program** | 1,555 of 8,948 | 93,132 of 2,193,280 bytes (4.25%) | 4.47% |
 | Engine core (core.text) | 384 of 1,637 | 8,972 of 280,336 bytes (3.20%) | 3.80% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
-| Network (net.text) | 223 of 2,441 | 4,472 of 465,620 bytes (0.96%) | 1.13% |
+| Network (net.text) | 243 of 2,441 | 4,772 of 465,620 bytes (1.02%) | 1.19% |
 | Resident menus (.text) | 872 of 4,785 | 64,692 of 1,416,576 bytes (4.57%) | 4.74% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
 | **Shared level code** | 1,036 of 5,076 | 80,276 of 1,980,204 bytes (4.05%) | 4.68% |
@@ -70,9 +70,9 @@ A function counts as matched on a version when its C, built with its file's own 
 | Level 14: Ghost Station (and 34) | 1 of 29 | 128 of 14,548 bytes (0.88%) | 0.88% |
 | Level 15: Control Level (and 35) | 9 of 135 | 704 of 116,368 bytes (0.60%) | 0.60% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 71 of 374 | 10,600 of 139,984 bytes (7.57%) | 9.43% |
-| **Total** | 3,097 of 18,085 | 231,228 of 5,782,424 bytes (4.00%) | 4.48% |
+| **Total** | 3,117 of 18,085 | 231,528 of 5,782,424 bytes (4.00%) | 4.49% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 92,832 bytes (1.61%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 93,132 bytes (1.61%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 **PAL (`SCES_532.85`)**
@@ -80,11 +80,11 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 <!-- progress:begin SCES_532.85 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,497 of 8,945 | 92,000 of 2,202,512 bytes (4.18%) | 4.39% |
+| **Main program** | 1,517 of 8,945 | 92,300 of 2,202,512 bytes (4.19%) | 4.40% |
 | Engine core (core.text) | 375 of 1,641 | 8,840 of 280,488 bytes (3.15%) | 3.76% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
-| Network (net.text) | 223 of 2,441 | 4,472 of 465,620 bytes (0.96%) | 1.13% |
+| Network (net.text) | 243 of 2,441 | 4,772 of 465,620 bytes (1.02%) | 1.19% |
 | Resident menus (.text) | 846 of 4,786 | 64,796 of 1,422,048 bytes (4.56%) | 4.71% |
 | frontbin's own code | 0 of 17 | 0 of 15,776 bytes (0.00%) | 0.00% |
 | **Shared level code** | 1,002 of 5,088 | 75,992 of 2,008,520 bytes (3.78%) | 4.40% |
@@ -103,9 +103,9 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Level 14: Ghost Station (and 34) | 1 of 23 | 128 of 8,884 bytes (1.44%) | 1.44% |
 | Level 15: Control Level (and 35) | 9 of 134 | 704 of 116,624 bytes (0.60%) | 0.60% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 69 of 374 | 10,192 of 140,340 bytes (7.26%) | 9.12% |
-| **Total** | 3,034 of 18,113 | 221,900 of 5,812,924 bytes (3.82%) | 4.27% |
+| **Total** | 3,054 of 18,113 | 222,200 of 5,812,924 bytes (3.82%) | 4.27% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 92,000 bytes (1.58%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 92,300 bytes (1.59%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 </details>
