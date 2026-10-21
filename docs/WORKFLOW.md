@@ -130,14 +130,20 @@ made functions match so far.
 ```
 bash tools/docker/run.sh bash tools/build.sh
 venv/bin/python tools/audit_matches.py
+venv/bin/python tools/audit_relocs.py
 ```
 
 `tools/audit_matches.py` compares each compiled function with the retail bytes
-at its address, with relocatable fields masked (jump targets, the immediate of
-`lui`, and of loads, stores and adds that are not stack-relative). This is
+at its address, masking only the fields the compiled object has relocations on
+(jump targets, and the immediates of `lui`/`%lo`/`$gp` accesses to symbols):
+every constant and offset must equal retail. This is
 **not** a link-time comparison yet: a function that calls or reads the wrong
-symbol can still pass, so check calls and globals by eye. An overlay function
-counts in every level that contains it.
+symbol can still pass. `tools/audit_relocs.py` closes that gap for the exact
+functions: it resolves each relocation (calls, `%hi`/`%lo` pairs, `$gp`
+accesses with `$gp = 0x22597F`, jump tables) to the address a link would give
+it and compares that with the address retail's instruction encodes. Fix every
+mismatch it reports in the C (the right `D_XXXXXXXX`, callee or case label)
+and build again. An overlay function counts in every level that contains it.
 
 If it does not match yet, keep it out of `src/`: see
 [`NONMATCHING.md`](NONMATCHING.md).
@@ -145,13 +151,16 @@ If it does not match yet, keep it out of `src/`: see
 ## 4. Publish
 
 ```
-python3 tools/gen_progress_report.py
-python3 tools/gen_progress_report.py --check
+python3 tools/match_map.py --write                  # where src/ matches on the US disc
+python3 tools/match_map.py --version pal --write    # and on PAL
+python3 tools/progress.py --write                   # progress/report.json (SCUS_974.65)
+python3 tools/progress.py --version pal --write     # progress/pal/report.json (SCES_532.85)
 ```
 
-Commit the regenerated `progress/report.json` together with your source. CI
-(`.github/workflows/progress.yml`) runs `--check` and fails if the report
-disagrees with `src/`; it cannot build the game, so the report always comes from
+These need the dumps (`tools/levels.py dump`, `docs/levels.md`). Commit the regenerated
+`config/us/map.tsv`, `config/pal/map.tsv`, both reports and the README tables together with your
+source. CI (`.github/workflows/progress.yml`) runs `tools/progress.py --check` for both versions
+and fails if a report disagrees with `src/`; it cannot build the game, so the report always comes from
 your machine.
 
 ## Names
@@ -176,5 +185,6 @@ names from any other source ([`LEGAL.md`](../LEGAL.md)).
 | `.claude/agents/` | The worker agent used by waves ([`AGENT_WORKFLOW.md`](AGENT_WORKFLOW.md)) |
 | `docs/` | This guide, the toolchain, research notes, the overlays, levers, near misses, the agent workflow |
 | `notes/` | Notes on single functions |
-| `progress/report.json` | objdiff-format progress report read by decomp.dev |
+| `progress/report.json` | the US (`SCUS_974.65`) objdiff-format progress report CI publishes (`tools/progress.py`) |
+| `progress/pal/report.json` | the PAL (`SCES_532.85`) report (`tools/progress.py --version pal`) |
 | `baserom/`, `asm/`, `assets/`, `build/`, `toolchain/`, `venv/`, `private/` | Local only, never committed |

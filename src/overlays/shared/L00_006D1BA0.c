@@ -2,19 +2,10 @@
 
 typedef int u128 __attribute__((mode(TI)));
 
-typedef struct {
-    u8 f00[0xA0];
-    u128 fA0;
-    u8 fB0[0x2640];
-    u128 f26F0;
-    u8 f2700[0x57C];
-    s32 f2C7C;
-    s32 f2C78;
-} Type1;
-
-/* Copies a 128-bit field to another spot and sets two flags to 1. */
-void func_L00_006D1BA0(Type1 *arg0) {
-    arg0->f2C7C = 1;
-    arg0->f26F0 = arg0->fA0;
-    arg0->f2C78 = 1;
+// Copy the 16-byte value at +0xA0 to +0x26F0 and raise both flags at +0x2C78/+0x2C7C.
+void func_L00_006D1BA0(void *player) {
+    u128 value = *(u128 *)((u32)player + 0xA0);
+    *(s32 *)((u32)player + 0x2C78) = 1;
+    *(u128 *)((u32)player + 0x26F0) = value;
+    *(s32 *)((u32)player + 0x2C7C) = 1;
 }

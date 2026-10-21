@@ -136,10 +136,14 @@ INSN_LINE = re.compile(r"^\s*([a-z][a-z0-9.]*)\s*(.*?)\s*(#.*)?$")
 
 def gnu_padding(text, start, branch, lines, j):
     """Nops GNU as put right before the branch at BRANCH (source line J):
-    the object's run of nops there, not counting a delay slot, less the
-    nops the source itself writes there."""
+    the object's run of nops there, not counting a delay slot or anything
+    before the branch's target (an alignment nop in front of a loop's
+    label is not the loop's padding), less the nops the source itself
+    writes there."""
+    word = int.from_bytes(text[branch:branch + 4], "little")
+    target = branch + 4 + (((word & 0xFFFF) ^ 0x8000) - 0x8000) * 4
     run, a = 0, branch - 4
-    while a >= start and text[a:a + 4] == b"\0\0\0\0":
+    while a >= max(start, target) and text[a:a + 4] == b"\0\0\0\0":
         if a - 4 >= start:
             prev = decode(text, a - 4)
             if prev.isBranch() or prev.isJump():

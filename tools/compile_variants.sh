@@ -7,6 +7,8 @@ cd "$(dirname "$0")/.."
 src=${1:?usage: compile_variants.sh file.c}
 out=build/variants; mkdir -p "$out"
 export WINEDEBUG=-all
+# Windows (Git Bash) runs the 32-bit .exe directly; elsewhere it goes through Wine.
+WINE=$(command -v wine >/dev/null 2>&1 && echo wine || true)
 declare -A CC=(
   [sn114]=toolchain/sn-prodg-24/local/sce/ee/gcc/bin/ee-gcc2953.exe
   [sn274]=toolchain/sn-prodg-24/local/sce/ee/gcc/bin/ee-gcc295.exe
@@ -17,7 +19,7 @@ declare -A CC=(
 for name in "${!CC[@]}"; do
   for flags in "-O2 -G0" "-O2 -G2" "-O2 -G8" "-O1 -G0" "-O3 -G0"; do
     tag=$(echo "$flags" | tr -d ' ')
-    wine "${CC[$name]}" $flags -c "$src" -o "$out/${name}_${tag}.o" >/dev/null 2>"$out/${name}_${tag}.err" || echo "fail $name $flags"
+    $WINE "${CC[$name]}" $flags -c "$src" -o "$out/${name}_${tag}.o" >/dev/null 2>"$out/${name}_${tag}.err" || echo "fail $name $flags"
   done
 done
 ls "$out"/*.o | wc -l

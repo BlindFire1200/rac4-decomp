@@ -1,0 +1,6 @@
+#include "common.h"
+
+// Store the third argument in the word at +0x14 of the fourth.
+void func_004E254C(void *arg0, void *arg1, s32 arg2, void *arg3) {
+    *(s32 *)((u8 *)arg3 + 0x14) = arg2;
+}

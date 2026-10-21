@@ -20,7 +20,8 @@ Runs on the host: the overlay ELFs it compares against are outside the
 repository ($OVERLAYS or private/overlays), so only the compile goes through
 tools/docker/run.sh (directly, when wine is on PATH).
 
-The comparison masks relocatable fields (retail.normalise): it is NOT a
+The comparison masks only the fields the compiled object relocates
+(retail.fields): constants and offsets must equal retail. It is NOT a
 link-time check, so a wrong callee or global can still pass. Read the calls
 and globals of an EXACT before landing it.
 
@@ -34,6 +35,7 @@ have been logged. --no-budget skips both, for tools that re-check results.
 and BUDGET: two agents trying the same function side by side.
 """
 from __future__ import annotations
+import os
 import shutil
 import struct
 import subprocess
@@ -80,7 +82,9 @@ def source_text(name: str, candidate: str) -> str:
 
 
 def in_container() -> bool:
-    return shutil.which("wine") is not None
+    """True where the compiler runs without starting the container: inside it
+    (wine on PATH), or natively on Windows (Git Bash)."""
+    return shutil.which("wine") is not None or os.name == "nt"
 
 
 def compile_all(jobs: list[tuple[Path, Path, list[str]]], work: Path) -> None:
@@ -90,27 +94,31 @@ def compile_all(jobs: list[tuple[Path, Path, list[str]]], work: Path) -> None:
     for src, obj, flags in jobs:
         obj.unlink(missing_ok=True)
         log = obj.with_suffix(".log")
-        lines.append(f"bash tools/cc.sh {src.relative_to(ROOT)} {obj.relative_to(ROOT)} "
-                     f"{' '.join(flags)} > {log.relative_to(ROOT)} 2>&1")
+        # as_posix: on Windows relative_to() gives backslashes, which bash reads as escapes
+        lines.append(f"bash tools/cc.sh {src.relative_to(ROOT).as_posix()} {obj.relative_to(ROOT).as_posix()} "
+                     f"{' '.join(flags)} > {log.relative_to(ROOT).as_posix()} 2>&1")
     script.write_text("\n".join(lines) + "\n")
-    cmd = ["bash", str(script.relative_to(ROOT))]
+    cmd = ["bash", script.relative_to(ROOT).as_posix()]
     if not in_container():
         cmd = ["bash", "tools/docker/run.sh"] + cmd
     subprocess.run(cmd, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def compiled(obj: Path, name: str) -> bytes | None:
+def compiled(obj: Path, name: str) -> tuple[bytes, dict, int] | None:
+    """The function's code, the object's relocation masks and its offset."""
     from elftools.elf.elffile import ELFFile
     with open(obj, "rb") as f:
         elf = ELFFile(f)
         text = elf.get_section_by_name(".text")
         for s in elf.get_section_by_name(".symtab").iter_symbols():
             if s.name == name and s["st_info"]["type"] == "STT_FUNC":
-                return text.data()[s["st_value"]: s["st_value"] + s["st_size"]]
+                start = s["st_value"]
+                return text.data()[start: start + s["st_size"]], retail.reloc_masks(elf), start
     return None
 
 
-def compare(name: str, code: bytes, show: bool) -> str:
+def compare(name: str, found: tuple, show: bool) -> str:
+    code, masks, start = found
     want = layout.retail_bytes(name)
     # The linker pads functions to 8 bytes with nops (tools/audit_matches.py).
     pad = len(want) - len(code)
@@ -119,20 +127,20 @@ def compare(name: str, code: bytes, show: bool) -> str:
     if len(code) != len(want):
         verdict = f"SIZE ours {len(code)} / retail {len(want)}"
     else:
-        ours, theirs = retail.normalise(code), retail.normalise(want)
+        ours, theirs = retail.fields(code, masks, start), retail.fields(want, masks, start)
         diff = sum(((a >> s) & 0xFF) != ((b >> s) & 0xFF)
                    for a, b in zip(ours, theirs) for s in (0, 8, 16, 24))
         verdict = "EXACT" if diff == 0 else f"BYTES {diff}/{len(want)}"
     if show and not verdict.startswith("EXACT"):
-        print(diff_lines(code, want))
+        print(diff_lines(code, want, masks, start))
     return verdict
 
 
-def diff_lines(code: bytes, want: bytes, limit: int = 60) -> str:
+def diff_lines(code: bytes, want: bytes, masks: dict, start: int, limit: int = 60) -> str:
     """The words that differ after masking: offset, ours, retail."""
     import rabbitizer
     dis = lambda w: rabbitizer.Instruction(w, 0, category=rabbitizer.InstrCategory.R5900).disassemble()
-    ours, theirs = retail.normalise(code), retail.normalise(want)
+    ours, theirs = retail.fields(code, masks, start), retail.fields(want, masks, start)
     out = []
     for i in range(max(len(ours), len(theirs))):
         if i < len(ours) and i < len(theirs) and ours[i] == theirs[i]:
@@ -171,22 +179,22 @@ def main() -> None:
     failed = False
     for cand, (src, obj, _) in zip(cands, jobs):
         label = f"{Path(cand).name:10s} " if len(cands) > 1 else ""
-        code = compiled(obj, name) if obj.exists() else None
+        found = compiled(obj, name) if obj.exists() else None
         log = obj.with_suffix(".log")
         shutil.copy(log, work / "log.txt") if log.exists() else None
-        if code is None:
+        if found is None:
             verdict = "COMPILE failed" if not obj.exists() else f"COMPILE ({name} not defined)"
         else:
             if show and len(cands) > 1:
                 print(f"{label}{name}:")
-            verdict = compare(name, code, show)
+            verdict = compare(name, found, show)
         if counted:
             used += 1
             with open(work / "runs.log", "a") as runs:
                 runs.write(f"{Path(cand).name} {verdict}\n")
         tally = f"   [run {used} of {limit}]" if limit else ""
         print(f"{label}{name}: {verdict}   ({where}){tally}")
-        if code is None:
+        if found is None:
             failed = True
             text = log.read_text(errors="replace") if log.exists() else ""
             errs = [l for l in text.splitlines() if "error" in l.lower() or "undeclared" in l or "parse" in l]

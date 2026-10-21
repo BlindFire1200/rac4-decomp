@@ -1,0 +1,6 @@
+# The SCUS_974.65 disc's other programs (tools/levels.py config): name, dump, SHA-1 of the dump, SHA-1 of the
+# program as the disc stores it (main: as the loader's WAD unpacks it), entry, sections
+# (name:address:size:type). The loader SCUS_974.65 itself: see the `loader` row.
+loader	baserom/us/SCUS_974.65	aa91b1c3b9b1a244320c47580b77342ef9856e95	aa91b1c3b9b1a244320c47580b77342ef9856e95	-	-
+main	baserom/us/main.elf	e816d91bb5d9aabe4dbbf839972621ff0766c29a	518d45bdf27352fbf752252666a1b4bc5635102a	001574E8	.reginfo:00100000:18:70000006,.vutext:00100080:1A0E0:1,core.text:0011A180:49990:1,core.data:00163B80:2E350:1,core.rdata:00191F00:13248:1,core.bss:001A5180:78AB8:8,core.lit:0021DC80:4B8:1,.lit:0021E180:2EF0:1,.bss:00221080:1A4908:8,.data:003C5A00:2B404:1,lvl.vtbl:003F0E80:C:1,lvl.camvtbl:003F0F00:14:1,lvl.sndvtbl:003F0F80:8:1,.text:003F1000:15C6D8:1,patch.data:0054D700:18:70000006,net.text:01E9A000:97330:1,net.nostomp:01F31380:6C20:1
+frontbin	baserom/us/frontbin.elf	aab2af60dcbf80ebb661606de5040f3232e4756d	1755364d4decf4b6f1aa72720c33a603e086c646	00437C30	.lit:0021E180:2EB0:1,.bss:00221080:1A4708:8,.data:003C5800:2B3C4:1,lvl.vtbl:003F0C00:C:1,lvl.camvtbl:003F0C80:14:1,lvl.sndvtbl:003F0D00:8:1,.text:003F0D80:15B5E8:1,net.text:01E9A000:97330:1

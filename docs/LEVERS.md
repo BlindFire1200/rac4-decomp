@@ -11,8 +11,12 @@ yours here. The compiler and its flags are in [`TOOLCHAIN.md`](TOOLCHAIN.md).
   ```
   and add `/* cflags: -mno-split-addresses */` if the destination register is the
   `lui` temporary in retail.
-- **`-G8`**: variables of up to 8 bytes that retail reaches through `$gp` are
-  plain `extern` declarations.
+- **`-G8`**: variables of up to 8 bytes are plain `extern` declarations when
+  retail reaches them with `lui` (the destination register as temporary)
+  and through `$gp` only in delay slots; reached through `$gp` elsewhere,
+  they are defined above the function in the same file (`s32 D_x = 0;`).
+  Retail's assembler only took data it had already seen for small
+  (`tools/ps2eeas_sdata.py`).
 - **`volatile`**: a counter that retail reloads from memory, or a store that
   retail leaves a nop delay slot after, is usually `volatile`.
 - **Array indexing**: `p = array + i` and `array[i].field` give different

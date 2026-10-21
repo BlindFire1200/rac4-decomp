@@ -1,15 +1,17 @@
 #include "common.h"
 
-typedef struct Inner {
-    char pad0[0x16];
+// True when the pvar's +0x16 equals 1.
+
+typedef struct Type2 {
+    char _p0[0x16];
     u8 f16;
-} Inner;
+} Type2;
 
-typedef struct Outer {
-    char pad0[0xAC];
-    Inner *inner;
-} Outer;
+typedef struct Type1 {
+    char _p0[0xAC];
+    Type2 *fAC;
+} Type1;
 
-s32 func_L01_00446760(Outer *arg0) {
-    return arg0->inner->f16 == 1;
+s32 func_L01_00446760(Type1 *arg0) {
+    return arg0->fAC->f16 == 1;
 }

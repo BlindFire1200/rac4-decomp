@@ -1,21 +1,15 @@
 #include "common.h"
 
-typedef struct {
-    u8 pad00[0x86];
-    s16 f86;
-} Type_005A0158_Inner;
+extern s32 D_0022CA80[];
 
-typedef struct {
-    u8 pad00[0x50];
-    Type_005A0158_Inner *f50;
-} Type_005A0158_Outer;
-
-extern Type_005A0158_Outer D_0022CA80[];
-
-/* Tests the s16 at +0x86 of the entry at +0x50 of table entry arg0 for the value 0x13. */
+// Compare a field to 0x13 after table lookup
 s32 func_L00_005A0158(s32 arg0) {
-    u32 addr;
+    s32 *base;
+    s32 *entry;
+    s32 value;
 
-    addr = (u32)&D_0022CA80[0] + (u32)arg0 * 0x470;
-    return ((Type_005A0158_Outer *)addr)->f50->f86 == 0x13;
+    base = (s32 *)((u32)D_0022CA80 + (arg0 * 0x470));
+    entry = (s32 *)base[0x50 / 4];
+    value = *(s16 *)((u32)entry + 0x86);
+    return (value == 0x13);
 }

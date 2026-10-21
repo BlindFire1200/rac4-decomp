@@ -1,0 +1,113 @@
+/* Not matching yet: SIZE ours 580 / retail 664 (tools/try_func.py func_004F8B60 --diff). Not part of the build. */
+#include "common.h"
+typedef struct TypePacket {
+    s32 f0; s32 f4; s32 f8; s32 fC;
+    s64 f10;
+    s64 f18;
+    s64 f20;
+    s64 f28;
+    s64 f30;
+    s64 f38;
+    s64 f40;
+    s64 f48;
+    s64 f50;
+    s64 f58;
+    s64 f60;
+    s64 f68;
+    s64 f70;
+    s64 f78;
+    s64 f80;
+    s64 f88;
+    s64 f90;
+    s64 f98;
+    s64 fA0;
+    s64 fA8;
+    s64 fB0;
+    s64 fB8;
+    s64 fC0;
+    s64 fC8;
+} TypePacket;
+typedef struct Type1 { char pad0[4]; s32 f4; s32 f8; } Type1;
+typedef struct Type2 { char pad0[0x18]; s32 f18; s32 f1C; char pad20[8]; s32 f28; char pad2C[8]; s32 f34; s32 f38; s32 f3C; s32 f40; } Type2;
+extern Type1 D_1DFCF0;
+extern volatile TypePacket *D_221E20;
+extern Type2 D_328A40;
+
+void func_004F8B60(void) {
+    s32 temp_a2;
+    s32 temp_t0;
+    s32 temp_t1;
+    s32 temp_v0;
+    s32 var_a2;
+    s32 var_a3;
+    s32 var_t0;
+    s32 var_t1;
+    s32 var_t2;
+    s64 temp_a1;
+    s64 temp_a1_2;
+    s64 temp_v1;
+    u32 temp_a0;
+    void *temp_t8;
+    void *temp_t8_2;
+    void *var_t8;
+
+    D_221E20->f18 = 0xE;
+    D_221E20->f10 = (s64) ((0x8000 << 0x2D) | 8);
+    D_221E20->f28 = 0x4D;
+    D_221E20->f20 = (s64) (((s32) D_1DFCF0.f4 >> 0xD) | 0x02080000 | (0xFFFC << 0x1E));
+    D_221E20->f40 = 0x30000;
+    D_221E20->f48 = 0x48;
+    D_221E20->f58 = 0x19;
+    D_221E20->f38 = 0x4F;
+    D_221E20->f30 = (s64) (((s32) D_1DFCF0.f8 >> 0xD) | 0x31000000 | (0x8000 << 0x11));
+    D_221E20->f50 = 0;
+    D_221E20->f68 = 0x41;
+    D_221E20->f78 = 0x3F;
+    D_221E20->f88 = 0x15;
+    D_221E20->f60 = (s64) (((D_328A40.f18 - 1) << 0x10) | (((D_328A40.f1C * 2) - 1) << 0x30));
+    D_221E20->f70 = 0;
+    D_221E20->f80 = 0;
+    var_t8 = (void *) ((u8 *) D_221E20 + 0xD0);
+    D_221E20->fB8 = 0x316;
+    D_221E20->f98 = 7;
+    D_221E20->fA0 = (s64) ((0x9000 << 0x2E) | 1);
+    D_221E20->fA8 = 1;
+    D_221E20->fB0 = (s64) ((((0xFE00 << 0x1E) | 0x8080) << 0x10) | 0x8080);
+    D_221E20->f90 = (s64) (((s64) D_1DFCF0.f8 >> 8) | ((s64) D_328A40.f28 << 0xE) | (0xEAB2 << 0x14));
+    temp_t1 = D_328A40.f34 & ~0x3F;
+    temp_t0 = (s32) (((D_328A40.f3C + 0x3F) & ~0x3F) - temp_t1) >> 4;
+    D_221E20->fC0 = (s64) (temp_t0 | 0x8000 | (0x8800 << 0x2F));
+    D_221E20->fC8 = 0x5353;
+    if (temp_t0 > 0) {
+        temp_a1 = (((D_328A40.f40 * 2) + 0x3F) & ~0x3F) * 0x10;
+        temp_v1 = ((D_328A40.f38 * 2) & ~0x3F) * 0x10;
+        temp_a2 = temp_t1 * 0x10;
+        var_t2 = temp_t0;
+        var_t1 = temp_a2 + 8;
+        var_t0 = temp_a2 + 0x100;
+        var_a3 = temp_a2 + 0x88;
+        var_a2 = temp_a2 | 0x80;
+        do {
+            *((s64 *) var_t8) = (s64) (var_t1 | ((temp_v1 + 8) << 0x10));
+            temp_t8 = var_t8 + 8;
+            temp_a1_2 = var_t0 | (temp_a1 << 0x10);
+            *((s64 *) ((u8 *) var_t8 + 8)) = (s64) (var_a2 | (temp_v1 << 0x10));
+            temp_v0 = 0x10 * 0x10;
+            temp_t8_2 = temp_t8 + 8;
+            var_t1 += temp_v0;
+            *((s64 *) ((u8 *) temp_t8 + 8)) = (s64) (var_a3 | ((temp_a1 + 8) << 0x10));
+            var_t0 += temp_v0;
+            var_a3 += temp_v0;
+            *((s64 *) ((u8 *) temp_t8_2 + 8)) = temp_a1_2;
+            var_a2 += temp_v0;
+            var_t2 -= 1;
+            var_t8 = temp_t8_2 + 8 + 8;
+        } while (var_t2 != 0);
+    }
+    temp_a0 = (u32) (var_t8 - ((void *) ((u8 *) D_221E20 + 0x10))) >> 4;
+    D_221E20->f0 = (s32) (temp_a0 | 0x10000000);
+    D_221E20->f4 = 0;
+    D_221E20->f8 = 0;
+    D_221E20->fC = (s32) (temp_a0 | 0x50000000);
+    D_221E20 = (volatile TypePacket *) ((u8 *) D_221E20 + ((temp_a0 * 0x10) + 0x10));
+}

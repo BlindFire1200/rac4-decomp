@@ -1,4 +1,11 @@
-# Level overlays
+# Level overlays (NTSC-U)
+
+> [!NOTE]
+> The level programs are now read straight from each disc (`tools/levels.py dump`, US and PAL),
+> built byte-identical and counted with rac1-decomp's rules: see [`levels.md`](levels.md), which
+> also explains how the totals below became the new ones. This page describes the earlier split
+> of the wrench-unpacked US overlays, which `config/overlay_functions.tsv`, the names in
+> `src/overlays/` and `tools/audit_matches.py` still use.
 
 Every level of the game carries its own build of the level code: an overlay
 loaded over the resident image when the level starts. This page describes what
@@ -162,7 +169,7 @@ or to `src/overlays/lNN_<level>/LNN_<ADDRESS>.c` if it is in one level only
 file (same compiler, flags and assembler passes). `tools/audit_matches.py` and
 `tools/diff_func.py` compare it with the bytes in that level's `overlay.elf`, found in
 `$OVERLAYS` or `private/overlays` (a symlink to the folder from
-`wrenchbuild unpack`). Jump targets and relocatable immediates are masked, so
+`wrenchbuild unpack`). The fields the compiled object relocates are masked, so
 the different load addresses of the levels do not matter, and a match counts in
 **every** level that contains the function.
 

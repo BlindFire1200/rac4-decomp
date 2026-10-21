@@ -106,9 +106,19 @@ stop and say in NOTES.md which instructions are left.
 - `func_XXXXXXXX` and `D_XXXXXXXX` are the resident executable;
   `func_LNN_XXXXXXXX` is level overlay code, named after the first level it
   occurs in: an L01 function may call `func_L00_...`, and that is right.
-- `-G8`: a global of up to 8 bytes that retail reaches through `$gp`
-  (`%gp_rel`) is a plain `extern s32 D_x;` (or `f32`, `s16`...).
-- A global retail reaches with `lui` + `%lo` must not go through `$gp`:
+- Small globals (`-G8`, up to 8 bytes), as the build's assembler step
+  (tools/ps2eeas_sdata.py) treats them, like retail's assembler:
+  - reached with `lui` + `%lo` whose temporary is the destination
+    register (`lui $v0` / `lw $v0`; `$at` for a store), and through `$gp`
+    only in branch delay slots, if at all: a plain `extern s32 D_x;` (or
+    `f32`, `s16`...);
+  - reached through `$gp` outside a delay slot: the variable was defined
+    above the function in its file. Define it there: `s32 D_x = 0;`.
+  When the assembly gives only an offset (`lw $v0, -0x37F7($gp)`), the
+  global's address is `0x22597F` plus that offset (`$gp` is `0x22597F`,
+  from `.reginfo`): `-0x37F7($gp)` is `D_00222188`.
+- A global retail reaches with `lui` + `%lo` where the `lui` is shared by
+  several accesses or uses another temporary, and never through `$gp`:
   declare it without a size,
   ```c
   extern s32 D_00221ED8_[];

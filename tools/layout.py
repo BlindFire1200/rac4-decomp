@@ -115,7 +115,7 @@ def nonmatching_path(name: str) -> Path:
     return ROOT / "nonmatching" / info(name)["area"] / f"{name}.c"
 
 
-DEF = re.compile(r"^(?!extern\b|static\s+inline\b)[A-Za-z_][\w \t\*]*?\b(func_(?:L\d\d_)?[0-9A-F]{8})\s*\([^;]*$")
+DEF = re.compile(r"^(?!extern\b|static\s+inline\b)[A-Za-z_][\w \t\*]*?\b(func_(?:L\d\d_|FB_)?[0-9A-F]{8})\s*\([^;]*$")
 
 
 def definitions(text: str) -> list[str]:

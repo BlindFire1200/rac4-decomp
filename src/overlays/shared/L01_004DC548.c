@@ -1,20 +1,8 @@
 #include "common.h"
 
-typedef struct Inner {
-    char pad0[0x4];
-    u8 f4;
-    u8 f5;
-} Inner;
-
-typedef struct Outer {
-    char pad0[0xAC];
-    Inner *fAC;
-} Outer;
-
-// sets two flag bytes of the object at arg0->fAC to 1
-void func_L01_004DC548(Outer *o) {
-    Inner *i = o->fAC;
-
-    i->f4 = 1;
-    i->f5 = 1;
+// Set bytes +4 and +5 of the linked object to one.
+void func_L01_004DC548(void *object) {
+    u8 *linked = *(u8 **)((u8 *)object + 0xAC);
+    linked[4] = 1;
+    linked[5] = 1;
 }

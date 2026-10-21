@@ -1,12 +1,9 @@
 #include "common.h"
 
-typedef struct Obj {
-    char pad0[0xAC];
-    s32 *ptr;
-} Obj;
-
-void func_L01_004787D0(Obj *arg0, s32 arg1) {
-    if (arg0->ptr != NULL) {
-        *arg0->ptr = arg1;
+// Store value through the linked pointer at +0xAC when it is non-null.
+void func_L01_004787D0(void *object, s32 value) {
+    u8 *linked = *(u8 **)((u8 *)object + 0xAC);
+    if (linked != NULL) {
+        *(s32 *)linked = value;
     }
 }

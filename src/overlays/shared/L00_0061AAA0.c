@@ -1,31 +1,25 @@
-/* cflags: -mno-split-addresses */
 #include "common.h"
 
-typedef void (*Type1)(void *, void *);
-
+typedef struct Type1 Type1;
 typedef struct {
-    char f00[0x14];
-    Type1 f14;
+    char pad[0x14];
+    void (*fn)(char *, Type1 *);
 } Type2;
+struct Type1 {
+    s32 unk0;
+    Type2 *vt;
+};
 
-typedef struct {
-    char f00[0x4];
-    Type2 *f4;
-} Type3;
+extern s32 func_L00_005BC9B8(void *);
+extern void func_L00_00607960(void *);
 
-s32 func_L00_005BC9B8(void *);
-s32 func_L00_00607960(void *);
-
-/* Dispatches through the table at arg0+0x34, or falls back to a plain update. */
-void func_L00_0061AAA0(Type3 *arg0) {
-    Type3 *temp_s1;
-
-    temp_s1 = (Type3 *)((char *)arg0 + 0x30);
-    if (temp_s1 != NULL) {
-        if (func_L00_005BC9B8((void *)((char *)arg0 + 0xA)) != 0) {
+void func_L00_0061AAA0(char *arg0) {
+    Type1 *s1 = (Type1 *)(arg0 + 0x30);
+    if (s1 != NULL) {
+        if (func_L00_005BC9B8(arg0 + 0xA) != 0) {
             func_L00_00607960(arg0);
         } else {
-            temp_s1->f4->f14(arg0, temp_s1);
+            s1->vt->fn(arg0, s1);
         }
     }
 }

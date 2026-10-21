@@ -11,18 +11,22 @@ EXPECTED=aa91b1c3b9b1a244320c47580b77342ef9856e95
 ACTUAL=$(sha1sum baserom/SCUS_974.65 | cut -d' ' -f1)
 [ "$ACTUAL" = "$EXPECTED" ] || { echo "baserom/SCUS_974.65 has sha1 $ACTUAL, expected $EXPECTED"; exit 1; }
 
-if [ ! -x venv/bin/python ]; then
-    python3 -m venv venv
-    venv/bin/pip install -q -r requirements.txt
+# the venv's python is venv/bin/python, or venv/Scripts/python.exe on Windows
+VPY=venv/bin/python
+[ -x venv/Scripts/python.exe ] && VPY=venv/Scripts/python.exe
+if [ ! -x "$VPY" ]; then
+    python3 -m venv venv 2>/dev/null || python -m venv venv
+    [ -x venv/Scripts/python.exe ] && VPY=venv/Scripts/python.exe
+    "$VPY" -m pip install -q -r requirements.txt
 fi
 
-venv/bin/python tools/unpack_wad.py
-venv/bin/python tools/split_image.py
+"$VPY" tools/unpack_wad.py
+"$VPY" tools/split_image.py
 rm -rf asm
-venv/bin/python -m splat split config/splat.yaml
+"$VPY" -m splat split config/splat.yaml
 
 # Optional: the level overlays. Set OVERLAYS to a folder made by
 # `wrenchbuild unpack GAME.iso -o DIR -g dl -r us` (docs/OVERLAYS.md).
 if [ -n "${OVERLAYS:-}" ]; then
-    venv/bin/python tools/gen_overlay_asm.py "$OVERLAYS"
+    "$VPY" tools/gen_overlay_asm.py "$OVERLAYS"
 fi

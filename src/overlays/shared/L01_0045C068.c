@@ -1,15 +1,6 @@
 #include "common.h"
 
-typedef struct Inner {
-    char pad0[0x616];
-    u8 f616;
-} Inner;
-
-typedef struct Outer {
-    char pad0[0xAC];
-    Inner *inner;
-} Outer;
-
-s32 func_L01_0045C068(Outer *arg0) {
-    return arg0->inner->f616 != 0;
+// Return whether the +0x616 byte of the linked +0xAC object is nonzero.
+s32 func_L01_0045C068(u8 *object) {
+    return *(u8 *)(*(u8 **)(object + 0xAC) + 0x616) != 0;
 }

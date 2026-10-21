@@ -6,6 +6,8 @@
 set -u
 cd "$(dirname "$0")/.."
 export WINEDEBUG=-all
+# Windows (Git Bash) runs the 32-bit .exe directly; elsewhere it goes through Wine.
+WINE=$(command -v wine >/dev/null 2>&1 && echo wine || true)
 CC=toolchain/sn-prodg-24/local/sce/ee/gcc/bin/ee-gcc.exe
 SRC=${LIBM_SRC:-src/libm}
 INC="-I$SRC -Iprivate/include -I${LIBM_INC:-private/newlib/newlib/libc/include}"
@@ -15,7 +17,7 @@ n=0
 for m in $(grep -v '^#' config/libm.tsv | cut -f1 | sort -u); do
   stem=${m%.o}
   [ -f "$SRC/$stem.c" ] || continue
-  wine $CC $FLAGS -c $INC "$SRC/$stem.c" -o build/libm/$stem.o >/dev/null 2>build/libm/$stem.err || true
+  $WINE $CC $FLAGS -c $INC "$SRC/$stem.c" -o build/libm/$stem.o >/dev/null 2>build/libm/$stem.err || true
   n=$((n+1))
 done
 echo "compiled $n files"
