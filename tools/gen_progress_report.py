@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Progress report for decomp.dev, in objdiff's report format (version 2).
+The NTSC-U progress report, in objdiff's report format (version 2).
 
-decomp.dev reads a `report.json` that CI uploads as the artifact
-`SCUS_974.65_report`. CI cannot build the game: the compiler and the retail
-executable may not be redistributed. So the report is generated HERE, from a
-real local build, and committed as progress/report.json. The workflow only
-validates and uploads it. The report holds names, addresses, sizes and
+The project's target is the PAL disc (SCES_532.85): tools/progress.py writes
+progress/report.json, which CI publishes. This is the US build's own count,
+kept for reference: the C in src/ was matched against SCUS_974.65 and its
+level overlays, and tools/audit_matches.py still checks every function
+against them. It is generated from a real local build and committed as
+progress/us/report.json. The report holds names, addresses, sizes and
 percentages. It holds no retail bytes.
 
 Inputs:
@@ -18,10 +19,10 @@ A function counts as matched when its compiled code equals retail with
 relocatable fields masked (see tools/audit_matches.py: not a link-time check).
 
 Usage:
-  python tools/gen_progress_report.py          write progress/report.json from
+  python tools/gen_progress_report.py          write progress/us/report.json from
                                                the last build (tools/build.sh,
                                                tools/audit_matches.py)
-  python tools/gen_progress_report.py --check  CI: the report must list as
+  python tools/gen_progress_report.py --check  the report must list as
                                                matched exactly the functions
                                                that have C source
 """
@@ -32,7 +33,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REPORT = ROOT / "progress" / "report.json"
+REPORT = ROOT / "progress" / "us" / "report.json"
 FUNCTIONS = ROOT / "config" / "functions.tsv"
 MATCHES = ROOT / "build" / "matches.json"
 
@@ -275,10 +276,10 @@ def check() -> int:
     try:
         r = json.loads(REPORT.read_text())
     except (OSError, ValueError) as e:
-        print("progress/report.json unreadable: %s" % e)
+        print("progress/us/report.json unreadable: %s" % e)
         return 1
     if r.get("version") != 2 or "measures" not in r or "units" not in r:
-        print("progress/report.json is not an objdiff v2 report")
+        print("progress/us/report.json is not an objdiff v2 report")
         return 1
     reported = {f["name"] for u in r["units"] for f in u["functions"]
                 if f["fuzzy_match_percent"] == 100.0}
@@ -291,7 +292,7 @@ def check() -> int:
         print("rebuild (tools/build.sh), audit (tools/audit_matches.py) and rerun "
               "tools/gen_progress_report.py")
         return 1
-    print("progress/report.json OK (%d matched functions)" % len(reported))
+    print("progress/us/report.json OK (%d matched functions)" % len(reported))
     return 0
 
 
@@ -305,7 +306,7 @@ def main() -> int:
     REPORT.parent.mkdir(exist_ok=True)
     REPORT.write_text(json.dumps(build_report(matched), indent=1) + "\n")
     m = json.loads(REPORT.read_text())["measures"]
-    print("wrote progress/report.json: %s/%s functions, %.3f%% code"
+    print("wrote progress/us/report.json: %s/%s functions, %.3f%% code"
           % (m["matched_functions"], m["total_functions"], m["matched_code_percent"]))
     return 0
 

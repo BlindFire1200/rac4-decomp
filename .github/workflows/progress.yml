@@ -1,15 +1,17 @@
-# decomp.dev progress report.
+# ByteMatch progress report (https://bytematch.dev/OpenRAC/rac-deadlocked-decomp), as rac1-decomp
+# and rac3-uya-decomp-pal publish theirs.
 #
-# decomp.dev reads objdiff's report.json from an artifact named
-# "<VERSION>_report" on the default branch. This job does NOT build the
-# game: the compiler and the retail executable cannot be redistributed, so
-# neither is available here. The report is generated locally from a real
-# build (tools/gen_progress_report.py) and committed as progress/report.json;
-# this job only proves it is current, validates it, and uploads it. It holds
-# names, addresses, sizes and percentages -- no retail bytes.
+# ByteMatch reads objdiff's report.json from an artifact named "<VERSION>_report"; the version is
+# the PAL disc's, SCES_532.85. This job does NOT build the game: SN's toolchain and the retail
+# programs cannot be redistributed. tools/progress.py counts everything from src/, nonmatching/
+# and tables made from the binaries and committed (config/inventory.tsv,
+# config/frontend_pairs.tsv, config/levels/functions.tsv, config/pal_map.tsv: names, addresses,
+# sizes and hashes of masked code, no retail bytes), so this job needs no disc: it checks that
+# config/pal_map.tsv covers every function of src/ and nonmatching/ and that the committed
+# report and README table are current, validates the report with objdiff and uploads it.
 #
-# The repository must be registered once by hand at
-# https://decomp.dev/manage/new; this workflow alone does not add it.
+# The repository must be registered once by hand on ByteMatch; this workflow alone does not
+# add it.
 name: Progress report
 
 on:
@@ -32,10 +34,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Fails if C was added or removed without regenerating the report,
-      # so the published numbers cannot silently fall behind src/.
+      # Fails if src/ or nonmatching/ changed without regenerating config/pal_map.tsv
+      # (tools/pal_map.py --write, from a build) and the report (tools/progress.py --write).
       - name: Check the committed report is current
-        run: python tools/gen_progress_report.py --check
+        run: python tools/progress.py --check
 
       - name: Validate the report with objdiff
         run: |
@@ -54,8 +56,8 @@ jobs:
           m = r["measures"]
           print("| Measure | Value |")
           print("| --- | --- |")
-          print("| Code matched | %.2f%% (%s / %s bytes) |"
-                % (m["matched_code_percent"], m["matched_code"], m["total_code"]))
+          print("| Code matched | %.2f%% (%s / %s bytes), fuzzy %.2f%% |"
+                % (m["matched_code_percent"], m["matched_code"], m["total_code"], m["fuzzy_match_percent"]))
           print("| Functions matched | %s / %s |" % (m["matched_functions"], m["total_functions"]))
           print("| Units complete | %s / %s |" % (m["complete_units"], m["total_units"]))
           for c in r["categories"]:
@@ -67,6 +69,6 @@ jobs:
       - name: Upload the progress report
         uses: actions/upload-artifact@v4
         with:
-          name: SCUS_974.65_report
+          name: SCES_532.85_report
           path: progress/report.json
           if-no-files-found: error

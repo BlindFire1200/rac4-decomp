@@ -281,8 +281,9 @@ def near_places(near, info, pal):
         try:
             b = layout.retail_bytes(name)
         except SystemExit:
-            continue
+            b = None
         if b is None:
+            out[name] = None              # no US function of that name: nothing to carry over
             continue
         size = len(b)
         while size >= 4 and b[size - 4:size] == bytes(4) and not (size >= 8 and _jump(b[size - 8:size - 4])):
