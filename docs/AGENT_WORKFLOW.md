@@ -73,7 +73,8 @@ only to compile.
 5. Land: `wave.py land q1`. Then `tools/build.sh`,
    `tools/audit_matches.py` (the count goes up by the landed functions),
    `tools/audit_relocs.py` (0 mismatches: it catches the wrong callees and
-   globals the review missed) and `tools/gen_progress_report.py`, once, after
+   globals the review missed) and `tools/match_map.py --write` plus
+   `tools/progress.py --write` (each also `--version pal`), once, after
    every worker has finished.
 6. Stage near misses: `wave.py stage`. The next tier starts from them:
    `wave.py plan q2 --near` gives each one's best attempt and what still

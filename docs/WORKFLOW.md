@@ -151,16 +151,16 @@ If it does not match yet, keep it out of `src/`: see
 ## 4. Publish
 
 ```
-python3 tools/gen_progress_report.py
-python3 tools/gen_progress_report.py --check
+python3 tools/match_map.py --write                  # where src/ matches on the US disc
+python3 tools/match_map.py --version pal --write    # and on PAL
+python3 tools/progress.py --write                   # progress/report.json (SCUS_974.65)
+python3 tools/progress.py --version pal --write     # progress/pal/report.json (SCES_532.85)
 ```
 
-Commit the regenerated `progress/us/report.json` together with your source,
-and the PAL count too (`python3 tools/pal_map.py --write` and
-`python3 tools/progress.py --write`, `docs/levels.md`: `config/pal_map.tsv`,
-`progress/report.json`, the README table). CI
-(`.github/workflows/progress.yml`) runs `tools/progress.py --check` and fails if the PAL report
-disagrees with `src/`; it cannot build the game, so the report always comes from
+These need the dumps (`tools/levels.py dump`, `docs/levels.md`). Commit the regenerated
+`config/us/map.tsv`, `config/pal/map.tsv`, both reports and the README tables together with your
+source. CI (`.github/workflows/progress.yml`) runs `tools/progress.py --check` for both versions
+and fails if a report disagrees with `src/`; it cannot build the game, so the report always comes from
 your machine.
 
 ## Names
@@ -185,6 +185,6 @@ names from any other source ([`LEGAL.md`](../LEGAL.md)).
 | `.claude/agents/` | The worker agent used by waves ([`AGENT_WORKFLOW.md`](AGENT_WORKFLOW.md)) |
 | `docs/` | This guide, the toolchain, research notes, the overlays, levers, near misses, the agent workflow |
 | `notes/` | Notes on single functions |
-| `progress/report.json` | the PAL (`SCES_532.85`) objdiff-format progress report CI publishes (`tools/progress.py`) |
-| `progress/us/report.json` | the NTSC-U count (`tools/gen_progress_report.py`) |
+| `progress/report.json` | the US (`SCUS_974.65`) objdiff-format progress report CI publishes (`tools/progress.py`) |
+| `progress/pal/report.json` | the PAL (`SCES_532.85`) report (`tools/progress.py --version pal`) |
 | `baserom/`, `asm/`, `assets/`, `build/`, `toolchain/`, `venv/`, `private/` | Local only, never committed |

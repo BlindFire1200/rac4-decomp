@@ -7,14 +7,14 @@
 Writes, for each target (tools/levels.py targets(): main, frontbin, level_NN), from the dumps
 of tools/levels.py dump and the committed function tables:
 
-  asm/<version>/<program>/<section>/<function>.s   one per function: config/inventory.tsv's for
+  asm/<version>/<program>/<section>/<function>.s   one per function: config/<version>/inventory.tsv's for
                                              the main image and frontbin, the catalogue's
-                                             (config/levels/functions.tsv) names for a level
+                                             (config/<version>/functions.tsv) names for a level
   asm/<version>/<program>/<section>.s              the section: .include of every function in order
   asm/<version>/<program>/<section>.s              a data section: .word lines (.space for a .bss)
   build/<version>/<target>/<target>.ld             the linker script: every section at its address
 
-A level whose program is a byte-identical copy of a lower one (config/levels/levels.tsv) is
+A level whose program is a byte-identical copy of a lower one (config/<version>/levels.tsv) is
 built from that level's assembly; net.text, the same in every program, from the main image's.
 
 The instructions come from rabbitizer (pinned in requirements.txt), R5900, with no pseudo
