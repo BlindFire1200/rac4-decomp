@@ -213,7 +213,7 @@ def report():
             rest[(f["program"], f["section"], f["addr"] // BLOCK * BLOCK)].append(f)
     for src, fns in sorted(by_file.items()):
         name = os.path.splitext(src[len("src/"):])[0]
-        units.append(make_unit(name, fns, src, ["core", fns[0]["cat"]]))
+        units.append(make_unit(name, fns, src, ["core"] + sorted({f["cat"] for f in fns})))
     for (prog, sec, blk), fns in sorted(rest.items()):
         cats = ["core"] + sorted({f["cat"] for f in fns})
         units.append(make_unit("%s/%s/%04Xxxxx" % (prog, sec, blk >> 16), fns, "asm/%s/%s/%s" % (levels.V, prog, sec.lstrip(".").replace(".", "_")), cats))
@@ -225,7 +225,8 @@ def report():
     units += level_units
     cats = [{"id": "core", "name": "Main program", "measures": summed(core_units)}]
     for cid, cname in CAT_NAMES[1:]:
-        us = [u for u in core_units if cid in u["metadata"]["progress_categories"]]
+        # by each function's own section (a source file's unit can hold functions of two)
+        us = [u for u in core_units if any(f["cat"] == cid for f in u["_fns"])]
         if us:
             fns = [f for u in us for f in u["_fns"] if f["cat"] == cid]
             m = measures(fns)

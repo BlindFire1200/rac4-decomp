@@ -5,7 +5,7 @@
 
 Adapted from rac3-uya-decomp-pal's tools/level_catalogue.py (b20190e; rac1-decomp's and
 rac2-decomp's catalogue, tools/overlays.py catalogue there). Writes, from baserom/ (the dumps of
-tools/levels.py dump) and config/inventory.tsv:
+tools/levels.py dump) and config/<version>/inventory.tsv:
 
   config/<version>/functions.tsv   name, kind, size, fingerprint, remnant, levels, places
   config/<version>/frontend_pairs.tsv  frontbin .text function -> the main image's .text function with its code
@@ -24,11 +24,11 @@ tools/levels.py dump) and config/inventory.tsv:
 3. A function the main image's resident .text has too keeps that name (func_XXXXXXXX) and kind
    `main`: it is counted once, with the main image. One that only frontbin has is `frontbin`
    (func_FB_XXXXXXXX). Any other is `shared` (in two or more distinct level programs) or
-   `level` (in one), named func_LNN_XXXXXXXX: its PAL address in the lowest-numbered level
+   `level` (in one), named func_LNN_XXXXXXXX: its address in the lowest-numbered level
    that has it.
 
 frontbin's pairs: frontbin's .text is the main image's resident menu .text linked a second
-time. Each frontbin .text function (config/inventory.tsv) whose identity and size are one
+time. Each frontbin .text function (config/<version>/inventory.tsv) whose identity and size are one
 main .text function's is paired with it; identical code that occurs several times is paired
 copy by copy in address order, and every pair must keep both programs' order (the anchors are
 the unique pairs). The report counts a pair once (tools/progress.py).
@@ -62,7 +62,7 @@ def mask(w):
 
 
 def core_functions(program, section):
-    """[(address, bytes, kind)] of a core program's code section, as config/inventory.tsv cuts it
+    """[(address, bytes, kind)] of a core program's code section, as config/<version>/inventory.tsv cuts it
     (kind: function or remnant)."""
     s = inv.program_sections(program, levels.program_path(program), [section])[0]
     data = struct.pack("<%dI" % len(s.w), *s.w)
@@ -75,28 +75,33 @@ def key(body, address):
 
 
 def pair_in_order(a_items, b_items):
-    """Pairs (a, b) of equal keys: unique keys first (the anchors), then repeated keys copy by
-    copy, each kept only if it falls between the anchors around it in both programs."""
+    """Pairs (a, b) of equal keys: unique keys first (the anchors, in the same order in both
+    programs), then repeated keys: between two neighbouring anchors, the copies of a key are
+    paired in address order when both programs have as many there."""
     ka, kb = collections.defaultdict(list), collections.defaultdict(list)
     for addr, k in a_items:
         ka[k].append(addr)
     for addr, k in b_items:
         kb[k].append(addr)
     anchors = sorted((v[0], kb[k][0]) for k, v in ka.items() if len(v) == 1 and len(kb.get(k, ())) == 1)
-    # the anchors must be in the same order in both programs
     good = set(lis(anchors))
     pairs = dict(good)
     sa = sorted(good)
+    sb = sorted(b for _, b in sa)
     for k, v in ka.items():
         w = kb.get(k, [])
-        if len(v) == 1 and len(w) == 1 or not w or len(v) != len(w):
+        if len(v) == 1 and len(w) == 1 or not w:
             continue
-        for a, b in zip(sorted(v), sorted(w)):
-            i = bisect.bisect_left(sa, (a, -1))
-            lo = sa[i - 1][1] if i else -1
-            hi = sa[i][1] if i < len(sa) else 1 << 32
-            if lo < b < hi:
-                pairs[a] = b
+        # the gap between anchors each copy is in, in both programs
+        ga, gb = collections.defaultdict(list), collections.defaultdict(list)
+        for a in sorted(v):
+            ga[bisect.bisect_left(sa, (a, -1))].append(a)
+        for b in sorted(w):
+            gb[bisect.bisect_left(sb, b)].append(b)
+        for gap, aa in ga.items():
+            bb = gb.get(gap, [])
+            if len(aa) == len(bb):
+                pairs.update(zip(aa, bb))
     return pairs
 
 

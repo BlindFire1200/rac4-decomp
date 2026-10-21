@@ -8,7 +8,7 @@
 
 A work-in-progress **matching decompilation** of *Ratchet: Deadlocked* (*Ratchet: Gladiator* in PAL regions; Insomniac Games, 2005) for the PlayStation 2, part of the **[OpenRAC](https://openrac.dev)** initiative.
 
-The objective is to produce C/C++ source code that, when compiled with the original toolchain, generates a byte-identical copy of the retail programs. The target is the PAL disc, *Ratchet: Gladiator* (`SCES-53285`, `baserom/SCES_532.85.iso`): its main program, the front end and the 47 level programs, each read straight from the disc. The C matched so far was matched against the NTSC-U executable (`SCUS_974.65`) and its overlays; it keeps building and passing that audit, and is counted on PAL where it builds to the PAL bytes too. Matched code is then refactored toward readable, idiomatic C++ with accurate types and naming, using matching builds as continuous regression tests.
+The objective is to produce C/C++ source code that, when compiled with the original toolchain, generates a byte-identical copy of the retail programs: the main program, the front end and the 47 level programs, each read straight from the disc. The primary target is the NTSC-U disc (`SCUS_974.65`), which the existing C was matched against; the PAL disc, *Ratchet: Gladiator* (`SCES_532.85`), is the second version, built and counted the same way, and the same C counts there wherever it builds to the PAL bytes too. Matched code is then refactored toward readable, idiomatic C++ with accurate types and naming, using matching builds as continuous regression tests.
 
 > [!NOTE]
 > This repository contains **no game assets, retail executables, or disassembly**. To build, you must provide your own legally obtained copy of the game. Please review [`LEGAL.md`](LEGAL.md) before contributing.
@@ -17,37 +17,76 @@ The objective is to produce C/C++ source code that, when compiled with the origi
 
 ## Progress
 
-Progress is published on **[ByteMatch](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp)** (`SCES_532.85`) and **[openrac.dev](https://openrac.dev)**.
+Progress is published on **[ByteMatch](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp)** for both versions (US by default) and on **[openrac.dev](https://openrac.dev)**.
 
 | Version | Region | Target ID | Code Matched | Functions Matched |
 |---|---|---|---|---|
-| PAL | Europe (*Ratchet: Gladiator*) | `SCES_532.85` | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85) |
+| v1.00 (primary) | NTSC-U | `SCUS_974.65` | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65) |
+| PAL | Europe (*Ratchet: Gladiator*) | `SCES_532.85` | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85) |
 
-A function counts as matched when its C, built with its file's own flags, gives the PAL bytes of that function with only the fields its object relocates masked (`tools/pal_map.py`, `config/pal_map.tsv`); the fuzzy figure adds what the near misses in `nonmatching/` get right. There is no C in the level programs' build yet: they build byte-identical from assembly ([`docs/levels.md`](docs/levels.md)). The NTSC-U count (`SCUS_974.65`, the version the existing C was matched against) is kept in `progress/us/report.json` (`tools/gen_progress_report.py`).
+A function counts as matched on a version when its C, built with its file's own flags, gives that disc's bytes of the function with only the fields its object relocates masked (`tools/match_map.py`, `config/<version>/map.tsv`); the fuzzy figure adds what the near misses in `nonmatching/` get right. There is no C in the programs' build yet: every program builds byte-identical from its assembly ([`docs/levels.md`](docs/levels.md)), and `tools/audit_matches.py` checks every function of `src/` against the US bytes.
 
-| Category | Progress | Contents |
-|---|---|---|
-| Main program | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=core&label=Main%20program&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=core) | The main image: engine core, network code, resident menus, and frontbin's own code |
-| Engine core | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=core_text&label=Engine%20core&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=core_text) | `core.text`, resident in every level (libgcc and libm apart) |
-| libgcc | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=libgcc&label=libgcc&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=libgcc) | GCC's runtime, rebuilt from GCC's source (`src/libgcc/`) |
-| libm | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=libm&label=libm&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=libm) | newlib's math library, rebuilt from its source (`src/libm/`) |
-| Network | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=net_text&label=Network&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=net_text) | `net.text`, the same in every program |
-| Resident menus | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=menu_text&label=Resident%20menus&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=menu_text) | The main image's resident `.text` (the menus); frontbin links it a second time and is counted with it |
-| frontbin | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=frontbin&label=frontbin&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=frontbin) | The 26 functions only frontbin has |
-| Level code | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_code&label=Level%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_code) | Every level program's code, each distinct function once |
-| Shared level code | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=common&label=Shared%20level%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=common) | In two or more distinct level programs |
-| Level-specific code | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=levels&label=Level-specific%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=levels) | In one level program only |
+| Category | US | PAL | Contents |
+|---|---|---|---|
+| Main program | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=core&label=Main%20program&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=core) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=core&label=Main%20program&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=core) | The main image: engine core, network code, resident menus, and frontbin's own code |
+| Engine core | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=core_text&label=Engine%20core&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=core_text) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=core_text&label=Engine%20core&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=core_text) | `core.text`, resident in every level (libgcc and libm apart) |
+| libgcc | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=libgcc&label=libgcc&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=libgcc) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=libgcc&label=libgcc&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=libgcc) | GCC's runtime, rebuilt from GCC's source (`src/libgcc/`) |
+| libm | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=libm&label=libm&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=libm) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=libm&label=libm&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=libm) | newlib's math library, rebuilt from its source (`src/libm/`) |
+| Network | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=net_text&label=Network&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=net_text) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=net_text&label=Network&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=net_text) | `net.text`, the same in every program |
+| Resident menus | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=menu_text&label=Resident%20menus&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=menu_text) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=menu_text&label=Resident%20menus&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=menu_text) | The main image's resident `.text` (the menus); frontbin links it a second time and is counted with it |
+| frontbin | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=frontbin&label=frontbin&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=frontbin) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=frontbin&label=frontbin&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=frontbin) | The functions only frontbin has |
+| Level code | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_code&label=Level%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_code) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_code&label=Level%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_code) | Every level program's code, each distinct function once |
+| Shared level code | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=common&label=Shared%20level%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=common) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=common&label=Shared%20level%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=common) | In two or more distinct level programs |
+| Level-specific code | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=levels&label=Level-specific%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=levels) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=levels&label=Level-specific%20code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=levels) | In one level program only |
+
+<details>
+<summary>The counts</summary>
+
+**NTSC-U (`SCUS_974.65`)**
+
+<!-- progress:begin SCUS_974.65 (tools/progress.py --write) -->
+| | Functions (exact) | Code (exact) | Fuzzy |
+| --- | ---: | ---: | ---: |
+| **Main program** | 1,167 of 8,948 | 86,756 of 2,193,280 bytes (3.96%) | 4.19% |
+| Engine core (core.text) | 336 of 1,639 | 7,932 of 280,352 bytes (2.83%) | 3.43% |
+| libgcc | 24 of 31 | 6,132 of 10,820 bytes (56.67%) | 56.67% |
+| libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
+| Network (net.text) | 52 of 2,441 | 2,464 of 465,620 bytes (0.53%) | 0.70% |
+| Resident menus (.text) | 726 of 4,785 | 61,688 of 1,416,576 bytes (4.35%) | 4.54% |
+| frontbin's own code | 2 of 25 | 796 of 12,168 bytes (6.54%) | 6.54% |
+| **Shared level code** | 478 of 5,076 | 68,860 of 1,980,204 bytes (3.48%) | 4.09% |
+| **Level-specific code** | 372 of 4,061 | 55,016 of 1,608,940 bytes (3.42%) | 3.94% |
+| Level 00: Multiplayer Menu | 255 of 2,798 | 39,104 of 943,140 bytes (4.15%) | 4.74% |
+| Level 01: Dreadzone Station (and 21) | 25 of 356 | 2,848 of 188,848 bytes (1.51%) | 1.51% |
+| Level 02: Catacrom Graveyard (and 22) | 2 of 35 | 124 of 26,596 bytes (0.47%) | 0.47% |
+| Level 04: Sarathos Swamp (and 24) | 2 of 19 | 196 of 11,708 bytes (1.67%) | 1.67% |
+| Level 05: Dark Cathedral (and 25) | 3 of 102 | 288 of 59,824 bytes (0.48%) | 0.64% |
+| Level 06: Temple Of Shaar (and 26) | 0 of 31 | 0 of 9,360 bytes (0.00%) | 0.00% |
+| Level 07: Valix Lighthouse (and 27) | 3 of 46 | 396 of 28,304 bytes (1.40%) | 1.40% |
+| Level 08: Mining Facility (and 28) | 3 of 48 | 172 of 24,400 bytes (0.70%) | 0.70% |
+| Level 10: Torval Ruins (and 30) | 3 of 37 | 256 of 20,140 bytes (1.27%) | 1.27% |
+| Level 11: Tempus Station (and 31) | 1 of 17 | 32 of 8,804 bytes (0.36%) | 0.36% |
+| Level 13: Maraxus Prison (and 33) | 2 of 34 | 280 of 16,916 bytes (1.66%) | 1.66% |
+| Level 14: Ghost Station (and 34) | 1 of 29 | 128 of 14,548 bytes (0.88%) | 0.88% |
+| Level 15: Control Level (and 35) | 8 of 135 | 696 of 116,368 bytes (0.60%) | 0.60% |
+| Level 41: Battledome Tower (all 22 multiplayer maps) | 64 of 374 | 10,496 of 139,984 bytes (7.50%) | 9.36% |
+| **Total** | 2,017 of 18,085 | 210,632 of 5,782,424 bytes (3.64%) | 4.09% |
+
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 86,756 bytes (1.50%) are in units with nothing left to decompile.
+<!-- progress:end -->
+
+**PAL (`SCES_532.85`)**
 
 <!-- progress:begin SCES_532.85 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,163 of 8,954 | 86,356 of 2,202,548 bytes (3.92%) | 4.14% |
+| **Main program** | 1,163 of 8,945 | 86,356 of 2,202,512 bytes (3.92%) | 4.14% |
 | Engine core (core.text) | 336 of 1,643 | 7,932 of 280,504 bytes (2.83%) | 3.43% |
 | libgcc | 24 of 31 | 6,132 of 10,820 bytes (56.67%) | 56.67% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
 | Network (net.text) | 52 of 2,441 | 2,464 of 465,620 bytes (0.53%) | 0.70% |
 | Resident menus (.text) | 724 of 4,786 | 62,084 of 1,422,048 bytes (4.37%) | 4.53% |
-| frontbin's own code | 0 of 26 | 0 of 15,812 bytes (0.00%) | 0.00% |
+| frontbin's own code | 0 of 17 | 0 of 15,776 bytes (0.00%) | 0.00% |
 | **Shared level code** | 458 of 5,088 | 64,948 of 2,008,520 bytes (3.23%) | 3.84% |
 | **Level-specific code** | 364 of 4,080 | 50,528 of 1,601,892 bytes (3.15%) | 3.57% |
 | Level 00: Multiplayer Menu | 251 of 2,826 | 35,188 of 943,820 bytes (3.73%) | 4.14% |
@@ -64,67 +103,69 @@ A function counts as matched when its C, built with its file's own flags, gives 
 | Level 14: Ghost Station (and 34) | 1 of 23 | 128 of 8,884 bytes (1.44%) | 1.44% |
 | Level 15: Control Level (and 35) | 8 of 134 | 696 of 116,624 bytes (0.60%) | 0.60% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 62 of 374 | 10,088 of 140,340 bytes (7.19%) | 9.05% |
-| **Total** | 1,985 of 18,122 | 201,832 of 5,812,960 bytes (3.47%) | 3.88% |
+| **Total** | 1,985 of 18,113 | 201,832 of 5,812,924 bytes (3.47%) | 3.88% |
 
 Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 86,356 bytes (1.49%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
+</details>
+
 ### Levels
 
-Each level carries its own program: its code, data and dispatch tables, loaded over the main image's menus when the level starts. The disc has 47 of them, but only 14 distinct programs: the 12 split-screen campaign levels are byte-identical copies of their single-player levels, and all 22 multiplayer maps run one program (level 41's). Their functions are counted once each: under *Shared level code* when two or more distinct programs have them, else in their level's own row; a function the resident menus have too is counted there ([`docs/levels.md`](docs/levels.md)).
+Each level carries its own program: its code, data and dispatch tables, loaded over the main image's menus when the level starts. Each disc has 47 of them but only 14 distinct programs: the 12 split-screen campaign levels are byte-identical copies of their single-player levels, and all 22 multiplayer maps run one program (level 41's). Their functions are counted once each: under *Shared level code* when two or more distinct programs have them, else in their level's own row; a function the resident menus have too is counted there ([`docs/levels.md`](docs/levels.md)).
 
 <details>
 <summary>Per level</summary>
 
-| Level | Name | Same program as | Code | Functions |
+| Level | Name | Same program as | US | PAL |
 |---|---|---|---|---|
-| 00 | Multiplayer Menu | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_00&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_00) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_00&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_00) |
-| 01 | Dreadzone Station | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_01&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_01) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_01&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_01) |
-| 02 | Catacrom Graveyard | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_02&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_02) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_02&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_02) |
-| 04 | Sarathos Swamp | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_04&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_04) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_04&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_04) |
-| 05 | Dark Cathedral | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_05&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_05) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_05&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_05) |
-| 06 | Temple Of Shaar | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_06&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_06) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_06&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_06) |
-| 07 | Valix Lighthouse | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_07&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_07) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_07&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_07) |
-| 08 | Mining Facility | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_08&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_08) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_08&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_08) |
-| 10 | Torval Ruins | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_10&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_10) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_10&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_10) |
-| 11 | Tempus Station | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_11&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_11) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_11&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_11) |
-| 13 | Maraxus Prison | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_13&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_13) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_13&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_13) |
-| 14 | Ghost Station | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_14&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_14) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_14&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_14) |
-| 15 | Control Level | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_15&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_15) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_15&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_15) |
-| 21 | Dreadzone Station (split screen) | 01 | (level 01's) | |
-| 22 | Catacrom Graveyard (split screen) | 02 | (level 02's) | |
-| 24 | Sarathos Swamp (split screen) | 04 | (level 04's) | |
-| 25 | Dark Cathedral (split screen) | 05 | (level 05's) | |
-| 26 | Temple Of Shaar (split screen) | 06 | (level 06's) | |
-| 27 | Valix Lighthouse (split screen) | 07 | (level 07's) | |
-| 28 | Mining Facility (split screen) | 08 | (level 08's) | |
-| 30 | Torval Ruins (split screen) | 10 | (level 10's) | |
-| 31 | Tempus Station (split screen) | 11 | (level 11's) | |
-| 33 | Maraxus Prison (split screen) | 13 | (level 13's) | |
-| 34 | Ghost Station (split screen) | 14 | (level 14's) | |
-| 35 | Control Level (split screen) | 15 | (level 15's) | |
-| 41 | Battledome Tower | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_41&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_41) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&category=level_41&label=Functions&measure=matched_functions)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_41) |
-| 42 | Catacrom Graveyard (multiplayer) | 41 | (level 41's) | |
-| 44 | Sarathos Swamp (multiplayer) | 41 | (level 41's) | |
-| 45 | Dark Cathedral (multiplayer) | 41 | (level 41's) | |
-| 46 | Temple Of Shaar (multiplayer) | 41 | (level 41's) | |
-| 47 | Valix Lighthouse (multiplayer) | 41 | (level 41's) | |
-| 48 | Mining Facility (multiplayer) | 41 | (level 41's) | |
-| 50 | Torval Ruins (multiplayer) | 41 | (level 41's) | |
-| 51 | Tempus Station (multiplayer) | 41 | (level 41's) | |
-| 53 | Maraxus Prison (multiplayer) | 41 | (level 41's) | |
-| 54 | Ghost Station (multiplayer) | 41 | (level 41's) | |
-| 61 | Battledome Tower (multiplayer, split screen) | 41 | (level 41's) | |
-| 62 | Catacrom Graveyard (multiplayer, split screen) | 41 | (level 41's) | |
-| 64 | Sarathos Swamp (multiplayer, split screen) | 41 | (level 41's) | |
-| 65 | Dark Cathedral (multiplayer, split screen) | 41 | (level 41's) | |
-| 66 | Temple Of Shaar (multiplayer, split screen) | 41 | (level 41's) | |
-| 67 | Valix Lighthouse (multiplayer, split screen) | 41 | (level 41's) | |
-| 68 | Mining Facility (multiplayer, split screen) | 41 | (level 41's) | |
-| 70 | Torval Ruins (multiplayer, split screen) | 41 | (level 41's) | |
-| 71 | Tempus Station (multiplayer, split screen) | 41 | (level 41's) | |
-| 73 | Maraxus Prison (multiplayer, split screen) | 41 | (level 41's) | |
-| 74 | Ghost Station (multiplayer, split screen) | 41 | (level 41's) | |
+| 00 | Multiplayer Menu | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_00&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_00) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_00&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_00) |
+| 01 | Dreadzone Station | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_01&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_01) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_01&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_01) |
+| 02 | Catacrom Graveyard | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_02&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_02) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_02&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_02) |
+| 04 | Sarathos Swamp | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_04&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_04) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_04&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_04) |
+| 05 | Dark Cathedral | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_05&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_05) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_05&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_05) |
+| 06 | Temple Of Shaar | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_06&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_06) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_06&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_06) |
+| 07 | Valix Lighthouse | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_07&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_07) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_07&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_07) |
+| 08 | Mining Facility | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_08&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_08) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_08&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_08) |
+| 10 | Torval Ruins | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_10&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_10) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_10&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_10) |
+| 11 | Tempus Station | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_11&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_11) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_11&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_11) |
+| 13 | Maraxus Prison | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_13&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_13) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_13&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_13) |
+| 14 | Ghost Station | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_14&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_14) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_14&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_14) |
+| 15 | Control Level | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_15&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_15) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_15&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_15) |
+| 21 | Dreadzone Station (split screen) | 01 | (level 01's) | (level 01's) |
+| 22 | Catacrom Graveyard (split screen) | 02 | (level 02's) | (level 02's) |
+| 24 | Sarathos Swamp (split screen) | 04 | (level 04's) | (level 04's) |
+| 25 | Dark Cathedral (split screen) | 05 | (level 05's) | (level 05's) |
+| 26 | Temple Of Shaar (split screen) | 06 | (level 06's) | (level 06's) |
+| 27 | Valix Lighthouse (split screen) | 07 | (level 07's) | (level 07's) |
+| 28 | Mining Facility (split screen) | 08 | (level 08's) | (level 08's) |
+| 30 | Torval Ruins (split screen) | 10 | (level 10's) | (level 10's) |
+| 31 | Tempus Station (split screen) | 11 | (level 11's) | (level 11's) |
+| 33 | Maraxus Prison (split screen) | 13 | (level 13's) | (level 13's) |
+| 34 | Ghost Station (split screen) | 14 | (level 14's) | (level 14's) |
+| 35 | Control Level (split screen) | 15 | (level 15's) | (level 15's) |
+| 41 | Battledome Tower | | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCUS_974.65&category=level_41&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCUS_974.65?category=level_41) | [![](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp.svg?mode=shield&version=SCES_532.85&category=level_41&label=Code&measure=matched_code_percent)](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp/SCES_532.85?category=level_41) |
+| 42 | Catacrom Graveyard (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 44 | Sarathos Swamp (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 45 | Dark Cathedral (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 46 | Temple Of Shaar (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 47 | Valix Lighthouse (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 48 | Mining Facility (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 50 | Torval Ruins (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 51 | Tempus Station (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 53 | Maraxus Prison (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 54 | Ghost Station (multiplayer) | 41 | (level 41's) | (level 41's) |
+| 61 | Battledome Tower (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 62 | Catacrom Graveyard (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 64 | Sarathos Swamp (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 65 | Dark Cathedral (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 66 | Temple Of Shaar (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 67 | Valix Lighthouse (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 68 | Mining Facility (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 70 | Torval Ruins (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 71 | Tempus Station (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 73 | Maraxus Prison (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
+| 74 | Ghost Station (multiplayer, split screen) | 41 | (level 41's) | (level 41's) |
 
 </details>
 
@@ -168,31 +209,32 @@ Each level carries its own program: its code, data and dispatch tables, loaded o
    # Linux & macOS (via container):
    bash tools/docker/run.sh bash tools/build.sh
 
-   # Then compare every function with retail and write the progress report:
+   # Then compare every function with retail:
    venv/bin/python tools/audit_matches.py
-   python3 tools/gen_progress_report.py
+   # and write the progress reports (needs the dumps, see below):
+   python3 tools/match_map.py --write && python3 tools/progress.py --write
    ```
 
-### The PAL target
+### Both discs: the programs, their build and the count
 
-The PAL disc's programs are read from your own `baserom/SCES_532.85.iso` (expected SHA-1s in
-`config/programs.tsv` and `config/levels/levels.tsv`), built from their assembly, and counted
-([`docs/levels.md`](docs/levels.md)):
+Each disc's programs are read from your own `baserom/SCUS_974.65.iso` (or `baserom/SCES_532.85.iso`
+with `--version pal`; the SHA-1s are in `config/<version>/programs.tsv` and `levels.tsv`), built
+from their assembly, and counted ([`docs/levels.md`](docs/levels.md)):
 
 ```bash
-python3 tools/levels.py dump                        # baserom/SCES_532.85(.elf), baserom/pal/
-python3 tools/build_levels.py --asm -P 16           # 49 targets, one MATCH each (ee-as/ee-ld; Linux, or the container)
+python3 tools/levels.py dump                           # baserom/us/ (add --version pal for baserom/pal/)
+python3 tools/build_levels.py --asm -P 16              # 49 targets, one MATCH each (ee-as/ee-ld; Linux, or the container)
 JOBS=16 bash tools/docker/run.sh bash tools/build.sh   # then build_libgcc.sh, build_libm.sh
-python3 tools/pal_map.py --write                    # where src/ matches on PAL
-python3 tools/progress.py --write                   # progress/report.json and the table above
-python3 tools/check_pal.py func_L01_XXXXXXXX try.c  # one function against its PAL bytes
+python3 tools/match_map.py --write                     # where src/ matches (and --version pal)
+python3 tools/progress.py --write                      # progress/report.json and its table (and --version pal)
+python3 tools/check_func.py func_L01_XXXXXXXX try.c    # one function against its US bytes (--version pal: PAL)
 ```
 
 For detailed documentation:
 - [`docs/WORKFLOW.md`](docs/WORKFLOW.md) – Setup in full, and the step-by-step function matching guide
 - [`docs/TOOLCHAIN.md`](docs/TOOLCHAIN.md) – Compiler, flags, assembler passes, libraries and the container
 - [`docs/RESEARCH.md`](docs/RESEARCH.md) – How the retail executable is packed and taken apart
-- [`docs/levels.md`](docs/levels.md) – The PAL disc's programs, their build, how the functions are counted, and the old against the new totals
+- [`docs/levels.md`](docs/levels.md) – Both discs' programs, their build, how the functions are counted, and the old against the new totals
 - [`docs/OVERLAYS.md`](docs/OVERLAYS.md) – The 47 US level overlays the existing C was matched against
 
 ---
