@@ -22,6 +22,10 @@ every source function is looked up in that disc's programs (tools/levels.py dump
     where it starts one, then a single find inside one (the inventory then takes the C's start
     and end as proven). When identical code is in several places of one section, the one
     nearest the address the unique finds around it predict is kept;
+  - a US catalogue name the old lists do not have (phase 2's C: src/core/, src/net/,
+    src/game/ ADDR.c, src/frontbin/FB_ADDR.c, src/overlays/.../LNN_ADDR.c) is, on the US disc,
+    compared at its catalogue place (`match` or `nomatch`); on PAL it is looked up by its code
+    like the rest, in the section its US place says;
   - where it is not found it is `differs`: the C builds to the other version's bytes only (on
     PAL: a 50 Hz constant against 60 Hz, a field moved, the code changed). Its C stays in src/.
   - C in src/pal/ is written against PAL under its PAL catalogue name (tools/check_func.py
@@ -47,8 +51,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-NAME = re.compile(r"^func_(?:(L\d\d)_)?([0-9A-F]{8})$")
-DEF_RE = re.compile(r"^[A-Za-z_][\w \t\*]*?\b(func_(?:L\d\d_)?[0-9A-F]{8})\s*\(.*\)\s*\{?\s*$", re.M)
+NAME = re.compile(r"^func_(?:(L\d\d)_|FB_)?([0-9A-F]{8})$")
 HEAD = """# Each function of src/ (and each near miss in nonmatching/) on the %s disc (tools/match_map.py --write):
 # source name (US names; PAL names in src/pal/), source file, status (match: its C builds to this disc's bytes;
 # differs: to the other version's only; nomatch: src/pal/ C that does not build to its PAL function; other:
@@ -215,6 +218,11 @@ def search_order(name, us_seg, disc):
     """[(program, section)] to look in for a US function, best first, in groups: the first
     group with a find wins."""
     m = NAME.match(name)
+    if us_seg == "frontbin":
+        return [[("frontbin", ".text")], [("main", ".text")],
+                [("level_%02d" % n, ".text") for n in disc.levels]]
+    if us_seg == "overlay" and not (m and m.group(1)):
+        return [[("level_%02d" % n, ".text") for n in disc.levels], [("main", ".text")]]
     if us_seg in ("core_text", "libgcc", "libm"):
         return [[("main", "core.text")]]
     if us_seg == "net_text":
@@ -228,14 +236,64 @@ def search_order(name, us_seg, disc):
             [("main", ".text")]]
 
 
+SEGMENT_OF = {("main", "core.text"): "core_text", ("main", "net.text"): "net_text",
+              ("main", ".text"): "text", ("frontbin", ".text"): "frontbin"}
+
+
 def us_info():
-    """{US name: (segment, address)}"""
+    """{US name: (segment, address)}: the old US lists' (config/functions.tsv,
+    config/overlay_functions.tsv), then every US catalogue name they do not have (new_us_names())."""
     import gen_progress_report as g
     out = {}
     for n, f in g.load_functions().items():
         seg = f["seg"]
         out[n] = ("overlay" if seg.startswith("ovl_") else seg, f["addr"])
+    for n, (prog, sec, a, size, kind) in us_catalogue().items():
+        if n not in out:
+            out[n] = (SEGMENT_OF.get((prog, sec), "overlay"), a)
     return out
+
+
+_US = {}
+
+
+def us_catalogue():
+    """{name: (program, section, address, size, kind)} of the US disc's catalogue
+    (tools/check_func.py places(), config/us/), whatever version is selected."""
+    if "places" not in _US:
+        import check_func
+        import levels
+        was = levels.V
+        levels.select("us")
+        try:
+            _US["places"] = check_func.places()
+        finally:
+            levels.select(was)
+    return _US["places"]
+
+
+def us_bytes(name):
+    """The US disc's bytes of a US catalogue function (its dump, baserom/us/), or None."""
+    import check_func
+    import levels
+    p = us_catalogue().get(name)
+    if p is None:
+        return None
+    was = levels.V
+    levels.select("us")
+    try:
+        return check_func.disc_bytes(p[:4])
+    finally:
+        levels.select(was)
+
+
+def new_us_names():
+    """The US catalogue names the old US lists do not have: functions phase 2 decompiles
+    under their catalogue name (src/core/, src/net/, src/game/ ADDR.c, src/frontbin/FB_ADDR.c,
+    src/overlays/.../LNN_ADDR.c). On the US disc they are compared at their catalogue place."""
+    import gen_progress_report as g
+    old = set(g.load_functions())
+    return {n for n in us_catalogue() if n not in old}
 
 
 def resolve(hits_by_name, info):
@@ -281,7 +339,7 @@ def near_places(near, info, disc):
         try:
             b = layout.retail_bytes(name)
         except SystemExit:
-            b = None
+            b = us_bytes(name)               # a US catalogue name the old lists do not have
         if b is None:
             out[name] = None              # no US function of that name: nothing to carry over
             continue
@@ -318,9 +376,10 @@ def write():
     info = us_info()
     src = source_functions()
     built = compiled()
+    new = new_us_names()
     hits = {}
     for name, f in src.items():
-        if name not in built or f.startswith("src/pal/"):
+        if name not in built or f.startswith("src/pal/") or (levels.V == "us" and name in new):
             continue
         code, masks = built[name]
         seg, us_addr = info.get(name, ("overlay", 0))
@@ -362,8 +421,8 @@ def write():
         if f.startswith("src/pal/") and levels.V != "pal":
             rows.append((name, f, "other", "-", "-", 0.0))
             continue
-        if f.startswith("src/pal/"):
-            # C written against PAL, under its PAL catalogue name
+        if f.startswith("src/pal/") or (levels.V == "us" and name in new):
+            # C written under this disc's catalogue name: compared at that function's place
             p = table.get(name)
             if name not in built or p is None:
                 rows.append((name, f, "nomatch", "-", "-", 0.0))
