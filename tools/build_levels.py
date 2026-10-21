@@ -159,10 +159,14 @@ def main():
             progasm.write_target(t, done)
         a.asm = False
     bad = 0
-    with ProcessPoolExecutor(a.parallel) as ex:
-        for t, ok, msg in ex.map(functools.partial(one_named, table=table, a=a), names):
-            print("%s: %s" % (t, msg), flush=True)
-            bad += not ok
+    # the programs first, then the copies that are built from their assembly: a program's
+    # rounds rewrite that assembly, which must not happen under a copy's build
+    first = [t for t in names if progasm.program_of(t) == t]
+    for batch in (first, [t for t in names if t not in first]):
+        with ProcessPoolExecutor(a.parallel) as ex:
+            for t, ok, msg in ex.map(functools.partial(one_named, table=table, a=a), batch):
+                print("%s: %s" % (t, msg), flush=True)
+                bad += not ok
     print("%d of %d targets match" % (len(names) - bad, len(names)))
     sys.exit(1 if bad else 0)
 
