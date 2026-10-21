@@ -83,7 +83,7 @@ a link-time comparison, so a function that calls or reads the wrong symbol can
 still count; `tools/audit_relocs.py` checks the relocation targets of the
 exact functions against retail. `tools/diff_func.py` shows a function next to retail word by word;
 `tools/try_variants.py` tries several source forms of one function at once.
-`tools/gen_progress_report.py` writes `progress/report.json` for decomp.dev
+`tools/progress.py` writes the reports (`docs/levels.md`); `tools/gen_progress_report.py` the old count
 from `config/functions.tsv` and the audit result.
 
 ## Open questions

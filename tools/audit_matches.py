@@ -67,7 +67,10 @@ def main() -> int:
                     obj, sym, a, _ = l.split("\t")
                     alias[(obj[:-2] if obj.endswith(".o") else obj, sym)] = by_addr[int(a, 16)]
     exact, bad = [], []
-    for path in sorted(glob.glob(str(ROOT / "build" / "obj" / "*.o")) + glob.glob(str(ROOT / "build" / "libgcc" / "*.o")) + glob.glob(str(ROOT / "build" / "libm" / "*.o"))):
+    # src/pal/ holds C written against the PAL disc under PAL names (tools/check_func.py
+    # --version pal, tools/match_map.py): not US functions, so not audited here.
+    objs = [p for p in glob.glob(str(ROOT / "build" / "obj" / "*.o")) if not Path(p).name.startswith("pal_")]
+    for path in sorted(objs + glob.glob(str(ROOT / "build" / "libgcc" / "*.o")) + glob.glob(str(ROOT / "build" / "libm" / "*.o"))):
         elf = ELFFile(open(path, "rb"))
         text = elf.get_section_by_name(".text")
         data = text.data() if text else b""

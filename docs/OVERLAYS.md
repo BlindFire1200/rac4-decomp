@@ -1,4 +1,11 @@
-# Level overlays
+# Level overlays (NTSC-U)
+
+> [!NOTE]
+> The level programs are now read straight from each disc (`tools/levels.py dump`, US and PAL),
+> built byte-identical and counted with rac1-decomp's rules: see [`levels.md`](levels.md), which
+> also explains how the totals below became the new ones. This page describes the earlier split
+> of the wrench-unpacked US overlays, which `config/overlay_functions.tsv`, the names in
+> `src/overlays/` and `tools/audit_matches.py` still use.
 
 Every level of the game carries its own build of the level code: an overlay
 loaded over the resident image when the level starts. This page describes what

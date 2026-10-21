@@ -20,9 +20,10 @@ The full procedure is in [`docs/WORKFLOW.md`](docs/WORKFLOW.md). In short:
    `venv/bin/python tools/audit_matches.py`. A function that does
    not match yet goes to `nonmatching/`
    ([`docs/NONMATCHING.md`](docs/NONMATCHING.md)), never into `src/`.
-5. Regenerate the progress report with
-   `python3 tools/gen_progress_report.py`, and commit it together with your
-   change. CI fails if the report is out of date.
+5. Regenerate the progress reports (`tools/match_map.py --write` and
+   `tools/progress.py --write`, each also with `--version pal`; see
+   [`docs/WORKFLOW.md`](docs/WORKFLOW.md)) and commit them together with your
+   change. CI fails if a report is out of date.
 
 On macOS and Linux, prefix the build commands with `bash tools/docker/run.sh`.
 m2c and asm-differ are used from local clones (not vendored):
@@ -72,15 +73,16 @@ to check a match against. Every name in `src/` is your own work
 ## Commits and pull requests
 
 - Small, focused commits: one function or one tool change.
-- Run the build, the audit and `tools/gen_progress_report.py --check` before
+- Run the build, the audit and `tools/progress.py --check` (and `--version pal --check`) before
   pushing.
 - Commit messages: a short summary line, then an optional body. Add
   `Co-Authored-By:` for anyone (or any tool) who helped, and nothing else
   tool-specific: no session links.
 - Never commit retail data: `asm/`, `assets/`, `baserom/`, `build/`, `venv/`,
   `toolchain/` and `private/` are ignored by git.
-- CI (`.github/workflows/progress.yml`) checks and uploads
-  `progress/report.json` to [decomp.dev](https://decomp.dev/OpenRAC/rac-deadlocked-decomp).
+- CI (`.github/workflows/progress.yml`) checks and uploads both reports
+  (`progress/report.json` for SCUS_974.65, `progress/pal/report.json` for SCES_532.85) to
+  [ByteMatch](https://bytematch.dev/OpenRAC/rac-deadlocked-decomp).
   It cannot build the game, so the report is generated on your machine.
 
 For LLM agents, [`docs/AGENT_WORKFLOW.md`](docs/AGENT_WORKFLOW.md) describes
