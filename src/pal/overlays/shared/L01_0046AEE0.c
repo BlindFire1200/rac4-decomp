@@ -26,9 +26,9 @@ struct Type3 {
     char pad0[0x10];
     s32 f10;
 };
-extern s32 func_L00_005BC9B8(void *);
-extern void func_L01_00591BD8(void *, s32, s32);
-extern void func_L01_005ABDE8(void *, f32, f32, f32);
+extern s32 func_00453D20(void *);
+extern void func_00474368(void *, s32, s32);
+extern void func_L01_005B0178(void *, f32, f32, f32);
 
 s32 func_L01_0046AEE0(Type1 *arg0, s32 arg1) {
     Type2 *temp_t0 = arg0->fAC;
@@ -46,10 +46,10 @@ case0:
     temp_t0->f50 |= 0x80;
     goto done;
 case1:
-    if (func_L00_005BC9B8(&temp_t0->f4FA) != 0) {
+    if (func_00453D20(&temp_t0->f4FA) != 0) {
         arg0->f98 = arg0->f24->f10;
     }
-    func_L01_005ABDE8(arg0, 8.5f, 14.5f, 17.0f);
+    func_L01_005B0178(arg0, 8.5f, 14.5f, 17.0f);
     goto done;
 case4:
     arg0->f98 = arg0->f24->f10;
@@ -57,7 +57,7 @@ case4:
     temp_t0->f9C = 0;
     temp_t0->f54 |= 0x800;
     temp_t0->f50 &= ~0x80;
-    func_L01_00591BD8(arg0, 2, 2);
+    func_00474368(arg0, 2, 2);
 done:
     return 1;
 }

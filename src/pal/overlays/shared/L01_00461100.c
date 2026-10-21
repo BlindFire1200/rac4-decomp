@@ -28,15 +28,15 @@ struct Type1 {
     s32 f90;
 };
 
-extern void func_L00_005E75B0(void *, s32, s32, f32);
-extern void *func_L00_006AA100(s32);
+extern void func_00474148(void *, s32, s32, f32);
+extern void *func_00512138(s32);
 
 /* Pick an animation for the object from its linked owner's state. */
 void func_L01_00461100(Type1 *arg0) {
     Type2 *owner;
     s32 anim;
 
-    owner = func_L00_006AA100(arg0->f90);
+    owner = func_00512138(arg0->f90);
     if (owner != 0) {
         if (owner->f25CC == 0x37) {
             anim = 0xB;
@@ -47,12 +47,12 @@ void func_L01_00461100(Type1 *arg0) {
                 arg0->f40 = arg0->f24->f48[anim];
                 arg0->f44 = owner->f2EF0->f44;
             } else {
-                func_L00_005E75B0(arg0, anim, 6, 0.0f);
+                func_00474148(arg0, anim, 6, 0.0f);
             }
         } else {
             u8 st = arg0->f54;
             if (st == 0xB || st == 0x13 || st == 0x12) {
-                func_L00_005E75B0(arg0, 1, 0xE, 0.0f);
+                func_00474148(arg0, 1, 0xE, 0.0f);
             }
         }
     }
