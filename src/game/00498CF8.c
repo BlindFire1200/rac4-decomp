@@ -1,7 +1,7 @@
 #include "common.h"
 
-extern u8 D_00498D10;
+extern s8 D_0021F5EF;
 
 void func_00498CF8(void) {
-    D_00498D10 = 1;
+    D_0021F5EF = 1;
 }
