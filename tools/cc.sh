@@ -18,6 +18,11 @@ WINE=$(command -v wine >/dev/null 2>&1 && echo wine || true)
 PY=python
 [ -x venv/Scripts/python.exe ] && PY=venv/Scripts/python.exe
 mkdir -p build/tmp
+# GCC 2.95 takes its temporary directory from TMPDIR. Where it is unset the
+# Windows build falls back to C:\tmp, which need not exist or be writable, and
+# the driver then aborts after ~60 s. Pin it to the build tree; what the
+# compiler emits is unaffected.
+export TMPDIR="$(cygpath -w "$PWD/build/tmp" 2>/dev/null || echo "$PWD/build/tmp")"
 # named after the whole output path: two workers' build/try/<func>/p1.o must not share one
 tmp=build/tmp/$(echo "${out%.o}" | tr '/' '_')
 $WINE "$CC" -O2 -G8 -fopt-stack -mno-check-zero-division "$@" -Iinclude -S "$src" -o "$tmp.s"
