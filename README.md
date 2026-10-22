@@ -47,12 +47,12 @@ A function counts as matched on a version when its C, built with its file's own 
 <!-- progress:begin SCUS_974.65 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,581 of 8,948 | 93,952 of 2,193,280 bytes (4.28%) | 4.51% |
+| **Main program** | 1,586 of 8,948 | 94,388 of 2,193,280 bytes (4.30%) | 4.53% |
 | Engine core (core.text) | 384 of 1,637 | 8,972 of 280,336 bytes (3.20%) | 3.81% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
 | Network (net.text) | 263 of 2,441 | 5,376 of 465,620 bytes (1.15%) | 1.33% |
-| Resident menus (.text) | 878 of 4,785 | 64,908 of 1,416,576 bytes (4.58%) | 4.76% |
+| Resident menus (.text) | 883 of 4,785 | 65,344 of 1,416,576 bytes (4.61%) | 4.79% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
 | **Shared level code** | 1,036 of 5,076 | 80,276 of 1,980,204 bytes (4.05%) | 4.74% |
 | **Level-specific code** | 548 of 4,061 | 58,516 of 1,608,940 bytes (3.64%) | 4.31% |
@@ -70,9 +70,9 @@ A function counts as matched on a version when its C, built with its file's own 
 | Level 14: Ghost Station (and 34) | 1 of 29 | 128 of 14,548 bytes (0.88%) | 0.88% |
 | Level 15: Control Level (and 35) | 9 of 135 | 704 of 116,368 bytes (0.60%) | 0.60% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 71 of 374 | 10,600 of 139,984 bytes (7.57%) | 9.43% |
-| **Total** | 3,165 of 18,085 | 232,744 of 5,782,424 bytes (4.03%) | 4.53% |
+| **Total** | 3,170 of 18,085 | 233,180 of 5,782,424 bytes (4.03%) | 4.54% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 93,952 bytes (1.62%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 94,388 bytes (1.63%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 **PAL (`SCES_532.85`)**
@@ -80,12 +80,12 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 <!-- progress:begin SCES_532.85 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 1,570 of 8,945 | 93,868 of 2,202,512 bytes (4.26%) | 4.48% |
+| **Main program** | 1,575 of 8,945 | 94,304 of 2,202,512 bytes (4.28%) | 4.50% |
 | Engine core (core.text) | 384 of 1,641 | 8,972 of 280,488 bytes (3.20%) | 3.81% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
 | Network (net.text) | 263 of 2,441 | 5,376 of 465,620 bytes (1.15%) | 1.33% |
-| Resident menus (.text) | 870 of 4,786 | 65,628 of 1,422,048 bytes (4.62%) | 4.77% |
+| Resident menus (.text) | 875 of 4,786 | 66,064 of 1,422,048 bytes (4.65%) | 4.80% |
 | frontbin's own code | 0 of 17 | 0 of 15,776 bytes (0.00%) | 0.00% |
 | **Shared level code** | 1,024 of 5,088 | 80,072 of 2,008,520 bytes (3.99%) | 4.66% |
 | **Level-specific code** | 549 of 4,080 | 58,600 of 1,601,892 bytes (3.66%) | 4.23% |
@@ -103,9 +103,9 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Level 14: Ghost Station (and 34) | 1 of 23 | 128 of 8,884 bytes (1.44%) | 1.44% |
 | Level 15: Control Level (and 35) | 9 of 134 | 704 of 116,624 bytes (0.60%) | 0.60% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 71 of 374 | 10,600 of 140,340 bytes (7.55%) | 9.41% |
-| **Total** | 3,143 of 18,113 | 232,540 of 5,812,924 bytes (4.00%) | 4.47% |
+| **Total** | 3,148 of 18,113 | 232,976 of 5,812,924 bytes (4.01%) | 4.48% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 93,868 bytes (1.61%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 94,304 bytes (1.62%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 </details>
