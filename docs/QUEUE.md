@@ -186,3 +186,9 @@ From rac1-decomp (the same compiler family, verified there):
   fills it, and no rewording moves it: note it, do not chase it.
 - More saved registers or a bigger frame than retail with the instructions
   otherwise right, after `-mno-split-addresses` was tried: note it.
+- The function ends in a tail call to another function — `ld $ra, 0($sp)`,
+  `j func_XXXXXXXX`, `addiu $sp, ...` — rather than `jal` plus an epilogue:
+  SN GCC 2.95.3 v1.36 emits no `j` for a C call and has no sibling-call
+  option (it rejects `-foptimize-sibling-calls`), and no matched function
+  here contains one. Over 200 functions in the US image end this way. Note
+  it and stop; the C is not the problem.
