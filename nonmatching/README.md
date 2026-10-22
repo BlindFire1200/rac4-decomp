@@ -95,7 +95,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_00665160`](shared/func_L00_00665160.c) | shared | 184 | BYTES 32/180 (14 words differ) |
 | [`func_0013EEB0`](core/func_0013EEB0.c) | core | 140 | BYTES 25/140 |
 | [`func_L00_0071BEB8`](l00_multiplayer_menu/func_L00_0071BEB8.c) | l00_multiplayer_menu | 328 | BYTES 59/328 (24 words differ) |
-| [`func_00148D10`](core/func_00148D10.c) | core | 132 | BYTES 24/132 |
 | [`func_L00_006702E0`](shared/func_L00_006702E0.c) | shared | 192 | BYTES 35/192 (20 words differ) |
 | [`func_L01_005BAEC0`](shared/func_L01_005BAEC0.c) | shared | 168 | BYTES 30/164 |
 | [`func_004C67D8`](game/func_004C67D8.c) | game | 144 | BYTES 27/144 |
