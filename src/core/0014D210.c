@@ -4,7 +4,6 @@
 extern s32 func_0014D8E8(s32 **arg0);
 extern s32 func_0014DED8(void *arg0, s32 arg1, f32 arg2);
 extern s32 *(*D_0016F740_[])(s32, s32);
-#define D_0016F740 (D_0016F740_[0])
 
 /* Allocates and initialises the child object of the validated parent. */
 s32 func_0014D210(u8 *arg0) {
@@ -15,7 +14,7 @@ s32 func_0014D210(u8 *arg0) {
         return 0x17D4;
     }
     holder = *(u8 **)(arg0 + 0x1C);
-    obj = (u8 *)D_0016F740(1, 0x20);
+    obj = (u8 *)D_0016F740_[0](1, 0x20);
     *(u8 **)(holder + 0x4C) = obj;
     if (obj == 0) {
         return 0x1770;

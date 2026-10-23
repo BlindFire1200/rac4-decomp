@@ -23,7 +23,6 @@ struct Type1 {
 };
 
 extern s32 D_00163E74_[];
-#define D_00163E74 (D_00163E74_[0])
 
 extern s32 func_0011C2D8(void *);
 extern void func_0011C6C0(u8 *);
@@ -40,7 +39,7 @@ s32 func_0011C220(u8 *arg0) {
         return 0;
     }
     if (o->f54 == NULL) {
-        o->f54 = (Type2 *)D_00163E74;
+        o->f54 = (Type2 *)D_00163E74_[0];
     }
     p = o->f54;
     if (p->f38 == 0) {

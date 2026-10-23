@@ -2,7 +2,6 @@
 #include "common.h"
 
 extern void (*D_0016F744_[])(s32);
-#define D_0016F744 (D_0016F744_[0])
 
 s32 func_0014DFB0(s32 *);
 s32 func_0014D970(s32 *);
@@ -27,7 +26,7 @@ s32 func_0014D2C0(u8 *arg0) {
         return 0x17E8;
     }
     if (obj != 0) {
-        D_0016F744((s32)obj);
+        D_0016F744_[0]((s32)obj);
     }
     return 0;
 }

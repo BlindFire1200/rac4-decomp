@@ -2,13 +2,12 @@
 #include "common.h"
 
 extern s32 *(*D_0016F740_[])(s32, s32);
-#define D_0016F740 (D_0016F740_[0])
 
 void func_001480F8(void *, s32, s32);
 
 // Allocates a 0x30-byte record and clears its two 16-byte halves.
 s32 func_00148D10(s32 **arg0) {
-    s32 *p = D_0016F740(1, 0x30);
+    s32 *p = D_0016F740_[0](1, 0x30);
 
     *arg0 = p;
     if (p == 0) {

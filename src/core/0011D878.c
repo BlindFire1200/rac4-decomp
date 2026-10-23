@@ -16,7 +16,6 @@ typedef struct Type1 {
 } Type1;
 
 extern s32 D_00163E74_[];
-#define D_00163E74 (D_00163E74_[0])
 
 u32 func_00122A28(Type1 *, s8 *, u8 *);
 
@@ -29,7 +28,7 @@ u32 func_0011D878(s8 *arg0, u32 arg1, s8 *arg2, ...) {
     s.fC = 0x208;
     s.f0 = arg0;
     s.f10 = arg0;
-    s.f54 = D_00163E74;
+    s.f54 = D_00163E74_[0];
     s.f8 = arg1;
     s.f14 = arg1;
     /* first vararg slot: skip the five argument registers saved above it */
