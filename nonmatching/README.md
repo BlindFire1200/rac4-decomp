@@ -60,7 +60,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_00503B88`](game/func_00503B88.c) | game | 168 | BYTES 18/164 (10 words differ) |
 | [`func_L00_00528810`](l00_multiplayer_menu/func_L00_00528810.c) | l00_multiplayer_menu | 168 | BYTES 18/164 |
 | [`func_00148800`](core/func_00148800.c) | core | 180 | BYTES 20/180 |
-| [`func_0011C040`](core/func_0011C040.c) | core | 96 | BYTES 11/96 |
 | [`func_004B7558`](game/func_004B7558.c) | game | 96 | BYTES 11/96 |
 | [`func_00549C18`](game/func_00549C18.c) | game | 136 | BYTES 16/136 |
 | [`func_L00_006F5E28`](shared/func_L00_006F5E28.c) | shared | 472 | BYTES 56/472 |
@@ -81,10 +80,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_01EC0410`](net/func_01EC0410.c) | net | 128 | BYTES 18/128 (6 words differ) |
 | [`func_L00_006AA3D0`](shared/func_L00_006AA3D0.c) | shared | 128 | BYTES 18/128 |
 | [`func_L00_006AAE40`](shared/func_L00_006AAE40.c) | shared | 128 | BYTES 18/124 |
-| [`func_0011C1C0`](core/func_0011C1C0.c) | core | 96 | BYTES 14/96 |
-| [`func_0011EC90`](core/func_0011EC90.c) | core | 96 | BYTES 14/96 |
-| [`func_0011EF00`](core/func_0011EF00.c) | core | 96 | BYTES 14/96 |
-| [`func_00120DA0`](core/func_00120DA0.c) | core | 96 | BYTES 14/96 |
 | [`func_01EEF7E4`](net/func_01EEF7E4.c) | net | 48 | BYTES 7/48 (7 words differ) |
 | [`func_L00_00599710`](shared/func_L00_00599710.c) | shared | 520 | BYTES 78/516 |
 | [`func_00162698`](core/func_00162698.c) | core | 132 | BYTES 20/132 |
@@ -100,7 +95,6 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_00665160`](shared/func_L00_00665160.c) | shared | 184 | BYTES 32/180 (14 words differ) |
 | [`func_0013EEB0`](core/func_0013EEB0.c) | core | 140 | BYTES 25/140 |
 | [`func_L00_0071BEB8`](l00_multiplayer_menu/func_L00_0071BEB8.c) | l00_multiplayer_menu | 328 | BYTES 59/328 (24 words differ) |
-| [`func_00148D10`](core/func_00148D10.c) | core | 132 | BYTES 24/132 |
 | [`func_L00_006702E0`](shared/func_L00_006702E0.c) | shared | 192 | BYTES 35/192 (20 words differ) |
 | [`func_L01_005BAEC0`](shared/func_L01_005BAEC0.c) | shared | 168 | BYTES 30/164 |
 | [`func_004C67D8`](game/func_004C67D8.c) | game | 144 | BYTES 27/144 |
