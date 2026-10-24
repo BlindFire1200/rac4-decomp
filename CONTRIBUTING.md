@@ -14,6 +14,7 @@ The full procedure is in [`docs/WORKFLOW.md`](docs/WORKFLOW.md). In short:
    compiles each candidate through the real pipeline and says `EXACT` or
    how many bytes are off, in seconds, without touching `src/`.
    [`docs/LEVERS.md`](docs/LEVERS.md) lists what makes functions match.
+   For register or order near misses, [`docs/PERMUTER.md`](docs/PERMUTER.md).
    When it matches, put the C in its file under `src/`
    ([`docs/WORKFLOW.md`](docs/WORKFLOW.md) says which).
 4. Build (`bash tools/build.sh`) and verify with
