@@ -173,3 +173,34 @@ container with Wine, the repository mounted at the same path as on the host.
 It uses Podman if present, otherwise Docker. The image is the one rac1-decomp
 publishes (`ghcr.io/lynder063/rac1-build`, override with `RAC_BUILD_IMAGE`);
 if it cannot be pulled, it is built from `tools/docker/Dockerfile`.
+
+## Sony EE GCC 2.9 route for whole-file builds
+
+Most RAC4 code uses SN GCC 2.95.3 v1.36 and the SN-output fixups described
+above. A source file may opt into Sony EE GCC 2.9-ee-991111 with a standalone
+`@ee29` token in its first-line `cflags` (for example,
+`/* cflags: @ee29 -O2 -G0 */`). The `tools/build.sh` flag reader passes these
+flags to `tools/cc.sh` for the entire translation unit; do not treat this as a
+per-function option.
+
+For that route, `tools/cc.sh` invokes
+`toolchain/sn-prodg-24/local/sce/ee/gcc/bin/ee-gcc.exe` with the explicitly
+pinned backend at `lib/gcc-lib/ee/2.9-ee-991111`, emits assembly, and assembles
+it with the SN GCC 2.95.3 driver. The `@ee29` marker is removed before compiler
+invocation. If no other flags are supplied, the route uses `-O2 -G0`. It
+intentionally skips the SN-specific `ps2eeas_dli.py`, `ps2eeas_sdata.py`, and
+`ps2eeas_nops.py` passes; these reproduce transformations of SN's compiler
+output and must not be applied to the Sony compiler's output.
+
+Both toolchain mirrors are third-party distributions and remain uncommitted
+under ignored `toolchain/`. This route uses their local compiler binaries; it
+does not use Sony SDK source or sample code. A route-level shell test only
+checks command selection, argument forwarding, output creation, and diagnostics.
+It does not establish compiler byte parity. Exact matching still requires the
+project's normal retail comparison and RAC4 verification pipeline, including
+relocation review, before any match claim.
+The command-route tests require Bash and Python but no retail files or proprietary tools:
+
+```
+python tools/test_cc_routes.py
+```
