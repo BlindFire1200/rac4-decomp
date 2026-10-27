@@ -1,51 +1,51 @@
 {
  "version": 2,
  "measures": {
-  "fuzzy_match_percent": 5.074782,
+  "fuzzy_match_percent": 5.078586,
   "total_code": "5782424",
-  "matched_code": "264616",
-  "matched_code_percent": 4.576212,
+  "matched_code": "264836",
+  "matched_code_percent": 4.580017,
   "total_functions": 18085,
-  "matched_functions": 3603,
-  "matched_functions_percent": 19.922588,
-  "complete_code": "117716",
-  "complete_code_percent": 2.035755,
-  "total_units": 1948,
-  "complete_units": 1888
+  "matched_functions": 3604,
+  "matched_functions_percent": 19.928117,
+  "complete_code": "117936",
+  "complete_code_percent": 2.03956,
+  "total_units": 1949,
+  "complete_units": 1889
  },
  "categories": [
   {
    "id": "core",
    "name": "Main program",
    "measures": {
-    "fuzzy_match_percent": 5.573207,
+    "fuzzy_match_percent": 5.583237,
     "total_code": "2193280",
-    "matched_code": "117716",
-    "matched_code_percent": 5.367121,
+    "matched_code": "117936",
+    "matched_code_percent": 5.377152,
     "total_functions": 8948,
-    "matched_functions": 1912,
-    "matched_functions_percent": 21.367903,
-    "complete_code": "117716",
-    "complete_code_percent": 5.367121,
-    "total_units": 1933,
-    "complete_units": 1888
+    "matched_functions": 1913,
+    "matched_functions_percent": 21.379079,
+    "complete_code": "117936",
+    "complete_code_percent": 5.377152,
+    "total_units": 1934,
+    "complete_units": 1889
    }
   },
   {
    "id": "core_text",
    "name": "Engine core (core.text)",
    "measures": {
-    "fuzzy_match_percent": 7.367593,
+    "fuzzy_match_percent": 7.44607,
     "total_code": "280336",
-    "matched_code": "19472",
-    "matched_code_percent": 6.945951,
+    "matched_code": "19692",
+    "matched_code_percent": 7.024428,
     "total_functions": 1637,
-    "matched_functions": 490,
-    "matched_functions_percent": 29.932804,
+    "matched_functions": 491,
+    "matched_functions_percent": 29.993891,
     "complete_code": "0",
     "complete_code_percent": 0.0,
-    "total_units": 494,
-    "complete_units": 488
+    "total_units": 495,
+    "complete_units": 489
    }
   },
   {
@@ -1013,6 +1013,41 @@
    "metadata": {
     "complete": true,
     "source_path": "src/core/0011C6C0.c",
+    "progress_categories": [
+     "core",
+     "core_text"
+    ]
+   }
+  },
+  {
+   "name": "core/0011C840",
+   "measures": {
+    "fuzzy_match_percent": 100.0,
+    "total_code": "220",
+    "matched_code": "220",
+    "matched_code_percent": 100.0,
+    "total_functions": 1,
+    "matched_functions": 1,
+    "matched_functions_percent": 100.0,
+    "complete_code": "220",
+    "complete_code_percent": 100.0,
+    "total_units": 1,
+    "complete_units": 1
+   },
+   "functions": [
+    {
+     "name": "func_0011C840",
+     "size": "220",
+     "fuzzy_match_percent": 100.0,
+     "address": "0",
+     "metadata": {
+      "virtual_address": "1165376"
+     }
+    }
+   ],
+   "metadata": {
+    "complete": true,
+    "source_path": "src/core/0011C840.c",
     "progress_categories": [
      "core",
      "core_text"
@@ -101882,11 +101917,11 @@
   {
    "name": "main/core.text/0011xxxx",
    "measures": {
-    "fuzzy_match_percent": 0.611004,
-    "total_code": "19640",
+    "fuzzy_match_percent": 0.617926,
+    "total_code": "19420",
     "matched_code": "0",
     "matched_code_percent": 0.0,
-    "total_functions": 66,
+    "total_functions": 65,
     "matched_functions": 0,
     "matched_functions_percent": 0.0,
     "complete_code": "0",
@@ -102082,15 +102117,6 @@
      "address": "9752",
      "metadata": {
       "virtual_address": "1165208"
-     }
-    },
-    {
-     "name": "func_0011C840",
-     "size": "220",
-     "fuzzy_match_percent": 0.0,
-     "address": "9920",
-     "metadata": {
-      "virtual_address": "1165376"
      }
     },
     {
