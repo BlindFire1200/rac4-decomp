@@ -23,6 +23,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_004B6970`](game/func_004B6970.c) | game | 32 | BYTES 1/28 |
 | [`func_004B6990`](game/func_004B6990.c) | game | 32 | BYTES 1/28 |
 | [`func_004F6498`](game/func_004F6498.c) | game | 32 | BYTES 1/28 |
+| [`func_0050C740`](game/func_0050C740.c) | game | 32 | BYTES 1/28 |
 | [`func_L01_0044A0F0`](shared/func_L01_0044A0F0.c) | shared | 144 | BYTES 5/140 |
 | [`func_L01_0047E690`](shared/func_L01_0047E690.c) | shared | 168 | BYTES 6/168 |
 | [`func_L00_00715B30`](l00_multiplayer_menu/func_L00_00715B30.c) | l00_multiplayer_menu | 1160 | BYTES 45/1160 |
