@@ -51,7 +51,7 @@ A function counts as matched on a version when its C, built with its file's own 
 | Engine core (core.text) | 512 of 1,637 | 18,088 of 280,336 bytes (6.45%) | 6.79% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
-| Network (net.text) | 421 of 2,441 | 12,316 of 465,620 bytes (2.65%) | 2.82% |
+| Network (net.text) | 421 of 2,441 | 12,316 of 465,620 bytes (2.65%) | 2.83% |
 | Resident menus (.text) | 1,073 of 4,785 | 75,576 of 1,416,576 bytes (5.34%) | 5.51% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
 | **Shared level code** | 1,082 of 5,076 | 83,504 of 1,980,204 bytes (4.22%) | 4.90% |
@@ -84,7 +84,7 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Engine core (core.text) | 512 of 1,641 | 18,068 of 280,488 bytes (6.44%) | 6.78% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
-| Network (net.text) | 421 of 2,441 | 12,316 of 465,620 bytes (2.65%) | 2.82% |
+| Network (net.text) | 421 of 2,441 | 12,316 of 465,620 bytes (2.65%) | 2.83% |
 | Resident menus (.text) | 1,079 of 4,786 | 77,760 of 1,422,048 bytes (5.47%) | 5.62% |
 | frontbin's own code | 1 of 17 | 20 of 15,776 bytes (0.13%) | 0.13% |
 | **Shared level code** | 1,087 of 5,088 | 85,400 of 2,008,520 bytes (4.25%) | 4.91% |
