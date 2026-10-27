@@ -1,11 +1,12 @@
-/* Not matching yet: BYTES 8/140 (tools/try_func.py func_00477120 --diff). Not part of the build. */
 #include "common.h"
+
 extern void func_004700B0(void *, s32, s32, s32);
-extern void *func_00476F50(void);
+extern void *func_00476F50(void *);
+// Clears a pending flag on an entry (or the default one) and applies its packed color to arg0.
 void func_00477120(void *arg0, void *arg1) {
     void *s0 = arg1;
     s32 v0, a1_val, a2, a3, color;
-    if (!s0) { s0 = func_00476F50(); if (!s0) return; }
+    if (!s0) { s0 = func_00476F50(arg0); if (!s0) return; }
     v0 = *(s16 *)((u8 *)s0 + 2);
     if (v0 == 0) return;
     a1_val = *(s32 *)((u8 *)s0 + 8);

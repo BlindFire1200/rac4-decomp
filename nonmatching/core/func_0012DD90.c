@@ -1,4 +1,5 @@
-/* Not matching yet: BYTES 7/144 (tools/try_func.py func_0012DD90 --diff). Not part of the build. */
+/* Not matching yet: BYTES 6/144 (tools/try_func.py func_0012DD90 --diff). Not part of the build. */
+/* cflags: -fno-opt-stack */
 s32 func_0012D420(void);
 void func_0012D470(void);
 void func_0012DC10(s32);
