@@ -380,3 +380,13 @@ All entries below refer to OpenRAC/rac3-decomp commit `403f30a9561324342c8780296
 | `src/game/00506A78.c` | `src/boot_elf/text/3E7758.c` | `func_003E9710` / `func_003E95B0` |
 | `src/game/0050DA70.c` | `src/boot_elf/text/3E5C60.c` | `func_003E5C78` / `func_003E5B30` |
 | `src/game/00510C18.c` | `src/boot_elf/core/121860.c` | `func_00121890` / `func_00121890` |
+
+## Lombyte I/O reference
+
+`src/core/00127168.c` uses the public
+[Lombyte decompilation](https://github.com/lombyte-project/Lombyte) as a reference:
+`src/sdk/library/write.c` and `read.c` at commit
+`0cf08ef39c8a2e37f122a5fdf5393856d7aefb09`. Call targets and shared state
+were retargeted against Deadlocked's retail program; pointer parameters agree
+with the TTY implementation in the public UYA decompilation. The source's
+newlib attribution comments are retained.
