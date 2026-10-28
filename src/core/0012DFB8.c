@@ -2,7 +2,6 @@
 /* C adapted from rac3-decomp func_001254B8 (NTSC-U func_001254B8, commit 403f30a9) */
 #include "common.h"
 
-extern s32 D_00165D28;
 typedef struct Type1 {
     struct Type1 *f0;
     struct Type1 *f4;
@@ -11,6 +10,10 @@ typedef struct Type1 {
     unsigned long f18;
     unsigned long f20;
 } Type1;
+
+/* State prefix includes the list head at offset 0x18. */
+typedef struct { u8 pad0[0x18]; Type1 *head; } ListState_12DFB8;
+extern ListState_12DFB8 D_00165D28;
 
 void *func_0012DFB8(Type1 *h)
 {
@@ -21,10 +24,7 @@ void *func_0012DFB8(Type1 *h)
 
     f4 = 0;
     var1 = h->f20 + h->f10 - h->f18;
-    {
-        u8 *q = (u8 *)&D_00165D28;
-        cur = *(Type1 **)(q + 0x18);
-    }
+    cur = D_00165D28.head;
     for (;;) {
         if (cur == 0) {
             break;
@@ -44,10 +44,7 @@ void *func_0012DFB8(Type1 *h)
     if (f4 != 0) {
         f4->f0 = h;
     } else {
-        {
-            u8 *q = (u8 *)&D_00165D28;
-            *(Type1 **)(q + 0x18) = h;
-        }
+        D_00165D28.head = h;
     }
     return ret;
 }
