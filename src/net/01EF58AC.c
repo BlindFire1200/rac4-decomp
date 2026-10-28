@@ -1,0 +1,18 @@
+/* cflags: -mno-split-addresses */
+#include "common.h"
+
+typedef struct Type1 Type1;
+struct Type1 {
+    s32 f0;
+    s32 f4;
+    s32 f8;
+};
+
+extern s32 D_00170020_[];
+#define D_00170020 (D_00170020_[0])
+
+void func_01EF58AC(Type1 *arg0, s32 arg1) {
+    arg0->f4 = arg1;
+    arg0->f8 = &D_00170020;
+    arg0->f0 = 0;
+}
