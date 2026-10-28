@@ -1,7 +1,14 @@
+/* cflags: -G0 */
 #include "common.h"
 
-// Clears the word at offset 0x18 and clears bit 0 of the word at offset 0x10.
-void func_00155CC8(char *arg0) {
-    *(s32 *)(arg0 + 0x18) = 0;
-    *(s32 *)(arg0 + 0x10) = *(s32 *)(arg0 + 0x10) & 0xFFFFFFFE;
+typedef struct {
+    u8 pad[0x10];
+    u32 f10;
+    u8 pad2[4];
+    s32 f18;
+} Obj;
+
+void func_00155CC8(Obj *o) {
+    o->f18 = 0;
+    o->f10 &= ~1;
 }

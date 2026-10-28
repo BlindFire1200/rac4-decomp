@@ -1,10 +1,11 @@
+/* cflags: -G0 */
 #include "common.h"
 
-extern u8 D_21D940_[];
+extern s32 D_21D940[];
 
-/* Zeroes the words at offsets 8 and 4 of the global block. */
 void func_001637F0(void) {
-    u8 *p = D_21D940_;
-    *(s32 *)(p + 4) = 0;
-    *(s32 *)(p + 8) = 0;
+    s32 *g = D_21D940;
+
+    g[1] = 0;
+    g[2] = 0;
 }

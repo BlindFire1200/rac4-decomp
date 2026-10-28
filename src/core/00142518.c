@@ -1,9 +1,9 @@
+/* cflags: -G0 */
 #include "common.h"
 
-/* Stores arg1 at offsets 0, 8 and 0xC and arg2 at offset 4 of the object. */
-void func_00142518(u8 *a0, s32 a1, s32 a2) {
-    *(s32 *)(a0 + 0) = a1;
-    *(s32 *)(a0 + 4) = a2;
-    *(s32 *)(a0 + 8) = a1;
-    *(s32 *)(a0 + 0xC) = a1;
+void func_00142518(s32 *p, s32 a, s32 b) {
+    p[0] = a;
+    p[2] = a;
+    p[1] = b;
+    p[3] = a;
 }

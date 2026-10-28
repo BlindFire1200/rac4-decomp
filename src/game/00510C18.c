@@ -1,8 +1,8 @@
+/* cflags: @ee29 -O2 -G0 */
+/* C adapted from rac3-decomp func_00121890 (NTSC-U func_00121890, commit 403f30a9) */
 #include "common.h"
 
-extern s32 D_3367B8[];
-
-// Return the word at D_3367B8 indexed by arg0.
-s32 func_00510C18(s32 arg0) {
-    return *(s32 *)((arg0 * 4) + (char *)D_3367B8);
+extern s32 D_003367B8[];
+s32 func_00510C18(s32 i) {
+    return D_003367B8[i];
 }
