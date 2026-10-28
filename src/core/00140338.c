@@ -16,8 +16,8 @@ typedef struct {
     u32 f10C;
     u32 f110;
     u32 f114;
-    s32 f118[3];
-    s32 f124;
+    /* Contiguous four-word state spans offsets 0x118 through 0x127. */
+    s32 f118[4];
     u8 pad128[0x134 - 0x128];
     s32 f134;
     s32 f138;
