@@ -4,7 +4,9 @@
 
 extern s32 D_00165FD0;
 extern s32 D_00165FF4;
-extern s32 D_00167190;
+/* RPC bind state, shared with the initialization routine. */
+typedef struct { u8 pad0[0x24]; s32 result; } RpcState_137448;
+extern RpcState_137448 D_00167190;
 extern s32 func_001294F0();
 extern u8 D_00194938[];
 extern s32 func_0012A918(void *);
