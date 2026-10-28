@@ -9,5 +9,3 @@ void func_L00_00717C48(Type1 *p) {
     if (p->c < plus(p->a, 1) - p->b) p->c = plus(p->a, 1) - p->b;
     if (p->c < 0) p->c = 0;
 }
-
-

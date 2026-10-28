@@ -14,4 +14,3 @@ void func_L01_0045F978(Actor *a) {
 
     }
 }
-

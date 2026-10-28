@@ -26,5 +26,3 @@ void func_004AF020(void) {
     D_0021F7D8 = 0;
     D_0021F7DC = 2;
 }
-
-

@@ -9,4 +9,3 @@ void func_L00_00776D90(Block *p) {
     t->flag = 0;
     t->data = *p;
 }
-

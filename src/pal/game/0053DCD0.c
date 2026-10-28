@@ -15,6 +15,3 @@ Type1 *func_0053DCD0(int *arg0, int arg1, int arg2, int arg3) {
  func_0053DF20(p, arg2, arg3);
  return p;
 }
-
-
-

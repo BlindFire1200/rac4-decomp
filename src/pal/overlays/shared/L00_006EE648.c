@@ -23,5 +23,3 @@ void func_L00_006EE648(Arg *arg) {
     if (obj->time < D_001721E0[0x218/4] - 0x4b0)
         obj->time = D_001721E0[0x218/4];
 }
-
-

@@ -6,6 +6,3 @@ unsigned int func_005123F0(unsigned int a, unsigned int b, unsigned int c) {
     *p = n + 1;
     return (a << 24) | (b << 28) | (c & 0xfff) | (((int)((unsigned int)n << 16) >> 4) & 0x00fff000);
 }
-
-
-

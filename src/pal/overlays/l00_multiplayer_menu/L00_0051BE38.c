@@ -14,4 +14,3 @@ void func_L00_0051BE38(unsigned int *state)
     state[22] = 0;
     func_0011A518(state + 6, 0, 0x40);
 }
-

@@ -11,4 +11,3 @@ int func_01EBA758(Owner *owner, int unused, Packet *input) {
     }
     return 0;
 }
-

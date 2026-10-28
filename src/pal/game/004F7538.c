@@ -28,5 +28,3 @@ void func_004F7538(PalCommandCursor *p, int *count, int a, int b, int c, int d, 
     *p->words++ = ((int)D_00003E90 >> 3) | 0x14000000;
     *count += 2;
 }
-
-

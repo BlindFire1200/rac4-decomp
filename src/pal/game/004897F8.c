@@ -15,5 +15,3 @@ unsigned char *func_004897F8(int index) {
     if (D_00243570[slot] != index) return D_003F0E8C + D_00246250[slot] * 32;
     return D_003F0E8C + D_00243480[slot] * 32;
 }
-
-

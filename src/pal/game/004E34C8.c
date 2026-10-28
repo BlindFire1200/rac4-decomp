@@ -19,4 +19,3 @@ void func_004E34C8(void) {
         p++;
     } while ((s32)p < (s32)end);
 }
-

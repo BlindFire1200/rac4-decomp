@@ -25,5 +25,3 @@ void func_L00_005C9C50(void) {
     D_001DFB30[0].fields[2] = -1;
     D_001DFB30[0].fields[3] = -1;
 }
-
-

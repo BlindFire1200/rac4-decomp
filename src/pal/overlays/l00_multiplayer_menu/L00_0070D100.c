@@ -13,4 +13,3 @@ s32 func_L00_0070D100(s32 arg0, s32 arg1, s32 arg2) {
     D_003E4F00[index].b = arg1;
     return index;
 }
-

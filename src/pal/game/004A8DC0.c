@@ -13,4 +13,3 @@ void func_004A8DC0(s32 arg0, s32 arg1) {
         D_308208[arg0].flags |= 8;
     }
 }
-

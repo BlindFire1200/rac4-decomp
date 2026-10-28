@@ -10,5 +10,3 @@ void func_00502BB8(float *a, float *b, float *c, float *d) {
     *c = p->c < *c ? p->c : *c;
     *d = p->d < *d ? p->d : *d;
 }
-
-

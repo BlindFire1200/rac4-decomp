@@ -17,8 +17,3 @@ int func_004D7DD8(void) {
     }
     return result + bit(*(unsigned char *)addr((unsigned int)D_001F8878, 0xF10));
 }
-
-
-
-
-

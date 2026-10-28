@@ -12,4 +12,3 @@ void func_L00_0076AF68(Block *arg) {
         t->f29 = 0;
     }
 }
-

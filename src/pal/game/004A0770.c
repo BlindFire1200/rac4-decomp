@@ -15,6 +15,3 @@ void func_004A0770(void) {
     func_0049CCF8(i, 0, 0, a, b, c, d);
     func_005063C0(add((unsigned int)i << 6, add((unsigned int)p->value << 1, 0x14000eu)), 0x80d0d0d0);
 }
-
-
-

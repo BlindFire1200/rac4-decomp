@@ -12,4 +12,3 @@ void func_L00_0077EB90(Copy *arg0) {
         target->data = *arg0;
     }
 }
-

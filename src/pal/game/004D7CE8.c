@@ -15,6 +15,3 @@ int func_004D7CE8(void) {
     }
     return result;
 }
-
-
-

@@ -16,4 +16,3 @@ Type1 *func_L00_0077C4C8(Type1 *p) {
  p->f198 = 0; p->f199 = 0; p->f19C = -1; p->f1A0 = -1; p->f1A4 = 0; p->f1AC = -1; p->f1A8 = 10000;
  return p;
 }
-

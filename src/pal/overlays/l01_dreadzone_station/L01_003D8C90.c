@@ -21,5 +21,3 @@ void func_L01_003D8C90(Owner *owner, int amount) {
         if (second) second->value = owner->target->value;
     } while ((int)record < (int)end);
 }
-
-
