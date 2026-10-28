@@ -383,7 +383,7 @@ All entries below refer to OpenRAC/rac3-decomp commit `403f30a9561324342c8780296
 
 ## Lombyte I/O reference
 
-`src/core/00127168.c` uses the public
+`src/core/00127168.c` and `src/core/001271E8.c` use the public
 [Lombyte decompilation](https://github.com/lombyte-project/Lombyte) as a reference:
 `src/sdk/library/write.c` and `read.c` at commit
 `0cf08ef39c8a2e37f122a5fdf5393856d7aefb09`. Call targets and shared state
