@@ -24,7 +24,7 @@ toolchain linked into the game.
 
 ## Other public decompilations (`src/core/`, `src/net/`, `src/game/`)
 
-The C of 175 functions started from the matching C of the equivalent functions in
+The C of 183 functions started from the matching C of the equivalent functions in
 [rac3-decomp](https://github.com/OpenRAC/rac3-decomp) (*Ratchet & Clank: Up Your Arsenal*, commit
 `403f30a9561324342c87802960eefbaaae13b372`), found by comparing the opcode sequences of the two games'
 retail code: Sony's library code and the engine's own helpers are the same in both games. That project's
@@ -36,6 +36,16 @@ rac3-uya-decomp (vetusmagnus and contributors) and to its maintainers and contri
 Each such file says so in a comment on its first lines (`C adapted from rac3-decomp func_XXXXXXXX`); the
 exact donor file, function and commit of every one are recorded in the maintainers' review notes. The text
 was then given this game's names and checked against this game's code.
+
+The C of 3 functions started from the matching C of equivalent functions in
+[rac2-decomp](https://github.com/OpenRAC/rac2-decomp) (*Ratchet & Clank: Going Commando*, GPL-3.0, commit
+`1243c8ea`): `src/core/001399E0.c`, `src/core/00139A80.c`, `src/core/00139AE0.c`. They were found the same way (opcode sequences), renamed and checked against this game's code;
+each file says so in its first-line comment (`C adapted from rac2-decomp func_XXXXXXXX`).
+
+The C of 5 functions (`src/core/00155908.c`, `src/game/0046D6A8.c`, `src/game/0049B5E0.c`, `src/game/004A7C50.c`,
+`src/game/004B5E18.c`) started from the SCES_532.85 reconstruction of the same routines in OpenRAC/rac4-decomp pull
+request #43 (Shaar-games), and was then checked against this game's SCUS_974.65 bytes. Each file says so in its first-line
+comment.
 
 ## Standard C library algorithm references (`src/core/`)
 
@@ -380,6 +390,15 @@ All entries below refer to OpenRAC/rac3-decomp commit `403f30a9561324342c8780296
 | `src/game/00506A78.c` | `src/boot_elf/text/3E7758.c` | `func_003E9710` / `func_003E95B0` |
 | `src/game/0050DA70.c` | `src/boot_elf/text/3E5C60.c` | `func_003E5C78` / `func_003E5B30` |
 | `src/game/00510C18.c` | `src/boot_elf/core/121860.c` | `func_00121890` / `func_00121890` |
+
+| `src/core/0012C3C8.c` | `src/boot_elf/core/123B98.c` | `func_00123C90` / `func_00123C90` |
+| `src/core/0012C888.c` | `src/boot_elf/core/123ED8.c` | `func_00123ED8` / `func_00123ED8` |
+| `src/core/00137558.c` | `src/boot_elf/core/12AE20.c` | `func_0012AEA8` / `func_0012AEA8` |
+| `src/core/00146748.c` | `src/boot_elf/core/13A150.c` | `func_0013A190` / `func_0013A190` |
+| `src/core/00146A60.c` | `src/boot_elf/core/13A150.c` | `func_0013A190` / `func_0013A190` |
+| `src/game/004F1AE8.c` | `src/frontbin/3AF2A0.c` | `func_003B2478` / `func_003ACED0` |
+| `src/game/00500F70.c` | `src/boot_elf/text/3B3408.c` | `func_003E6E50` / `func_003E6D08` |
+| `src/game/00501000.c` | `src/boot_elf/text/3B3408.c` | `func_003E6E50` / `func_003E6D08` |
 
 ## Lombyte I/O reference
 

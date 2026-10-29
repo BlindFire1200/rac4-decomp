@@ -1,15 +1,28 @@
 #include "common.h"
 
 typedef struct {
-    char f00[0x10];
+    u8 f0;
+    u8 pad1[3];
+    s32 f4;
+    s32 f8;
+} Type2;
+
+typedef struct {
+    s32 f0;
+    s32 f4;
+    s32 f8;
+    s32 fC;
     s32 f10;
-    char f14[0x1F8 - 0x14];
+    u8 pad14[0x194 - 0x14];
+    Type2 f194[8];
+    s32 f1F4;
 } Type1;
 
 extern Type1 D_003098F0[];
 extern s32 func_00505B20(void);
 extern s32 func_004A0208(s32);
-extern void func_0049B1A0(s32, s32, s32);
+/* The callee reads two arguments (index, value); these callers also pass a third that the callee overwrites, so it is declared without a parameter list. */
+extern void func_0049B1A0();
 
 // Sets up the current player's slot in the global player table and notifies the game about it.
 void func_004B7238(void) {

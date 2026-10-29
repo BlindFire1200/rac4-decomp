@@ -1,9 +1,26 @@
 #include "common.h"
 
-extern s32 D_003098F0_[];
-#define D_003098F0 (D_003098F0_[0])
+typedef struct {
+    u8 f0;
+    u8 pad1[3];
+    s32 f4;
+    s32 f8;
+} Type2;
+
+typedef struct {
+    s32 f0;
+    s32 f4;
+    s32 f8;
+    s32 fC;
+    s32 f10;
+    u8 pad14[0x194 - 0x14];
+    Type2 f194[8];
+    s32 f1F4;
+} Type1;
+
+extern Type1 D_003098F0[];
 
 void func_004B5DF8(s32 arg0) {
-    s32 *ptr = (s32 *)((char *)&D_003098F0 + (arg0 * 0x1F8));
-    *(s32 *)((char *)ptr + 0x1F4) = 0;
+    Type1 *rec = D_003098F0 + arg0;
+    rec->f1F4 = 0;
 }
