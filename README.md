@@ -47,11 +47,11 @@ A function counts as matched on a version when its C, built with its file's own 
 <!-- progress:begin SCUS_974.65 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 2,159 of 8,948 | 161,536 of 2,193,280 bytes (7.37%) | 7.55% |
+| **Main program** | 2,160 of 8,948 | 161,620 of 2,193,280 bytes (7.37%) | 7.55% |
 | Engine core (core.text) | 717 of 1,695 | 69,088 of 298,900 bytes (23.11%) | 23.38% |
 | libgcc | 2 of 2 | 16 of 16 bytes (100.00%) | 100.00% |
 | Network (net.text) | 376 of 2,441 | 11,132 of 465,620 bytes (2.39%) | 2.56% |
-| Resident menus (.text) | 1,061 of 4,785 | 80,496 of 1,416,576 bytes (5.68%) | 5.85% |
+| Resident menus (.text) | 1,062 of 4,785 | 80,580 of 1,416,576 bytes (5.69%) | 5.86% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
 | **Shared level code** | 1,082 of 5,076 | 83,504 of 1,980,204 bytes (4.22%) | 4.90% |
 | **Level-specific code** | 609 of 4,061 | 63,396 of 1,608,940 bytes (3.94%) | 4.61% |
@@ -69,9 +69,9 @@ A function counts as matched on a version when its C, built with its file's own 
 | Level 14: Ghost Station (and 34) | 6 of 29 | 444 of 14,548 bytes (3.05%) | 3.05% |
 | Level 15: Control Level (and 35) | 13 of 135 | 932 of 116,368 bytes (0.80%) | 0.80% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 81 of 374 | 11,296 of 139,984 bytes (8.07%) | 9.93% |
-| **Total** | 3,850 of 18,085 | 308,436 of 5,782,424 bytes (5.33%) | 5.82% |
+| **Total** | 3,851 of 18,085 | 308,520 of 5,782,424 bytes (5.34%) | 5.83% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 161,536 bytes (2.79%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 161,620 bytes (2.80%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 **PAL (`SCES_532.85`)**
@@ -79,11 +79,11 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 <!-- progress:begin SCES_532.85 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 2,163 of 8,945 | 163,356 of 2,202,512 bytes (7.42%) | 7.59% |
+| **Main program** | 2,164 of 8,945 | 163,440 of 2,202,512 bytes (7.42%) | 7.59% |
 | Engine core (core.text) | 717 of 1,699 | 69,068 of 299,052 bytes (23.10%) | 23.36% |
 | libgcc | 2 of 2 | 16 of 16 bytes (100.00%) | 100.00% |
 | Network (net.text) | 376 of 2,441 | 11,132 of 465,620 bytes (2.39%) | 2.56% |
-| Resident menus (.text) | 1,068 of 4,786 | 83,140 of 1,422,048 bytes (5.85%) | 6.00% |
+| Resident menus (.text) | 1,069 of 4,786 | 83,224 of 1,422,048 bytes (5.85%) | 6.00% |
 | frontbin's own code | 0 of 17 | 0 of 15,776 bytes (0.00%) | 0.00% |
 | **Shared level code** | 1,091 of 5,088 | 87,076 of 2,008,520 bytes (4.34%) | 5.00% |
 | **Level-specific code** | 616 of 4,080 | 64,028 of 1,601,892 bytes (4.00%) | 4.56% |
@@ -101,9 +101,9 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Level 14: Ghost Station (and 34) | 6 of 23 | 444 of 8,884 bytes (5.00%) | 5.00% |
 | Level 15: Control Level (and 35) | 13 of 134 | 932 of 116,624 bytes (0.80%) | 0.80% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 81 of 374 | 11,296 of 140,340 bytes (8.05%) | 9.91% |
-| **Total** | 3,870 of 18,113 | 314,460 of 5,812,924 bytes (5.41%) | 5.86% |
+| **Total** | 3,871 of 18,113 | 314,544 of 5,812,924 bytes (5.41%) | 5.86% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 163,356 bytes (2.81%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 163,440 bytes (2.81%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 </details>
