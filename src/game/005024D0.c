@@ -1,12 +1,10 @@
+/* cflags: -G0 */
 #include "common.h"
 
-extern u32 func_00502448(void);
+extern s32 func_00502448();
 
-// Unpack a 32-bit value into high and low 16-bit parts.
-void func_005024D0(void *unused, u32 *arg1, s32 *arg2) {
-    u32 temp_v0;
-
-    temp_v0 = func_00502448();
-    *arg1 = temp_v0 >> 0x10;
-    *arg2 = temp_v0 & 0xFFFF;
+void func_005024D0(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var1 = func_00502448();
+    (*(s32 *)((arg1 + 0))) = ((u32)var1 >> 0x10);
+    (*(s32 *)((arg2 + 0))) = (var1 & 0xFFFF);
 }

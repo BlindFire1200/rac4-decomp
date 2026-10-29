@@ -1,13 +1,26 @@
 #include "common.h"
 
 typedef struct {
-    u8 pad00[8];
-    s32 f08;
-    u8 pad0C[0x1F8 - 0xC];
+    u8 f0;
+    u8 pad1[3];
+    s32 f4;
+    s32 f8;
+} Type2;
+
+typedef struct {
+    s32 f0;
+    s32 f4;
+    s32 f8;
+    s32 fC;
+    s32 f10;
+    u8 pad14[0x194 - 0x14];
+    Type2 f194[8];
+    s32 f1F4;
 } Type1;
 
 extern Type1 D_003098F0[];
-extern s32 func_0049B1A0(s32, s32, s32);
+/* The callee reads two arguments (index, value); these callers also pass a third that the callee overwrites, so it is declared without a parameter list. */
+extern void func_0049B1A0();
 extern s32 func_004A0208(s32);
 extern s32 func_00505B20(void);
 
@@ -15,6 +28,6 @@ extern s32 func_00505B20(void);
 void func_004B7448(void) {
     s32 owner = func_00505B20();
     s32 value = func_004A0208(owner);
-    D_003098F0[owner].f08 = value;
+    D_003098F0[owner].f8 = value;
     func_0049B1A0(owner, 0x1C, owner * 0x1F8);
 }

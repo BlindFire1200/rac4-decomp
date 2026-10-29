@@ -1,11 +1,9 @@
-/* cflags: */
+/* cflags: -G0 */
 #include "common.h"
 
-extern s32 D_00169510_[];
-#define D_00169510 (D_00169510_[0])
+extern s32 D_00169510[];
 
-/* Stores the word at D_00169510 through the pointer argument and returns 0. */
-s32 func_01EC2268(s32 *arg0) {
-    *arg0 = D_00169510;
+s32 func_01EC2268(s32 arg0) {
+    (*(s32 *)((arg0 + 0))) = D_00169510[0];
     return 0;
 }
