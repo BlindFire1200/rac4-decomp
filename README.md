@@ -79,15 +79,15 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 <!-- progress:begin SCES_532.85 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 2,160 of 8,945 | 160,276 of 2,202,512 bytes (7.28%) | 7.45% |
+| **Main program** | 2,166 of 8,945 | 160,400 of 2,202,512 bytes (7.28%) | 7.45% |
 | Engine core (core.text) | 706 of 1,699 | 67,072 of 299,052 bytes (22.43%) | 22.70% |
 | libgcc | 2 of 2 | 16 of 16 bytes (100.00%) | 100.00% |
-| Network (net.text) | 379 of 2,441 | 11,188 of 465,620 bytes (2.40%) | 2.58% |
+| Network (net.text) | 385 of 2,441 | 11,312 of 465,620 bytes (2.43%) | 2.60% |
 | Resident menus (.text) | 1,073 of 4,786 | 82,000 of 1,422,048 bytes (5.77%) | 5.92% |
 | frontbin's own code | 0 of 17 | 0 of 15,776 bytes (0.00%) | 0.00% |
-| **Shared level code** | 1,133 of 5,088 | 87,596 of 2,008,520 bytes (4.36%) | 5.02% |
-| **Level-specific code** | 639 of 4,080 | 64,332 of 1,601,892 bytes (4.02%) | 4.58% |
-| Level 00: Multiplayer Menu | 471 of 2,826 | 45,592 of 943,820 bytes (4.83%) | 5.51% |
+| **Shared level code** | 1,134 of 5,088 | 87,616 of 2,008,520 bytes (4.36%) | 5.02% |
+| **Level-specific code** | 642 of 4,080 | 64,392 of 1,601,892 bytes (4.02%) | 4.59% |
+| Level 00: Multiplayer Menu | 474 of 2,826 | 45,652 of 943,820 bytes (4.84%) | 5.51% |
 | Level 01: Dreadzone Station (and 21) | 39 of 357 | 3,640 of 189,772 bytes (1.92%) | 1.92% |
 | Level 02: Catacrom Graveyard (and 22) | 2 of 29 | 124 of 21,232 bytes (0.58%) | 0.58% |
 | Level 04: Sarathos Swamp (and 24) | 2 of 19 | 196 of 11,868 bytes (1.65%) | 1.65% |
@@ -101,9 +101,9 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Level 14: Ghost Station (and 34) | 6 of 23 | 444 of 8,884 bytes (5.00%) | 5.00% |
 | Level 15: Control Level (and 35) | 13 of 134 | 932 of 116,624 bytes (0.80%) | 0.80% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 81 of 374 | 11,296 of 140,340 bytes (8.05%) | 9.91% |
-| **Total** | 3,932 of 18,113 | 312,204 of 5,812,924 bytes (5.37%) | 5.82% |
+| **Total** | 3,942 of 18,113 | 312,408 of 5,812,924 bytes (5.37%) | 5.82% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 160,276 bytes (2.76%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 160,400 bytes (2.76%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 </details>
