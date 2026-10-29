@@ -47,10 +47,10 @@ A function counts as matched on a version when its C, built with its file's own 
 <!-- progress:begin SCUS_974.65 (tools/progress.py --write) -->
 | | Functions (exact) | Code (exact) | Fuzzy |
 | --- | ---: | ---: | ---: |
-| **Main program** | 2,187 of 8,948 | 164,240 of 2,193,280 bytes (7.49%) | 7.67% |
+| **Main program** | 2,188 of 8,948 | 164,256 of 2,193,280 bytes (7.49%) | 7.67% |
 | Engine core (core.text) | 717 of 1,695 | 69,088 of 298,900 bytes (23.11%) | 23.38% |
 | libgcc | 2 of 2 | 16 of 16 bytes (100.00%) | 100.00% |
-| Network (net.text) | 378 of 2,441 | 11,172 of 465,620 bytes (2.40%) | 2.57% |
+| Network (net.text) | 379 of 2,441 | 11,188 of 465,620 bytes (2.40%) | 2.58% |
 | Resident menus (.text) | 1,087 of 4,785 | 83,160 of 1,416,576 bytes (5.87%) | 6.04% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
 | **Shared level code** | 1,082 of 5,076 | 83,504 of 1,980,204 bytes (4.22%) | 4.90% |
@@ -69,9 +69,9 @@ A function counts as matched on a version when its C, built with its file's own 
 | Level 14: Ghost Station (and 34) | 6 of 29 | 444 of 14,548 bytes (3.05%) | 3.05% |
 | Level 15: Control Level (and 35) | 13 of 135 | 932 of 116,368 bytes (0.80%) | 0.80% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 81 of 374 | 11,296 of 139,984 bytes (8.07%) | 9.93% |
-| **Total** | 3,878 of 18,085 | 311,140 of 5,782,424 bytes (5.38%) | 5.87% |
+| **Total** | 3,879 of 18,085 | 311,156 of 5,782,424 bytes (5.38%) | 5.87% |
 
-Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 164,240 bytes (2.84%) are in units with nothing left to decompile.
+Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 164,256 bytes (2.84%) are in units with nothing left to decompile.
 <!-- progress:end -->
 
 **PAL (`SCES_532.85`)**
