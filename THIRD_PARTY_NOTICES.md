@@ -390,7 +390,6 @@ All entries below refer to OpenRAC/rac3-decomp commit `403f30a9561324342c8780296
 | `src/game/00506A78.c` | `src/boot_elf/text/3E7758.c` | `func_003E9710` / `func_003E95B0` |
 | `src/game/0050DA70.c` | `src/boot_elf/text/3E5C60.c` | `func_003E5C78` / `func_003E5B30` |
 | `src/game/00510C18.c` | `src/boot_elf/core/121860.c` | `func_00121890` / `func_00121890` |
-
 | `src/core/0012C3C8.c` | `src/boot_elf/core/123B98.c` | `func_00123C90` / `func_00123C90` |
 | `src/core/0012C888.c` | `src/boot_elf/core/123ED8.c` | `func_00123ED8` / `func_00123ED8` |
 | `src/core/00137558.c` | `src/boot_elf/core/12AE20.c` | `func_0012AEA8` / `func_0012AEA8` |
