@@ -1,4 +1,6 @@
-/* Not matching yet: BYTES 10/120 (tools/try_func.py func_0012C330 --diff). Not part of the build. */
+/* cflags: @ee29 -O2 -G0 */
+#include "common.h"
+
 extern s32 func_0012A718();
 extern s32 D_0016473C[];
 extern s32 D_1A9340[];
