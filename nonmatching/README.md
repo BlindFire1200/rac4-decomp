@@ -27,6 +27,9 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L01_00568C08`](shared/func_L01_00568C08.c) | shared | 432 | BYTES 12/428 |
 | [`func_L41_00445E10`](shared/func_L41_00445E10.c) | shared | 216 | BYTES 7/216 |
 | [`func_004E5550`](game/func_004E5550.c) | game | 64 | BYTES 2/60 |
+| [`func_004BA0D0`](game/func_004BA0D0.c) | game | 120 | BYTES 4/116 |
+| [`func_004BA338`](game/func_004BA338.c) | game | 120 | BYTES 4/116 |
+| [`func_004BA490`](game/func_004BA490.c) | game | 120 | BYTES 4/116 |
 | [`func_L41_003E3060`](shared/func_L41_003E3060.c) | shared | 432 | BYTES 15/428 |
 | [`func_0012E3F0`](core/func_0012E3F0.c) | core | 112 | BYTES 4/112 |
 | [`func_L01_0044A0F0`](shared/func_L01_0044A0F0.c) | shared | 144 | BYTES 5/140 |
@@ -63,6 +66,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L41_0043A718`](shared/func_L41_0043A718.c) | shared | 320 | BYTES 23/320 |
 | [`func_L00_0071C498`](l00_multiplayer_menu/func_L00_0071C498.c) | l00_multiplayer_menu | 472 | BYTES 34/472 |
 | [`func_L00_0051F4B0`](l00_multiplayer_menu/func_L00_0051F4B0.c) | l00_multiplayer_menu | 148 | BYTES 11/148 |
+| [`func_00498368`](game/func_00498368.c) | game | 120 | BYTES 9/120 |
 | [`func_L00_006ED020`](shared/func_L00_006ED020.c) | shared | 200 | BYTES 15/200 |
 | [`func_01ECF658`](net/func_01ECF658.c) | net | 92 | BYTES 7/92 |
 | [`func_0012C330`](core/func_0012C330.c) | core | 120 | BYTES 10/120 |
@@ -143,6 +147,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_01F0A6A4`](net/func_01F0A6A4.c) | net | 48 | BYTES 6/48 |
 | [`func_L01_00573D00`](shared/func_L01_00573D00.c) | shared | 160 | BYTES 20/160 |
 | [`func_004C3988`](game/func_004C3988.c) | game | 128 | BYTES 16/124 |
+| [`func_00473778`](game/func_00473778.c) | game | 120 | BYTES 14/108 |
 | [`func_004C5B78`](game/func_004C5B78.c) | game | 112 | BYTES 14/108 |
 | [`func_0050C768`](game/func_0050C768.c) | game | 112 | BYTES 14/108 |
 | [`func_L01_00591730`](shared/func_L01_00591730.c) | shared | 112 | BYTES 14/108 |
