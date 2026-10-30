@@ -1,4 +1,5 @@
-/* Not matching yet: BYTES 7/116 (tools/try_func.py func_00522BF8 --diff). Not part of the build. */
+#include "common.h"
+
 extern s32 func_004A7DB0(s32 arg0);
 extern void func_00522868(void *arg0, s32 arg1);
 
@@ -6,9 +7,10 @@ extern void func_00522868(void *arg0, s32 arg1);
 void func_00522BF8(u8 *arg0, s32 arg1) {
     s32 t = arg0[0x266D] != 0;
     if ((t != 0 || arg1 != 0) && *(s32 *)(arg0 + 0x2EE8) != 0) {
+        s32 u = t == 1;
         *(s32 *)(arg0 + 0x2EE8) = 0;
         arg0[0x2666] = 0;
-        if (t != 0) {
+        if (u != 0) {
             s32 (*hook)(void *) = *(s32 (**)(void *))(*(u8 **)(arg0 + 0x14) + 0x4C);
             func_00522868(arg0, func_004A7DB0(hook(arg0)));
         }
