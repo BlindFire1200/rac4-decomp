@@ -118,6 +118,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_0046DB78`](game/func_0046DB78.c) | game | 8 | BYTES 1/8 |
 | [`func_00489458`](game/func_00489458.c) | game | 32 | BYTES 4/32 |
 | [`func_004A1D58`](game/func_004A1D58.c) | game | 48 | BYTES 6/48 |
+| [`func_01E9DDD0`](net/func_01E9DDD0.c) | net | 104 | BYTES 13/104 |
 | [`func_01EE503C`](net/func_01EE503C.c) | net | 48 | BYTES 6/48 |
 | [`func_01EE50D4`](net/func_01EE50D4.c) | net | 48 | BYTES 6/48 |
 | [`func_01EE5BA0`](net/func_01EE5BA0.c) | net | 48 | BYTES 6/48 |
