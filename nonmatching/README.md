@@ -13,12 +13,14 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_00526FD8`](game/func_00526FD8.c) | game | 112 | BYTES 1/112 |
 | [`func_0047EC78`](game/func_0047EC78.c) | game | 80 | BYTES 1/80 |
 | [`func_01E9E798`](net/func_01E9E798.c) | net | 80 | BYTES 1/80 |
+| [`func_01EC9238`](net/func_01EC9238.c) | net | 80 | BYTES 1/80 |
 | [`func_L01_003C9930`](shared/func_L01_003C9930.c) | shared | 312 | BYTES 4/312 |
 | [`func_L00_0068AC58`](shared/func_L00_0068AC58.c) | shared | 688 | BYTES 9/684 |
 | [`func_L41_0040F218`](shared/func_L41_0040F218.c) | shared | 376 | BYTES 5/376 |
 | [`func_0047D448`](game/func_0047D448.c) | game | 64 | BYTES 1/64 |
 | [`func_L02_003C56E8`](shared/func_L02_003C56E8.c) | shared | 224 | BYTES 4/224 |
 | [`func_01EA4940`](net/func_01EA4940.c) | net | 48 | BYTES 1/48 |
+| [`func_01EEF8A4`](net/func_01EEF8A4.c) | net | 80 | BYTES 2/80 |
 | [`func_L00_006C69F0`](shared/func_L00_006C69F0.c) | shared | 184 | BYTES 5/180 (4 words differ) |
 | [`func_L01_00568C08`](shared/func_L01_00568C08.c) | shared | 432 | BYTES 12/428 |
 | [`func_L41_00445E10`](shared/func_L41_00445E10.c) | shared | 216 | BYTES 7/216 |
@@ -75,6 +77,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_001480B0`](core/func_001480B0.c) | core | 68 | BYTES 7/68 |
 | [`func_0050F030`](game/func_0050F030.c) | game | 80 | BYTES 8/76 |
 | [`func_01ED5F40`](net/func_01ED5F40.c) | net | 76 | BYTES 8/76 |
+| [`func_00147D88`](core/func_00147D88.c) | core | 84 | BYTES 9/84 |
 | [`func_00497938`](game/func_00497938.c) | game | 32 | BYTES 3/28 |
 | [`func_004A52C0`](game/func_004A52C0.c) | game | 32 | BYTES 3/28 |
 | [`func_004B69B0`](game/func_004B69B0.c) | game | 32 | BYTES 3/28 |
@@ -91,6 +94,8 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_01E9E580`](net/func_01E9E580.c) | net | 80 | BYTES 9/80 |
 | [`func_01E9E7E8`](net/func_01E9E7E8.c) | net | 80 | BYTES 9/80 |
 | [`func_01E9E8C8`](net/func_01E9E8C8.c) | net | 80 | BYTES 9/80 |
+| [`func_01EC9530`](net/func_01EC9530.c) | net | 80 | BYTES 9/80 |
+| [`func_01EC9580`](net/func_01EC9580.c) | net | 80 | BYTES 9/80 |
 | [`func_004B7558`](game/func_004B7558.c) | game | 96 | BYTES 11/96 |
 | [`func_01ED2DC0`](net/func_01ED2DC0.c) | net | 52 | BYTES 6/52 |
 | [`func_00549C18`](game/func_00549C18.c) | game | 136 | BYTES 16/136 |
