@@ -97,6 +97,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_01E9E8C8`](net/func_01E9E8C8.c) | net | 80 | BYTES 9/80 |
 | [`func_01EC9530`](net/func_01EC9530.c) | net | 80 | BYTES 9/80 |
 | [`func_01EC9580`](net/func_01EC9580.c) | net | 80 | BYTES 9/80 |
+| [`func_004CB0F0`](game/func_004CB0F0.c) | game | 88 | BYTES 10/88 |
 | [`func_004B7558`](game/func_004B7558.c) | game | 96 | BYTES 11/96 |
 | [`func_01ED2DC0`](net/func_01ED2DC0.c) | net | 52 | BYTES 6/52 |
 | [`func_00549C18`](game/func_00549C18.c) | game | 136 | BYTES 16/136 |
