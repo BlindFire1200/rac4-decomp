@@ -1,4 +1,6 @@
-/* Not matching yet: BYTES 10/112 (tools/try_func.py func_0012C240 --diff). Not part of the build. */
+/* cflags: @ee29 -O2 -G0 */
+#include "common.h"
+
 /* Stores arg0 in D_1A93C0 and runs func_0012A718 on the D_1A9340 request; returns D_1A9380 on success, else 0. */
 extern s32 D_0016473C[];
 extern s32 D_1A9340[];
