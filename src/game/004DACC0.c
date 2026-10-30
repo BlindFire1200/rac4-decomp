@@ -1,4 +1,5 @@
-/* Not matching yet: BYTES 1/108 (tools/try_func.py func_004DACC0 --diff). Not part of the build. */
+#include "common.h"
+
 extern s32 func_004FC518(s32 arg0);
 extern u8 D_322EA4[];
 
@@ -14,7 +15,8 @@ s32 func_004DACC0(s32 arg0) {
         e = (u8 *)*(s32 *)(b + 0x34) + arg0 * 0x18;
     } else {
         arg0 = *(s32 *)(b + 0x54);
-        e = arg0 < 0 ? 0 : (u8 *)*(s32 *)(b + 0x34) + arg0 * 0x18;
+        e = 0;
+        if (arg0 >= 0) e = (u8 *)*(s32 *)(b + 0x34) + arg0 * 0x18;
     }
     s0 = *(u8 **)(e + 8);
     r = 0;

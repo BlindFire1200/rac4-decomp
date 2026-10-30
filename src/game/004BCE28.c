@@ -1,4 +1,5 @@
-/* Not matching yet: BYTES 2/108 (tools/try_func.py func_004BCE28 --diff). Not part of the build. */
+#include "common.h"
+
 extern s32 func_00505B20(void);
 extern u8 D_30A6F0[];
 
@@ -6,11 +7,12 @@ extern u8 D_30A6F0[];
 s32 func_004BCE28(s32 arg0) {
     s32 var_s0;
     u8 *temp_v1;
+    u8 *base;
     u8 *var_v0;
 
     var_s0 = arg0;
-    temp_v1 = (u8 *)(func_00505B20() * 0x534 + (s32)D_30A6F0);
-    temp_v1 = temp_v1 + 0x4C8;
+    base = (u8 *)(func_00505B20() * 0x534 + (s32)D_30A6F0);
+    temp_v1 = base + 0x4C8;
     if (var_s0 >= 0) {
         var_v0 = *(u8 **)(temp_v1 + 0x34) + var_s0 * 0x18;
     } else {
