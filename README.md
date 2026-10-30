@@ -51,7 +51,7 @@ A function counts as matched on a version when its C, built with its file's own 
 | Engine core (core.text) | 738 of 1,637 | 70,268 of 280,336 bytes (25.07%) | 25.31% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
-| Network (net.text) | 467 of 2,441 | 14,504 of 465,620 bytes (3.11%) | 3.43% |
+| Network (net.text) | 467 of 2,441 | 14,504 of 465,620 bytes (3.11%) | 3.45% |
 | Resident menus (.text) | 1,290 of 4,785 | 91,888 of 1,416,576 bytes (6.49%) | 6.68% |
 | frontbin's own code | 3 of 25 | 804 of 12,168 bytes (6.61%) | 6.61% |
 | **Shared level code** | 1,082 of 5,076 | 83,504 of 1,980,204 bytes (4.22%) | 4.90% |
@@ -70,7 +70,7 @@ A function counts as matched on a version when its C, built with its file's own 
 | Level 14: Ghost Station (and 34) | 6 of 29 | 444 of 14,548 bytes (3.05%) | 3.05% |
 | Level 15: Control Level (and 35) | 13 of 135 | 932 of 116,368 bytes (0.80%) | 0.80% |
 | Level 41: Battledome Tower (all 22 multiplayer maps) | 81 of 374 | 11,296 of 139,984 bytes (8.07%) | 9.93% |
-| **Total** | 4,242 of 18,085 | 338,256 of 5,782,424 bytes (5.85%) | 6.35% |
+| **Total** | 4,242 of 18,085 | 338,256 of 5,782,424 bytes (5.85%) | 6.36% |
 
 Each distinct function counts once: frontbin's copy of the menus is the main image's, and a level function counts once however many of the 47 levels have it. 191,356 bytes (3.31%) are in units with nothing left to decompile.
 <!-- progress:end -->
@@ -84,7 +84,7 @@ Each distinct function counts once: frontbin's copy of the menus is the main ima
 | Engine core (core.text) | 739 of 1,641 | 70,452 of 280,488 bytes (25.12%) | 25.36% |
 | libgcc | 26 of 33 | 6,148 of 10,836 bytes (56.74%) | 56.74% |
 | libm | 27 of 27 | 7,744 of 7,744 bytes (100.00%) | 100.00% |
-| Network (net.text) | 479 of 2,441 | 15,168 of 465,620 bytes (3.26%) | 3.57% |
+| Network (net.text) | 479 of 2,441 | 15,168 of 465,620 bytes (3.26%) | 3.59% |
 | Resident menus (.text) | 1,334 of 4,786 | 98,444 of 1,422,048 bytes (6.92%) | 7.08% |
 | frontbin's own code | 1 of 17 | 20 of 15,776 bytes (0.13%) | 0.13% |
 | **Shared level code** | 1,261 of 5,088 | 92,516 of 2,008,520 bytes (4.61%) | 5.27% |
