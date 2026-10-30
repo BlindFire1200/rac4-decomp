@@ -1,41 +1,41 @@
 {
  "version": 2,
  "measures": {
-  "fuzzy_match_percent": 6.656921,
+  "fuzzy_match_percent": 6.662074,
   "total_code": "5782424",
-  "matched_code": "353248",
-  "matched_code_percent": 6.108995,
+  "matched_code": "353456",
+  "matched_code_percent": 6.112592,
   "total_functions": 18085,
-  "matched_functions": 4425,
-  "matched_functions_percent": 24.467791,
-  "complete_code": "206348",
-  "complete_code_percent": 3.568538,
-  "total_units": 2770,
-  "complete_units": 2710
+  "matched_functions": 4427,
+  "matched_functions_percent": 24.47885,
+  "complete_code": "206556",
+  "complete_code_percent": 3.572135,
+  "total_units": 2772,
+  "complete_units": 2712
  },
  "categories": [
   {
    "id": "core",
    "name": "Main program",
    "measures": {
-    "fuzzy_match_percent": 9.744402,
+    "fuzzy_match_percent": 9.757989,
     "total_code": "2193280",
-    "matched_code": "206348",
-    "matched_code_percent": 9.408192,
+    "matched_code": "206556",
+    "matched_code_percent": 9.417676,
     "total_functions": 8948,
-    "matched_functions": 2734,
-    "matched_functions_percent": 30.554314,
-    "complete_code": "206348",
-    "complete_code_percent": 9.408192,
-    "total_units": 2755,
-    "complete_units": 2710
+    "matched_functions": 2736,
+    "matched_functions_percent": 30.576665,
+    "complete_code": "206556",
+    "complete_code_percent": 9.417676,
+    "total_units": 2757,
+    "complete_units": 2712
    }
   },
   {
    "id": "core_text",
    "name": "Engine core (core.text)",
    "measures": {
-    "fuzzy_match_percent": 25.870387,
+    "fuzzy_match_percent": 25.902492,
     "total_code": "280336",
     "matched_code": "71632",
     "matched_code_percent": 25.552195,
@@ -103,17 +103,17 @@
    "id": "menu_text",
    "name": "Resident menus (.text)",
    "measures": {
-    "fuzzy_match_percent": 7.592747,
+    "fuzzy_match_percent": 7.60743,
     "total_code": "1416576",
-    "matched_code": "104648",
-    "matched_code_percent": 7.38739,
+    "matched_code": "104856",
+    "matched_code_percent": 7.402074,
     "total_functions": 4785,
-    "matched_functions": 1446,
-    "matched_functions_percent": 30.219436,
+    "matched_functions": 1448,
+    "matched_functions_percent": 30.261233,
     "complete_code": "0",
     "complete_code_percent": 0.0,
-    "total_units": 1468,
-    "complete_units": 1446
+    "total_units": 1470,
+    "complete_units": 1448
    }
   },
   {
@@ -29003,6 +29003,41 @@
    }
   },
   {
+   "name": "game/0044D668",
+   "measures": {
+    "fuzzy_match_percent": 100.0,
+    "total_code": "104",
+    "matched_code": "104",
+    "matched_code_percent": 100.0,
+    "total_functions": 1,
+    "matched_functions": 1,
+    "matched_functions_percent": 100.0,
+    "complete_code": "104",
+    "complete_code_percent": 100.0,
+    "total_units": 1,
+    "complete_units": 1
+   },
+   "functions": [
+    {
+     "name": "func_0044D668",
+     "size": "104",
+     "fuzzy_match_percent": 100.0,
+     "address": "0",
+     "metadata": {
+      "virtual_address": "4511336"
+     }
+    }
+   ],
+   "metadata": {
+    "complete": true,
+    "source_path": "src/game/0044D668.c",
+    "progress_categories": [
+     "core",
+     "menu_text"
+    ]
+   }
+  },
+  {
    "name": "game/00452698",
    "measures": {
     "fuzzy_match_percent": 100.0,
@@ -31061,6 +31096,41 @@
    "metadata": {
     "complete": true,
     "source_path": "src/game/004602C0.c",
+    "progress_categories": [
+     "core",
+     "menu_text"
+    ]
+   }
+  },
+  {
+   "name": "game/004604F0",
+   "measures": {
+    "fuzzy_match_percent": 100.0,
+    "total_code": "104",
+    "matched_code": "104",
+    "matched_code_percent": 100.0,
+    "total_functions": 1,
+    "matched_functions": 1,
+    "matched_functions_percent": 100.0,
+    "complete_code": "104",
+    "complete_code_percent": 100.0,
+    "total_units": 1,
+    "complete_units": 1
+   },
+   "functions": [
+    {
+     "name": "func_004604F0",
+     "size": "104",
+     "fuzzy_match_percent": 100.0,
+     "address": "0",
+     "metadata": {
+      "virtual_address": "4588784"
+     }
+    }
+   ],
+   "metadata": {
+    "complete": true,
+    "source_path": "src/game/004604F0.c",
     "progress_categories": [
      "core",
      "menu_text"
@@ -101438,10 +101508,10 @@
    "name": "main/.text/0044xxxx",
    "measures": {
     "fuzzy_match_percent": 0.0,
-    "total_code": "61276",
+    "total_code": "61172",
     "matched_code": "0",
     "matched_code_percent": 0.0,
-    "total_functions": 128,
+    "total_functions": 127,
     "matched_functions": 0,
     "matched_functions_percent": 0.0,
     "complete_code": "0",
@@ -102357,15 +102427,6 @@
      "address": "50664",
      "metadata": {
       "virtual_address": "4511184"
-     }
-    },
-    {
-     "name": "func_0044D668",
-     "size": "104",
-     "fuzzy_match_percent": 0.0,
-     "address": "50816",
-     "metadata": {
-      "virtual_address": "4511336"
      }
     },
     {
@@ -104253,10 +104314,10 @@
    "name": "main/.text/0046xxxx",
    "measures": {
     "fuzzy_match_percent": 0.0,
-    "total_code": "60396",
+    "total_code": "60292",
     "matched_code": "0",
     "matched_code_percent": 0.0,
-    "total_functions": 218,
+    "total_functions": 217,
     "matched_functions": 0,
     "matched_functions_percent": 0.0,
     "complete_code": "0",
@@ -104344,15 +104405,6 @@
      "address": "1224",
      "metadata": {
       "virtual_address": "4588776"
-     }
-    },
-    {
-     "name": "func_004604F0",
-     "size": "104",
-     "fuzzy_match_percent": 0.0,
-     "address": "1232",
-     "metadata": {
-      "virtual_address": "4588784"
      }
     },
     {
@@ -134294,7 +134346,7 @@
   {
    "name": "main/core.text/0016xxxx",
    "measures": {
-    "fuzzy_match_percent": 0.910289,
+    "fuzzy_match_percent": 1.641772,
     "total_code": "12304",
     "matched_code": "0",
     "matched_code_percent": 0.0,
@@ -134382,7 +134434,7 @@
     {
      "name": "func_001614C0",
      "size": "104",
-     "fuzzy_match_percent": 0.0,
+     "fuzzy_match_percent": 86.54,
      "address": "5208",
      "metadata": {
       "virtual_address": "1447104"

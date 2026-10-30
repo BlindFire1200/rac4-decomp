@@ -137,6 +137,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L00_0067FB70`](shared/func_L00_0067FB70.c) | shared | 512 | BYTES 67/508 |
 | [`func_01EA88C8`](net/func_01EA88C8.c) | net | 60 | BYTES 8/60 |
 | [`func_01EACB58`](net/func_01EACB58.c) | net | 60 | BYTES 8/60 |
+| [`func_001614C0`](core/func_001614C0.c) | core | 104 | BYTES 14/104 |
 | [`func_L00_0065B218`](shared/func_L00_0065B218.c) | shared | 96 | BYTES 13/96 |
 | [`func_L01_00494FF0`](shared/func_L01_00494FF0.c) | shared | 96 | BYTES 13/96 |
 | [`func_004F5E18`](game/func_004F5E18.c) | game | 48 | BYTES 6/44 (2 words differ) |
