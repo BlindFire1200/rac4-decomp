@@ -64,6 +64,7 @@ Best attempts at functions that do not match yet. They are not built; see
 | [`func_L01_003CF4F0`](shared/func_L01_003CF4F0.c) | shared | 144 | BYTES 12/144 |
 | [`func_L01_004330A8`](shared/func_L01_004330A8.c) | shared | 528 | BYTES 45/524 |
 | [`func_L05_004F24B0`](shared/func_L05_004F24B0.c) | shared | 104 | BYTES 9/104 |
+| [`func_01EA95C0`](net/func_01EA95C0.c) | net | 88 | BYTES 8/88 |
 | [`func_0048A9A8`](game/func_0048A9A8.c) | game | 80 | BYTES 7/76 |
 | [`func_01EDBC10`](net/func_01EDBC10.c) | net | 84 | BYTES 8/84 |
 | [`func_004979A8`](game/func_004979A8.c) | game | 312 | BYTES 30/308 |
