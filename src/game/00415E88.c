@@ -3,11 +3,10 @@
 typedef struct Type1 Type1;
 struct Type1 {
     char _p0[0x20];
-    u8 f20;
-    char _p21[0x9B];
-    s16 fBC;
+    s32 f20;
+    char _p24[0x98];
+    s32 fBC;
 };
-
 
 s32 func_00415E88(Type1 *arg0) {
     s16 temp_a0;
